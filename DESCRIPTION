@@ -1,0 +1,19 @@
+Package: officerExtras
+Title: Extra Helpers for 'officer'
+Version: 0.0.0.9000
+Authors@R: 
+    person("Eli", "Pousson", , "eli.pousson@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0001-8280-1706"))
+Description: Helper and convenience functions using the 'officer' package
+    to modify docx files.
+License: MIT + file LICENSE
+Imports: 
+    cli,
+    glue,
+    officer,
+    rlang
+Suggests: 
+    gt
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
