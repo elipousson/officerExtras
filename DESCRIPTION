@@ -7,6 +7,8 @@ Authors@R:
 Description: Helper and convenience functions using the 'officer' package
     to modify docx files.
 License: MIT + file LICENSE
+URL: https://github.com/elipousson/officerExtras
+BugReports: https://github.com/elipousson/officerExtras/issues
 Imports: 
     cli,
     glue,

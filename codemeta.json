@@ -4,6 +4,8 @@
   "identifier": "officerExtras",
   "description": "Helper and convenience functions using the 'officer' package to modify docx files.",
   "name": "officerExtras: Extra Helpers for 'officer'",
+  "codeRepository": "https://github.com/elipousson/officerExtras",
+  "issueTracker": "https://github.com/elipousson/officerExtras/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -51,6 +53,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=gt"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
   "softwareRequirements": {
@@ -104,6 +119,9 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "22.792KB",
-  "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html#experimental", "https://www.repostatus.org/#wip"]
+  "fileSize": "24.573KB",
+  "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
+  "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
+  "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html#experimental", "https://www.repostatus.org/#wip"],
+  "keywords": ["microsoft-word", "officer", "r-package", "rstats"]
 }
