@@ -9,33 +9,45 @@
 #' @param index A integer matching a doc_index value appearing in a summary of
 #'   the docx object created with [officer::docx_summary()]. If index is for a
 #'   paragraph value, the text of the pargraph is used as a keyword.
+#' @param quiet If `FALSE` (default) warn when keyword is not found.
 #' @seealso
 #'  [officer::cursor_begin()], [officer::docx_summary()]
 #' @export
 #' @importFrom rlang check_required
-#' @importFrom cli cli_abort
-#' @importFrom officer cursor_reach cursor_bookmark docx_summary
-cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL) {
+#' @importFrom cli cli_alert_warning cli_abort
+#' @importFrom officer cursor_reach_test cursor_reach cursor_bookmark
+#'   docx_summary
+cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE) {
   rlang::check_required(docx)
 
-  if (is_all_null(c(keyword, id, index))) {
-    cli::cli_abort(
-      "One of {.arg keyword}, {.arg id}, or {.arg index} must be provided."
-    )
-  }
-
   if (!is.null(keyword)) {
-    officer::cursor_reach(docx, keyword)
-  } else if (!is.null(id)) {
-    officer::cursor_bookmark(docx, id)
-  } else if (!is.null(index)) {
-    docx_summary_df <- officer::docx_summary(docx)
-    docx_summary_df <- docx_summary_df[docx_summary_df[["doc_index"]] == index, ]
+    if (isFALSE(officer::cursor_reach_test(docx, keyword)) & isFALSE(quiet)) {
+      cli::cli_alert_warning(
+        "{.arg keyword} {.val {keyword}} can't be found found in {.arg docx}."
+      )
 
-    check_docx_summary(docx_summary_df)
+      return(docx)
+    }
 
-    officer::cursor_reach(docx, keyword = docx_summary_df[["text"]])
+    return(officer::cursor_reach(docx, keyword))
   }
+
+  if (!is.null(id)) {
+    return(officer::cursor_bookmark(docx, id))
+  }
+
+  if (!is.null(index)) {
+    summary_df <- officer::docx_summary(docx)
+    summary_df <- summary_df[summary_df[["doc_index"]] == index, ]
+
+    check_docx_summary(summary_df)
+
+    return(officer::cursor_reach(docx, keyword = summary_df[["text"]]))
+  }
+
+  cli::cli_abort(
+    "One of {.arg keyword}, {.arg id}, or {.arg index} must be provided."
+  )
 }
 
 #' Check a docx summary data.frame

@@ -4,7 +4,7 @@
 \alias{cursor_docx}
 \title{Set cursor position in rdocx object based on keyword, id, or index}
 \usage{
-cursor_docx(docx, keyword = NULL, id = NULL, index = NULL)
+cursor_docx(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE)
 }
 \arguments{
 \item{docx}{A rdocx object.}
@@ -17,6 +17,8 @@ inserted at the front of the document.}
 \item{index}{A integer matching a doc_index value appearing in a summary of
 the docx object created with \code{\link[officer:docx_summary]{officer::docx_summary()}}. If index is for a
 paragraph value, the text of the pargraph is used as a keyword.}
+
+\item{quiet}{If \code{FALSE} (default) warn when keyword is not found.}
 }
 \description{
 Set cursor position in rdocx object based on keyword, id, or index
