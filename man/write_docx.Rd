@@ -4,15 +4,25 @@
 \alias{write_docx}
 \title{Write a rdocx object to a docx file}
 \usage{
-write_docx(docx, path, overwrite = TRUE)
+write_docx(docx, path, overwrite = TRUE, ...)
 }
 \arguments{
-\item{docx}{A rdocx object to save.}
+\item{docx}{A rdocx or rpptx object to save.}
 
 \item{path}{File path.}
 
 \item{overwrite}{If \code{TRUE} (default), remove file at path if it already
 exists. If \code{FALSE} and file exists, this function aborts.}
+
+\item{...}{
+  Arguments passed on to \code{\link[officer:set_doc_properties]{officer::set_doc_properties}}
+  \describe{
+    \item{\code{title,subject,creator,description}}{text fields}
+    \item{\code{created}}{a date object}
+    \item{\code{values}}{a named list (names are field names), each element is a single
+character value specifying value associated with the corresponding field name.
+If \code{values} is provided, argument \code{...} will be ignored.}
+  }}
 }
 \value{
 Returns rdocx input object (invisibly) and writes the rdocx object
