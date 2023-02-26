@@ -1,6 +1,20 @@
 # @staticimports pkg:isstatic
 #   is_fileext_path is_all_null
 
+#' @param vec_last Used as value for "vec-last" item in style object.
+#' @keywords internal
+#' @noRd
+#' @importFrom cli cli_vec
+cli_vec_last <- function(x, style = list(), vec_last = " or ") {
+  cli::cli_vec(
+    x,
+    style = c(
+      style,
+      "vec-last" = vec_last
+    )
+  )
+}
+
 # ---
 # repo: r-lib/rlang
 # file: standalone-purrr.R
