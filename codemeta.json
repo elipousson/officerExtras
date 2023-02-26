@@ -119,7 +119,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "24.573KB",
+  "fileSize": "30.793KB",
   "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
   "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html#experimental", "https://www.repostatus.org/#wip"],
