@@ -7,6 +7,11 @@ test_that("write_docx works", {
 
   withr::with_tempdir({
     write_docx(docx, "example.docx")
+
+    expect_error(
+      write_docx(docx, "example.docx", overwrite = FALSE)
+    )
+
     expect_identical(
       docx[["doc_obj"]],
       read_docx_ext(
