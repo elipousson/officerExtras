@@ -6,11 +6,15 @@ test_that("read_docx_ext works", {
 
   expect_true(
     inherits(docx, "rdocx")
-    )
+  )
 
   expect_identical(
     read_docx_ext(docx = docx),
     docx
+  )
+
+  expect_message(
+    read_docx_ext(docx = docx, quiet = FALSE)
   )
 
   expect_message(
