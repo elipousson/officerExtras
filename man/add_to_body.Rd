@@ -3,10 +3,10 @@
 \name{add_to_body}
 \alias{add_to_body}
 \alias{add_text_to_body}
-\alias{add_value_vec_to_body}
-\alias{add_str_vec_to_body}
 \alias{add_xml_to_body}
 \alias{add_gt_to_body}
+\alias{add_value_with_keys}
+\alias{add_str_with_keys}
 \title{Add an xml string or paragraph of text at a specified position in a Word document}
 \usage{
 add_to_body(
@@ -31,13 +31,13 @@ add_text_to_body(
   ...
 )
 
-add_value_vec_to_body(docx, value, ..., .f = add_text_to_body, named = TRUE)
-
-add_str_vec_to_body(docx, str, ..., .f = add_xml_to_body, named = TRUE)
-
 add_xml_to_body(docx, str, pos = "after", ...)
 
 add_gt_to_body(docx, gt_object, pos = "after", ...)
+
+add_value_with_keys(docx, value, ..., .f = add_text_to_body)
+
+add_str_with_keys(docx, str, ..., .f = add_xml_to_body)
 }
 \arguments{
 \item{docx}{A rdocx object.}
@@ -81,16 +81,13 @@ value is replaced by the value of \code{.null}.}
 evaluated from left to right. If \code{.x} is an environment, the expressions are
 evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is passed, it is equivalent to \code{\link[=emptyenv]{emptyenv()}}.}
 
-\item{.f}{Any function that takes a docx and value parameter and returns a
-rdocx object. A keyword parameter must also be supported if named is TRUE.
-Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
-
-\item{named}{If \code{TRUE}, value must be a named vector or names must be
-provided as a keyword parameter and .f must accept a keyword parameter.}
-
 \item{gt_object}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
 Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
+
+\item{.f}{Any function that takes a docx and value parameter and returns a
+rdocx object. A keyword parameter must also be supported if named is TRUE.
+Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
 }
 \value{
 A rdocx object with added xml, gt tables, or paragraphs of text.
@@ -104,13 +101,11 @@ value to \code{\link[glue:glue]{glue::glue()}} to add support for glue string in
 \code{\link[officer:body_add_par]{officer::body_add_par()}}.
 }
 \details{
-Using \code{\link[=add_value_vec_to_body]{add_value_vec_to_body()}} or \code{\link[=add_str_vec_to_body]{add_str_vec_to_body()}}
+Using \code{\link[=add_value_with_keys]{add_value_with_keys()}} or \code{\link[=add_str_with_keys]{add_str_with_keys()}}
 
-\code{\link[=add_value_vec_to_body]{add_value_vec_to_body()}} supports value vectors of length 1 or longer. When
-\code{named = TRUE} and value is named, the names are assumed to be keywords
-indicating the cursor position for adding each value in the vector. If value
-is not named, a keyword parameter with the same length as value must be
-provided. When \code{named = FALSE}, no keyword parameter is required. Add
-\code{\link[=add_str_vec_to_body]{add_str_vec_to_body()}} works identically but uses a str parameter and .f
-defaults to \code{\link[=add_xml_to_body]{add_xml_to_body()}}.
+\code{\link[=add_value_with_keys]{add_value_with_keys()}} supports value vectors of length 1 or longer. If
+value is named, the names are assumed to be keywords indicating the cursor
+position for adding each value in the vector. If value is not named, a
+keyword parameter with the same length as value must be provided. When \code{named = FALSE}, no keyword parameter is required. Add \code{\link[=add_str_with_keys]{add_str_with_keys()}} works
+identically but uses a str parameter and .f defaults to \code{\link[=add_xml_to_body]{add_xml_to_body()}}.
 }

@@ -3,12 +3,30 @@ test_that("add_to_body works", {
     filename = "example.docx",
     path = system.file("doc_examples", package = "officer")
   )
-  docx <- add_text_to_body(
+
+  expect_error(add_to_body(docx_example))
+
+  docx_text <- add_text_to_body(
     docx_example,
     value = "ABCDEFG",
     keyword = "Title 1"
   )
-  expect_snapshot(docx)
+  expect_snapshot(docx_text)
+
+  docx_value_key <- add_value_with_keys(
+    docx_example,
+    value = c("ABC", "CDE"),
+    keyword = c("Title 1", "Title 2")
+  )
+
+  expect_snapshot(docx_value_key)
+
+  docx_value_named <- add_value_with_keys(
+    docx_example,
+    value = c("Title 1" = "ABC", "Title 2" = "CDE")
+  )
+
+  expect_snapshot(docx_value_named)
 })
 
 test_that("add_gt_to_body works", {

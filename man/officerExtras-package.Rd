@@ -12,6 +12,7 @@ Helper and convenience functions using the 'officer' package to modify docx file
 Useful links:
 \itemize{
   \item \url{https://github.com/elipousson/officerExtras}
+  \item \url{https://elipousson.github.io/officerExtras/}
   \item Report bugs at \url{https://github.com/elipousson/officerExtras/issues}
 }
 
