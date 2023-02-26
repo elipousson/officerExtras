@@ -14,7 +14,9 @@
 #' @importFrom officer read_docx
 read_docx_ext <- function(filename = NULL, path = NULL, docx = NULL, quiet = TRUE) {
   if (is.null(docx)) {
-    docx <- officer::read_docx(path = set_docx_path(filename, path))
+    docx <- officer::read_docx(
+      path = set_office_path(filename, path, fileext = "docx")
+    )
   } else {
     if (!is_all_null(c(filename, path)) & isFALSE(quiet)) {
       cli::cli_alert_warning(
@@ -35,7 +37,7 @@ read_docx_ext <- function(filename = NULL, path = NULL, docx = NULL, quiet = TRU
   invisible(docx)
 }
 
-#' List document properties
+#' List document properties for a rdocx or rpptx object
 #'
 #' @keywords internal
 #' @export
@@ -62,19 +64,21 @@ list_doc_properties <- function(docx, filename = NULL) {
 #'
 #' @keywords internal
 #' @importFrom cli cli_vec
-set_docx_path <- function(filename = NULL, path = NULL) {
+set_office_path <- function(filename = NULL,
+                            path = NULL,
+                            fileext = c("docx", "pptx", "xlsx")) {
   if (is.null(path)) {
     path <- filename
   } else {
     path <- file.path(path, filename)
   }
 
-  check_docx_fileext(
+  check_office_fileext(
     path,
-    arg = cli::cli_vec(
-      c("filename", "path"),
-      style = list("vec-last" = " or ")
-    )
+    arg = cli_vec_last(
+      c("filename", "path")
+    ),
+    fileext = fileext
   )
 
   path

@@ -2,11 +2,11 @@
 % Please edit documentation in R/read_docx.R
 \name{list_doc_properties}
 \alias{list_doc_properties}
-\title{List document properties}
+\title{List document properties for a rdocx or rpptx object}
 \usage{
 list_doc_properties(docx, filename = NULL)
 }
 \description{
-List document properties
+List document properties for a rdocx or rpptx object
 }
 \keyword{internal}
