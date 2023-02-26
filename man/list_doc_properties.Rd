@@ -4,7 +4,7 @@
 \alias{list_doc_properties}
 \title{List document properties for a rdocx or rpptx object}
 \usage{
-list_doc_properties(docx, filename = NULL)
+list_doc_properties(x, filename = NULL)
 }
 \description{
 List document properties for a rdocx or rpptx object
