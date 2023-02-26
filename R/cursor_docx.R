@@ -63,7 +63,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
 #' @importFrom cli cli_abort
 check_docx_summary <- function(x,
                                n = 1,
-                               content_type = "text",
+                               content_type = "paragraph",
                                ...,
                                arg = caller_arg(x),
                                call = parent.frame()) {

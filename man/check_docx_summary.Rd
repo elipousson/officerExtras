@@ -7,7 +7,7 @@
 check_docx_summary(
   x,
   n = 1,
-  content_type = "text",
+  content_type = "paragraph",
   ...,
   arg = caller_arg(x),
   call = parent.frame()
