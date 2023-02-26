@@ -4,7 +4,7 @@ test_that("officer_summary works", {
     path = system.file("doc_examples", package = "officer")
   )
 
-  expect_s3_class(officer_summary(pptx), "data.frame")
+  expect_s3_class(officer_summary(docx), "data.frame")
 
   pptx <- read_pptx_ext(
     filename = "example.pptx",
