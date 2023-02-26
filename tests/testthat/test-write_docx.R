@@ -12,6 +12,8 @@ test_that("write_docx works", {
       write_docx(docx, "example.docx", overwrite = FALSE)
     )
 
+    write_docx(docx, "example.docx")
+
     expect_identical(
       docx[["doc_obj"]],
       read_docx_ext(
