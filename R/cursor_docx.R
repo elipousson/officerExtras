@@ -15,8 +15,8 @@
 #' @export
 #' @importFrom rlang check_required
 #' @importFrom cli cli_alert_warning cli_abort
-#' @importFrom officer cursor_reach_test cursor_reach cursor_bookmark
-#'   docx_summary
+#' @importFrom officer cursor_reach_test cursor_reach docx_bookmarks
+#'   cursor_bookmark docx_summary
 cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE) {
   rlang::check_required(docx)
 
@@ -33,6 +33,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   }
 
   if (!is.null(id)) {
+    id <- match.arg(id, officer::docx_bookmarks(docx))
     return(officer::cursor_bookmark(docx, id))
   }
 
