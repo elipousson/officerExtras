@@ -11,8 +11,12 @@ write_docx(docx, path, overwrite = TRUE)
 
 \item{path}{File path.}
 
-\item{overwrite}{If \code{FALSE} and file exists, abort save function. If \code{TRUE},
-save file even if file exists at path.}
+\item{overwrite}{If \code{TRUE} (default), remove file at path if it already
+exists. If \code{FALSE} and file exists, this function aborts.}
+}
+\value{
+Returns rdocx input object (invisibly) and writes the rdocx object
+to a file with a name and location matching path.
 }
 \description{
 Write a rdocx object to a docx file
