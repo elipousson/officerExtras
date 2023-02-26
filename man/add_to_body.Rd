@@ -3,6 +3,7 @@
 \name{add_to_body}
 \alias{add_to_body}
 \alias{add_text_to_body}
+\alias{add_vec_to_body}
 \alias{add_xml_to_body}
 \alias{add_gt_to_body}
 \title{Add an xml string or paragraph of text at a specified position in a Word document}
@@ -14,6 +15,7 @@ add_to_body(
   index = NULL,
   value = NULL,
   str = NULL,
+  pos = "after",
   ...
 )
 
@@ -21,13 +23,16 @@ add_text_to_body(
   docx,
   value,
   style = NULL,
+  pos = "after",
   .na = "NA",
   .null = NULL,
   .envir = parent.frame(),
   ...
 )
 
-add_xml_to_body(docx, str = NULL, pos = "after", ...)
+add_vec_to_body(docx, value, ..., .f = add_text_to_body)
+
+add_xml_to_body(docx, str, pos = "after", ...)
 
 add_gt_to_body(docx, gt_object, pos = "after", ...)
 }
@@ -50,6 +55,9 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.}
 
 \item{str}{a wml string}
 
+\item{pos}{where to add the new element relative to the cursor,
+one of "after", "before", "on".}
+
 \item{...}{Additional parameters passed to \code{\link[officer:body_add]{officer::body_add()}} or
 \code{\link[officer:body_add_xml]{officer::body_add_xml()}}.}
 
@@ -70,19 +78,29 @@ value is replaced by the value of \code{.null}.}
 evaluated from left to right. If \code{.x} is an environment, the expressions are
 evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is passed, it is equivalent to \code{\link[=emptyenv]{emptyenv()}}.}
 
-\item{pos}{where to add the new element relative to the cursor,
-one of "after", "before", "on".}
+\item{.f}{Any function that takes a docx, value, and keyword parameter and
+returns a rdocx object. Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
 
 \item{gt_object}{A gt object converted to an OOXML string with
-\code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}}. Required.}
+\code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
+Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
 }
 \value{
 A rdocx object with added xml, gt tables, or paragraphs of text.
 }
 \description{
-Wrappers for \code{\link[officer:body_add]{officer::body_add()}} and \code{\link[officer:body_add_xml]{officer::body_add_xml()}} that use the
-\code{\link[=cursor_docx]{cursor_docx()}} helper functions to allow input of filename and path and use
-of multiple options for cursor placement. \code{\link[=add_text_to_body]{add_text_to_body()}} passed value
-to \code{\link[glue:glue]{glue::glue()}} to add support for glue string interpolation.
-\code{\link[=add_gt_to_body]{add_gt_to_body()}} converts gt tables to OOXML with \code{\link[gt:as_word]{gt::as_word()}}.
+Wrappers for \code{\link[officer:body_add_par]{officer::body_add_par()}} and \code{\link[officer:body_add_xml]{officer::body_add_xml()}} that use
+the \code{\link[=cursor_docx]{cursor_docx()}} helper functions to allow input of filename and path and
+use of multiple options for cursor placement. \code{\link[=add_text_to_body]{add_text_to_body()}} passes
+value to \code{\link[glue:glue]{glue::glue()}} to add support for glue string interpolation.
+\code{\link[=add_gt_to_body]{add_gt_to_body()}} converts gt tables to OOXML with \code{\link[gt:as_word]{gt::as_word()}}. If \code{pos = NULL}, \code{\link[=add_to_body]{add_to_body()}} calls \code{\link[officer:body_add]{officer::body_add()}} instead of
+\code{\link[officer:body_add_par]{officer::body_add_par()}}.
+}
+\details{
+Using \code{\link[=add_vec_to_body]{add_vec_to_body()}}
+
+\code{\link[=add_vec_to_body]{add_vec_to_body()}} supports value vectors of length 1 or longer. If value is
+named, the names are assumed to be keywords indicating the cursor position
+for adding each value in the vector. If value is not named, a keyword
+parameter with the same length as value must be provided.
 }
