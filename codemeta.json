@@ -44,6 +44,18 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "gt",
       "name": "gt",
       "provider": {
@@ -119,9 +131,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "30.793KB",
+  "fileSize": "36.473KB",
   "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
+  "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras?branch=main",
   "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html#experimental", "https://www.repostatus.org/#wip"],
   "keywords": ["microsoft-word", "officer", "r-package", "rstats"]
 }
