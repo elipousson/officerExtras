@@ -3,7 +3,8 @@
 \name{add_to_body}
 \alias{add_to_body}
 \alias{add_text_to_body}
-\alias{add_vec_to_body}
+\alias{add_value_vec_to_body}
+\alias{add_str_vec_to_body}
 \alias{add_xml_to_body}
 \alias{add_gt_to_body}
 \title{Add an xml string or paragraph of text at a specified position in a Word document}
@@ -30,7 +31,9 @@ add_text_to_body(
   ...
 )
 
-add_vec_to_body(docx, value, ..., .f = add_text_to_body, named = TRUE)
+add_value_vec_to_body(docx, value, ..., .f = add_text_to_body, named = TRUE)
+
+add_str_vec_to_body(docx, str, ..., .f = add_xml_to_body, named = TRUE)
 
 add_xml_to_body(docx, str, pos = "after", ...)
 
@@ -101,10 +104,13 @@ value to \code{\link[glue:glue]{glue::glue()}} to add support for glue string in
 \code{\link[officer:body_add_par]{officer::body_add_par()}}.
 }
 \details{
-Using \code{\link[=add_vec_to_body]{add_vec_to_body()}}
+Using \code{\link[=add_value_vec_to_body]{add_value_vec_to_body()}} or \code{\link[=add_str_vec_to_body]{add_str_vec_to_body()}}
 
-\code{\link[=add_vec_to_body]{add_vec_to_body()}} supports value vectors of length 1 or longer. When \code{named = TRUE} and value is named, the names are assumed to be keywords indicating
-the cursor position for adding each value in the vector. If value is not
-named, a keyword parameter with the same length as value must be provided.
-When \code{named = FALSE}, no keyword parameter is required.
+\code{\link[=add_value_vec_to_body]{add_value_vec_to_body()}} supports value vectors of length 1 or longer. When
+\code{named = TRUE} and value is named, the names are assumed to be keywords
+indicating the cursor position for adding each value in the vector. If value
+is not named, a keyword parameter with the same length as value must be
+provided. When \code{named = FALSE}, no keyword parameter is required. Add
+\code{\link[=add_str_vec_to_body]{add_str_vec_to_body()}} works identically but uses a str parameter and .f
+defaults to \code{\link[=add_xml_to_body]{add_xml_to_body()}}.
 }

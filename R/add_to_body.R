@@ -9,13 +9,15 @@
 #' = NULL`, [add_to_body()] calls [officer::body_add()] instead of
 #' [officer::body_add_par()].
 #'
-#' @details Using [add_vec_to_body()]
+#' @details Using [add_value_vec_to_body()] or [add_str_vec_to_body()]
 #'
-#' [add_vec_to_body()] supports value vectors of length 1 or longer. When `named
-#' = TRUE` and value is named, the names are assumed to be keywords indicating
-#' the cursor position for adding each value in the vector. If value is not
-#' named, a keyword parameter with the same length as value must be provided.
-#' When `named = FALSE`, no keyword parameter is required.
+#' [add_value_vec_to_body()] supports value vectors of length 1 or longer. When
+#' `named = TRUE` and value is named, the names are assumed to be keywords
+#' indicating the cursor position for adding each value in the vector. If value
+#' is not named, a keyword parameter with the same length as value must be
+#' provided. When `named = FALSE`, no keyword parameter is required. Add
+#' [add_str_vec_to_body()] works identically but uses a str parameter and .f
+#' defaults to [add_xml_to_body()].
 #'
 #'
 #' @inheritParams cursor_docx
@@ -79,7 +81,7 @@ add_text_to_body <- function(docx,
   add_to_body(docx, value = value, style = style, pos = pos, ...)
 }
 
-#' @name add_vec_to_body
+#' @name add_value_vec_to_body
 #' @rdname add_to_body
 #' @param .f Any function that takes a docx and value parameter and returns a
 #'   rdocx object. A keyword parameter must also be supported if named is TRUE.
@@ -87,12 +89,12 @@ add_text_to_body <- function(docx,
 #' @param named If `TRUE`, value must be a named vector or names must be
 #'   provided as a keyword parameter and .f must accept a keyword parameter.
 #' @export
-#' @importFrom rlang check_required is_named
-add_vec_to_body <- function(docx,
-                            value,
-                            ...,
-                            .f = add_text_to_body,
-                            named = TRUE) {
+#' @importFrom rlang check_required as_function is_named
+add_value_vec_to_body <- function(docx,
+                                  value,
+                                  ...,
+                                  .f = add_text_to_body,
+                                  named = TRUE) {
   rlang::check_required(value)
   .f <- rlang::as_function(.f)
 
@@ -102,7 +104,7 @@ add_vec_to_body <- function(docx,
     for (i in seq_along(value)) {
       docx <-
         .f(
-          docx = docx,
+          docx,
           value = value[[i]],
           keyword = names(value)[[i]],
           ...
@@ -112,7 +114,7 @@ add_vec_to_body <- function(docx,
     for (i in seq_along(value)) {
       docx <-
         .f(
-          docx = docx,
+          docx,
           value = value[[i]],
           ...
         )
@@ -121,6 +123,45 @@ add_vec_to_body <- function(docx,
 
   docx
 }
+
+#' @name add_str_vec_to_body
+#' @rdname add_to_body
+#' @export
+#' @importFrom rlang check_required as_function is_named
+add_str_vec_to_body <- function(docx,
+                                str,
+                                ...,
+                                .f = add_xml_to_body,
+                                named = TRUE) {
+  rlang::check_required(str)
+  .f <- rlang::as_function(.f)
+
+  if (isTRUE(named)) {
+    str <- set_vec_value_names(str, ...)
+
+    for (i in seq_along(str)) {
+      docx <-
+        .f(
+          docx,
+          str = str[[i]],
+          keyword = names(str)[[i]],
+          ...
+        )
+    }
+  } else {
+    for (i in seq_along(str)) {
+      docx <-
+        .f(
+          docx,
+          str = str[[i]],
+          ...
+        )
+    }
+  }
+
+  docx
+}
+
 
 #' Set names for a value vector object
 #'
