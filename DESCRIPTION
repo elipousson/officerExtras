@@ -15,6 +15,7 @@ Imports:
     officer,
     rlang
 Suggests: 
+    covr,
     gt,
     testthat (>= 3.0.0)
 Encoding: UTF-8
