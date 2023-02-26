@@ -23,7 +23,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   if (!is.null(keyword)) {
     if (isFALSE(officer::cursor_reach_test(docx, keyword)) & isFALSE(quiet)) {
       cli::cli_alert_warning(
-        "{.arg keyword} {.val {keyword}} can't be found found in {.arg docx}."
+        "{.arg keyword} {.val {keyword}} can't be found in {.arg docx}."
       )
 
       return(docx)
