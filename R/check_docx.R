@@ -31,8 +31,8 @@ check_docx_fileext <- function(x, arg = caller_arg(x), ..., .envir = current_env
 
 #' Does x have a docx file extension?
 #'
-#' @inheritParams isstatic::has_fileext
+#' @inheritParams isstatic::is_fileext_path
 #' @keywords internal
-has_docx_fileext <- function(string = NULL, ignore.case = TRUE) {
-  has_fileext(string, "docx")
+has_docx_fileext <- function(x = NULL) {
+  !is.null(x) & is_fileext_path(x, "docx")
 }

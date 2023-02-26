@@ -4,14 +4,11 @@
 \alias{has_docx_fileext}
 \title{Does x have a docx file extension?}
 \usage{
-has_docx_fileext(string = NULL, ignore.case = TRUE)
+has_docx_fileext(x = NULL)
 }
 \arguments{
-\item{string}{String to be tested with or without filetype. Defaults to
-\code{NULL}.}
-
-\item{ignore.case}{If \code{FALSE}, the pattern matching is case sensitive. If
-\code{TRUE}, case is ignored.}
+\item{x}{A character vector to check for matches, or an object which can be
+coerced by \code{\link[=as.character]{as.character()}} to a character vector.}
 }
 \description{
 Does x have a docx file extension?

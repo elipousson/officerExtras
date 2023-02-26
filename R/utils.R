@@ -1,5 +1,5 @@
 # @staticimports pkg:isstatic
-#   has_fileext is_all_null
+#   is_fileext_path is_all_null
 
 # ---
 # repo: r-lib/rlang
