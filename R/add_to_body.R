@@ -11,10 +11,11 @@
 #'
 #' @details Using [add_vec_to_body()]
 #'
-#' [add_vec_to_body()] supports value vectors of length 1 or longer. If value is
-#' named, the names are assumed to be keywords indicating the cursor position
-#' for adding each value in the vector. If value is not named, a keyword
-#' parameter with the same length as value must be provided.
+#' [add_vec_to_body()] supports value vectors of length 1 or longer. When `named
+#' = TRUE` and value is named, the names are assumed to be keywords indicating
+#' the cursor position for adding each value in the vector. If value is not
+#' named, a keyword parameter with the same length as value must be provided.
+#' When `named = FALSE`, no keyword parameter is required.
 #'
 #'
 #' @inheritParams cursor_docx
@@ -80,29 +81,42 @@ add_text_to_body <- function(docx,
 
 #' @name add_vec_to_body
 #' @rdname add_to_body
-#' @param .f Any function that takes a docx, value, and keyword parameter and
-#'   returns a rdocx object. Defaults to [add_text_to_body()].
+#' @param .f Any function that takes a docx and value parameter and returns a
+#'   rdocx object. A keyword parameter must also be supported if named is TRUE.
+#'   Defaults to [add_text_to_body()].
+#' @param named If `TRUE`, value must be a named vector or names must be
+#'   provided as a keyword parameter and .f must accept a keyword parameter.
 #' @export
 #' @importFrom rlang check_required is_named
 add_vec_to_body <- function(docx,
                             value,
                             ...,
-                            .f = add_text_to_body) {
+                            .f = add_text_to_body,
+                            named = TRUE) {
   rlang::check_required(value)
   .f <- rlang::as_function(.f)
 
-  if (!rlang::is_named(value)) {
+  if (isTRUE(named)) {
     value <- set_vec_value_names(value, ...)
-  }
 
-  for (i in seq_along(value)) {
-    docx <-
-      .f(
-        docx = docx,
-        value = value[[i]],
-        keyword = names(value)[[i]],
-        ...
-      )
+    for (i in seq_along(value)) {
+      docx <-
+        .f(
+          docx = docx,
+          value = value[[i]],
+          keyword = names(value)[[i]],
+          ...
+        )
+    }
+  } else {
+    for (i in seq_along(value)) {
+      docx <-
+        .f(
+          docx = docx,
+          value = value[[i]],
+          ...
+        )
+    }
   }
 
   docx
@@ -114,9 +128,13 @@ add_vec_to_body <- function(docx,
 #' @param nm Names for value.
 #' @param arg Name of the argument in ... to use as names for value when nm is `NULL`.
 #' @noRd
-#' @importFrom rlang list2 set_names
+#' @importFrom rlang is_named list2 set_names
 #' @importFrom cli cli_abort
 set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
+  if (rlang::is_named(value)) {
+    return(value)
+  }
+
   if (is.null(nm)) {
     params <- rlang::list2(...)
     if (is.null(params[[arg]]) | (length(params[[arg]]) != length(value))) {

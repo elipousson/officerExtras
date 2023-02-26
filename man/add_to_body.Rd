@@ -30,7 +30,7 @@ add_text_to_body(
   ...
 )
 
-add_vec_to_body(docx, value, ..., .f = add_text_to_body)
+add_vec_to_body(docx, value, ..., .f = add_text_to_body, named = TRUE)
 
 add_xml_to_body(docx, str, pos = "after", ...)
 
@@ -78,8 +78,12 @@ value is replaced by the value of \code{.null}.}
 evaluated from left to right. If \code{.x} is an environment, the expressions are
 evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is passed, it is equivalent to \code{\link[=emptyenv]{emptyenv()}}.}
 
-\item{.f}{Any function that takes a docx, value, and keyword parameter and
-returns a rdocx object. Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
+\item{.f}{Any function that takes a docx and value parameter and returns a
+rdocx object. A keyword parameter must also be supported if named is TRUE.
+Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
+
+\item{named}{If \code{TRUE}, value must be a named vector or names must be
+provided as a keyword parameter and .f must accept a keyword parameter.}
 
 \item{gt_object}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
@@ -99,8 +103,8 @@ value to \code{\link[glue:glue]{glue::glue()}} to add support for glue string in
 \details{
 Using \code{\link[=add_vec_to_body]{add_vec_to_body()}}
 
-\code{\link[=add_vec_to_body]{add_vec_to_body()}} supports value vectors of length 1 or longer. If value is
-named, the names are assumed to be keywords indicating the cursor position
-for adding each value in the vector. If value is not named, a keyword
-parameter with the same length as value must be provided.
+\code{\link[=add_vec_to_body]{add_vec_to_body()}} supports value vectors of length 1 or longer. When \code{named = TRUE} and value is named, the names are assumed to be keywords indicating
+the cursor position for adding each value in the vector. If value is not
+named, a keyword parameter with the same length as value must be provided.
+When \code{named = FALSE}, no keyword parameter is required.
 }
