@@ -96,17 +96,35 @@ add_xml_to_body <- function(docx,
 #' @param gt_object A gt object converted to an OOXML string with
 #'   [gt::as_word()] then passed to [add_xml_to_body()] as str parameter.
 #'   Required for [add_gt_to_body()].
+#' @inheritParams gt::as_word
 #' @name add_gt_to_body
 #' @rdname add_to_body
 #' @export
 #' @importFrom rlang check_required check_installed
 add_gt_to_body <- function(docx,
                            gt_object,
+                           align = "center",
+                           caption_location = c("top", "bottom", "embed"),
+                           caption_align = "left",
+                           split = FALSE,
+                           keep_with_next = TRUE,
                            pos = "after",
                            ...) {
   rlang::check_required(gt_object)
   rlang::check_installed("gt")
-  add_xml_to_body(docx, str = gt::as_word(gt_object), pos = pos, ...)
+  add_xml_to_body(
+    docx,
+    str = gt::as_word(
+      gt_object,
+      align = align,
+      caption_location = caption_location,
+      caption_align = caption_align,
+      split = split,
+      keep_with_next = keep_with_next
+    ),
+    pos = pos,
+    ...
+    )
 }
 
 

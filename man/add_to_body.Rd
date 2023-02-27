@@ -34,7 +34,17 @@ add_text_to_body(
 
 add_xml_to_body(docx, str, pos = "after", ...)
 
-add_gt_to_body(docx, gt_object, pos = "after", ...)
+add_gt_to_body(
+  docx,
+  gt_object,
+  align = "center",
+  caption_location = c("top", "bottom", "embed"),
+  caption_align = "left",
+  split = FALSE,
+  keep_with_next = TRUE,
+  pos = "after",
+  ...
+)
 
 add_value_with_keys(docx, value, ..., .f = add_text_to_body)
 
@@ -85,6 +95,22 @@ evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is pa
 \item{gt_object}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
 Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
+
+\item{align}{An option for table alignment. Can either be \code{"center"} (the
+default), \code{"left"}, or \code{"right"}.}
+
+\item{caption_location}{Determines where the caption should be positioned.
+This can either be \code{"top"} (the default), \code{"bottom"}, or \code{"embed"}.}
+
+\item{caption_align}{Determines the alignment of the caption. This is
+either \code{"left"} (the default), \code{"center"}, or \code{"right"}. This option is
+only used when \code{caption_location} is not set as \code{"embed"}.}
+
+\item{split}{A \code{TRUE} or \code{FALSE} (the default) value that indicates whether
+to activate the Word option \verb{Allow row to break across pages}.}
+
+\item{keep_with_next}{A \code{TRUE} (the default) or \code{FALSE} value that indicates
+whether a table should use Word option \verb{keep rows together}.}
 
 \item{.f}{Any function that takes a docx and value parameter and returns a
 rdocx object. A keyword parameter must also be supported if named is TRUE.
