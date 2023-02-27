@@ -14,19 +14,22 @@
 #'   parameter by the corresponding function. Defaults to `NULL`.
 #' @param quiet If `FALSE`, warn if docx is provided when filename and/or path
 #'   are also provided. Default: `TRUE`.
+#' @param ... Additional parameters passed to [cli::cli_abort()].
 #' @return A rdocx, rpptx, or rxlsx object.
 #' @seealso
 #'  [officer::read_docx()]
 #' @rdname read_officer
 #' @export
 #' @importFrom cli cli_alert_warning cli_alert_success symbol
+#' @importFrom rlang current_call
 #' @importFrom officer read_docx
 read_officer <- function(filename = NULL,
                          path = NULL,
                          fileext = c("docx", "pptx", "xlsx"),
                          x = NULL,
                          arg = caller_arg(x),
-                         quiet = TRUE) {
+                         quiet = TRUE,
+                         ...) {
   if (is.null(x)) {
     path <- set_office_path(filename, path, fileext = fileext)
 
@@ -42,7 +45,7 @@ read_officer <- function(filename = NULL,
       )
     }
 
-    check_officer(x, what = paste0("r", fileext))
+    check_officer(x, what = paste0("r", fileext), ...)
   }
 
   if (isFALSE(quiet)) {
@@ -68,7 +71,8 @@ read_docx_ext <- function(filename = NULL,
     path = path,
     fileext = "docx",
     x = docx,
-    quiet = quiet
+    quiet = quiet,
+    call = rlang::current_call()
   )
 }
 
@@ -84,7 +88,8 @@ read_pptx_ext <- function(filename = NULL,
     path = path,
     fileext = "pptx",
     x = pptx,
-    quiet = quiet
+    quiet = quiet,
+    call = rlang::current_call()
   )
 }
 
@@ -100,7 +105,8 @@ read_xlsx_ext <- function(filename = NULL,
     path = path,
     fileext = "xlsx",
     x = xlsx,
-    quiet = quiet
+    quiet = quiet,
+    call = rlang::current_call()
   )
 }
 
@@ -140,9 +146,9 @@ set_office_path <- function(filename = NULL,
     path <- file.path(path, filename)
   }
 
-  fileext <- match.arg(fileext)
+  fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if ((fileext == "pptx") & is_fileext_path(path, "potx")) {
+  if (("pptx" %in% fileext) & is_fileext_path(path, "potx")) {
     fileext <- "potx"
   }
 

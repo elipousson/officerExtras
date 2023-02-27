@@ -3,11 +3,17 @@
 \name{check_officer}
 \alias{check_officer}
 \alias{check_docx}
-\title{Check if x is a rdocx object or if x has a docx file extension}
+\alias{check_pptx}
+\alias{check_xlsx}
+\title{Check if x is a rdocx, rpptx, or rxlsx object}
 \usage{
-check_officer(x, arg = caller_arg(x), what = c("rdocx", "rpptx"), ...)
+check_officer(x, arg = caller_arg(x), what = c("rdocx", "rpptx", "rxlsx"), ...)
 
 check_docx(x, arg = caller_arg(x), ...)
+
+check_pptx(x, arg = caller_arg(x), ...)
+
+check_xlsx(x, arg = caller_arg(x), ...)
 }
 \arguments{
 \item{x}{Object to check.}
@@ -19,5 +25,5 @@ check_docx(x, arg = caller_arg(x), ...)
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }
 \description{
-Check if x is a rdocx object or if x has a docx file extension
+Check if x is a rdocx, rpptx, or rxlsx object
 }

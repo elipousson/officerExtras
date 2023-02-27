@@ -14,7 +14,8 @@ read_officer(
   fileext = c("docx", "pptx", "xlsx"),
   x = NULL,
   arg = caller_arg(x),
-  quiet = TRUE
+  quiet = TRUE,
+  ...
 )
 
 read_docx_ext(filename = NULL, path = NULL, docx = NULL, quiet = TRUE)
@@ -31,6 +32,8 @@ and path are ignored. Default: \code{NULL}}
 
 \item{quiet}{If \code{FALSE}, warn if docx is provided when filename and/or path
 are also provided. Default: \code{TRUE}.}
+
+\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}.}
 
 \item{docx, pptx, xlsx}{A rdocx, rpptx, or rxlsx class object passed to the x
 parameter by the corresponding function. Defaults to \code{NULL}.}
