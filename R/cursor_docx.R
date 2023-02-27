@@ -33,7 +33,8 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   }
 
   if (!is.null(id)) {
-    id <- match.arg(id, officer::docx_bookmarks(docx))
+    bookmarks <- officer::docx_bookmarks(docx)
+    id <- match.arg(id, bookmarks)
     return(officer::cursor_bookmark(docx, id))
   }
 
