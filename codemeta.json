@@ -4,6 +4,7 @@
   "identifier": "officerExtras",
   "description": "Helper and convenience functions using the 'officer' package to modify docx files.",
   "name": "officerExtras: Extra Helpers for 'officer'",
+  "relatedLink": "https://elipousson.github.io/officerExtras/",
   "codeRepository": "https://github.com/elipousson/officerExtras",
   "issueTracker": "https://github.com/elipousson/officerExtras/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -78,6 +79,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "withr",
+      "name": "withr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
   "softwareRequirements": {
@@ -131,7 +144,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "51.684KB",
+  "fileSize": "55.536KB",
   "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
   "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras?branch=main",
