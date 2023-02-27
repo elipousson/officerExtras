@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">officerExtras</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,14 +45,24 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9001" id="officerextras-0009001">officerExtras 0.0.0.9001<a class="anchor" aria-label="anchor" href="#officerextras-0009001"></a></h2>
+<ul><li>The main change in this update is that most functions now support the full range of officer class objects to work with pptx and xlsx as well as docx files. <code><a href="../reference/read_officer.html">read_docx_ext()</a></code> is now a wrapper for a more general <code><a href="../reference/read_officer.html">read_officer()</a></code> function. <code>write_docx()</code> is replaced by <code><a href="../reference/write_officer.html">write_officer()</a></code>
+</li>
+<li>This update also includes two new functions that are vectorized versions of <code><a href="../reference/add_to_body.html">add_to_body()</a></code>: <code><a href="../reference/add_to_body.html">add_value_with_keys()</a></code> and <code><a href="../reference/add_to_body.html">add_str_with_keys()</a></code>.</li>
+<li>
+<code><a href="../reference/add_to_body.html">add_to_body()</a></code> has been updated with a few fixes and improvements making keyword, id, + index parameters optional and using <code><a href="https://davidgohel.github.io/officer/reference/body_add_par.html" class="external-link">officer::body_add_par()</a></code> by default not <code><a href="https://davidgohel.github.io/officer/reference/body_add.html" class="external-link">officer::body_add()</a></code> (due to some odd error messages when using the latter and lack of support for the pos parameter).</li>
+<li>Finally, test coverage is currently around 64% which is seems like a good start for a new package.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9000" id="officerextras-0009000">officerExtras 0.0.0.9000<a class="anchor" aria-label="anchor" href="#officerextras-0009000"></a></h2>
 <ul><li><p>Initial set up for package with functions including:</p></li>
 <li><p><code><a href="../reference/read_officer.html">read_docx_ext()</a></code></p></li>
-<li><p><code><a href="../reference/write_docx.html">write_docx()</a></code></p></li>
+<li><p><code>write_docx()</code></p></li>
 <li><p><code><a href="../reference/add_to_body.html">add_to_body()</a></code>, <code><a href="../reference/add_to_body.html">add_text_to_body()</a></code>, <code><a href="../reference/add_to_body.html">add_xml_to_body()</a></code>, and <code><a href="../reference/add_to_body.html">add_gt_to_body()</a></code></p></li>
 <li><p><code>check_docx</code> and <code><a href="../reference/check_office_fileext.html">check_docx_fileext()</a></code></p></li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
