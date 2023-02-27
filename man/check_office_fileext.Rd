@@ -5,7 +5,7 @@
 \alias{check_docx_fileext}
 \alias{check_pptx_fileext}
 \alias{check_xlsx_fileext}
-\title{Check file path for a docx or pptx file extension}
+\title{Check file path for a docx, pptx, or xlsx file extension}
 \usage{
 check_office_fileext(
   x,
@@ -24,10 +24,16 @@ check_xlsx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
 \arguments{
 \item{x}{Object to check.}
 
-\item{arg}{Argument name for x. Defaults to \code{caller_arg(x)}.}
+\item{arg}{Argument name for x. Used to improve error messages with
+\code{\link[cli:cli_abort]{cli::cli_abort()}}.}
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
+
+\item{fileext}{File extensions to allow without error. Defaults to "docx",
+"pptx", "xlsx".}
+
+\item{.envir}{Passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}.}
 }
 \description{
-Check file path for a docx or pptx file extension
+Check file path for a docx, pptx, or xlsx file extension
 }
