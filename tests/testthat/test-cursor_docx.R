@@ -15,7 +15,15 @@ test_that("cursor_docx works", {
   )
 
   expect_snapshot(
+    cursor_docx(docx, id = "bmk_1")[["officer_cursor"]]
+  )
+
+  expect_snapshot(
     cursor_docx(docx, index = 10)[["officer_cursor"]]
+  )
+
+  expect_error(
+    cursor_docx(docx, index = 16)
   )
 
   expect_error(

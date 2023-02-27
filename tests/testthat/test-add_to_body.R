@@ -11,6 +11,7 @@ test_that("add_to_body works", {
     value = "ABCDEFG",
     keyword = "Title 1"
   )
+
   expect_snapshot(docx_text)
 
   docx_value_key <- add_value_with_keys(
@@ -42,11 +43,23 @@ test_that("add_gt_to_body works", {
       rowname_col = "row",
       groupname_col = "group"
     )
-  docx <-
+
+  docx_gt <-
     add_gt_to_body(
       docx,
       tab_1,
       keyword = "Sub title 1"
     )
-  expect_snapshot(docx)
+
+  expect_snapshot(docx_gt)
+
+  tab_str <- gt::as_word(tab_1)
+
+  docx_str_keys <-
+    add_str_with_keys(
+      docx,
+      str = c("Title 1" = tab_str, "Title 2" = tab_str)
+    )
+
+  expect_snapshot(docx_str_keys)
 })
