@@ -7,7 +7,8 @@
 \alias{add_gt_to_body}
 \alias{add_value_with_keys}
 \alias{add_str_with_keys}
-\title{Add an xml string or paragraph of text at a specified position in a Word document}
+\title{Add an xml string, text paragraph, or gt object at a specified position in a
+Word document}
 \usage{
 add_to_body(
   docx,

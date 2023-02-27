@@ -1,5 +1,6 @@
 
-#' Add an xml string or paragraph of text at a specified position in a Word document
+#' Add an xml string, text paragraph, or gt object at a specified position in a
+#' Word document
 #'
 #' Wrappers for [officer::body_add_par()] and [officer::body_add_xml()] that use
 #' the [cursor_docx()] helper functions to allow input of filename and path and
@@ -41,7 +42,7 @@ add_to_body <- function(docx,
   check_docx(docx)
 
   if ((!is.null(str) & !is.null(value)) | is_all_null(c(str, value))) {
-    cli::cli_abort(
+    cli_abort(
       "Either {.arg str} or {.arg value} must be provided."
     )
   }
@@ -194,7 +195,7 @@ set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
   if (is.null(nm)) {
     params <- rlang::list2(...)
     if (is.null(params[[arg]]) | (length(params[[arg]]) != length(value))) {
-      cli::cli_abort(
+      cli_abort(
         "{.arg value} must {.arg {arg}} must be be the same length as {.arg value}."
       )
     }

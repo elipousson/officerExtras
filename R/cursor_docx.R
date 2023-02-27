@@ -46,7 +46,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
     return(officer::cursor_reach(docx, keyword = summary_df[["text"]]))
   }
 
-  cli::cli_abort(
+  cli_abort(
     "One of {.arg keyword}, {.arg id}, or {.arg index} must be provided."
   )
 }
@@ -69,7 +69,7 @@ check_docx_summary <- function(x,
                                arg = caller_arg(x),
                                call = parent.frame()) {
   if (!is.null(n) & nrow(x) != n) {
-    cli::cli_abort(
+    cli_abort(
       "{.arg {arg}} must have {n} rows.",
       ...,
       call = call,
@@ -77,7 +77,7 @@ check_docx_summary <- function(x,
   }
 
   if (!is.null(content_type) & !all(x[["content_type"]] %in% content_type)) {
-    cli::cli_abort(
+    cli_abort(
       "{.arg {arg}} must only include content_type {.val {content_type}}.",
       ...,
       call = call,
