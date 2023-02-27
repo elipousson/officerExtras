@@ -1,6 +1,7 @@
 #' Write a rdocx object to a docx file
 #'
-#' @param docx A rdocx or rpptx object to save.
+#' @param x A rdocx, rpptx, or rxlsx object to save. Document properties won't
+#'   be set for rxlsx objects.
 #' @param path File path.
 #' @param overwrite If `TRUE` (default), remove file at path if it already
 #'   exists. If `FALSE` and file exists, this function aborts.
@@ -20,7 +21,7 @@ write_officer <- function(x, path, overwrite = TRUE, ...) {
     path,
     fileext = c("docx", "pptx", "xlsx"),
     call = rlang::current_call()
-    )
+  )
 
   is_xlsx <- isTRUE(is_fileext_path(path, "xlsx"))
 

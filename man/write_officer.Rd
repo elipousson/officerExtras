@@ -7,6 +7,9 @@
 write_officer(x, path, overwrite = TRUE, ...)
 }
 \arguments{
+\item{x}{A rdocx, rpptx, or rxlsx object to save. Document properties won't
+be set for rxlsx objects.}
+
 \item{path}{File path.}
 
 \item{overwrite}{If \code{TRUE} (default), remove file at path if it already
@@ -21,8 +24,6 @@ exists. If \code{FALSE} and file exists, this function aborts.}
 character value specifying value associated with the corresponding field name.
 If \code{values} is provided, argument \code{...} will be ignored.}
   }}
-
-\item{docx}{A rdocx or rpptx object to save.}
 }
 \value{
 Returns rdocx input object (invisibly) and writes the rdocx object
