@@ -25,7 +25,9 @@ read_pptx_ext(filename = NULL, path = NULL, pptx = NULL, quiet = TRUE)
 read_xlsx_ext(filename = NULL, path = NULL, xlsx = NULL, quiet = TRUE)
 }
 \arguments{
-\item{filename, path}{File name and path. Default: \code{NULL}}
+\item{filename, path}{File name and path. Default: \code{NULL}. Must include a
+"docx", "pptx", or "xlsx" file path. "dotx" and "potx" files are also
+supported.}
 
 \item{x}{A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
 and path are ignored. Default: \code{NULL}}
