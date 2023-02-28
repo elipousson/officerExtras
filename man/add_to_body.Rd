@@ -136,3 +136,21 @@ position for adding each value in the vector. If value is not named, a
 keyword parameter with the same length as value must be provided. When \code{named = FALSE}, no keyword parameter is required. Add \code{\link[=add_str_with_keys]{add_str_with_keys()}} works
 identically but uses a str parameter and .f defaults to \code{\link[=add_xml_to_body]{add_xml_to_body()}}.
 }
+\examples{
+if (rlang::is_installed("gt")) {
+  tab_1 <-
+    gt::gt(
+      gt::exibble,
+      rowname_col = "row",
+      groupname_col = "group"
+    )
+
+  tab_str <- gt::as_word(tab_1)
+
+  docx_str_keys <-
+    add_str_with_keys(
+      docx,
+      str = c("Title 1" = tab_str, "Title 2" = tab_str)
+    )
+}
+}

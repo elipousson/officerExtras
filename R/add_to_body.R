@@ -27,6 +27,7 @@
 #' @inheritParams officer::body_add_xml
 #' @param ... Additional parameters passed to [officer::body_add()] or
 #'   [officer::body_add_xml()].
+#' @example examples/example-add_to_body.R
 #' @returns A rdocx object with added xml, gt tables, or paragraphs of text.
 #' @export
 #' @importFrom officer body_add body_add_xml
