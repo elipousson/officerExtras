@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_officer.R
 \name{write_officer}
 \alias{write_officer}
-\title{Write a rdocx object to a docx file}
+\title{Write a rdocx, rpptx, or rxlsx object to a file}
 \usage{
 write_officer(x, path, overwrite = TRUE, ...)
 }
@@ -26,9 +26,9 @@ If \code{values} is provided, argument \code{...} will be ignored.}
   }}
 }
 \value{
-Returns rdocx input object (invisibly) and writes the rdocx object
-to a file with a name and location matching path.
+Returns the input object (invisibly) and writes the rdocx, rpptx, or
+rxlsx object to a file with a name and location matching the provided path.
 }
 \description{
-Write a rdocx object to a docx file
+Write a rdocx, rpptx, or rxlsx object to a file
 }
