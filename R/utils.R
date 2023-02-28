@@ -1,5 +1,5 @@
 # @staticimports pkg:isstatic
-#   is_fileext_path is_all_null
+#   is_fileext_path is_all_null str_extract_fileext
 
 #' @param vec_last Used as value for "vec-last" item in style object.
 #' @keywords internal

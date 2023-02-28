@@ -41,3 +41,16 @@ is_fileext_path <- function(x, fileext, ignore.case = TRUE) {
     ignore.case = ignore.case, perl = TRUE
   )
 }
+
+#' @name str_extract_fileext
+#' @rdname str_fileext
+#' @noRd
+str_extract_fileext <- function(string, fileext = NULL) {
+  if (is.null(fileext)) {
+    fileext <- "[a-zA-Z0-9]+"
+  }
+  regmatches(
+    string,
+    regexpr(paste0("(?<=\\.)", fileext, "$(?!\\.)"), string, perl = TRUE)
+    )
+}

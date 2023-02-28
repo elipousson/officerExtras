@@ -7,7 +7,9 @@
 #' filename and path (the original officer functions only use a path) and
 #' default to use a rdocx, rpptx, or rxlsx class object if provided.
 #'
-#' @param filename,path File name and path. Default: `NULL`
+#' @param filename,path File name and path. Default: `NULL`. Must include a
+#'   "docx", "pptx", or "xlsx" file path. "dotx" and "potx" files are also
+#'   supported.
 #' @param x A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
 #'   and path are ignored. Default: `NULL`
 #' @param docx,pptx,xlsx A rdocx, rpptx, or rxlsx class object passed to the x
@@ -33,7 +35,7 @@ read_officer <- function(filename = NULL,
   if (is.null(x)) {
     path <- set_office_path(filename, path, fileext = fileext)
 
-    x <- switch(fileext,
+    x <- switch(str_extract_fileext(path),
       "docx" = officer::read_docx(path),
       "pptx" = officer::read_pptx(path),
       "xlsx" = officer::read_xlsx(path)
@@ -53,7 +55,7 @@ read_officer <- function(filename = NULL,
       cli::cli_alert_success("Reading {.filename {filename}}{cli::symbol$ellipsis}")
     }
 
-    list_doc_properties(x, filename)
+    cli_doc_properties(x, filename)
   }
 
   invisible(x)
@@ -114,11 +116,8 @@ read_xlsx_ext <- function(filename = NULL,
 #'
 #' @keywords internal
 #' @export
-#' @importFrom officer doc_properties
 #' @importFrom cli cli_rule symbol cli_dl
-#' @importFrom rlang set_names
-list_doc_properties <- function(x, filename = NULL) {
-  props <- officer::doc_properties(x)
+cli_doc_properties <- function(x, filename = NULL) {
   if (!is.null(filename)) {
     cli::cli_rule("{cli::symbol$info} {.filename {filename}} properties:")
   } else {
@@ -127,9 +126,25 @@ list_doc_properties <- function(x, filename = NULL) {
 
   cli::cli_dl(
     items = discard(
-      rlang::set_names(props[["value"]], props[["tag"]]),
+      officer_properties(x),
       ~ .x == ""
     )
+  )
+}
+
+#' Get doc properties for a rdocx or rpptx object
+#'
+#' @keywords internal
+#' @export
+#' @importFrom officer doc_properties
+#' @importFrom rlang set_names
+#' @importFrom utils modifyList
+officer_properties <- function(x, values = list(), keep.null = FALSE) {
+  props <- officer::doc_properties(x)
+  utils::modifyList(
+    rlang::set_names(as.list(props[["value"]]), props[["tag"]]),
+    values,
+    keep.null
   )
 }
 
@@ -142,14 +157,16 @@ set_office_path <- function(filename = NULL,
                             fileext = c("docx", "pptx", "xlsx")) {
   if (is.null(path)) {
     path <- filename
-  } else {
+  } else if (!is.null(filename)) {
     path <- file.path(path, filename)
   }
 
   fileext <- match.arg(fileext, several.ok = TRUE)
 
   if (("pptx" %in% fileext) & is_fileext_path(path, "potx")) {
-    fileext <- "potx"
+    return(path)
+  } else if (("dotx" %in% fileext) & is_fileext_path(path, "dotx")) {
+    return(path)
   }
 
   check_office_fileext(
