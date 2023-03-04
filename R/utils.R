@@ -15,12 +15,30 @@ cli_vec_last <- function(x, style = list(), vec_last = " or ") {
   )
 }
 
+#' @keywords internal
+#' @noRd
+cli_vec_cls <- function(x) {
+  cli_vec_last(
+    x,
+    style = list(
+      before = "<",
+      after = ">",
+      color = "blue"
+    )
+  )
+}
+
 # ---
 # repo: r-lib/rlang
 # file: standalone-purrr.R
 # last-updated: 2023-02-23
 # license: https://unlicense.org
 # ---
+map <- function(.x, .f, ...) {
+  .f <- rlang::as_function(.f, env = rlang::global_env())
+  lapply(.x, .f, ...)
+}
+
 #' @keywords internal
 map_lgl <- function(.x, .f, ...) {
   .rlang_purrr_map_mold(.x, .f, logical(1), ...)

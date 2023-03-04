@@ -1,3 +1,15 @@
+#' @keywords internal
+#' @noRd
+is_officer <- function(x, what = c("rdocx", "rpptx", "rxlsx")) {
+  inherits(x, what)
+}
+
+#' @keywords internal
+#' @noRd
+is_rdocx <- function(x) {
+  inherits(x, "rdocx")
+}
+
 #' Check if x is a rdocx, rpptx, or rxlsx object
 #'
 #' @param x Object to check.
@@ -14,15 +26,7 @@ check_officer <- function(x,
   rlang::check_required(x, arg = arg)
   what <- match.arg(what, several.ok = TRUE)
   if (!inherits(x, what)) {
-    what <-
-      cli_vec_last(
-        what,
-        style = list(
-          before = "<",
-          after = ">",
-          color = "blue"
-        )
-      )
+    what <- cli_vec_cls(what)
 
     cli_abort("{.arg {arg}} must be a {what} object.", ...)
   }
