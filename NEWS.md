@@ -4,6 +4,7 @@
 * Add support for "dotx" files to `read_officer()`
 * Fix error when `filename = NULL` for `read_officer()`
 * Export `officer_properties()` function
+* Add new `officer_tables()` function.
 
 # officerExtras 0.0.0.9001
 
