@@ -2,13 +2,16 @@
 #' Add an xml string, text paragraph, or gt object at a specified position in a
 #' Word document
 #'
+#' @description
 #' Wrappers for [officer::body_add_par()] and [officer::body_add_xml()] that use
-#' the [cursor_docx()] helper functions to allow input of filename and path and
-#' use of multiple options for cursor placement. [add_text_to_body()] passes
-#' value to [glue::glue()] to add support for glue string interpolation.
-#' [add_gt_to_body()] converts gt tables to OOXML with [gt::as_word()]. If `pos
-#' = NULL`, [add_to_body()] calls [officer::body_add()] instead of
-#' [officer::body_add_par()].
+#' the [cursor_docx()] helper function to allow users to pass the value and
+#' keyword, id, or index value used to place a "cursor" within the document
+#' using a single function. If `pos = NULL`, [add_to_body()] calls
+#' [officer::body_add()] instead of [officer::body_add_par()].
+#'
+#' - [add_text_to_body()] passes value to [glue::glue()]
+#' to add support for glue string interpolation.
+#' - [add_gt_to_body()] converts gt tables to OOXML with [gt::as_word()].
 #'
 #' @details Using [add_value_with_keys()] or [add_str_with_keys()]
 #'
@@ -19,16 +22,15 @@
 #' = FALSE`, no keyword parameter is required. Add [add_str_with_keys()] works
 #' identically but uses a str parameter and .f defaults to [add_xml_to_body()].
 #'
-#'
 #' @inheritParams cursor_docx
 #' @inheritParams read_docx_ext
 #' @inheritParams cursor_docx
 #' @inheritParams officer::body_add
 #' @inheritParams officer::body_add_xml
-#' @param ... Additional parameters passed to [officer::body_add()] or
-#'   [officer::body_add_xml()].
+#' @param ... Additional parameters passed to [officer::body_add_par()] or
+#'   [officer::body_add()].
 #' @example examples/example-add_to_body.R
-#' @returns A rdocx object with added xml, gt tables, or paragraphs of text.
+#' @returns A rdocx object with xml, gt tables, or paragraphs of text added.
 #' @export
 #' @importFrom officer body_add body_add_xml
 #' @importFrom cli cli_abort cli_alert_warning

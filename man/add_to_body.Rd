@@ -72,8 +72,8 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.}
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
 
-\item{...}{Additional parameters passed to \code{\link[officer:body_add]{officer::body_add()}} or
-\code{\link[officer:body_add_xml]{officer::body_add_xml()}}.}
+\item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}} or
+\code{\link[officer:body_add]{officer::body_add()}}.}
 
 \item{style}{paragraph style name. These names are available with function \link[officer]{styles_info}
 and are the names of the Word styles defined in the base document (see
@@ -117,15 +117,19 @@ rdocx object. A keyword parameter must also be supported if named is TRUE.
 Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
 }
 \value{
-A rdocx object with added xml, gt tables, or paragraphs of text.
+A rdocx object with xml, gt tables, or paragraphs of text added.
 }
 \description{
 Wrappers for \code{\link[officer:body_add_par]{officer::body_add_par()}} and \code{\link[officer:body_add_xml]{officer::body_add_xml()}} that use
-the \code{\link[=cursor_docx]{cursor_docx()}} helper functions to allow input of filename and path and
-use of multiple options for cursor placement. \code{\link[=add_text_to_body]{add_text_to_body()}} passes
-value to \code{\link[glue:glue]{glue::glue()}} to add support for glue string interpolation.
-\code{\link[=add_gt_to_body]{add_gt_to_body()}} converts gt tables to OOXML with \code{\link[gt:as_word]{gt::as_word()}}. If \code{pos = NULL}, \code{\link[=add_to_body]{add_to_body()}} calls \code{\link[officer:body_add]{officer::body_add()}} instead of
-\code{\link[officer:body_add_par]{officer::body_add_par()}}.
+the \code{\link[=cursor_docx]{cursor_docx()}} helper function to allow users to pass the value and
+keyword, id, or index value used to place a "cursor" within the document
+using a single function. If \code{pos = NULL}, \code{\link[=add_to_body]{add_to_body()}} calls
+\code{\link[officer:body_add]{officer::body_add()}} instead of \code{\link[officer:body_add_par]{officer::body_add_par()}}.
+\itemize{
+\item \code{\link[=add_text_to_body]{add_text_to_body()}} passes value to \code{\link[glue:glue]{glue::glue()}}
+to add support for glue string interpolation.
+\item \code{\link[=add_gt_to_body]{add_gt_to_body()}} converts gt tables to OOXML with \code{\link[gt:as_word]{gt::as_word()}}.
+}
 }
 \details{
 Using \code{\link[=add_value_with_keys]{add_value_with_keys()}} or \code{\link[=add_str_with_keys]{add_str_with_keys()}}
@@ -138,6 +142,11 @@ identically but uses a str parameter and .f defaults to \code{\link[=add_xml_to_
 }
 \examples{
 if (rlang::is_installed("gt")) {
+  docx <- read_docx_ext(
+    filename = "example.docx",
+    path = system.file("doc_examples", package = "officer")
+  )
+
   tab_1 <-
     gt::gt(
       gt::exibble,
@@ -145,12 +154,17 @@ if (rlang::is_installed("gt")) {
       groupname_col = "group"
     )
 
+  add_gt_to_body(
+    docx,
+    tab_1,
+    keyword = "Title 1"
+  )
+
   tab_str <- gt::as_word(tab_1)
 
-  docx_str_keys <-
-    add_str_with_keys(
-      docx,
-      str = c("Title 1" = tab_str, "Title 2" = tab_str)
-    )
+  add_str_with_keys(
+    docx,
+    str = c("Title 1" = tab_str, "Title 2" = tab_str)
+  )
 }
 }
