@@ -29,7 +29,6 @@ write_officer <- function(x,
   is_xlsx <- isTRUE(is_fileext_path(path, "xlsx"))
 
   if (isFALSE(rlang::is_empty(rlang::list2(...))) & !is_xlsx) {
-
     x <-
       officer::set_doc_properties(
         x,

@@ -1,4 +1,3 @@
-
 #' Add an xml string, text paragraph, or gt object at a specified position in a
 #' Word document
 #'
@@ -127,7 +126,7 @@ add_gt_to_body <- function(docx,
     ),
     pos = pos,
     ...
-    )
+  )
 }
 
 

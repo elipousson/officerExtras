@@ -1,4 +1,3 @@
-
 #' Set cursor position in rdocx object based on keyword, id, or index
 #'
 #' @param docx A rdocx object.
