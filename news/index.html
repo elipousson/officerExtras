@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">officerExtras</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,15 @@
       <small>Source: <a href="https://github.com/elipousson/officerExtras/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9002" id="officerextras-0009002">officerExtras 0.0.0.9002<a class="anchor" aria-label="anchor" href="#officerextras-0009002"></a></h2>
+<ul><li>Add support for <code><a href="https://gt.rstudio.com/reference/as_word.html" class="external-link">gt::as_word()</a></code> parameters to <code><a href="../reference/add_to_body.html">add_gt_to_body()</a></code>.</li>
+<li>Add support for “dotx” files to <code><a href="../reference/read_officer.html">read_officer()</a></code>
+</li>
+<li>Fix error when <code>filename = NULL</code> for <code><a href="../reference/read_officer.html">read_officer()</a></code>
+</li>
+<li>Add <code><a href="../reference/officer_properties.html">officer_properties()</a></code>, <code><a href="../reference/officer_tables.html">officer_tables()</a></code>, and <code><a href="../reference/officer_media.html">officer_media()</a></code> functions.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9001" id="officerextras-0009001">officerExtras 0.0.0.9001<a class="anchor" aria-label="anchor" href="#officerextras-0009001"></a></h2>
 <ul><li>The main change in this update is that most functions now support the full range of officer class objects to work with pptx and xlsx as well as docx files. <code><a href="../reference/read_officer.html">read_docx_ext()</a></code> is now a wrapper for a more general <code><a href="../reference/read_officer.html">read_officer()</a></code> function. <code>write_docx()</code> is replaced by <code><a href="../reference/write_officer.html">write_officer()</a></code>
