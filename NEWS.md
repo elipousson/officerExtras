@@ -1,4 +1,6 @@
-# officerExtras development
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# officerExtras 0.0.0.9002
 
 * Add support for `gt::as_word()` parameters to `add_gt_to_body()`.
 * Add support for "dotx" files to `read_officer()`
