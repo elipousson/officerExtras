@@ -1,10 +1,9 @@
 # officerExtras development
 
-* Added support for the `gt::as_word()` parameters to `add_gt_to_body()`.
+* Add support for `gt::as_word()` parameters to `add_gt_to_body()`.
 * Add support for "dotx" files to `read_officer()`
 * Fix error when `filename = NULL` for `read_officer()`
-* Export `officer_properties()` function
-* Add new `officer_tables()` function.
+* Add `officer_properties()`, `officer_tables()`, and `officer_media()` functions.
 
 # officerExtras 0.0.0.9001
 
