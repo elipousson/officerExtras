@@ -10,9 +10,9 @@
 check_office_fileext(
   x,
   arg = caller_arg(x),
-  ...,
   fileext = c("docx", "pptx", "xlsx"),
-  .envir = current_env()
+  call = parent.frame(),
+  ...
 )
 
 check_docx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
@@ -24,15 +24,16 @@ check_xlsx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
 \arguments{
 \item{x}{Object to check.}
 
-\item{arg}{Argument name for x. Used to improve error messages with
-\code{\link[cli:cli_abort]{cli::cli_abort()}}.}
-
-\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
+\item{arg}{Argument name of object to check. Used to improve
+\code{\link[cli:cli_abort]{cli::cli_abort()}} messages. Defaults to \code{caller_arg(x)}.}
 
 \item{fileext}{File extensions to allow without error. Defaults to "docx",
 "pptx", "xlsx".}
 
-\item{.envir}{Passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}.}
+\item{call}{The execution environment of a currently running function passed
+to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
+
+\item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }
 \description{
 Check file path for a docx, pptx, or xlsx file extension

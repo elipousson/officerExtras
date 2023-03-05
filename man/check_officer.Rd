@@ -7,20 +7,30 @@
 \alias{check_xlsx}
 \title{Check if x is a rdocx, rpptx, or rxlsx object}
 \usage{
-check_officer(x, arg = caller_arg(x), what = c("rdocx", "rpptx", "rxlsx"), ...)
+check_officer(
+  x,
+  arg = caller_arg(x),
+  what = c("rdocx", "rpptx", "rxlsx"),
+  call = parent.frame(),
+  ...
+)
 
-check_docx(x, arg = caller_arg(x), ...)
+check_docx(x, arg = caller_arg(x), call = parent.frame(), ...)
 
-check_pptx(x, arg = caller_arg(x), ...)
+check_pptx(x, arg = caller_arg(x), call = parent.frame(), ...)
 
-check_xlsx(x, arg = caller_arg(x), ...)
+check_xlsx(x, arg = caller_arg(x), call = parent.frame(), ...)
 }
 \arguments{
 \item{x}{Object to check.}
 
-\item{arg}{Argument name for x. Defaults to \code{caller_arg(x)}.}
+\item{arg}{Argument name of object to check. Used to improve
+\code{\link[cli:cli_abort]{cli::cli_abort()}} messages. Defaults to \code{caller_arg(x)}.}
 
 \item{what}{Class names to check}
+
+\item{call}{The execution environment of a currently running function passed
+to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }

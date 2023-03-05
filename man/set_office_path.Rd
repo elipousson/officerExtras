@@ -7,7 +7,8 @@
 set_office_path(
   filename = NULL,
   path = NULL,
-  fileext = c("docx", "pptx", "xlsx")
+  fileext = c("docx", "pptx", "xlsx"),
+  call = parent.frame()
 )
 }
 \description{

@@ -16,7 +16,7 @@
 #'   parameter by the corresponding function. Defaults to `NULL`.
 #' @param quiet If `FALSE`, warn if docx is provided when filename and/or path
 #'   are also provided. Default: `TRUE`.
-#' @param ... Additional parameters passed to [cli::cli_abort()].
+#' @inheritParams check_office_fileext
 #' @return A rdocx, rpptx, or rxlsx object.
 #' @seealso
 #'  [officer::read_docx()]
@@ -31,9 +31,10 @@ read_officer <- function(filename = NULL,
                          x = NULL,
                          arg = caller_arg(x),
                          quiet = TRUE,
+                         call = parent.frame(),
                          ...) {
   if (is.null(x)) {
-    path <- set_office_path(filename, path, fileext = fileext)
+    path <- set_office_path(filename, path, fileext = fileext, call = call)
 
     x <- switch(str_extract_fileext(path),
       "docx" = officer::read_docx(path),
@@ -47,7 +48,7 @@ read_officer <- function(filename = NULL,
       )
     }
 
-    check_officer(x, what = paste0("r", fileext), ...)
+    check_officer(x, what = paste0("r", fileext), call = call, ...)
   }
 
   if (isFALSE(quiet)) {
@@ -73,8 +74,7 @@ read_docx_ext <- function(filename = NULL,
     path = path,
     fileext = "docx",
     x = docx,
-    quiet = quiet,
-    call = rlang::current_call()
+    quiet = quiet
   )
 }
 
@@ -90,8 +90,7 @@ read_pptx_ext <- function(filename = NULL,
     path = path,
     fileext = "pptx",
     x = pptx,
-    quiet = quiet,
-    call = rlang::current_call()
+    quiet = quiet
   )
 }
 
@@ -107,8 +106,7 @@ read_xlsx_ext <- function(filename = NULL,
     path = path,
     fileext = "xlsx",
     x = xlsx,
-    quiet = quiet,
-    call = rlang::current_call()
+    quiet = quiet
   )
 }
 
@@ -132,7 +130,7 @@ cli_doc_properties <- function(x, filename = NULL) {
   )
 }
 
-#' Get doc properties for a rdocx or rpptx object
+#' Get doc properties for a rdocx or rpptx object as list
 #'
 #' @keywords internal
 #' @export
@@ -154,7 +152,8 @@ officer_properties <- function(x, values = list(), keep.null = FALSE) {
 #' @importFrom cli cli_vec
 set_office_path <- function(filename = NULL,
                             path = NULL,
-                            fileext = c("docx", "pptx", "xlsx")) {
+                            fileext = c("docx", "pptx", "xlsx"),
+                            call = parent.frame()) {
   if (is.null(path)) {
     path <- filename
   } else if (!is.null(filename)) {
@@ -174,7 +173,8 @@ set_office_path <- function(filename = NULL,
     arg = cli_vec_last(
       c("filename", "path")
     ),
-    fileext = fileext
+    fileext = fileext,
+    call = call
   )
 
   path
