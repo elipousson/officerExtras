@@ -5,6 +5,10 @@
 #' @param path File path.
 #' @param overwrite If `TRUE` (default), remove file at path if it already
 #'   exists. If `FALSE` and file exists, this function aborts.
+#' @param modified_by If the withr package is installed, modified_by overrides
+#'   the default value for the lastModifiedBy property assigned to the output
+#'   file by officer. Defaults to `Sys.getenv("USER")` (the same value used by
+#'   officer).
 #' @inheritDotParams officer::set_doc_properties -x
 #' @returns Returns the input object (invisibly) and writes the rdocx, rpptx, or
 #'   rxlsx object to a file with a name and location matching the provided path.
@@ -15,6 +19,7 @@
 write_officer <- function(x,
                           path,
                           overwrite = TRUE,
+                          modified_by = Sys.getenv("USER"),
                           ...) {
   rlang::check_required(x)
   rlang::check_required(path)
@@ -43,7 +48,16 @@ write_officer <- function(x,
     file.remove(path)
   }
 
-  print(x, target = path)
+  if (!rlang::is_installed("withr")) {
+    print(x, target = path)
+  } else {
+    withr::with_envvar(
+      list("USER" = modified_by),
+      {
+        print(x, target = path)
+      }
+    )
+  }
 
   invisible(x)
 }

@@ -4,7 +4,7 @@
 \alias{write_officer}
 \title{Write a rdocx, rpptx, or rxlsx object to a file}
 \usage{
-write_officer(x, path, overwrite = TRUE, ...)
+write_officer(x, path, overwrite = TRUE, modified_by = Sys.getenv("USER"), ...)
 }
 \arguments{
 \item{x}{A rdocx, rpptx, or rxlsx object to save. Document properties won't
@@ -14,6 +14,11 @@ be set for rxlsx objects.}
 
 \item{overwrite}{If \code{TRUE} (default), remove file at path if it already
 exists. If \code{FALSE} and file exists, this function aborts.}
+
+\item{modified_by}{If the withr package is installed, modified_by overrides
+the default value for the lastModifiedBy property assigned to the output
+file by officer. Defaults to \code{Sys.getenv("USER")} (the same value used by
+officer).}
 
 \item{...}{
   Arguments passed on to \code{\link[officer:set_doc_properties]{officer::set_doc_properties}}

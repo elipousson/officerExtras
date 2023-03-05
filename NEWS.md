@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# officerExtras development
+
+* Add support for writing custom lastModifiedBy property to `write_officer()`.
+
 # officerExtras 0.0.0.9002
 
 * Add support for `gt::as_word()` parameters to `add_gt_to_body()`.

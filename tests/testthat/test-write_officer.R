@@ -26,6 +26,17 @@ test_that("write_officer works", {
       )[["doc_obj"]]
     )
 
+    write_officer(docx, "example.docx", modified_by = "test")
+
+    expect_identical(
+      "test",
+      officer_properties(
+        read_docx_ext(
+          filename = "example.docx", quiet = TRUE
+        )
+      )[["lastModifiedBy"]]
+    )
+
     write_officer(pptx, "example.pptx")
 
     expect_identical(
