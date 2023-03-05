@@ -4,12 +4,6 @@ is_officer <- function(x, what = c("rdocx", "rpptx", "rxlsx")) {
   inherits(x, what)
 }
 
-#' @keywords internal
-#' @noRd
-is_rdocx <- function(x) {
-  inherits(x, "rdocx")
-}
-
 #' Check if x is a rdocx, rpptx, or rxlsx object
 #'
 #' @param x Object to check.
