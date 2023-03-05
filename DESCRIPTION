@@ -18,7 +18,7 @@ Imports:
     utils
 Suggests: 
     covr,
-    gt,
+    gt (>= 0.7.0),
     testthat (>= 3.0.0),
     withr
 Encoding: UTF-8
