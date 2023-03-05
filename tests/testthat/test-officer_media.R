@@ -7,7 +7,7 @@ test_that("officer_media works", {
   withr::with_tempdir({
     officer_media(
       system.file("doc_examples/example.pptx", package = "officer"),
-      dest = "test-officer_media"
+      dir = "test-officer_media"
     )
 
     expect_true(

@@ -4,15 +4,35 @@
 \alias{officer_media}
 \title{Copy media from a docx or pptx file to a folder}
 \usage{
-officer_media(filename = NULL, path = NULL, dest = "media", overwrite = TRUE)
+officer_media(
+  filename = NULL,
+  path = NULL,
+  dir = "media",
+  list = FALSE,
+  overwrite = TRUE
+)
 }
 \arguments{
-\item{dest}{Folder name or path to copy media files to. dest is created if no
+\item{filename, path}{File name and path for a \code{docx} or \code{pptx} file. One of
+the two must be provided. Defaults to \code{NULL}.}
+
+\item{dir}{Folder name or path to copy media files. dir is created if no
 folder exists at that location.}
 
+\item{list}{If \code{TRUE}, display a message listing files contained in the docx
+or pptx file but do not copy the files to dir. Defaults to \code{FALSE}.}
+
 \item{overwrite}{If \code{TRUE} (default), overwrite any files with the same names
-at the dest location.}
+at the dir location.}
 }
 \description{
-Copy media from a docx or pptx file to a folder
+Unzip a docx or pptx file to a temporary directory, check if the directory
+contains a media folder, and copy media files to the directory set by dir.
+}
+\examples{
+officer_media(
+  system.file("doc_examples/example.pptx", package = "officer"),
+  list = TRUE
+)
+
 }

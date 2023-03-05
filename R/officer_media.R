@@ -20,7 +20,7 @@ list_officer_media <- function(path) {
     return(NULL)
   }
 
-  cli::cli_alert_info("{n_images} media files found in {.path {path}}")
+  cli::cli_alert_info("{n_images} media file{?s} found in {.path {path}}")
   filenames
 }
 
@@ -43,22 +43,45 @@ unzip_officer <- function(path,
 
 #' Copy media from a docx or pptx file to a folder
 #'
-#' @inheritParams set_office_path
-#' @param dest Folder name or path to copy media files to. dest is created if no
+#' Unzip a docx or pptx file to a temporary directory, check if the directory
+#' contains a media folder, and copy media files to the directory set by dir.
+#'
+#' @param filename,path File name and path for a `docx` or `pptx` file. One of
+#'   the two must be provided. Defaults to `NULL`.
+#' @param dir Folder name or path to copy media files. dir is created if no
 #'   folder exists at that location.
+#' @param list If `TRUE`, display a message listing files contained in the docx
+#'   or pptx file but do not copy the files to dir. Defaults to `FALSE`.
 #' @param overwrite If `TRUE` (default), overwrite any files with the same names
-#'   at the dest location.
+#'   at the dir location.
+#' @examples
+#' officer_media(
+#'   system.file("doc_examples/example.pptx", package = "officer"),
+#'   list = TRUE
+#' )
+#'
 #' @export
-#' @importFrom cli cli_alert_success
+#' @importFrom cli cli_bullets cli_alert_success
 #' @importFrom rlang set_names
 officer_media <- function(filename = NULL,
                           path = NULL,
-                          dest = "media",
+                          dir = "media",
+                          list = FALSE,
                           overwrite = TRUE) {
   path <- set_office_path(filename, path, fileext = c("docx", "pptx"))
-  media_files <- list_officer_media(path)
+  mediafiles <- list_officer_media(path)
 
-  if (length(media_files) == 0) {
+  if (length(mediafiles) == 0) {
+    return(invisible(NULL))
+  }
+
+  if (isTRUE(list)) {
+    cli::cli_bullets(
+      rlang::set_names(
+        basename(mediafiles),
+        rep("*", length(mediafiles))
+      )
+    )
     return(invisible(NULL))
   }
 
@@ -66,18 +89,18 @@ officer_media <- function(filename = NULL,
 
   unzip_officer(path, exdir)
 
-  if (!dir.exists(dest)) {
-    dir.create(dest)
+  if (!dir.exists(dir)) {
+    dir.create(dir)
   }
 
   file.copy(
-    file.path(exdir, media_files),
-    file.path(dest, basename(media_files)),
+    file.path(exdir, mediafiles),
+    file.path(dir, basename(mediafiles)),
     overwrite = overwrite,
     copy.date = TRUE
   )
 
   unlink(exdir)
 
-  cli::cli_alert_success("Copied media to {.path {dest}}")
+  cli::cli_alert_success("Copied media to {.path {dir}}")
 }
