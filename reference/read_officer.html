@@ -73,6 +73,7 @@ default to use a rdocx, rpptx, or rxlsx class object if provided.</p>
 <span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -91,9 +92,19 @@ default to use a rdocx, rpptx, or rxlsx class object if provided.</p>
 supported.</p></dd>
 
 
+<dt>fileext</dt>
+<dd><p>File extensions to allow without error. Defaults to "docx",
+"pptx", "xlsx".</p></dd>
+
+
 <dt>x</dt>
 <dd><p>A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
 and path are ignored. Default: <code>NULL</code></p></dd>
+
+
+<dt>arg</dt>
+<dd><p>Argument name of object to check. Used to improve
+<code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code> messages. Defaults to <code>caller_arg(x)</code>.</p></dd>
 
 
 <dt>quiet</dt>
@@ -101,8 +112,13 @@ and path are ignored. Default: <code>NULL</code></p></dd>
 are also provided. Default: <code>TRUE</code>.</p></dd>
 
 
+<dt>call</dt>
+<dd><p>The execution environment of a currently running function passed
+to <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code>. Defaults to <code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame()</a></code></p></dd>
+
+
 <dt>...</dt>
-<dd><p>Additional parameters passed to <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code>.</p></dd>
+<dd><p>Additional parameters passed to <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code></p></dd>
 
 
 <dt>docx, pptx, xlsx</dt>
