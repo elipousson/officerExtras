@@ -1,5 +1,6 @@
 #' @keywords internal
 #' @export
+#' @noRd
 #' @importFrom cli cli_alert_warning cli_alert_info
 list_officer_media <- function(path) {
   filenames <- unzip_officer(path, list = TRUE)[["Name"]]
@@ -13,6 +14,7 @@ list_officer_media <- function(path) {
 
   pattern <- file.path(pattern, "media", ".+")
   filenames <- filenames[str_detect(filenames, pattern)]
+
   n_images <- length(filenames)
 
   if (n_images == 0) {
@@ -25,6 +27,7 @@ list_officer_media <- function(path) {
 }
 
 #' @keywords internal
+#' @noRd
 #' @export
 #' @importFrom utils unzip
 unzip_officer <- function(path,
@@ -82,7 +85,7 @@ officer_media <- function(filename = NULL,
         rep("*", length(mediafiles))
       )
     )
-    return(invisible(NULL))
+    return(invisible(mediafiles))
   }
 
   exdir <- tempdir()
