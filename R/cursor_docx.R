@@ -17,7 +17,7 @@
 #' @importFrom officer cursor_reach_test cursor_reach docx_bookmarks
 #'   cursor_bookmark docx_summary
 cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE) {
-  rlang::check_required(docx)
+  check_docx(docx)
 
   if (!is.null(keyword)) {
     if (isFALSE(officer::cursor_reach_test(docx, keyword)) & isFALSE(quiet)) {
@@ -47,7 +47,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   }
 
   cli_abort(
-    "One of {.arg keyword}, {.arg id}, or {.arg index} must be provided."
+    "{.arg keyword}, {.arg id}, or {.arg index} must be supplied."
   )
 }
 
