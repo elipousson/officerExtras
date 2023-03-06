@@ -160,6 +160,13 @@ set_office_path <- function(filename = NULL,
     path <- file.path(path, filename)
   }
 
+  if (!is.character(path) & !is.null(path)) {
+    cli::cli_abort(
+      '{.arg {cli_vec_last(c("filename", "path"))}} must be `NULL` or
+      {.cls character} objects not {.cls {class(path)}}.'
+    )
+  }
+
   fileext <- match.arg(fileext, several.ok = TRUE)
 
   if (("pptx" %in% fileext) & is_fileext_path(path, "potx")) {
