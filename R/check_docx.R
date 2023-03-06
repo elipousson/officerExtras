@@ -83,9 +83,9 @@ check_office_fileext <- function(x,
 #' @export
 check_docx_fileext <- function(x,
                                arg = caller_arg(x),
-                               ...,
-                               .envir = current_env()) {
-  check_office_fileext(x, arg, ..., fileext = "docx", .envir = .envir)
+                               call = parent.frame(),
+                               ...) {
+  check_office_fileext(x, arg, fileext = "docx", call = call, ...)
 }
 
 #' @name check_pptx_fileext
@@ -94,9 +94,9 @@ check_docx_fileext <- function(x,
 #' @importFrom rlang caller_arg current_env
 check_pptx_fileext <- function(x,
                                arg = caller_arg(x),
-                               ...,
-                               .envir = current_env()) {
-  check_office_fileext(x, arg, ..., fileext = "pptx", .envir = .envir)
+                               call = parent.frame(),
+                               ...) {
+  check_office_fileext(x, arg, fileext = "pptx", call = call, ...)
 }
 
 #' @name check_xlsx_fileext
@@ -105,7 +105,7 @@ check_pptx_fileext <- function(x,
 #' @importFrom rlang caller_arg current_env
 check_xlsx_fileext <- function(x,
                                arg = caller_arg(x),
-                               ...,
-                               .envir = current_env()) {
-  check_office_fileext(x, arg, ..., fileext = "xlsx", .envir = .envir)
+                               call = parent.frame(),
+                               ...) {
+  check_office_fileext(x, arg, fileext = "xlsx", call = call, ...)
 }

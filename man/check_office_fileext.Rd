@@ -15,11 +15,11 @@ check_office_fileext(
   ...
 )
 
-check_docx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
+check_docx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
 
-check_pptx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
+check_pptx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
 
-check_xlsx_fileext(x, arg = caller_arg(x), ..., .envir = current_env())
+check_xlsx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
 }
 \arguments{
 \item{x}{Object to check.}
