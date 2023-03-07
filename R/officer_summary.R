@@ -51,10 +51,11 @@ officer_summary <- function(x, summary_type = "doc", index = NULL) {
 #' @param n Required number of rows. Optional. If n is more than length 1,
 #'   checks to make sure the number of rows is within the range of `max(n) `and
 #'   `min(n)`. Defaults to `NULL`.
-#' @param content_type Required content_type. Optional.
+#' @param content_type Required content_type, e.g. "paragraph", "table cell", or
+#'   "image". Optional. Defaults to `NULL`.
 #' @param summary_type Summary type. Options "doc", "docx", "pptx", "slide", or
-#'   "layout". "doc" requires a "content_type" column but allows columns for
-#'   either a docx or pptx summary.
+#'   "layout". "doc" requires the data.frame include a "content_type" column but
+#'   allows columns for either a docx or pptx summary.
 #' @param tables If `TRUE`, require that the summary include the column names
 #'   indicated a table is present in the rdocx or rpptx summary.
 #' @param arg Argument name to use in error messages. Defaults to

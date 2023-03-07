@@ -19,13 +19,16 @@ check_officer_summary(
 \item{x}{An object to check if it is a data.frame object created with
 \code{\link[officer:docx_summary]{officer::docx_summary()}} or another summary function.}
 
-\item{n}{Required number of rows. Optional. Defaults to \code{NULL}.}
+\item{n}{Required number of rows. Optional. If n is more than length 1,
+checks to make sure the number of rows is within the range of \code{max(n) }and
+\code{min(n)}. Defaults to \code{NULL}.}
 
-\item{content_type}{Required content_type.}
+\item{content_type}{Required content_type, e.g. "paragraph", "table cell", or
+"image". Optional. Defaults to \code{NULL}.}
 
 \item{summary_type}{Summary type. Options "doc", "docx", "pptx", "slide", or
-"layout". "doc" requires a "content_type" column but allows columns for
-either a docx or pptx summary.}
+"layout". "doc" requires the data.frame include a "content_type" column but
+allows columns for either a docx or pptx summary.}
 
 \item{tables}{If \code{TRUE}, require that the summary include the column names
 indicated a table is present in the rdocx or rpptx summary.}

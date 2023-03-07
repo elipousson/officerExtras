@@ -13,8 +13,8 @@ officer_summary(x, summary_type = "doc", index = NULL)
 functions, it is returned as is.}
 
 \item{summary_type}{Summary type. Options "doc", "docx", "pptx", "slide", or
-"layout". "doc" requires a "content_type" column but allows columns for
-either a docx or pptx summary.}
+"layout". "doc" requires the data.frame include a "content_type" column but
+allows columns for either a docx or pptx summary.}
 
 \item{index}{slide index}
 }
