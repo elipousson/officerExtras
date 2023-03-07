@@ -162,15 +162,24 @@ add_gg_to_body <- function(docx,
   docx <- add_to_body(docx, value = value, style = style, pos = pos, ...)
 
   if (!is.null(caption) & !is.null(value[["labels"]][[caption]])) {
-    officer::body_add_caption(
-      docx,
-      value = officer::block_caption(
-        label = as.character(value[["labels"]][[caption]]),
+    if (!is.null(autonum)) {
+      officer::body_add_caption(
+        docx,
+        value = officer::block_caption(
+          label = as.character(value[["labels"]][[caption]]),
+          style = caption_style,
+          autonum = autonum
+        ),
+        pos = pos
+      )
+    } else {
+      officer::body_add_par(
+        docx,
+        value = as.character(value[["labels"]][[caption]]),
         style = caption_style,
-        autonum = autonum
-      ),
-      pos = pos
-    )
+        pos = pos
+      )
+    }
   }
 }
 

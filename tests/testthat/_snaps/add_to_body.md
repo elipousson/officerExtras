@@ -259,3 +259,26 @@
       8.66     10     FALSE       8               NA        1        1   table cell
       8.74     11     FALSE       8            0.440        1        1   table cell
 
+# add_gg_to_body works
+
+    Code
+      docx_gg
+    Output
+      rdocx document with 22 element(s)
+      
+      * styles:
+                      Normal              heading 1              heading 2 
+                 "paragraph"            "paragraph"            "paragraph" 
+      Default Paragraph Font           Normal Table                No List 
+                 "character"                "table"            "numbering" 
+                 Titre 1 Car            Titre 2 Car          Light Shading 
+                 "character"            "character"                "table" 
+              List Paragraph                 header            En-tête Car 
+                 "paragraph"            "paragraph"            "character" 
+                      footer       Pied de page Car 
+                 "paragraph"            "character" 
+      
+      * Content at cursor location:
+        level num_id       text style_name content_type
+      1    NA     NA test title     Normal    paragraph
+

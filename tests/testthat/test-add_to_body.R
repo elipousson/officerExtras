@@ -36,7 +36,6 @@ test_that("add_gt_to_body works", {
     path = system.file("doc_examples", package = "officer")
   )
 
-  skip_if_not_installed("gt")
   tab_1 <-
     gt::gt(
       gt::exibble,
@@ -62,4 +61,37 @@ test_that("add_gt_to_body works", {
     )
 
   expect_snapshot(docx_str_keys)
+})
+
+test_that("add_gg_to_body works", {
+  docx <- read_docx_ext(
+    filename = "example.docx",
+    path = system.file("doc_examples", package = "officer")
+  )
+
+  skip_if_not_installed("ggplot2")
+
+  set.seed(1)
+  df <- data.frame(
+    gp = factor(rep(letters[1:3], each = 10)),
+    y = rnorm(30)
+  )
+  ds <- do.call(rbind, lapply(split(df, df$gp), function(d) {
+    data.frame(mean = mean(d$y), sd = sd(d$y), gp = d$gp)
+  }))
+
+  plot1 <- ggplot2::ggplot(df, ggplot2::aes(gp, y)) +
+    ggplot2::geom_point() +
+    ggplot2::geom_point(data = ds, ggplot2::aes(y = mean), colour = "red", size = 3) +
+    ggplot2::labs(
+      title = "test title"
+    )
+
+  docx_gg <-
+    add_gg_to_body(
+      docx,
+      plot1
+    )
+
+  expect_snapshot(docx_gg)
 })
