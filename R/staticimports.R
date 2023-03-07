@@ -25,6 +25,28 @@ is_all_null <- function(x) {
   is_all(x, is.null)
 }
 
+#' Do any items in a list or vector return `TRUE` from a predicate function?
+#'
+#' @param x A list or vector passed to [vapply()].
+#' @inheritParams base::vapply
+#' @inheritDotParams base::vapply -X
+#' @returns `TRUE` if FUN returns `TRUE` for any element of x or `FALSE` if all
+#'   elements return `FALSE`.
+#' @seealso [isstatic::is_all()]
+#' @noRd
+is_any <- function(x, FUN, ...) {
+  any(vapply(x, FUN, FUN.VALUE = TRUE, ...))
+}
+
+#' - [is_any_null()]: Is any item in a list or vector a `NULL` value?
+#'
+#' @name is_any_null
+#' @rdname is_any
+#' @noRd
+is_any_null <- function(x) {
+  is_any(x, is.null)
+}
+
 #' Does this text end in the provided file extension?
 #'
 #' @param x A character vector to check for matches, or an object which can be
@@ -40,6 +62,15 @@ is_fileext_path <- function(x, fileext, ignore.case = TRUE) {
     x,
     ignore.case = ignore.case, perl = TRUE
   )
+}
+
+#' Is this a ggplot class object?
+#'
+#' @name is_ggplot
+#' @rdname is_gg
+#' @noRd
+is_ggplot <- function(x) {
+  inherits(x, "ggplot")
 }
 
 #' @name str_extract_fileext
@@ -75,4 +106,11 @@ str_detect <- function(string, pattern, negate = FALSE) {
 	result <- as.logical(lengths(indices))
 	result[is.na(string)] <- NA
 	result
+}
+
+str_remove <- function(string, pattern) {
+	is_fixed <- inherits(pattern, "stringr_fixed")
+	Vectorize(sub, c("pattern", "x"), USE.NAMES = FALSE)(
+		pattern, replacement = "", x = string, perl = !is_fixed, fixed = is_fixed
+	)
 }
