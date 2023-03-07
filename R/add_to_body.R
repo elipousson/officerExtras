@@ -1,16 +1,19 @@
 #' Add an xml string, text paragraph, or gt object at a specified position in a
-#' Word document
+#' rdocx object
 #'
 #' @description
-#' Wrappers for [officer::body_add_par()] and [officer::body_add_xml()] that use
-#' the [cursor_docx()] helper function to allow users to pass the value and
-#' keyword, id, or index value used to place a "cursor" within the document
-#' using a single function. If `pos = NULL`, [add_to_body()] calls
-#' [officer::body_add()] instead of [officer::body_add_par()].
+#' Wrappers for [officer::body_add_par()], [officer::body_add_gg()], and
+#' [officer::body_add_xml()] that use the [cursor_docx()] helper function to
+#' allow users to pass the value and keyword, id, or index value used to place a
+#' "cursor" within the document using a single function. If `pos = NULL`,
+#' [add_to_body()] calls [officer::body_add()] instead of
+#' [officer::body_add_par()].
 #'
 #' - [add_text_to_body()] passes value to [glue::glue()]
 #' to add support for glue string interpolation.
 #' - [add_gt_to_body()] converts gt tables to OOXML with [gt::as_word()].
+#' - [add_gg_to_body()] adds a caption following the plots using the labels
+#' from the plot object.
 #'
 #' @details Using [add_value_with_keys()] or [add_str_with_keys()]
 #'
@@ -26,8 +29,8 @@
 #' @inheritParams cursor_docx
 #' @inheritParams officer::body_add
 #' @inheritParams officer::body_add_xml
-#' @param ... Additional parameters passed to [officer::body_add_par()] or
-#'   [officer::body_add()].
+#' @param ... Additional parameters passed to [officer::body_add_par()],
+#'   [officer::body_add_gg()], or [officer::body_add()].
 #' @example examples/example-add_to_body.R
 #' @returns A rdocx object with xml, gt tables, or paragraphs of text added.
 #' @export
@@ -40,12 +43,14 @@ add_to_body <- function(docx,
                         value = NULL,
                         str = NULL,
                         pos = "after",
+                        call = parent.frame(),
                         ...) {
-  check_docx(docx)
+  check_docx(docx, call = call)
 
-  if ((!is.null(str) & !is.null(value)) | is_all_null(c(str, value))) {
+  if ((!is_any_null(list(str, value))) | is_all_null(list(str, value))) {
     cli_abort(
-      "Either {.arg str} or {.arg value} must be provided."
+      "{.arg str} or {.arg value} must be supplied.",
+      call = call
     )
   }
 
@@ -58,7 +63,13 @@ add_to_body <- function(docx,
   }
 
   if (!is.null(pos) & !is.null(value)) {
-    return(officer::body_add_par(docx, value, pos = pos, ...))
+    if (is.character(value)) {
+      return(officer::body_add_par(docx, value, pos = pos, ...))
+    }
+
+    if (is_ggplot(value)) {
+      return(officer::body_add_gg(docx, value, pos = pos, ...))
+    }
   }
 
   officer::body_add(docx, value, ...)
@@ -129,6 +140,39 @@ add_gt_to_body <- function(docx,
   )
 }
 
+#' @name add_gg_to_body
+#' @rdname add_to_body
+#' @param caption Name of the ggplot2 label to use as a caption if plot passed
+#'   to value has a label for this value. Defaults to "title".
+#' @param caption_style Passed to style for [officer::body_add_caption()].
+#'   Defaults to same value as style.
+#' @inheritParams officer::body_add_caption
+#' @export
+#' @importFrom rlang check_required
+#' @importFrom officer body_add_caption
+add_gg_to_body <- function(docx,
+                           value,
+                           caption = "title",
+                           caption_style = style,
+                           autonum = NULL,
+                           style = "Normal",
+                           pos = "after",
+                           ...) {
+  rlang::check_required(value)
+  docx <- add_to_body(docx, value = value, style = style, pos = pos, ...)
+
+  if (!is.null(caption) & !is.null(value[["labels"]][[caption]])) {
+    officer::body_add_caption(
+      docx,
+      value = officer::block_caption(
+        label = as.character(value[["labels"]][[caption]]),
+        style = caption_style,
+        autonum = autonum
+      ),
+      pos = pos
+    )
+  }
+}
 
 #' @name add_value_with_keys
 #' @rdname add_to_body

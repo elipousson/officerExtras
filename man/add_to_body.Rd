@@ -5,10 +5,11 @@
 \alias{add_text_to_body}
 \alias{add_xml_to_body}
 \alias{add_gt_to_body}
+\alias{add_gg_to_body}
 \alias{add_value_with_keys}
 \alias{add_str_with_keys}
 \title{Add an xml string, text paragraph, or gt object at a specified position in a
-Word document}
+rdocx object}
 \usage{
 add_to_body(
   docx,
@@ -18,6 +19,7 @@ add_to_body(
   value = NULL,
   str = NULL,
   pos = "after",
+  call = parent.frame(),
   ...
 )
 
@@ -42,6 +44,17 @@ add_gt_to_body(
   caption_align = "left",
   split = FALSE,
   keep_with_next = TRUE,
+  pos = "after",
+  ...
+)
+
+add_gg_to_body(
+  docx,
+  value,
+  caption = "title",
+  caption_style = style,
+  autonum = NULL,
+  style = "Normal",
   pos = "after",
   ...
 )
@@ -72,8 +85,11 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.}
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
 
-\item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}} or
-\code{\link[officer:body_add]{officer::body_add()}}.}
+\item{call}{The execution environment of a currently running function passed
+to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
+
+\item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}},
+\code{\link[officer:body_add_gg]{officer::body_add_gg()}}, or \code{\link[officer:body_add]{officer::body_add()}}.}
 
 \item{style}{paragraph style name. These names are available with function \link[officer]{styles_info}
 and are the names of the Word styles defined in the base document (see
@@ -112,6 +128,12 @@ to activate the Word option \verb{Allow row to break across pages}.}
 \item{keep_with_next}{A \code{TRUE} (the default) or \code{FALSE} value that indicates
 whether a table should use Word option \verb{keep rows together}.}
 
+\item{caption}{Name of the ggplot2 label to use as a caption if plot passed
+to value has a label for this value. Defaults to "title".}
+
+\item{caption_style}{Passed to style for \code{\link[officer:body_add_caption]{officer::body_add_caption()}}.
+Defaults to same value as style.}
+
 \item{.f}{Any function that takes a docx and value parameter and returns a
 rdocx object. A keyword parameter must also be supported if named is TRUE.
 Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
@@ -120,15 +142,18 @@ Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
 A rdocx object with xml, gt tables, or paragraphs of text added.
 }
 \description{
-Wrappers for \code{\link[officer:body_add_par]{officer::body_add_par()}} and \code{\link[officer:body_add_xml]{officer::body_add_xml()}} that use
-the \code{\link[=cursor_docx]{cursor_docx()}} helper function to allow users to pass the value and
-keyword, id, or index value used to place a "cursor" within the document
-using a single function. If \code{pos = NULL}, \code{\link[=add_to_body]{add_to_body()}} calls
-\code{\link[officer:body_add]{officer::body_add()}} instead of \code{\link[officer:body_add_par]{officer::body_add_par()}}.
+Wrappers for \code{\link[officer:body_add_par]{officer::body_add_par()}}, \code{\link[officer:body_add_gg]{officer::body_add_gg()}}, and
+\code{\link[officer:body_add_xml]{officer::body_add_xml()}} that use the \code{\link[=cursor_docx]{cursor_docx()}} helper function to
+allow users to pass the value and keyword, id, or index value used to place a
+"cursor" within the document using a single function. If \code{pos = NULL},
+\code{\link[=add_to_body]{add_to_body()}} calls \code{\link[officer:body_add]{officer::body_add()}} instead of
+\code{\link[officer:body_add_par]{officer::body_add_par()}}.
 \itemize{
 \item \code{\link[=add_text_to_body]{add_text_to_body()}} passes value to \code{\link[glue:glue]{glue::glue()}}
 to add support for glue string interpolation.
 \item \code{\link[=add_gt_to_body]{add_gt_to_body()}} converts gt tables to OOXML with \code{\link[gt:as_word]{gt::as_word()}}.
+\item \code{\link[=add_gg_to_body]{add_gg_to_body()}} adds a caption following the plots using the labels
+from the plot object.
 }
 }
 \details{
