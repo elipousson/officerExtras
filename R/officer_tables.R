@@ -1,20 +1,11 @@
 #' @keywords internal
 #' @noRd
 officer_table_index <- function(x) {
+  tables <- subset_type(x, "table cell")
   if (rlang::has_name(x, "doc_index")) {
-    unique(subset(x, content_type %in% "table cell")[["doc_index"]])
+    unique(tables[["doc_index"]])
   } else if (rlang::has_name(x, "id")) {
-    unique(subset(x, content_type %in% "table cell")[["id"]])
-  }
-}
-
-#' @keywords internal
-#' @noRd
-officer_filter_index <- function(x, index = NULL) {
-  if (rlang::has_name(x, "doc_index")) {
-    subset(x, doc_index %in% index)
-  } else if (rlang::has_name(x, "id")) {
-    subset(x, id %in% index)
+    unique(tables[["id"]])
   }
 }
 
@@ -40,15 +31,15 @@ officer_table_pivot <- function(x) {
 #' @importFrom rlang set_names
 #' @importFrom utils tail head
 officer_table <- function(x, index = NULL, has_header = TRUE) {
-  table_cells <- x[x[["content_type"]] %in% "table cell", ]
+  table_cells <- subset_type(x, "table cell")
 
   if (!is.null(index)) {
-    table_cells <- officer_filter_index(x, index)
+    table_cells <- subset_index(x, index)
   }
 
   if (rlang::has_name(x, "is_header")) {
-    table_body <- officer_table_pivot(subset(table_cells, !isTRUE(is_header)))
-    table_header <- officer_table_pivot(subset(table_cells, isTRUE(is_header)))
+    table_body <- officer_table_pivot(subset_header(table_cells, FALSE))
+    table_header <- officer_table_pivot(subset_header(table_cells, TRUE))
   } else {
     table_body <- officer_table_pivot(table_cells)
     table_header <- data.frame()
