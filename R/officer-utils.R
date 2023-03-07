@@ -27,3 +27,15 @@ subset_index <- function(x, index) {
     x[x[["id"]] %in% index, ]
   }
 }
+
+#' @keywords internal
+#' @noRd
+subset_header <- function(x, header = TRUE) {
+  if (isTRUE(header)) {
+    x[isTRUE(x[["is_header"]]), ]
+  } else if (isFALSE(header)) {
+    x[isFALSE(x[["is_header"]]), ]
+  } else {
+    x
+  }
+}
