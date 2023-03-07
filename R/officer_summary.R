@@ -101,7 +101,6 @@ check_officer_summary <- function(x,
 
 #' @keywords internal
 #' @noRd
-#' @export
 #' @importFrom rlang has_name
 is_officer_summary <- function(x,
                                summary_type = "doc",

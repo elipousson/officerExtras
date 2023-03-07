@@ -1,5 +1,4 @@
 #' @keywords internal
-#' @export
 #' @noRd
 #' @importFrom cli cli_alert_warning cli_alert_info
 list_officer_media <- function(path) {
@@ -28,7 +27,6 @@ list_officer_media <- function(path) {
 
 #' @keywords internal
 #' @noRd
-#' @export
 #' @importFrom utils unzip
 unzip_officer <- function(path,
                           exdir = ".",
@@ -62,7 +60,6 @@ unzip_officer <- function(path,
 #'   system.file("doc_examples/example.pptx", package = "officer"),
 #'   list = TRUE
 #' )
-#'
 #' @export
 #' @importFrom cli cli_bullets cli_alert_success
 #' @importFrom rlang set_names

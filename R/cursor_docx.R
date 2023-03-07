@@ -20,7 +20,11 @@
 #' @importFrom cli cli_alert_warning cli_abort
 #' @importFrom officer cursor_reach_test cursor_reach docx_bookmarks
 #'   cursor_bookmark docx_summary
-cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE) {
+cursor_docx <- function(docx,
+                        keyword = NULL,
+                        id = NULL,
+                        index = NULL,
+                        quiet = FALSE) {
   check_docx(docx)
 
   if (!is.null(keyword)) {
@@ -52,9 +56,8 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
 
 #' @keywords internal
 #' @noRd
-#' @export
 #' @importFrom officer docx_summary cursor_reach
-cursor_index <- function(docx, index = NULL) {
+cursor_index <- function(docx, index) {
   docx_df <- subset_index(officer::docx_summary(docx), index)
 
   check_officer_summary(
