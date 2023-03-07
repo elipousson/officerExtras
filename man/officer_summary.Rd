@@ -4,10 +4,19 @@
 \alias{officer_summary}
 \title{Summarize a rdocx or rpptx object}
 \usage{
-officer_summary(x)
+officer_summary(x, summary_type = "doc", index = NULL)
 }
 \arguments{
-\item{x}{A rdocx or rpptx object passed to \code{\link[officer:docx_summary]{officer::docx_summary()}} or \code{\link[officer:pptx_summary]{officer::pptx_summary()}}.}
+\item{x}{A rdocx or rpptx object passed to \code{\link[officer:docx_summary]{officer::docx_summary()}},
+\code{\link[officer:pptx_summary]{officer::pptx_summary()}}, \code{\link[officer:slide_summary]{officer::slide_summary()}}, or
+\code{\link[officer:layout_summary]{officer::layout_summary()}}. If x is a data.frame created with one of those
+functions, it is returned as is.}
+
+\item{summary_type}{Summary type. Options "doc", "docx", "pptx", "slide", or
+"layout". "doc" requires a "content_type" column but allows columns for
+either a docx or pptx summary.}
+
+\item{index}{slide index}
 }
 \value{
 A data.frame object.

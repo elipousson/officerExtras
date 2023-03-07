@@ -1,5 +1,9 @@
 #' Set cursor position in rdocx object based on keyword, id, or index
 #'
+#' A combined function for setting cursor position with
+#' [officer::cursor_reach()], [officer::cursor_bookmark()], or using a doc_index
+#' value from [officer::docx_summary()].
+#'
 #' @param docx A rdocx object.
 #' @param keyword,id A keyword string used to place cursor with
 #'   [officer::cursor_reach()] or bookmark id with [officer::cursor_bookmark()].
@@ -38,12 +42,7 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   }
 
   if (!is.null(index)) {
-    summary_df <- officer::docx_summary(docx)
-    summary_df <- summary_df[summary_df[["doc_index"]] == index, ]
-
-    check_docx_summary(summary_df)
-
-    return(officer::cursor_reach(docx, keyword = summary_df[["text"]]))
+    return(cursor_index(docx, index))
   }
 
   cli_abort(
@@ -51,36 +50,19 @@ cursor_docx <- function(docx, keyword = NULL, id = NULL, index = NULL, quiet = F
   )
 }
 
-#' Check a docx summary data.frame
-#'
-#' @param x A data.frame object created with [officer::docx_summary()].
-#' @param n Required number of rows.
-#' @param content_type Required content_type.
-#' @param arg Argument name to use in error messages. Defaults to
-#'   `caller_arg(x)`
-#' @param ... Additional parameters passed to [cli::cli_abort()]
-#' @inheritParams cli::cli_abort
 #' @keywords internal
-#' @importFrom cli cli_abort
-check_docx_summary <- function(x,
-                               n = 1,
-                               content_type = "paragraph",
-                               ...,
-                               arg = caller_arg(x),
-                               call = parent.frame()) {
-  if (!is.null(n) & nrow(x) != n) {
-    cli_abort(
-      "{.arg {arg}} must have {n} rows.",
-      ...,
-      call = call,
-    )
-  }
+#' @noRd
+#' @export
+#' @importFrom officer docx_summary cursor_reach
+cursor_index <- function(docx, index = NULL) {
+  docx_df <- subset_index(officer::docx_summary(docx), index)
 
-  if (!is.null(content_type) & !all(x[["content_type"]] %in% content_type)) {
-    cli_abort(
-      "{.arg {arg}} must only include content_type {.val {content_type}}.",
-      ...,
-      call = call,
-    )
-  }
+  check_officer_summary(
+    docx_df,
+    n = 1,
+    content_type = "paragraph",
+    summary_type = "docx"
+  )
+
+  officer::cursor_reach(docx, keyword = docx_df[["text"]])
 }

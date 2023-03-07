@@ -21,7 +21,9 @@ paragraph value, the text of the pargraph is used as a keyword.}
 \item{quiet}{If \code{FALSE} (default) warn when keyword is not found.}
 }
 \description{
-Set cursor position in rdocx object based on keyword, id, or index
+A combined function for setting cursor position with
+\code{\link[officer:cursor]{officer::cursor_reach()}}, \code{\link[officer:cursor]{officer::cursor_bookmark()}}, or using a doc_index
+value from \code{\link[officer:docx_summary]{officer::docx_summary()}}.
 }
 \seealso{
 \code{\link[officer:cursor]{officer::cursor_begin()}}, \code{\link[officer:docx_summary]{officer::docx_summary()}}
