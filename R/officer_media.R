@@ -42,14 +42,14 @@ unzip_officer <- function(path,
   )
 }
 
-#' Copy media from a docx or pptx file to a folder
+#' Copy media from a docx or pptx file to a target folder
 #'
 #' Unzip a docx or pptx file to a temporary directory, check if the directory
 #' contains a media folder, and copy media files to the directory set by dir.
 #'
 #' @param filename,path File name and path for a `docx` or `pptx` file. One of
 #'   the two must be provided. Defaults to `NULL`.
-#' @param dir Folder name or path to copy media files. dir is created if no
+#' @param target Folder name or path to copy media files. dir is created if no
 #'   folder exists at that location.
 #' @param list If `TRUE`, display a message listing files contained in the docx
 #'   or pptx file but do not copy the files to dir. Defaults to `FALSE`.
@@ -60,12 +60,13 @@ unzip_officer <- function(path,
 #'   system.file("doc_examples/example.pptx", package = "officer"),
 #'   list = TRUE
 #' )
+#' @seealso [officer::media_extract()]
 #' @export
 #' @importFrom cli cli_bullets cli_alert_success
 #' @importFrom rlang set_names
 officer_media <- function(filename = NULL,
                           path = NULL,
-                          dir = "media",
+                          target = "media",
                           list = FALSE,
                           overwrite = TRUE) {
   path <- set_office_path(filename, path, fileext = c("docx", "pptx"))
@@ -89,18 +90,18 @@ officer_media <- function(filename = NULL,
 
   unzip_officer(path, exdir)
 
-  if (!dir.exists(dir)) {
-    dir.create(dir)
+  if (!dir.exists(target)) {
+    dir.create(target)
   }
 
   file.copy(
     file.path(exdir, mediafiles),
-    file.path(dir, basename(mediafiles)),
+    file.path(target, basename(mediafiles)),
     overwrite = overwrite,
     copy.date = TRUE
   )
 
   unlink(exdir)
 
-  cli::cli_alert_success("Copied media to {.path {dir}}")
+  cli::cli_alert_success("Copied media to {.path {target}}")
 }

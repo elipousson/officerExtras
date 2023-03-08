@@ -2,12 +2,12 @@
 % Please edit documentation in R/officer_media.R
 \name{officer_media}
 \alias{officer_media}
-\title{Copy media from a docx or pptx file to a folder}
+\title{Copy media from a docx or pptx file to a target folder}
 \usage{
 officer_media(
   filename = NULL,
   path = NULL,
-  dir = "media",
+  target = "media",
   list = FALSE,
   overwrite = TRUE
 )
@@ -16,7 +16,7 @@ officer_media(
 \item{filename, path}{File name and path for a \code{docx} or \code{pptx} file. One of
 the two must be provided. Defaults to \code{NULL}.}
 
-\item{dir}{Folder name or path to copy media files. dir is created if no
+\item{target}{Folder name or path to copy media files. dir is created if no
 folder exists at that location.}
 
 \item{list}{If \code{TRUE}, display a message listing files contained in the docx
@@ -34,5 +34,7 @@ officer_media(
   system.file("doc_examples/example.pptx", package = "officer"),
   list = TRUE
 )
-
+}
+\seealso{
+\code{\link[officer:media_extract]{officer::media_extract()}}
 }
