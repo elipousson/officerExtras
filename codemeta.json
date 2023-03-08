@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/elipousson/officerExtras",
   "issueTracker": "https://github.com/elipousson/officerExtras/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.0.9001",
+  "version": "0.0.0.9002",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -59,6 +59,7 @@
       "@type": "SoftwareApplication",
       "identifier": "gt",
       "name": "gt",
+      "version": ">= 0.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -142,9 +143,14 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "64.412KB",
+  "fileSize": "163.29KB",
   "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
   "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras?branch=main",

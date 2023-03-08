@@ -3,6 +3,10 @@
 # officerExtras development
 
 * Add support for writing custom lastModifiedBy property to `write_officer()`.
+* Add new functionality to `officer_summary()` to support layout and slide summaries.
+* Export `check_officer_summary()` helper function.
+* Add new `dims_docx_ext()` function wrapping `officer::docx_dim()`
+* Add `add_gg_to_body()` function wrapping `officer::body_add_gg()`
 
 # officerExtras 0.0.0.9002
 
