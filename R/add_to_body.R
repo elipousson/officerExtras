@@ -180,6 +180,8 @@ add_gg_to_body <- function(docx,
         pos = pos
       )
     }
+  } else {
+    docx
   }
 }
 
