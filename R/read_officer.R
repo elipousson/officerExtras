@@ -113,7 +113,7 @@ read_xlsx_ext <- function(filename = NULL,
 #' List document properties for a rdocx or rpptx object
 #'
 #' @keywords internal
-#' @export
+#' @noRd
 #' @importFrom cli cli_rule symbol cli_dl
 cli_doc_properties <- function(x, filename = NULL) {
   if (!is.null(filename)) {
@@ -130,10 +130,10 @@ cli_doc_properties <- function(x, filename = NULL) {
   )
 }
 
-#' Get doc properties for a rdocx or rpptx object as list
+#' Get doc properties for a rdocx or rpptx object as a list
 #'
 #' @keywords internal
-#' @export
+#' @noRd
 #' @importFrom officer doc_properties
 #' @importFrom rlang set_names
 #' @importFrom utils modifyList
@@ -149,6 +149,7 @@ officer_properties <- function(x, values = list(), keep.null = FALSE) {
 #' Set filepath for docx file
 #'
 #' @keywords internal
+#' @noRd
 #' @importFrom cli cli_vec
 set_office_path <- function(filename = NULL,
                             path = NULL,
