@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# officerExtras development
+# officerExtras 0.0.0.9003
 
 * Add support for writing custom lastModifiedBy property to `write_officer()`.
 * Add new functionality to `officer_summary()` to support layout and slide summaries.
