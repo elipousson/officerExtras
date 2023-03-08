@@ -22,19 +22,19 @@
     <loc>https://elipousson.github.io/officerExtras/reference/add_to_body.html</loc>
   </url>
   <url>
-    <loc>https://elipousson.github.io/officerExtras/reference/check_docx_summary.html</loc>
-  </url>
-  <url>
     <loc>https://elipousson.github.io/officerExtras/reference/check_office_fileext.html</loc>
   </url>
   <url>
     <loc>https://elipousson.github.io/officerExtras/reference/check_officer.html</loc>
   </url>
   <url>
-    <loc>https://elipousson.github.io/officerExtras/reference/cli_doc_properties.html</loc>
+    <loc>https://elipousson.github.io/officerExtras/reference/check_officer_summary.html</loc>
   </url>
   <url>
     <loc>https://elipousson.github.io/officerExtras/reference/cursor_docx.html</loc>
+  </url>
+  <url>
+    <loc>https://elipousson.github.io/officerExtras/reference/dims_docx_ext.html</loc>
   </url>
   <url>
     <loc>https://elipousson.github.io/officerExtras/reference/index.html</loc>
@@ -46,9 +46,6 @@
     <loc>https://elipousson.github.io/officerExtras/reference/officer_media.html</loc>
   </url>
   <url>
-    <loc>https://elipousson.github.io/officerExtras/reference/officer_properties.html</loc>
-  </url>
-  <url>
     <loc>https://elipousson.github.io/officerExtras/reference/officer_summary.html</loc>
   </url>
   <url>
@@ -56,9 +53,6 @@
   </url>
   <url>
     <loc>https://elipousson.github.io/officerExtras/reference/read_officer.html</loc>
-  </url>
-  <url>
-    <loc>https://elipousson.github.io/officerExtras/reference/set_office_path.html</loc>
   </url>
   <url>
     <loc>https://elipousson.github.io/officerExtras/reference/write_officer.html</loc>
