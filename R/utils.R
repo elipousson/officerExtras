@@ -1,5 +1,6 @@
 # @staticimports pkg:isstatic
 #   is_all_null is_any_null is_fileext_path is_ggplot str_extract_fileext
+#   has_fileext
 
 # @staticimports pkg:stringstatic
 #   str_detect str_remove

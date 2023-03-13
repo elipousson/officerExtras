@@ -2,11 +2,13 @@
 % Please edit documentation in R/officer_media.R
 \name{officer_media}
 \alias{officer_media}
-\title{Copy media from a docx or pptx file to a target folder}
+\title{Copy media from a docx or pptx file or a rdocx or rpptx object to a target
+folder}
 \usage{
 officer_media(
   filename = NULL,
   path = NULL,
+  x = NULL,
   target = "media",
   list = FALSE,
   overwrite = TRUE
@@ -14,7 +16,9 @@ officer_media(
 }
 \arguments{
 \item{filename, path}{File name and path for a \code{docx} or \code{pptx} file. One of
-the two must be provided. Defaults to \code{NULL}.}
+the two must be provided. Ignored if x is provided. Defaults to \code{NULL}.}
+
+\item{x}{A rdocx or rpptx object containing one or more media file.}
 
 \item{target}{Folder name or path to copy media files. dir is created if no
 folder exists at that location.}
@@ -23,11 +27,14 @@ folder exists at that location.}
 or pptx file but do not copy the files to dir. Defaults to \code{FALSE}.}
 
 \item{overwrite}{If \code{TRUE} (default), overwrite any files with the same names
-at the dir location.}
+at target path. If \code{FALSE}, abort if files with the same names already
+exist.}
 }
 \description{
 Unzip a docx or pptx file to a temporary directory, check if the directory
-contains a media folder, and copy media files to the directory set by dir.
+contains a media folder, and copy media files to the directory set by dir. If
+a rdocx or rpptx object is provided, files are copied from the temporary
+package_dir associated with the object (accessible via \code{x[["package_dir"]]}).
 }
 \examples{
 officer_media(
