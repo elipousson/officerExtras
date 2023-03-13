@@ -43,7 +43,10 @@ write_officer <- function(x,
 
   if (file.exists(path)) {
     if (!isTRUE(overwrite)) {
-      cli_abort("{.arg overwrite} must be {.code TRUE} if {.arg path} exists.")
+      cli_abort(
+        "{.arg overwrite} must be {.code TRUE} to replace existing file
+        {.file {basename(path)}}."
+        )
     }
     file.remove(path)
   }
