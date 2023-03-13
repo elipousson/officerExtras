@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# officerExtras development
+
+* Update `officer_media()` to support `rdocx` and `rpptx` objects and fix `overwrite` check so the function errors if files already exist.
+* Add `{ggplot2}` to Suggests (used in the test for `add_gg_to_body()`).
+
 # officerExtras 0.0.0.9003
 
 * Add support for writing custom lastModifiedBy property to `write_officer()`.
