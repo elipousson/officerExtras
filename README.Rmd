@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/elipousson/officerExtras/branch/main/graph/badge.svg)](https://app.codecov.io/gh/elipousson/officerExtras?branch=main)
 <!-- badges: end -->
 
-The goal of officerExtras is to provide helper and convenience functions for the officer package.
+The goal of officerExtras is to provide helper and convenience functions for the [{officer}](https://github.com/davidgohel/officer) package.
 
 ## Installation
 
@@ -32,14 +32,44 @@ You can install the development version of officerExtras like so:
 pak::pkg_install("elipousson/officerExtras")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+The officerExtras package provides a variety of helper functions to simplify the process of working with officer. For example, a single `read_officer()` function works with docx, pptx, or xlsx files:
 
-```{r example}
+```{r read_officer}
 library(officerExtras)
 
-docx <- read_docx_ext(filename = "example.docx", path = system.file("doc_examples", package = "officer"))
+docx <- read_officer(filename = "example.docx", path = system.file("doc_examples", package = "officer"))
 
-check_docx(docx)
+pptx <- read_officer(filename = "example.pptx", path = system.file("doc_examples", package = "officer"))
 ```
+
+officer uses a print method to save rdocx, rpptx, or rxlsx objects back to files. officerExtras provides a `write_officer()` with that adds the option to pass a filename and path separately and pass document properties to `officer::doc_properties()`.
+
+```{r write_officer}
+withr::with_tempdir({
+  write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
+  
+  example_docx <- read_officer("write-example.docx")
+  
+  officer::doc_properties(example_docx)
+})
+```
+
+## Related projects
+
+### Extending officer
+
+- [gto](https://github.com/GSK-Biostatistics/gto): allow users to insert gt tables into officeverse.
+- [onbrand](https://github.com/john-harrold/onbrand): A R package to provide a systematic method to script support for different Word of PowerPoint templates.
+- [officerWinTools](https://github.com/joshmire/officerWinTools): A R package to complement the officer package when using Microsoft Office in a Windows environment.
+
+### Working with Microsoft Office documents with R
+
+- [docxtractr](https://github.com/hrbrmstr/docxtractr): Extract Tables from Microsoft Word Documents with R
+- [stylex](https://github.com/niszet/stylex): A R package to help update docx style files.
+- [deef](https://github.com/prcleary/deef): Data extractor scripts for electronic forms, compatible with Microsoft Word files.
+
+### Other tools for working with Microsoft Office documents
+
+- [python-openxml/python-docx](https://github.com/python-openxml/python-docx):Create and modify Word documents with Python
