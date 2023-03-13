@@ -68,9 +68,6 @@ test_that("add_gg_to_body works", {
     filename = "example.docx",
     path = system.file("doc_examples", package = "officer")
   )
-
-  skip_if_not_installed("ggplot2")
-
   set.seed(1)
   df <- data.frame(
     gp = factor(rep(letters[1:3], each = 10)),
