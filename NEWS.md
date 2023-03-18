@@ -4,7 +4,7 @@
 
 * Update `officer_media()` to support `rdocx` and `rpptx` objects and fix `overwrite` check so the function errors if files already exist.
 * Add `{ggplot2}` to Suggests (used in a test for `add_gg_to_body()`).
-* Add new `docx_convert()` function to support pandoc conversion for `rdocx` objects and docx files (requires `{rmarkdown}` in Suggests).
+* Add new `convert_docx()` function to support pandoc conversion for `rdocx` objects and docx files (requires `{rmarkdown}` in Suggests).
 * Update `add_gt_to_body()` to incorporate implementation from `{gto}` (with better support to table captions) with credit to [Ellis Hughes](https://github.com/thebioengineer). Update required adding `{xml2}` to Imports.
 
 # officerExtras 0.0.0.9003

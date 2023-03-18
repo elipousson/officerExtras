@@ -21,7 +21,7 @@
 #'   )
 #'
 #'   withr::with_tempdir({
-#'     docx_convert(
+#'     convert_docx(
 #'       docx,
 #'       output = "docx.md"
 #'     )
@@ -30,10 +30,10 @@
 #' }
 #' @seealso
 #'  [rmarkdown::pandoc_convert()]
-#' @rdname docx_convert
+#' @rdname convert_docx
 #' @export
 #' @importFrom rlang check_installed is_true is_false
-docx_convert <- function(docx,
+convert_docx <- function(docx,
                          to = NULL,
                          input = NULL,
                          output = NULL,
