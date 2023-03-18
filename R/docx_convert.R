@@ -33,7 +33,6 @@
 #' @rdname docx_convert
 #' @export
 #' @importFrom rlang check_installed is_true is_false
-#' @importFrom rmarkdown pandoc_convert
 docx_convert <- function(docx,
                          to = NULL,
                          input = NULL,
