@@ -91,7 +91,7 @@ officer_media <- function(filename = NULL,
   } else {
     check_officer(x)
     path <- x[["package_dir"]]
-    type <- str_remove(class(x), "^r")
+    type <- officer_fileext(x)
   }
 
   media_files <- list_officer_media(path, type = type)

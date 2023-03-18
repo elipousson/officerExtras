@@ -1,3 +1,13 @@
+#' Convert officer object class into equivalent file extension
+#'
+#' @keywords internal
+#' @noRd
+officer_fileext <- function(x, prefix = "") {
+  paste0(prefix, str_remove(class(x), "^r"))
+}
+
+#' Subset officer object summary by content_type
+#'
 #' @keywords internal
 #' @noRd
 subset_type <- function(x, type) {
@@ -6,6 +16,8 @@ subset_type <- function(x, type) {
   }
 }
 
+#' Subset officer object summary by style_name
+#'
 #' @keywords internal
 #' @noRd
 subset_style <- function(x, style) {
@@ -18,6 +30,8 @@ subset_style <- function(x, style) {
   }
 }
 
+#' Subset officer object summary by doc_index or id
+#'
 #' @keywords internal
 #' @noRd
 subset_index <- function(x, index) {
