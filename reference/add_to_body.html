@@ -213,7 +213,10 @@ evaluated in that environment and <code>.envir</code> is ignored. If <code>NULL<
 <dt>gt_object</dt>
 <dd><p>A gt object converted to an OOXML string with
 <code><a href="https://gt.rstudio.com/reference/as_word.html" class="external-link">gt::as_word()</a></code> then passed to <code>add_xml_to_body()</code> as str parameter.
-Required for <code>add_gt_to_body()</code>.</p></dd>
+Required for <code>add_gt_to_body()</code>. A portion of the code to transform the
+gt_object to OOXML and insert the XML into the docx object is adapted from
+the <a href="https://github.com/GSK-Biostatistics/gto/" class="external-link">gto package</a> by Ellis
+Hughes.</p></dd>
 
 
 <dt>align</dt>
@@ -252,6 +255,10 @@ to value has a label for this value. Defaults to "title".</p></dd>
 Defaults to same value as style.</p></dd>
 
 
+<dt>autonum</dt>
+<dd><p>an object generated with function <a href="https://davidgohel.github.io/officer/reference/run_autonum.html" class="external-link">run_autonum</a></p></dd>
+
+
 <dt>.f</dt>
 <dd><p>Any function that takes a docx and value parameter and returns a
 rdocx object. A keyword parameter must also be supported if named is TRUE.
@@ -272,6 +279,11 @@ value is named, the names are assumed to be keywords indicating the cursor
 position for adding each value in the vector. If value is not named, a
 keyword parameter with the same length as value must be provided. When <code>named = FALSE</code>, no keyword parameter is required. Add <code>add_str_with_keys()</code> works
 identically but uses a str parameter and .f defaults to <code>add_xml_to_body()</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>Ellis Hughes <a href="mailto:ellis.h.hughes@gsk.com">ellis.h.hughes@gsk.com</a>
+(<a href="https://orcid.org/0000-0003-0637-4436" class="external-link">ORCID</a>)</p>
     </div>
 
     <div class="section level2">
