@@ -36,9 +36,13 @@ read_officer <- function(filename = NULL,
   if (is.null(x)) {
     path <- set_office_path(filename, path, fileext = fileext, call = call)
 
-    x <- switch(str_extract_fileext(path),
+    fileext <- str_extract_fileext(path)
+
+    x <- switch(fileext,
       "docx" = officer::read_docx(path),
+      "dotx" = officer::read_docx(path),
       "pptx" = officer::read_pptx(path),
+      "potx" = officer::read_pptx(path),
       "xlsx" = officer::read_xlsx(path)
     )
   } else {
