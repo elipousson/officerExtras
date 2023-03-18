@@ -106,12 +106,42 @@ add_xml_to_body <- function(docx,
   add_to_body(docx, str = str, pos = pos, ...)
 }
 
+# The code for the add_gt_to_body function transform the gt_object to OOXML and
+# insert the XML into the docx object is adapted from the gto package
+# <https://github.com/GSK-Biostatistics/gto/> by Ellis Hughes. A copy of the
+# license for the package is provided below. The code has been modified with the
+# addition of a new helper function (`wrap_tag()`) and minor changes to variable
+# names.
+#
+# repository: GSK-Biostatistics/gto
+# license: Apache-2.0
+# date-updated: 2023-02-20
+#
+# Copyright 2023 GlaxoSmithKline Research & Development Limited
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 #' @param gt_object A gt object converted to an OOXML string with
 #'   [gt::as_word()] then passed to [add_xml_to_body()] as str parameter.
-#'   Required for [add_gt_to_body()].
+#'   Required for [add_gt_to_body()]. A portion of the code to transform the
+#'   gt_object to OOXML and insert the XML into the docx object is adapted from
+#'   the [gto package](https://github.com/GSK-Biostatistics/gto/) by Ellis
+#'   Hughes.
 #' @inheritParams gt::as_word
 #' @name add_gt_to_body
 #' @rdname add_to_body
+#' @author Ellis Hughes \email{ellis.h.hughes@gsk.com}
+#'   ([ORCID](https://orcid.org/0000-0003-0637-4436))
 #' @export
 #' @importFrom rlang check_required check_installed
 add_gt_to_body <- function(docx,
@@ -125,19 +155,29 @@ add_gt_to_body <- function(docx,
                            ...) {
   rlang::check_required(gt_object)
   rlang::check_installed("gt")
-  add_xml_to_body(
-    docx,
-    str = gt::as_word(
-      gt_object,
-      align = align,
-      caption_location = caption_location,
-      caption_align = caption_align,
-      split = split,
-      keep_with_next = keep_with_next
-    ),
-    pos = pos,
-    ...
+
+  str <- gt::as_word(
+    gt_object,
+    align = align,
+    caption_location = caption_location,
+    caption_align = caption_align,
+    split = split,
+    keep_with_next = keep_with_next
   )
+
+  str <- wrap_tag(str, tag = "tablecontainer")
+  str_nodes <- xml2::xml_children(xml2::read_xml(str))
+  node_seq <- seq_along(str_nodes)
+
+  if (pos == "before") {
+    node_seq <- rev(node_seq)
+  }
+
+  for (i in node_seq){
+    docx <- add_xml_to_body(docx, str = str_nodes[[i]], pos = pos, ...)
+  }
+
+  docx
 }
 
 #' @name add_gg_to_body

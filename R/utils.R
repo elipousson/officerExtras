@@ -5,6 +5,16 @@
 # @staticimports pkg:stringstatic
 #   str_detect str_remove
 
+#' @noRd
+#' @importFrom glue glue
+wrap_tag <- function(..., tag) {
+  glue::glue(
+    "<{tag}>",
+    ...,
+    "</{tag}>"
+  )
+}
+
 #' @param vec_last Used as value for "vec-last" item in style object.
 #' @keywords internal
 #' @noRd

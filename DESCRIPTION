@@ -15,7 +15,8 @@ Imports:
     glue,
     officer,
     rlang,
-    utils
+    utils,
+    xml2
 Suggests: 
     covr,
     ggplot2,

@@ -110,7 +110,10 @@ evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is pa
 
 \item{gt_object}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
-Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
+Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}. A portion of the code to transform the
+gt_object to OOXML and insert the XML into the docx object is adapted from
+the \href{https://github.com/GSK-Biostatistics/gto/}{gto package} by Ellis
+Hughes.}
 
 \item{align}{An option for table alignment. Can either be \code{"center"} (the
 default), \code{"left"}, or \code{"right"}.}
@@ -192,4 +195,8 @@ if (rlang::is_installed("gt")) {
     str = c("Title 1" = tab_str, "Title 2" = tab_str)
   )
 }
+}
+\author{
+Ellis Hughes \email{ellis.h.hughes@gsk.com}
+(\href{https://orcid.org/0000-0003-0637-4436}{ORCID})
 }
