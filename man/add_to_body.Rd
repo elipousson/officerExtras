@@ -137,6 +137,8 @@ to value has a label for this value. Defaults to "title".}
 \item{caption_style}{Passed to style for \code{\link[officer:body_add_caption]{officer::body_add_caption()}}.
 Defaults to same value as style.}
 
+\item{autonum}{an object generated with function \link[officer]{run_autonum}}
+
 \item{.f}{Any function that takes a docx and value parameter and returns a
 rdocx object. A keyword parameter must also be supported if named is TRUE.
 Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}

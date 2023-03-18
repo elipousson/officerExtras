@@ -187,6 +187,7 @@ add_gt_to_body <- function(docx,
 #' @param caption_style Passed to style for [officer::body_add_caption()].
 #'   Defaults to same value as style.
 #' @inheritParams officer::body_add_caption
+#' @inheritParams officer::block_caption
 #' @export
 #' @importFrom rlang check_required
 #' @importFrom officer body_add_caption
