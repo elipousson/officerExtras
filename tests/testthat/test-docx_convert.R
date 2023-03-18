@@ -4,14 +4,16 @@ test_that("docx_convert works", {
     )
 
     withr::with_tempdir({
+      path <- getwd()
+
       docx_convert(
         docx,
         output = "test-docx.html",
-        path = getwd()
+        path = path
       )
 
       expect_true(
-        file.exists("test-docx.html")
+        file.exists(file.path(path, "test-docx.html"))
       )
 
       docx_convert(
@@ -21,7 +23,7 @@ test_that("docx_convert works", {
       )
 
       expect_true(
-        file.exists("test-docx.pdf")
+        file.exists(file.path(path, "test-docx.pdf"))
       )
     })
 })
