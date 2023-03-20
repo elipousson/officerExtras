@@ -89,9 +89,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">with_tempdir</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="reference/write_officer.html">write_officer</a></span><span class="op">(</span><span class="va">docx</span>, <span class="st">"write-example.docx"</span>, modified_by <span class="op">=</span> <span class="st">"officerExtras"</span>, title <span class="op">=</span> <span class="st">"Document Title set by doc_properties"</span>, subject <span class="op">=</span> <span class="st">"Microsoft Word, R"</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">example_docx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_officer.html">read_officer</a></span><span class="op">(</span><span class="st">"write-example.docx"</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="fu">officer</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/officer/reference/doc_properties.html" class="external-link">doc_properties</a></span><span class="op">(</span><span class="va">example_docx</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               tag                                value</span></span>
@@ -103,12 +103,16 @@
 <span><span class="co">#&gt; 6  lastModifiedBy                        officerExtras</span></span>
 <span><span class="co">#&gt; 7        revision                                   11</span></span>
 <span><span class="co">#&gt; 8         created                 2017-04-26T13:10:00Z</span></span>
-<span><span class="co">#&gt; 9        modified                 2023-03-13T09:52:30Z</span></span>
+<span><span class="co">#&gt; 9        modified                 2023-03-20T12:34:20Z</span></span>
 <span><span class="co">#&gt; 10       category</span></span></code></pre></div>
+<p>The package also wraps useful functions from a few other packages. <code><a href="reference/convert_docx.html">convert_docx()</a></code> uses <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_convert.html" class="external-link">rmarkdown::pandoc_convert()</a></code> to convert a rdocx object or a Word document to any other pandoc supported output format:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/convert_docx.html">convert_docx</a></span><span class="op">(</span><span class="va">docx</span>, to <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="related-projects">Related projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
 </h2>
+<p>There are a number of related projects for extending officer or working with <a href="https://en.wikipedia.org/wiki/Office_Open_XML" class="external-link">OOXML</a> in R and other languages.</p>
 <div class="section level3">
 <h3 id="extending-officer">Extending officer<a class="anchor" aria-label="anchor" href="#extending-officer"></a>
 </h3>
