@@ -174,9 +174,8 @@ set_office_path <- function(filename = NULL,
 
   fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if (("pptx" %in% fileext) & is_fileext_path(path, "potx")) {
-    return(path)
-  } else if (("dotx" %in% fileext) & is_fileext_path(path, "dotx")) {
+  if ((("pptx" %in% fileext) && is_fileext_path(path, "potx")) ||
+    (("dotx" %in% fileext) && is_fileext_path(path, "dotx"))) {
     return(path)
   }
 
