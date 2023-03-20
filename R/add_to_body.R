@@ -173,7 +173,7 @@ add_gt_to_body <- function(docx,
     node_seq <- rev(node_seq)
   }
 
-  for (i in node_seq){
+  for (i in node_seq) {
     docx <- add_xml_to_body(docx, str = str_nodes[[i]], pos = pos, ...)
   }
 

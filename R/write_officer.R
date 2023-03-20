@@ -46,7 +46,7 @@ write_officer <- function(x,
       cli_abort(
         "{.arg overwrite} must be {.code TRUE} to replace existing file
         {.file {basename(path)}}."
-        )
+      )
     }
     file.remove(path)
   }
