@@ -49,14 +49,23 @@ officer uses a print method to save rdocx, rpptx, or rxlsx objects back to files
 ```{r write_officer}
 withr::with_tempdir({
   write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
-  
+
   example_docx <- read_officer("write-example.docx")
-  
+
   officer::doc_properties(example_docx)
 })
 ```
 
+The package also wraps useful functions from a few other packages.  `convert_docx()` uses `rmarkdown::pandoc_convert()` to convert a rdocx object or a Word document to any other pandoc supported output format:
+
+```{r convert_docx}
+convert_docx(docx, to = "markdown")
+```
+
+
 ## Related projects
+
+There are a number of related projects for extending officer or working with [OOXML](https://en.wikipedia.org/wiki/Office_Open_XML) in R and other languages.
 
 ### Extending officer
 

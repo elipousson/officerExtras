@@ -49,9 +49,9 @@ properties to `officer::doc_properties()`.
 ``` r
 withr::with_tempdir({
   write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
-  
+
   example_docx <- read_officer("write-example.docx")
-  
+
   officer::doc_properties(example_docx)
 })
 #>               tag                                value
@@ -63,11 +63,23 @@ withr::with_tempdir({
 #> 6  lastModifiedBy                        officerExtras
 #> 7        revision                                   11
 #> 8         created                 2017-04-26T13:10:00Z
-#> 9        modified                 2023-03-13T09:52:30Z
+#> 9        modified                 2023-03-20T12:34:20Z
 #> 10       category
 ```
 
+The package also wraps useful functions from a few other packages.
+`convert_docx()` uses `rmarkdown::pandoc_convert()` to convert a rdocx
+object or a Word document to any other pandoc supported output format:
+
+``` r
+convert_docx(docx, to = "markdown")
+```
+
 ## Related projects
+
+There are a number of related projects for extending officer or working
+with [OOXML](https://en.wikipedia.org/wiki/Office_Open_XML) in R and
+other languages.
 
 ### Extending officer
 
