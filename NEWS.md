@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# officerExtras development
+# officerExtras 0.0.0.9004
 
 * Update `officer_media()` to support `rdocx` and `rpptx` objects and fix `overwrite` check so the function errors if files already exist.
 * Add `{ggplot2}` to Suggests (used in a test for `add_gg_to_body()`).

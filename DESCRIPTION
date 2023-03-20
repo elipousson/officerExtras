@@ -1,6 +1,6 @@
 Package: officerExtras
 Title: Extra Helpers for 'officer'
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Authors@R: 
     person("Eli", "Pousson", , "eli.pousson@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8280-1706"))
