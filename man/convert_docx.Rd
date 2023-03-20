@@ -10,8 +10,10 @@ convert_docx(
   input = NULL,
   output = NULL,
   path = NULL,
-  quiet = TRUE,
+  options = NULL,
+  extract_media = TRUE,
   overwrite = TRUE,
+  quiet = TRUE,
   ...
 )
 }
@@ -28,13 +30,21 @@ provided.}
 \item{output}{Output file (if not specified then determined based on format
 being converted to).}
 
-\item{path}{File path.}
+\item{path}{File path for converted file passed to wd parameter of
+\code{\link[rmarkdown:pandoc_convert]{rmarkdown::pandoc_convert()}}. If docx is a rdocx object, path defaults to
+current working directory instead of the base directory of the input file
+path.}
 
-\item{quiet}{If \code{TRUE}, suppress alert messages and pass \code{FALSE} to verbose
-parameter of \code{\link[rmarkdown:pandoc_convert]{rmarkdown::pandoc_convert()}}. Defaults \code{TRUE}.}
+\item{options}{Character vector of command line options to pass to pandoc.}
+
+\item{extract_media}{If \code{TRUE}, append \code{"--extract-media=."} to
+options. Defaults to \code{FALSE}.}
 
 \item{overwrite}{If \code{TRUE} (default), remove file at path if it already
 exists. If \code{FALSE} and file exists, this function aborts.}
+
+\item{quiet}{If \code{TRUE}, suppress alert messages and pass \code{FALSE} to verbose
+parameter of \code{\link[rmarkdown:pandoc_convert]{rmarkdown::pandoc_convert()}}. Defaults \code{TRUE}.}
 
 \item{...}{
   Arguments passed on to \code{\link[rmarkdown:pandoc_convert]{rmarkdown::pandoc_convert}}
@@ -43,9 +53,6 @@ exists. If \code{FALSE} and file exists, this function aborts.}
 determined based on the file extension of \code{input}).}
     \item{\code{citeproc}}{\code{TRUE} to run the pandoc-citeproc filter (for processing
 citations) as part of the conversion.}
-    \item{\code{options}}{Character vector of command line options to pass to pandoc.}
-    \item{\code{wd}}{Working directory in which code will be executed. If not
-supplied, defaults to the common base directory of \code{input}.}
   }}
 }
 \value{
@@ -54,7 +61,8 @@ create a file from an officer object or a docx file.
 }
 \description{
 Use \code{\link[rmarkdown:pandoc_convert]{rmarkdown::pandoc_convert()}} to convert a rodcx object or Word file to
-another format with pandoc.
+another format with pandoc. If the "to" parameter contains a file extension,
+it is assumed to be an output file name.
 }
 \details{
 Supported input and output formats are described in the
@@ -71,10 +79,15 @@ if (interactive()) {
     system.file("doc_examples/example.docx", package = "officer")
   )
 
+  convert_docx(
+      docx,
+      to = "markdown"
+    )
+
   withr::with_tempdir({
     convert_docx(
       docx,
-      output = "docx.md"
+      output = "docx.html"
     )
   })
 }
