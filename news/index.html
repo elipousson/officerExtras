@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">officerExtras</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,13 @@
       <small>Source: <a href="https://github.com/elipousson/officerExtras/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.0.9004" id="officerextras-0009004">officerExtras 0.0.0.9004<a class="anchor" aria-label="anchor" href="#officerextras-0009004"></a></h2>
+<ul><li>Update <code><a href="../reference/officer_media.html">officer_media()</a></code> to support <code>rdocx</code> and <code>rpptx</code> objects and fix <code>overwrite</code> check so the function errors if files already exist.</li>
+<li>Add <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> to Suggests (used in a test for <code><a href="../reference/add_to_body.html">add_gg_to_body()</a></code>).</li>
+<li>Add new <code><a href="../reference/convert_docx.html">convert_docx()</a></code> function to support pandoc conversion for <code>rdocx</code> objects and docx files (requires <a href="https://github.com/rstudio/rmarkdown" class="external-link">rmarkdown</a> in Suggests).</li>
+<li>Update <code><a href="../reference/add_to_body.html">add_gt_to_body()</a></code> to incorporate implementation from <code>{gto}</code> (with better support to table captions) with credit to <a href="https://github.com/thebioengineer" class="external-link">Ellis Hughes</a>. Update required adding <a href="https://xml2.r-lib.org/" class="external-link">xml2</a> to Imports.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.0.9003" id="officerextras-0009003">officerExtras 0.0.0.9003<a class="anchor" aria-label="anchor" href="#officerextras-0009003"></a></h2>
 <ul><li>Add support for writing custom lastModifiedBy property to <code><a href="../reference/write_officer.html">write_officer()</a></code>.</li>
