@@ -81,4 +81,7 @@ There are a number of related projects for extending officer or working with [OO
 
 ### Other tools for working with Microsoft Office documents
 
-- [python-openxml/python-docx](https://github.com/python-openxml/python-docx):Create and modify Word documents with Python
+- [python-docx](https://github.com/python-openxml/python-docx):Create and modify Word documents with Python
+- [Docx-templates](https://github.com/guigrpa/docx-templates): Template-based docx report creation for both Node and the browser
+- [docx](https://github.com/dolanmiu/docx): Easily generate and modify .docx files with JS/TS. Works for Node and on the Browser.
+- [docxtemplater](https://github.com/open-xml-templating/docxtemplater): Generate docx, pptx, and xlsx from templates (Word, Powerpoint and Excel documents), from Node.js, the Browser and the command line

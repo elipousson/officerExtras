@@ -63,7 +63,7 @@ withr::with_tempdir({
 #> 6  lastModifiedBy                        officerExtras
 #> 7        revision                                   11
 #> 8         created                 2017-04-26T13:10:00Z
-#> 9        modified                 2023-03-20T12:34:20Z
+#> 9        modified                 2023-04-03T00:29:38Z
 #> 10       category
 ```
 
@@ -103,5 +103,12 @@ other languages.
 
 ### Other tools for working with Microsoft Office documents
 
-- [python-openxml/python-docx](https://github.com/python-openxml/python-docx):Create
+- [python-docx](https://github.com/python-openxml/python-docx):Create
   and modify Word documents with Python
+- [Docx-templates](https://github.com/guigrpa/docx-templates):
+  Template-based docx report creation for both Node and the browser
+- [docx](https://github.com/dolanmiu/docx): Easily generate and modify
+  .docx files with JS/TS. Works for Node and on the Browser.
+- [docxtemplater](https://github.com/open-xml-templating/docxtemplater):
+  Generate docx, pptx, and xlsx from templates (Word, Powerpoint and
+  Excel documents), from Node.js, the Browser and the command line
