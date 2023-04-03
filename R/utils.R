@@ -3,7 +3,7 @@
 #   has_fileext
 
 # @staticimports pkg:stringstatic
-#   str_detect str_remove
+#   str_detect str_remove str_c
 
 #' @noRd
 #' @importFrom glue glue
@@ -12,6 +12,18 @@ wrap_tag <- function(..., tag) {
     "<{tag}>",
     ...,
     "</{tag}>"
+  )
+}
+
+#' @noRd
+office_temp <- function(fileext = NULL, path = NULL, ...) {
+  str_remove(
+    tempfile(
+      ...,
+      tmpdir = path %||% "",
+      fileext = paste0(".", fileext)
+    ),
+    paste0("^", .Platform$file.sep)
   )
 }
 
