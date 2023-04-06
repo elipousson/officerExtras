@@ -7,16 +7,16 @@
 #'
 #' @param url A URL for a Google Doc, Google Slides presentation, or Google
 #'   Sheets.
-#' @param format File format to use for export URL. Options are `NULL`
-#'   (default), "doc", "pptx", or "xslx". "pdf" and "csv" be supported in the
-#'   future.
-#'   in the future.
-#' @param filename Destination file name. Optional. If destfile is `NULL`,
+#' @param format File format to use for export URL (typically set
+#'   automatically). Options are `NULL` (default), "doc", "pptx", or "xslx".
+#'   "pdf" and "csv" be supported in the future.
+#' @param filename Destination file name. Optional. If filename is `NULL`,
 #'   downloaded file is removed as part of the function execution.
 #' @param path Folder path. Optional.
 #' @param quiet If `TRUE`, suppress messages when downloading file.
 #' @export
 #' @importFrom glue glue
+#' @importFrom utils download.file
 read_docs_url <- function(url,
                           format = NULL,
                           filename = NULL,
@@ -24,8 +24,8 @@ read_docs_url <- function(url,
                           quiet = TRUE) {
   export <- prep_docs_export(url, format)
 
-  if (!is.null(destfile)) {
-    check_office_fileext(destfile)
+  if (!is.null(filename)) {
+    check_office_fileext(filename)
   }
 
   path <- str_c(
@@ -35,7 +35,7 @@ read_docs_url <- function(url,
   )
 
   if (!file.exists(path)) {
-    download.file(export[["url"]], path, quiet = quiet)
+    utils::download.file(export[["url"]], path, quiet = quiet)
   }
 
   docx <- read_officer(path, quiet = quiet)

@@ -11,12 +11,11 @@ read_docs_url(url, format = NULL, filename = NULL, path = NULL, quiet = TRUE)
 \item{url}{A URL for a Google Doc, Google Slides presentation, or Google
 Sheets.}
 
-\item{format}{File format to use for export URL. Options are \code{NULL}
-(default), "doc", "pptx", or "xslx". "pdf" and "csv" be supported in the
-future.
-in the future.}
+\item{format}{File format to use for export URL (typically set
+automatically). Options are \code{NULL} (default), "doc", "pptx", or "xslx".
+"pdf" and "csv" be supported in the future.}
 
-\item{filename}{Destination file name. Optional. If destfile is \code{NULL},
+\item{filename}{Destination file name. Optional. If filename is \code{NULL},
 downloaded file is removed as part of the function execution.}
 
 \item{path}{Folder path. Optional.}
