@@ -54,6 +54,49 @@ cli_vec_cls <- function(x) {
   )
 }
 
+#' Fill a new column based on an existing column depending on a pattern
+#'
+#' This function uses [vctrs::vec_fill_missing()] to convert hierarchically
+#' nested headings and text into a rectangular data.frame. It is an experimental
+#' function that may be modified or removed. At present, it is only used by
+#' [officer_tables()].
+#'
+#' @param x A input data.frame (assumed to be from [officer_summary()] for
+#'   default values).
+#' @param pattern Passed to [grepl()] as the pattern identifying which rows of the
+#'   fill_col should have values pulled into the new column named by col.
+#'   Defaults to "^heading" which matches the default heading style names.
+#' @param pattern_col Name of column to use for pattern matching, Defaults to
+#'   "style_name".
+#' @param fill_col Name of column to fill , Defaults to "text".
+#' @param col Name of new column to fill with values from fill_col, Default:
+#'   Defaults to "heading"
+#' @param direction Direction of fill passed to [vctrs::vec_fill_missing()],
+#'   Default: c("down", "up", "downup", "updown")
+#' @returns A data.frame with an additional column taking the name from col and
+#'   the values from the column named in fill_col.
+#' @seealso
+#'  \code{\link[vctrs]{vec_fill_missing}}
+#' @rdname fill_with_pattern
+#' @export
+fill_with_pattern <- function(x,
+                                pattern = "^heading",
+                                pattern_col = "style_name",
+                                fill_col = "text",
+                                col = "heading",
+                                direction = c("down", "up", "downup", "updown")) {
+  x[[col]] <- x[[fill_col]]
+  pattern <- grepl(pattern, x[[pattern_col]])
+  if (sum(pattern) == 0) {
+    return(x)
+  }
+  check_installed("vctrs")
+  x[[col]][!pattern] <- rep(NA_character_, nrow(x))[!pattern]
+  x[[col]] <- vctrs::vec_fill_missing(x[[col]], direction = direction)
+  x
+}
+
+
 # ---
 # repo: r-lib/rlang
 # file: standalone-purrr.R

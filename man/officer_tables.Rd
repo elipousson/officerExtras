@@ -2,9 +2,27 @@
 % Please edit documentation in R/officer_tables.R
 \name{officer_tables}
 \alias{officer_tables}
+\alias{officer_table}
 \title{Get tables from a rdocx or rpptx object}
 \usage{
-officer_tables(x, index = NULL, has_header = TRUE)
+officer_tables(
+  x,
+  index = NULL,
+  has_header = TRUE,
+  col = NULL,
+  ...,
+  stack = FALSE,
+  call = caller_env()
+)
+
+officer_table(
+  x,
+  index = NULL,
+  has_header = TRUE,
+  col = NULL,
+  ...,
+  call = caller_env()
+)
 }
 \arguments{
 \item{x}{A rdocx or rpptx object or a data.frame created with
@@ -15,6 +33,19 @@ summary data.frame, Default: \code{NULL}}
 
 \item{has_header}{If \code{TRUE}, tables are expected to have implicit headers
 even if the object Default: \code{TRUE}}
+
+\item{col}{If col is supplied, \code{\link[=officer_table]{officer_table()}} passes col and the
+additional parameters in ... to \code{\link[=fill_with_pattern]{fill_with_pattern()}}. This allows the
+addition of preceding headings or captions as a column within the
+data.frame returned by \code{\link[=officer_tables]{officer_tables()}}. This is an experimental feature
+and may be modified or removed. Defaults to \code{NULL}.}
+
+\item{...}{Additional parameters passed to \code{\link[=fill_with_pattern]{fill_with_pattern()}}.}
+
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \value{
 A data.frame or list of data.frame (or list objects).
@@ -23,6 +54,10 @@ A data.frame or list of data.frame (or list objects).
 Get one or more tables from a rdocx or rpptx object. Functions based on
 example code on extracting Word document and PowerPoint slides in the
 \href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
+}
+\details{
+\code{\link[=officer_table]{officer_table()}} is a lower-level helper fucntion to extract a single table
+from a document.
 }
 \examples{
 docx <- read_docx_ext(
