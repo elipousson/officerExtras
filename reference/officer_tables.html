@@ -57,7 +57,24 @@ example code on extracting Word document and PowerPoint slides in the
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">officer_tables</span><span class="op">(</span><span class="va">x</span>, index <span class="op">=</span> <span class="cn">NULL</span>, has_header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">officer_tables</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  index <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  has_header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  stack <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">officer_table</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  index <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  has_header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,12 +93,36 @@ summary data.frame, Default: <code>NULL</code></p></dd>
 <dd><p>If <code>TRUE</code>, tables are expected to have implicit headers
 even if the object Default: <code>TRUE</code></p></dd>
 
+
+<dt>col</dt>
+<dd><p>If col is supplied, <code>officer_table()</code> passes col and the
+additional parameters in ... to <code><a href="fill_with_pattern.html">fill_with_pattern()</a></code>. This allows the
+addition of preceding headings or captions as a column within the
+data.frame returned by <code>officer_tables()</code>. This is an experimental feature
+and may be modified or removed. Defaults to <code>NULL</code>.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional parameters passed to <code><a href="fill_with_pattern.html">fill_with_pattern()</a></code>.</p></dd>
+
+
+<dt>call</dt>
+<dd><p>The execution environment of a currently
+running function, e.g. <code>caller_env()</code>. The function will be
+mentioned in error messages as the source of the error. See the
+<code>call</code> argument of <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort()</a></code> for more information.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
 <p>A data.frame or list of data.frame (or list objects).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>officer_table()</code> is a lower-level helper fucntion to extract a single table
+from a document.</p>
     </div>
 
     <div class="section level2">
@@ -92,7 +133,32 @@ even if the object Default: <code>TRUE</code></p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">officer_tables</span><span class="op">(</span><span class="va">docx</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data frame with 0 columns and 0 rows</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Petals   Internode                 Sepal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  5,621498349        &lt;NA&gt; 2,46210657918,2034091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  4,994616997          AA           2,429320759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4,767504884        &lt;NA&gt;                   AAA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   25,9242382        &lt;NA&gt;           2,066051345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  6,489375001 25,21130805           2,901582763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    5,7858682 25,52433147           2,655642742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  5,645575295 Merged cell           2,278691288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  4,828953215        &lt;NA&gt;           2,238467716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 6,783500773        &lt;NA&gt;           2,202762147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 5,395076839        &lt;NA&gt;           2,538375992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 4,683617783  29,2459239           2,601945544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13        Note        &lt;NA&gt;                  &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               Bract</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                              &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                       17,65204912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                              &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                       18,37915478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  17,3130473717,0721572418,2902189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                              &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                              &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                       19,87376227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                      19,85326662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                      19,56545356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                      18,95335451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                             &lt;NA&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">pptx</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_pptx_ext</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filename <span class="op">=</span> <span class="st">"example.pptx"</span>,</span></span>
@@ -100,11 +166,7 @@ even if the object Default: <code>TRUE</code></p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">officer_tables</span><span class="op">(</span><span class="va">pptx</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Header 1  Header 2       Header 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         A    12.23      blah blah</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         B     1.23 blah blah blah</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         B      9.0          Salut</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         C        6          Hello</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cbind(body_col, body_cells):</span> object 'body_col' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
