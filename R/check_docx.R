@@ -11,21 +11,18 @@ is_officer <- function(x, what = c("rdocx", "rpptx", "rxlsx")) {
 #'   [cli::cli_abort()] messages. Defaults to `caller_arg(x)`.
 #' @param what Class names to check
 #' @param ... Additional parameters passed to [cli::cli_abort()]
-#' @param call The execution environment of a currently running function passed
-#'   to [cli::cli_abort()]. Defaults to `parent.frame()`
+#' @inheritParams rlang::args_error_context
 #' @export
-#' @importFrom rlang caller_arg
-#' @importFrom cli cli_abort
 check_officer <- function(x,
                           arg = caller_arg(x),
                           what = c("rdocx", "rpptx", "rxlsx"),
-                          call = parent.frame(),
+                          call = caller_env(),
                           ...) {
-  rlang::check_required(x, arg = arg, call = call)
+  check_required(x, arg = arg, call = call)
+  check_character(what)
   what <- match.arg(what, several.ok = TRUE)
   if (!inherits(x, what)) {
     what <- cli_vec_cls(what)
-
     cli_abort("{.arg {arg}} must be a {what} object.", call = call, ...)
   }
 }
@@ -33,21 +30,21 @@ check_officer <- function(x,
 #' @name check_docx
 #' @rdname check_officer
 #' @export
-check_docx <- function(x, arg = caller_arg(x), call = parent.frame(), ...) {
+check_docx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
   check_officer(x, what = "rdocx", arg = arg, call = call, ...)
 }
 
 #' @name check_pptx
 #' @rdname check_officer
 #' @export
-check_pptx <- function(x, arg = caller_arg(x), call = parent.frame(), ...) {
+check_pptx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
   check_officer(x, what = "rpptx", arg = arg, call = call, ...)
 }
 
 #' @name check_xlsx
 #' @rdname check_officer
 #' @export
-check_xlsx <- function(x, arg = caller_arg(x), call = parent.frame(), ...) {
+check_xlsx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
   check_officer(x, what = "rxlsx", arg = arg, call = call, ...)
 }
 
@@ -65,11 +62,13 @@ check_xlsx <- function(x, arg = caller_arg(x), call = parent.frame(), ...) {
 check_office_fileext <- function(x,
                                  arg = caller_arg(x),
                                  fileext = c("docx", "pptx", "xlsx"),
-                                 call = parent.frame(),
+                                 call = caller_env(),
                                  ...) {
+  check_required(x, call = call)
+  check_character(fileext, allow_null = TRUE, call = call)
   fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if (!is.null(x) & !any(is_fileext_path(x, fileext))) {
+  if (!is_null(x) & !any(is_fileext_path(x, fileext))) {
     cli_abort(
       "{.arg {arg}} must use a {.val {cli_vec_last(fileext)}} file extension.",
       ...,
@@ -83,7 +82,7 @@ check_office_fileext <- function(x,
 #' @export
 check_docx_fileext <- function(x,
                                arg = caller_arg(x),
-                               call = parent.frame(),
+                               call = caller_env(),
                                ...) {
   check_office_fileext(x, arg, fileext = "docx", call = call, ...)
 }
@@ -94,7 +93,7 @@ check_docx_fileext <- function(x,
 #' @importFrom rlang caller_arg current_env
 check_pptx_fileext <- function(x,
                                arg = caller_arg(x),
-                               call = parent.frame(),
+                               call = caller_env(),
                                ...) {
   check_office_fileext(x, arg, fileext = "pptx", call = call, ...)
 }
@@ -105,7 +104,7 @@ check_pptx_fileext <- function(x,
 #' @importFrom rlang caller_arg current_env
 check_xlsx_fileext <- function(x,
                                arg = caller_arg(x),
-                               call = parent.frame(),
+                               call = caller_env(),
                                ...) {
   check_office_fileext(x, arg, fileext = "xlsx", call = call, ...)
 }

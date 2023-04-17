@@ -11,15 +11,15 @@ check_office_fileext(
   x,
   arg = caller_arg(x),
   fileext = c("docx", "pptx", "xlsx"),
-  call = parent.frame(),
+  call = caller_env(),
   ...
 )
 
-check_docx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_docx_fileext(x, arg = caller_arg(x), call = caller_env(), ...)
 
-check_pptx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_pptx_fileext(x, arg = caller_arg(x), call = caller_env(), ...)
 
-check_xlsx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_xlsx_fileext(x, arg = caller_arg(x), call = caller_env(), ...)
 }
 \arguments{
 \item{x}{Object to check.}
@@ -30,8 +30,10 @@ check_xlsx_fileext(x, arg = caller_arg(x), call = parent.frame(), ...)
 \item{fileext}{File extensions to allow without error. Defaults to "docx",
 "pptx", "xlsx".}
 
-\item{call}{The execution environment of a currently running function passed
-to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }

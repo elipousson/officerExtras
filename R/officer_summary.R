@@ -9,8 +9,8 @@
 #' @returns A data.frame object.
 #' @export
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
-officer_summary <- function(x, summary_type = "doc", index = NULL) {
-  if (is_officer_summary(x, summary_type)) {
+officer_summary <- function(x, summary_type = "doc", index = NULL, call = caller_env()) {
+  if (is_officer_summary(x, summary_type, call = call)) {
     return(x)
   }
 
@@ -22,7 +22,7 @@ officer_summary <- function(x, summary_type = "doc", index = NULL) {
     c("rdocx", "rpptx")
   )
 
-  check_officer(x, what = what)
+  check_officer(x, what = what, call = call)
 
   if (is.null(summary_type) | (summary_type == "doc")) {
     summary_type <- class(x)
@@ -104,18 +104,26 @@ check_officer_summary <- function(x,
 #' @importFrom rlang has_name
 is_officer_summary <- function(x,
                                summary_type = "doc",
-                               tables = FALSE) {
+                               tables = FALSE,
+                               call = caller_env()) {
+  check_required(x)
+  check_bool(tables, call = call)
+  check_string(summary_type, allow_null = TRUE, call = call)
+
   if (!is.data.frame(x)) {
     return(FALSE)
   }
 
-  summary_type <- match.arg(summary_type, c("doc", "docx", "pptx", "slide", "layout"))
+  summary_type <- match.arg(
+    summary_type,
+    c("doc", "docx", "pptx", "slide", "layout")
+    )
 
   nm <- "content_type"
   docx_nm <- c("doc_index", "content_type", "style_name", "text")
   pptx_nm <- c("text", "id", "content_type", "slide_id")
 
-  if (isTRUE(tables)) {
+  if (tables) {
     nm <- c(nm, "row_id", "cell_id")
   }
 

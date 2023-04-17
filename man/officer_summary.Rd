@@ -4,7 +4,7 @@
 \alias{officer_summary}
 \title{Summarize a rdocx or rpptx object}
 \usage{
-officer_summary(x, summary_type = "doc", index = NULL)
+officer_summary(x, summary_type = "doc", index = NULL, call = caller_env())
 }
 \arguments{
 \item{x}{A rdocx or rpptx object passed to \code{\link[officer:docx_summary]{officer::docx_summary()}},
@@ -17,6 +17,20 @@ functions, it is returned as is.}
 allows columns for either a docx or pptx summary.}
 
 \item{index}{slide index}
+
+\item{call}{The execution environment of a currently running
+function, e.g. \code{call = caller_env()}. The corresponding function
+call is retrieved and mentioned in error messages as the source
+of the error.
+
+You only need to supply \code{call} when throwing a condition from a
+helper function which wouldn't be relevant to mention in the
+message.
+
+Can also be \code{NULL} or a \link[rlang:topic-defuse]{defused function call} to
+respectively not display any call or hard-code a code to display.
+
+For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 }
 \value{
 A data.frame object.

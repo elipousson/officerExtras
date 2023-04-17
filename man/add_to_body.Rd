@@ -85,8 +85,10 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.}
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
 
-\item{call}{The execution environment of a currently running function passed
-to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 
 \item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}},
 \code{\link[officer:body_add_gg]{officer::body_add_gg()}}, or \code{\link[officer:body_add]{officer::body_add()}}.}

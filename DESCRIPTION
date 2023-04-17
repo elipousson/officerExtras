@@ -14,7 +14,7 @@ Imports:
     cli,
     glue,
     officer,
-    rlang,
+    rlang (>= 1.1.0),
     utils,
     xml2
 Suggests: 
@@ -23,6 +23,7 @@ Suggests:
     gt (>= 0.7.0),
     rmarkdown,
     testthat (>= 3.0.0),
+    vctrs,
     withr
 Config/testthat/edition: 3
 Encoding: UTF-8

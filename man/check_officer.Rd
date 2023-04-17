@@ -11,15 +11,15 @@ check_officer(
   x,
   arg = caller_arg(x),
   what = c("rdocx", "rpptx", "rxlsx"),
-  call = parent.frame(),
+  call = caller_env(),
   ...
 )
 
-check_docx(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_docx(x, arg = caller_arg(x), call = caller_env(), ...)
 
-check_pptx(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_pptx(x, arg = caller_arg(x), call = caller_env(), ...)
 
-check_xlsx(x, arg = caller_arg(x), call = parent.frame(), ...)
+check_xlsx(x, arg = caller_arg(x), call = caller_env(), ...)
 }
 \arguments{
 \item{x}{Object to check.}
@@ -29,8 +29,10 @@ check_xlsx(x, arg = caller_arg(x), call = parent.frame(), ...)
 
 \item{what}{Class names to check}
 
-\item{call}{The execution environment of a currently running function passed
-to \code{\link[cli:cli_abort]{cli::cli_abort()}}. Defaults to \code{parent.frame()}}
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }
