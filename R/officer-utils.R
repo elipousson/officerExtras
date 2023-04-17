@@ -10,8 +10,9 @@ officer_fileext <- function(x, prefix = "") {
 #'
 #' @keywords internal
 #' @noRd
+#' @importFrom rlang has_name
 subset_type <- function(x, type) {
-  if (rlang::has_name(x, "content_type")) {
+  if (has_name(x, "content_type")) {
     x[x[["content_type"]] %in% type, ]
   }
 }
@@ -20,8 +21,9 @@ subset_type <- function(x, type) {
 #'
 #' @keywords internal
 #' @noRd
+#' @importFrom rlang has_name
 subset_style <- function(x, style) {
-  if (rlang::has_name(x, "style_name")) {
+  if (has_name(x, "style_name")) {
     if (!is.na(style)) {
       x[!is.na(x[["style_name"]]) & x[["style_name"]] %in% style, ]
     } else {
@@ -34,21 +36,23 @@ subset_style <- function(x, style) {
 #'
 #' @keywords internal
 #' @noRd
+#' @importFrom rlang has_name
 subset_index <- function(x, index) {
-  if (rlang::has_name(x, "doc_index")) {
+  if (has_name(x, "doc_index")) {
     x[x[["doc_index"]] %in% index, ]
-  } else if (rlang::has_name(x, "id")) {
+  } else if (has_name(x, "id")) {
     x[x[["id"]] %in% index, ]
   }
 }
 
 #' @keywords internal
 #' @noRd
+#' @importFrom rlang is_true is_false
 subset_header <- function(x, header = TRUE) {
-  if (isTRUE(header)) {
-    x[isTRUE(x[["is_header"]]), ]
-  } else if (isFALSE(header)) {
-    x[isFALSE(x[["is_header"]]), ]
+  if (is_true(header)) {
+    x[x[["is_header"]], ]
+  } else if (is_false(header)) {
+    x[!x[["is_header"]], ]
   } else {
     x
   }
