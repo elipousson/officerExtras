@@ -33,18 +33,29 @@ read_officer <- function(filename = NULL,
                          quiet = TRUE,
                          call = parent.frame(),
                          ...) {
+  cli_quiet(quiet)
+
   if (is.null(x)) {
     path <- set_office_path(filename, path, fileext = fileext, call = call)
 
     fileext <- str_extract_fileext(path)
 
-    x <- switch(fileext,
-      "docx" = officer::read_docx(path),
-      "dotx" = officer::read_docx(path),
-      "pptx" = officer::read_pptx(path),
-      "potx" = officer::read_pptx(path),
-      "xlsx" = officer::read_xlsx(path)
-    )
+    x <-
+      rlang::try_fetch(
+        switch(fileext,
+          "docx" = officer::read_docx(path),
+          "dotx" = officer::read_docx(path),
+          "pptx" = officer::read_pptx(path),
+          "potx" = officer::read_pptx(path),
+          "xlsx" = officer::read_xlsx(path)
+        ),
+        error = function(cnd) {
+          cli::cli_abort("{.val {fileext}} file can't be read.", parent = cnd)
+        },
+        warning = function(cnd) {
+          cli::cli_warn(message = cnd)
+        }
+      )
   } else {
     if (!is_all_null(c(filename, path)) & isFALSE(quiet)) {
       cli::cli_alert_warning(
@@ -55,13 +66,14 @@ read_officer <- function(filename = NULL,
     check_officer(x, what = paste0("r", fileext), call = call, ...)
   }
 
-  if (isFALSE(quiet)) {
-    if (!is.null(filename)) {
-      cli::cli_alert_success("Reading {.filename {filename}}{cli::symbol$ellipsis}")
-    }
 
-    cli_doc_properties(x, filename)
+  if (!is.null(filename)) {
+    cli::cli_alert_success(
+      "Reading {.filename {filename}}{cli::symbol$ellipsis}"
+    )
   }
+
+  cli_doc_properties(x, filename)
 
   invisible(x)
 }
