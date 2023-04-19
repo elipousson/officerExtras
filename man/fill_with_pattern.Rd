@@ -10,7 +10,8 @@ fill_with_pattern(
   pattern_col = "style_name",
   fill_col = "text",
   col = "heading",
-  direction = c("down", "up", "downup", "updown")
+  direction = c("down", "up", "downup", "updown"),
+  call = caller_env()
 )
 }
 \arguments{
@@ -31,6 +32,11 @@ Defaults to "heading"}
 
 \item{direction}{Direction of fill passed to \code{\link[vctrs:vec_fill_missing]{vctrs::vec_fill_missing()}},
 Default: c("down", "up", "downup", "updown")}
+
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \value{
 A data.frame with an additional column taking the name from col and

@@ -42,6 +42,9 @@ and may be modified or removed. Defaults to \code{NULL}.}
 
 \item{...}{Additional parameters passed to \code{\link[=fill_with_pattern]{fill_with_pattern()}}.}
 
+\item{stack}{If \code{TRUE} and all tables share the same number of columns,
+return a combined data.frame instead of a list object.}
+
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the

@@ -73,6 +73,7 @@ cli_vec_cls <- function(x) {
 #'   Defaults to "heading"
 #' @param direction Direction of fill passed to [vctrs::vec_fill_missing()],
 #'   Default: c("down", "up", "downup", "updown")
+#' @inheritParams rlang::args_error_context
 #' @returns A data.frame with an additional column taking the name from col and
 #'   the values from the column named in fill_col.
 #' @seealso
@@ -80,18 +81,32 @@ cli_vec_cls <- function(x) {
 #' @rdname fill_with_pattern
 #' @export
 fill_with_pattern <- function(x,
-                                pattern = "^heading",
-                                pattern_col = "style_name",
-                                fill_col = "text",
-                                col = "heading",
-                                direction = c("down", "up", "downup", "updown")) {
-  x[[col]] <- x[[fill_col]]
-  pattern <- grepl(pattern, x[[pattern_col]])
-  if (sum(pattern) == 0) {
+                              pattern = "^heading",
+                              pattern_col = "style_name",
+                              fill_col = "text",
+                              col = "heading",
+                              direction = c("down", "up", "downup", "updown"),
+                              call = caller_env()) {
+  check_name(col, call = call)
+  check_name(fill_col, call = call)
+
+  if (has_name(x, col)) {
+    cli_abort(
+      "{.arg col} {.field {col}} can't be used when
+      {.arg x} has a column name {.field {col}}."
+    )
+  }
+
+  pattern <- str_detect(x[[pattern_col]], pattern)
+  pattern[is.na(pattern)] <- FALSE
+
+  if (sum(pattern, na.rm = TRUE) == 0) {
     return(x)
   }
   check_installed("vctrs")
-  x[[col]][!pattern] <- rep(NA_character_, nrow(x))[!pattern]
+  x[[col]] <- NA_character_
+  x[pattern, ][[col]] <- x[pattern, ][[fill_col]]
+  # x[!pattern, ][[col]] <- rep(NA_character_, nrow(x))[!pattern]
   x[[col]] <- vctrs::vec_fill_missing(x[[col]], direction = direction)
   x
 }

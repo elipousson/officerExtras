@@ -20,6 +20,8 @@
 #'   data.frame returned by [officer_tables()]. This is an experimental feature
 #'   and may be modified or removed. Defaults to `NULL`.
 #' @param ... Additional parameters passed to [fill_with_pattern()].
+#' @param stack If `TRUE` and all tables share the same number of columns,
+#'   return a combined data.frame instead of a list object.
 #' @inheritParams rlang::args_error_context
 #' @return A data.frame or list of data.frame (or list objects).
 #' @examples
@@ -52,7 +54,7 @@ officer_tables <- function(x,
     x <- officer_summary(x)
   }
 
-  if (!rlang::has_name(x, "content_type") | !is.data.frame(x)) {
+  if (!has_name(x, "content_type") | !is.data.frame(x)) {
     cli_abort(
       "{.arg x} must be a {cli_vec_cls(c('rdocx', 'rpptx'))} object or a
       {.cls data.frame} created with {.fn officer_summary}",
@@ -63,7 +65,14 @@ officer_tables <- function(x,
   tables <-
     map(
       index %||% officer_table_index(x),
-      ~ officer_table(x, .x, has_header, col = col, ...)
+      ~ officer_table(
+        x = x,
+        index = .x,
+        has_header = has_header,
+        col = col,
+        ...,
+        call = call
+      )
     )
 
   if (has_length(tables, 1)) {
@@ -73,9 +82,9 @@ officer_tables <- function(x,
   if (stack) {
     n_cols <- unique(vapply(tables, ncol, 1))
     if (length(n_cols) > 1) {
-      cli::cli_abort(
-        message = "{.arg stack} must be {.code FALSE} when {.arg x}
-      includes tables with a varying number of columns.",
+      cli_abort(
+        "{.arg stack} must be {.code FALSE} when {.arg x}
+        includes tables with a varying number of columns.",
         call = call
       )
     }
@@ -98,9 +107,8 @@ officer_table <- function(x,
                           ...,
                           call = caller_env()) {
   if (!is_null(col)) {
-    x <- fill_with_pattern(x, ..., col = col)
+    x <- fill_with_pattern(x, ..., col = col, call = call)
   }
-
   # Subset by doc_index or content_type
   if (!is.null(index)) {
     table_cells <- subset_index(x, index)
@@ -117,38 +125,55 @@ officer_table <- function(x,
   }
 
   body_cells <- officer_table_pivot(body_cells)
+
   n_header_rows <- nrow(header_cells)
+  n_body_rows <- nrow(body_cells)
 
   if (!is_null(col)) {
-    body_col <- rbind(
-      list(col),
-      rep(list(unique(table_cells[[col]])), nrow(body_cells) - 1)
-    )
+    col_value <- list(unique(table_cells[[col]]))
+    if (n_header_rows > 1) {
+      cli_abort(
+        "{.arg col} can't be used with tables with more than 1 header row."
+      )
+    }
   }
 
   if (n_header_rows == 0) {
-    body_cells <- cbind(
-      body_col,
-      body_cells
-    )
+    if (!is_null(col)) {
+      body_col <- as.data.frame(c(col, rep(col_value, n_body_rows - 1)))
+
+      body_cells <-
+        cbind(
+          body_cells,
+          body_col
+        )
+    }
 
     check_bool(has_header, call = call)
     if (!has_header) {
       return(body_cells)
     }
 
+    nm <- utils::head(body_cells, 1)
+
     return(
       rlang::set_names(
-        utils::tail(body_cells, nrow(body_cells) - 1),
-        utils::head(body_cells, 1)
+        utils::tail(body_cells, n_body_rows - 1),
+        nm
       )
     )
   }
 
-  if ((n_header_rows == 1)) {
-    return(rlang::set_names(body_cells, header_cells))
-  }
+  if (n_header_rows == 1) {
+    nm <- header_cells
 
+    if (!is_null(col)) {
+      nm <- c(nm, col)
+      body_cells[[col]] <- rep(col_value, n_body_rows)
+    }
+
+    return(rlang::set_names(body_cells, nm))
+  }
 
   list(body_cells, header_cells)
 }
@@ -182,4 +207,3 @@ officer_table_pivot <- function(x,
 
   tbl
 }
-
