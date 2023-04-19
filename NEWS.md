@@ -2,7 +2,7 @@
 
 # officerExtras development
 
-* Add new `officer_summary_levels()` function.
+* Add new `officer_summary_levels()` and `read_docs_url()` functions.
 * Add new `col` parameter to `officer_tables()` function.
 
 # officerExtras 0.0.0.9004
