@@ -67,7 +67,8 @@ heading text.</p>
 <span>  exclude_levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fill_col <span class="op">=</span> <span class="st">"text"</span>,</span>
 <span>  direction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"down"</span>, <span class="st">"up"</span>, <span class="st">"downup"</span>, <span class="st">"updown"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -107,23 +108,18 @@ Default: c("down", "up", "downup", "updown")</p></dd>
 "layout". "doc" requires the data.frame include a "content_type" column but
 allows columns for either a docx or pptx summary.</p></dd>
 
-    <dt><code>call</code></dt>
-<dd><p>The execution environment of a currently running
-function, e.g. <code>call = caller_env()</code>. The corresponding function
-call is retrieved and mentioned in error messages as the source
-of the error.</p>
-<p>You only need to supply <code>call</code> when throwing a condition from a
-helper function which wouldn't be relevant to mention in the
-message.</p>
-<p>Can also be <code>NULL</code> or a <a href="https://rlang.r-lib.org/reference/topic-defuse.html" class="external-link">defused function call</a> to
-respectively not display any call or hard-code a code to display.</p>
-<p>For more information about error calls, see <a href="https://rlang.r-lib.org/reference/topic-error-call.html" class="external-link">Including function calls in error messages</a>.</p></dd>
-
     <dt><code>index</code></dt>
 <dd><p>slide index</p></dd>
 
   
 </dl></dd>
+
+
+<dt>call</dt>
+<dd><p>The execution environment of a currently
+running function, e.g. <code>caller_env()</code>. The function will be
+mentioned in error messages as the source of the error. See the
+<code>call</code> argument of <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort()</a></code> for more information.</p></dd>
 
 </dl></div>
 
