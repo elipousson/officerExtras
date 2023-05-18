@@ -19,8 +19,9 @@ officer_summary_levels <- function(x,
                                    exclude_levels = NULL,
                                    fill_col = "text",
                                    direction = c("down", "up", "downup", "updown"),
-                                   ...) {
-  check_required(x)
+                                   ...,
+                                   call = caller_env()) {
+  check_required(x, call = call)
   if (!is_officer_summary(x)) {
     x <- officer_summary(x, ..., call = call)
   }
