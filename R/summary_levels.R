@@ -22,7 +22,7 @@ officer_summary_levels <- function(x,
                                    ...) {
   check_required(x)
   if (!is_officer_summary(x)) {
-    x <- officer_summary(docx, ..., call = call)
+    x <- officer_summary(x, ..., call = call)
   }
 
   check_name(levels_from, call = call)
