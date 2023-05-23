@@ -59,7 +59,7 @@ example code on extracting Word document and PowerPoint slides in the
 \href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
 }
 \details{
-\code{\link[=officer_table]{officer_table()}} is a lower-level helper fucntion to extract a single table
+\code{\link[=officer_table]{officer_table()}} is a lower-level helper function to extract a single table
 from a document.
 }
 \examples{

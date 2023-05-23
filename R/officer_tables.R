@@ -5,7 +5,7 @@
 #' [officeverse
 #' documentation](https://ardata-fr.github.io/officeverse/extract-content.html#word-tables).
 #'
-#' [officer_table()] is a lower-level helper fucntion to extract a single table
+#' [officer_table()] is a lower-level helper function to extract a single table
 #' from a document.
 #'
 #' @param x A rdocx or rpptx object or a data.frame created with
@@ -54,7 +54,7 @@ officer_tables <- function(x,
     x <- officer_summary(x)
   }
 
-  if (!has_name(x, "content_type") | !is.data.frame(x)) {
+  if (!has_name(x, "content_type") || !is.data.frame(x)) {
     cli_abort(
       "{.arg x} must be a {cli_vec_cls(c('rdocx', 'rpptx'))} object or a
       {.cls data.frame} created with {.fn officer_summary}",
@@ -65,14 +65,15 @@ officer_tables <- function(x,
   tables <-
     map(
       index %||% officer_table_index(x),
-      ~ officer_table(
-        x = x,
-        index = .x,
-        has_header = has_header,
-        col = col,
-        ...,
-        call = call
-      )
+      function(i) {
+        officer_table(
+          x = x,
+          index = i,
+          has_header = has_header,
+          col = col,
+          call = call
+        )
+      }
     )
 
   if (has_length(tables, 1)) {
@@ -106,14 +107,21 @@ officer_table <- function(x,
                           col = NULL,
                           ...,
                           call = caller_env()) {
+  check_string(col, allow_null = TRUE, call = call)
+
   if (!is_null(col)) {
     x <- fill_with_pattern(x, ..., col = col, call = call)
   }
+
   # Subset by doc_index or content_type
   if (!is.null(index)) {
     table_cells <- subset_index(x, index)
   } else {
     table_cells <- subset_type(x, "table cell")
+  }
+
+  if (!is_null(col)) {
+    col_value <- table_cells[[col]]
   }
 
   body_cells <- table_cells
@@ -129,8 +137,9 @@ officer_table <- function(x,
   n_header_rows <- nrow(header_cells)
   n_body_rows <- nrow(body_cells)
 
-  if (!is_null(col)) {
-    col_value <- list(unique(table_cells[[col]]))
+  if (!all(is_empty(col))) {
+    col_value <- unique(table_cells[[col]])
+
     if (n_header_rows > 1) {
       cli_abort(
         "{.arg col} can't be used with tables with more than 1 header row."
@@ -139,8 +148,17 @@ officer_table <- function(x,
   }
 
   if (n_header_rows == 0) {
+
     if (!is_null(col)) {
-      body_col <- as.data.frame(c(col, rep(col_value, n_body_rows - 1)))
+      stopifnot(
+        !is.null(col_value), length(col_value) == 1
+      )
+
+      body_col <- data.frame(
+        c(col, rep(col_value, n_body_rows - 1))
+        )
+
+      body_col <- set_names(body_col, ncol(body_cells) + 1)
 
       body_cells <-
         cbind(
