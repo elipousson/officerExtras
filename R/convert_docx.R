@@ -28,9 +28,9 @@
 #'   )
 #'
 #'   convert_docx(
-#'       docx,
-#'       to = "markdown"
-#'     )
+#'     docx,
+#'     to = "markdown"
+#'   )
 #'
 #'   withr::with_tempdir({
 #'     convert_docx(
@@ -103,7 +103,8 @@ convert_docx <- function(docx,
     if (is_true(output_exists) && is_false(overwrite)) {
       cli::cli_abort(
         c("{.arg output} {.filename {output}} already exists.",
-          "*" = "Set {.code overwrite = TRUE} to replace existing file.")
+          "*" = "Set {.code overwrite = TRUE} to replace existing file."
+        )
       )
     }
   }

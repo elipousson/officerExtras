@@ -148,7 +148,6 @@ officer_table <- function(x,
   }
 
   if (n_header_rows == 0) {
-
     if (!is_null(col)) {
       stopifnot(
         !is.null(col_value), length(col_value) == 1
@@ -156,7 +155,7 @@ officer_table <- function(x,
 
       body_col <- data.frame(
         c(col, rep(col_value, n_body_rows - 1))
-        )
+      )
 
       body_col <- set_names(body_col, ncol(body_cells) + 1)
 

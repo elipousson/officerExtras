@@ -117,7 +117,7 @@ is_officer_summary <- function(x,
   summary_type <- match.arg(
     summary_type,
     c("doc", "docx", "pptx", "slide", "layout")
-    )
+  )
 
   nm <- "content_type"
   docx_nm <- c("doc_index", "content_type", "style_name", "text")

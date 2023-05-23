@@ -80,9 +80,9 @@ if (interactive()) {
   )
 
   convert_docx(
-      docx,
-      to = "markdown"
-    )
+    docx,
+    to = "markdown"
+  )
 
   withr::with_tempdir({
     convert_docx(
