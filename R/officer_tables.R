@@ -148,10 +148,8 @@ officer_table <- function(x,
   }
 
   if (n_header_rows == 0) {
-    if (!is_null(col)) {
-      stopifnot(
-        !is.null(col_value), length(col_value) == 1
-      )
+    if (!is_null(col) && !is_null(col_value)) {
+      check_string(col_value, call = call)
 
       body_col <- data.frame(
         c(col, rep(col_value, n_body_rows - 1))
@@ -166,8 +164,7 @@ officer_table <- function(x,
         )
     }
 
-    check_bool(has_header, call = call)
-    if (!has_header) {
+    if (is_false(has_header)) {
       return(body_cells)
     }
 
