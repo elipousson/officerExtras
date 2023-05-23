@@ -132,6 +132,12 @@ read_xlsx_ext <- function(filename = NULL,
 #' @noRd
 #' @importFrom cli cli_rule symbol cli_dl
 cli_doc_properties <- function(x, filename = NULL) {
+  props <- officer_properties(x)
+
+  if (is_null(props)) {
+    return(props)
+  }
+
   if (!is.null(filename)) {
     cli::cli_rule("{cli::symbol$info} {.filename {filename}} properties:")
   } else {
@@ -140,7 +146,7 @@ cli_doc_properties <- function(x, filename = NULL) {
 
   cli::cli_dl(
     items = discard(
-      officer_properties(x),
+      props,
       ~ .x == ""
     )
   )
@@ -153,8 +159,23 @@ cli_doc_properties <- function(x, filename = NULL) {
 #' @importFrom officer doc_properties
 #' @importFrom rlang set_names
 #' @importFrom utils modifyList
+#' @importFrom cli cli_warn
 officer_properties <- function(x, values = list(), keep.null = FALSE) {
-  props <- officer::doc_properties(x)
+  props <- rlang::try_fetch(
+    officer::doc_properties(x),
+    error = function(cnd) {
+      cli::cli_warn(
+        "Document properties can't be found for {.filename {x}}",
+        parent = cnd
+      )
+      NULL
+    }
+  )
+
+  if (is_null(props)) {
+    return(props)
+  }
+
   utils::modifyList(
     rlang::set_names(as.list(props[["value"]]), props[["tag"]]),
     values,
