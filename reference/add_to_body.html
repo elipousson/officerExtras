@@ -121,6 +121,7 @@ from the plot object.</p></li>
 <span>  split <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  keep_with_next <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pos <span class="op">=</span> <span class="st">"after"</span>,</span>
+<span>  tablecontainer <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -215,10 +216,7 @@ evaluated in that environment and <code>.envir</code> is ignored. If <code>NULL<
 <dt>gt_object</dt>
 <dd><p>A gt object converted to an OOXML string with
 <code><a href="https://gt.rstudio.com/reference/as_word.html" class="external-link">gt::as_word()</a></code> then passed to <code>add_xml_to_body()</code> as str parameter.
-Required for <code>add_gt_to_body()</code>. A portion of the code to transform the
-gt_object to OOXML and insert the XML into the docx object is adapted from
-the <a href="https://github.com/GSK-Biostatistics/gto/" class="external-link">gto package</a> by Ellis
-Hughes.</p></dd>
+Required for <code>add_gt_to_body()</code>.</p></dd>
 
 
 <dt>align</dt>
@@ -245,6 +243,13 @@ to activate the Word option <code>Allow row to break across pages</code>.</p></d
 <dt>keep_with_next</dt>
 <dd><p>A <code>TRUE</code> (the default) or <code>FALSE</code> value that indicates
 whether a table should use Word option <code>keep rows together</code>.</p></dd>
+
+
+<dt>tablecontainer</dt>
+<dd><p>If <code>TRUE</code> (default), add tables inside of a
+tablecontainer tag that automatically adds a table number and converts the
+gt title into a table caption. This feature is based on code from the <a href="https://github.com/GSK-Biostatistics/gto/" class="external-link">gto package</a> by Ellis Hughes to
+transform the gt_object to OOXML and insert the XML into the docx object.</p></dd>
 
 
 <dt>caption</dt>
