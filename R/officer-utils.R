@@ -25,7 +25,7 @@ subset_type <- function(x, type) {
 subset_style <- function(x, style) {
   if (has_name(x, "style_name")) {
     if (!is.na(style)) {
-      x[!is.na(x[["style_name"]]) & x[["style_name"]] %in% style, ]
+      x[!is.na(x[["style_name"]]) && x[["style_name"]] %in% style, ]
     } else {
       x[is.na(x[["style_name"]]), ]
     }

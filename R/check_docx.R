@@ -68,7 +68,7 @@ check_office_fileext <- function(x,
   check_character(fileext, allow_null = TRUE, call = call)
   fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if (!is_null(x) & !any(is_fileext_path(x, fileext))) {
+  if (!is_null(x) && !any(is_fileext_path(x, fileext))) {
     cli_abort(
       "{.arg {arg}} must use a {.val {cli_vec_last(fileext)}} file extension.",
       ...,

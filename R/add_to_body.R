@@ -62,7 +62,7 @@ add_to_body <- function(docx,
     return(officer::body_add_xml(docx, str, pos))
   }
 
-  if (!is.null(pos) & !is.null(value)) {
+  if (!is.null(pos) && !is.null(value)) {
     if (is.character(value)) {
       return(officer::body_add_par(docx, value, pos = pos, ...))
     }
@@ -133,11 +133,13 @@ add_xml_to_body <- function(docx,
 
 #' @param gt_object A gt object converted to an OOXML string with
 #'   [gt::as_word()] then passed to [add_xml_to_body()] as str parameter.
-#'   Required for [add_gt_to_body()]. A portion of the code to transform the
-#'   gt_object to OOXML and insert the XML into the docx object is adapted from
-#'   the [gto package](https://github.com/GSK-Biostatistics/gto/) by Ellis
-#'   Hughes.
+#'   Required for [add_gt_to_body()].
 #' @inheritParams gt::as_word
+#' @param tablecontainer If `TRUE` (default), add tables inside of a
+#'   tablecontainer tag that automatically adds a table number and converts the
+#'   gt title into a table caption. This feature is based on code from the [gto
+#'   package](https://github.com/GSK-Biostatistics/gto/) by Ellis Hughes to
+#'   transform the gt_object to OOXML and insert the XML into the docx object.
 #' @name add_gt_to_body
 #' @rdname add_to_body
 #' @author Ellis Hughes \email{ellis.h.hughes@gsk.com}
@@ -152,6 +154,7 @@ add_gt_to_body <- function(docx,
                            split = FALSE,
                            keep_with_next = TRUE,
                            pos = "after",
+                           tablecontainer = TRUE,
                            ...) {
   rlang::check_required(gt_object)
   rlang::check_installed("gt")
@@ -164,6 +167,17 @@ add_gt_to_body <- function(docx,
     split = split,
     keep_with_next = keep_with_next
   )
+
+  if (!tablecontainer) {
+    docx <- add_xml_to_body(
+      docx,
+      str = str,
+      pos = pos,
+      ...
+    )
+
+    return(docx)
+  }
 
   str <- wrap_tag(str, tag = "tablecontainer")
   str_nodes <- xml2::xml_children(xml2::read_xml(str))
@@ -202,7 +216,7 @@ add_gg_to_body <- function(docx,
   rlang::check_required(value)
   docx <- add_to_body(docx, value = value, style = style, pos = pos, ...)
 
-  if (!is.null(caption) & !is.null(value[["labels"]][[caption]])) {
+  if (!is.null(caption) && !is.null(value[["labels"]][[caption]])) {
     if (!is.null(autonum)) {
       officer::body_add_caption(
         docx,

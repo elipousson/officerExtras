@@ -82,15 +82,17 @@ check_officer_summary <- function(x,
     )
   }
 
-  if (!is.null(n) & !((nrow(x) <= max(n)) & (nrow(x) >= min(n)))) {
+  n_rows <- nrow(x)
+
+  if (!is.null(n) && !((n_rows <= max(n)) && (n_rows >= min(n)))) {
     cli_abort(
-      "{.arg {arg}} must have {n} row{?s}.",
+      "{.arg {arg}} must have {n} row{?s}, not {n_rows}.",
       ...,
       call = call
     )
   }
 
-  if (!is.null(content_type) & !all(x[["content_type"]] %in% content_type)) {
+  if (!is.null(content_type) && !all(x[["content_type"]] %in% content_type)) {
     cli_abort(
       "{.arg {arg}} must include only {.val {content_type}} content type{?s}.",
       ...,
@@ -140,5 +142,5 @@ is_officer_summary <- function(x,
     nm_check <- any(rlang::has_name(x, c(docx_nm, pptx_nm)))
   }
 
-  all(rlang::has_name(x, nm)) & nm_check
+  all(rlang::has_name(x, nm)) && nm_check
 }

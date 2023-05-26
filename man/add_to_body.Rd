@@ -45,6 +45,7 @@ add_gt_to_body(
   split = FALSE,
   keep_with_next = TRUE,
   pos = "after",
+  tablecontainer = TRUE,
   ...
 )
 
@@ -112,10 +113,7 @@ evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is pa
 
 \item{gt_object}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
-Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}. A portion of the code to transform the
-gt_object to OOXML and insert the XML into the docx object is adapted from
-the \href{https://github.com/GSK-Biostatistics/gto/}{gto package} by Ellis
-Hughes.}
+Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
 
 \item{align}{An option for table alignment. Can either be \code{"center"} (the
 default), \code{"left"}, or \code{"right"}.}
@@ -132,6 +130,11 @@ to activate the Word option \verb{Allow row to break across pages}.}
 
 \item{keep_with_next}{A \code{TRUE} (the default) or \code{FALSE} value that indicates
 whether a table should use Word option \verb{keep rows together}.}
+
+\item{tablecontainer}{If \code{TRUE} (default), add tables inside of a
+tablecontainer tag that automatically adds a table number and converts the
+gt title into a table caption. This feature is based on code from the \href{https://github.com/GSK-Biostatistics/gto/}{gto package} by Ellis Hughes to
+transform the gt_object to OOXML and insert the XML into the docx object.}
 
 \item{caption}{Name of the ggplot2 label to use as a caption if plot passed
 to value has a label for this value. Defaults to "title".}
