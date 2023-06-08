@@ -1,3 +1,8 @@
+# officerExtras 0.0.1
+
+* Add new `officer_summary_levels()` and `read_docs_url()` functions.
+* Add new features to `officer_tables()` function using the `col`, `stack`, `type_convert`, and `nm` parameters partly inspired by [blog post by Matt Dray](https://www.rostrum.blog/2023/06/07/rectangular-officer/).
+
 # officerExtras 0.0.0.9004
 
 * Update `officer_media()` to support `rdocx` and `rpptx` objects and fix `overwrite` check so the function errors if files already exist.
