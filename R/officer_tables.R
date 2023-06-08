@@ -1,13 +1,13 @@
 #' Get tables from a rdocx or rpptx object
 #'
-#' Get one or more tables from a rdocx or rpptx object. These functions are
-#' based on example code on extracting Word document and PowerPoint slides in
-#' the [officeverse
+#' Get one or more tables from a rdocx or rpptx object. [officer_tables()]
+#' returns a list of data frames and [officer_table()] returns a single table as
+#' a data frame. These functions are based on example code on extracting Word
+#' document and PowerPoint slides in the [officeverse
 #' documentation](https://ardata-fr.github.io/officeverse/extract-content.html#word-tables).
-#' #' [officer_table()] is a lower-level helper function to extract a single
-#' table from a document. Some additional features including the type_convert
-#' parameter and the addition of doc_index values as the default names for the
-#' returned list of tables are based on [this blog post by Matt
+#' Some additional features including the type_convert parameter and the
+#' addition of doc_index values as the default names for the returned list of
+#' tables are based on [this blog post by Matt
 #' Dray](https://www.rostrum.blog/2023/06/07/rectangular-officer/).
 #'
 #' @param x A rdocx or rpptx object or a data frame created with
