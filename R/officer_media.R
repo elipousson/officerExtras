@@ -126,7 +126,8 @@ officer_media <- function(filename = NULL,
 
   if (any(file.exists(media_files_to)) && isFALSE(overwrite)) {
     cli::cli_abort(
-      c("One or more media files already exist at {.arg target}: {.path {target}}",
+      c("One or more media files already exist at
+        {.arg target}: {.path {target}}",
         "i" = "Set {.code overwrite = TRUE} to replace these existing files."
       )
     )

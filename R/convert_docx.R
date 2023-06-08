@@ -93,10 +93,8 @@ convert_docx <- function(docx,
   }
 
   if (!is.null(output)) {
-    output_exists <- FALSE
-    if (is.null(path)) {
-      output_exists <- file.exists(output)
-    } else {
+    output_exists <- file.exists(output)
+    if (!is.null(path)) {
       output_exists <- file.exists(file.path(path, output))
     }
 

@@ -79,7 +79,9 @@ test_that("add_gg_to_body works", {
 
   plot1 <- ggplot2::ggplot(df, ggplot2::aes(gp, y)) +
     ggplot2::geom_point() +
-    ggplot2::geom_point(data = ds, ggplot2::aes(y = mean), colour = "red", size = 3) +
+    ggplot2::geom_point(data = ds,
+                        ggplot2::aes(y = mean),
+                        colour = "red", size = 3) +
     ggplot2::labs(
       title = "test title"
     )

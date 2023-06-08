@@ -18,8 +18,8 @@ fill_with_pattern(
 \item{x}{A input data.frame (assumed to be from \code{\link[=officer_summary]{officer_summary()}} for
 default values).}
 
-\item{pattern}{Passed to \code{\link[=grepl]{grepl()}} as the pattern identifying which rows of the
-fill_col should have values pulled into the new column named by col.
+\item{pattern}{Passed to \code{\link[=grepl]{grepl()}} as the pattern identifying which rows of
+the fill_col should have values pulled into the new column named by col.
 Defaults to "^heading" which matches the default heading style names.}
 
 \item{pattern_col}{Name of column to use for pattern matching, Defaults to

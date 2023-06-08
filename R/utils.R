@@ -63,8 +63,8 @@ cli_vec_cls <- function(x) {
 #'
 #' @param x A input data.frame (assumed to be from [officer_summary()] for
 #'   default values).
-#' @param pattern Passed to [grepl()] as the pattern identifying which rows of the
-#'   fill_col should have values pulled into the new column named by col.
+#' @param pattern Passed to [grepl()] as the pattern identifying which rows of
+#'   the fill_col should have values pulled into the new column named by col.
 #'   Defaults to "^heading" which matches the default heading style names.
 #' @param pattern_col Name of column to use for pattern matching, Defaults to
 #'   "style_name".

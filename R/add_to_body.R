@@ -47,9 +47,9 @@ add_to_body <- function(docx,
                         ...) {
   check_docx(docx, call = call)
 
-  if ((!is_any_null(list(str, value))) | is_all_null(list(str, value))) {
+  if ((!is_any_null(list(str, value))) || is_all_null(list(str, value))) {
     cli_abort(
-      "{.arg str} or {.arg value} must be supplied.",
+      "{.arg str} *or* {.arg value} must be supplied.",
       call = call
     )
   }
@@ -313,7 +313,8 @@ add_str_with_keys <- function(docx,
 #'
 #' @keywords internal
 #' @param nm Names for value.
-#' @param arg Name of the argument in ... to use as names for value when nm is `NULL`.
+#' @param arg Name of the argument in ... to use as names for value when nm is
+#'   `NULL`.
 #' @noRd
 #' @importFrom rlang is_named list2 set_names
 #' @importFrom cli cli_abort
@@ -324,9 +325,10 @@ set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
 
   if (is.null(nm)) {
     params <- rlang::list2(...)
-    if (is.null(params[[arg]]) | (length(params[[arg]]) != length(value))) {
+    if (is.null(params[[arg]]) || (length(params[[arg]]) != length(value))) {
       cli_abort(
-        "{.arg value} must {.arg {arg}} must be be the same length as {.arg value}."
+        "{.arg value} must {.arg {arg}} must be be the same length
+        as {.arg value}."
       )
     }
     nm <- params[[arg]]

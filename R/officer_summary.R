@@ -40,7 +40,7 @@ officer_summary <- function(x,
   summary_type <- summary_type %||% class(x)
 
   if ((summary_type %in% c("rdocx", "docx")) &&
-      is_installed("officer (>= 0.6.3)")) {
+    is_installed("officer (>= 0.6.3)")) {
     return(officer::docx_summary(x, preserve = preserve))
   }
 

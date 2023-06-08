@@ -37,7 +37,8 @@ dims_docx_ext <- function(docx) {
       "body" = c(
         "width" = page_dims[["width"]] - margin_w,
         "height" = page_dims[["height"]] - margin_h,
-        "asp" = (page_dims[["width"]] - margin_w) / (page_dims[["height"]] - margin_h)
+        "asp" = (page_dims[["width"]] - margin_w) /
+          (page_dims[["height"]] - margin_h)
       )
     )
   )

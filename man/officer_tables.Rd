@@ -65,13 +65,13 @@ mentioned in error messages as the source of the error. See the
 A list of data frames or, if stack is \code{TRUE}, a single data frame.
 }
 \description{
-Get one or more tables from a rdocx or rpptx object. These functions are
-based on example code on extracting Word document and PowerPoint slides in
-the \href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
-#' \code{\link[=officer_table]{officer_table()}} is a lower-level helper function to extract a single
-table from a document. Some additional features including the type_convert
-parameter and the addition of doc_index values as the default names for the
-returned list of tables are based on \href{https://www.rostrum.blog/2023/06/07/rectangular-officer/}{this blog post by Matt Dray}.
+Get one or more tables from a rdocx or rpptx object. \code{\link[=officer_tables]{officer_tables()}}
+returns a list of data frames and \code{\link[=officer_table]{officer_table()}} returns a single table as
+a data frame. These functions are based on example code on extracting Word
+document and PowerPoint slides in the \href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
+Some additional features including the type_convert parameter and the
+addition of doc_index values as the default names for the returned list of
+tables are based on \href{https://www.rostrum.blog/2023/06/07/rectangular-officer/}{this blog post by Matt Dray}.
 }
 \examples{
 docx <- read_docx_ext(

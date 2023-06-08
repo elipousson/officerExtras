@@ -57,7 +57,7 @@ read_officer <- function(filename = NULL,
         }
       )
   } else {
-    if (!is_all_null(c(filename, path)) & isFALSE(quiet)) {
+    if (!is_null(c(filename, path)) && is_false(quiet)) {
       cli::cli_alert_warning(
         "{.arg filename} and {.arg path} are ignored if {.arg {arg}} is provided."
       )
@@ -198,10 +198,10 @@ set_office_path <- function(filename = NULL,
     path <- file.path(path, filename)
   }
 
-  if (!is.character(path) & !is.null(path)) {
+  if (!is.character(path) && !is.null(path)) {
     cli::cli_abort(
       '{.arg {cli_vec_last(c("filename", "path"))}} must be `NULL` or
-      {.cls character} objects not {.cls {class(path)}}.'
+      {.cls character} objects not {.obj_type_friendly {path}}.'
     )
   }
 
