@@ -4,7 +4,13 @@
 \alias{officer_summary}
 \title{Summarize a rdocx or rpptx object}
 \usage{
-officer_summary(x, summary_type = "doc", index = NULL, call = caller_env())
+officer_summary(
+  x,
+  summary_type = "doc",
+  preserve = FALSE,
+  index = NULL,
+  call = caller_env()
+)
 }
 \arguments{
 \item{x}{A rdocx or rpptx object passed to \code{\link[officer:docx_summary]{officer::docx_summary()}},
@@ -15,6 +21,12 @@ functions, it is returned as is.}
 \item{summary_type}{Summary type. Options "doc", "docx", "pptx", "slide", or
 "layout". "doc" requires the data.frame include a "content_type" column but
 allows columns for either a docx or pptx summary.}
+
+\item{preserve}{If \code{FALSE} (default), text in table cells is collapsed into a
+single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
+character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
+published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
+the \code{{docxtractr}} package by Bob Rudis.}
 
 \item{index}{slide index}
 
@@ -36,5 +48,7 @@ For more information about error calls, see \ifelse{html}{\link[rlang:topic-erro
 A data.frame object.
 }
 \description{
-Summarize a rdocx or rpptx object
+The preserve parameter is supported by officer version >= 0.6.3 (currently
+the development version) and it is ignored unless a minimum supported version
+of officer is installed.
 }

@@ -1,15 +1,24 @@
 #' Summarize a rdocx or rpptx object
 #'
+#' The preserve parameter is supported by officer version >= 0.6.3 (currently
+#' the development version) and it is ignored unless a minimum supported version
+#' of officer is installed.
+#'
 #' @param x A rdocx or rpptx object passed to [officer::docx_summary()],
 #'   [officer::pptx_summary()], [officer::slide_summary()], or
 #'   [officer::layout_summary()]. If x is a data.frame created with one of those
 #'   functions, it is returned as is.
 #' @inheritParams check_officer_summary
 #' @inheritParams officer::slide_summary
+#' @inheritParams officer::docx_summary
 #' @returns A data.frame object.
 #' @export
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
-officer_summary <- function(x, summary_type = "doc", index = NULL, call = caller_env()) {
+officer_summary <- function(x,
+                            summary_type = "doc",
+                            preserve = FALSE,
+                            index = NULL,
+                            call = caller_env()) {
   if (is_officer_summary(x, summary_type, call = call)) {
     return(x)
   }
@@ -24,8 +33,15 @@ officer_summary <- function(x, summary_type = "doc", index = NULL, call = caller
 
   check_officer(x, what = what, call = call)
 
-  if (is.null(summary_type) | (summary_type == "doc")) {
-    summary_type <- class(x)
+  if (summary_type == "doc") {
+    summary_type <- NULL
+  }
+
+  summary_type <- summary_type %||% class(x)
+
+  if ((summary_type %in% c("rdocx", "docx")) &&
+      is_installed("officer (>= 0.6.3)")) {
+    return(officer::docx_summary(x, preserve = preserve))
   }
 
   switch(summary_type,
@@ -75,7 +91,7 @@ check_officer_summary <- function(x,
   if (!is_officer_summary(x, summary_type, tables)) {
     fn_nm <- c("officer_summary", "docx_summary", "pptx_summary")
     cli_abort(
-      "{.arg {arg}} must be a {.cls data.frame} from
+      "{.arg {arg}} must be a data frame from
       {.fn {cli_vec_last(fn_nm)}}.",
       ...,
       call = call

@@ -39,6 +39,11 @@ Default: c("down", "up", "downup", "updown")}
 "layout". "doc" requires the data.frame include a "content_type" column but
 allows columns for either a docx or pptx summary.}
     \item{\code{index}}{slide index}
+    \item{\code{preserve}}{If \code{FALSE} (default), text in table cells is collapsed into a
+single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
+character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
+published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
+the \code{{docxtractr}} package by Bob Rudis.}
   }}
 
 \item{call}{The execution environment of a currently
