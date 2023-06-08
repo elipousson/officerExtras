@@ -10,8 +10,11 @@ officer_tables(
   index = NULL,
   has_header = TRUE,
   col = NULL,
+  preserve = FALSE,
   ...,
   stack = FALSE,
+  type_convert = FALSE,
+  nm = NULL,
   call = caller_env()
 )
 
@@ -25,14 +28,15 @@ officer_table(
 )
 }
 \arguments{
-\item{x}{A rdocx or rpptx object or a data.frame created with
-\code{\link[=officer_summary]{officer_summary()}}}
+\item{x}{A rdocx or rpptx object or a data frame created with
+\code{\link[=officer_summary]{officer_summary()}}.}
 
 \item{index}{A index value matching a doc_index value for a table in the
-summary data.frame, Default: \code{NULL}}
+summary data frame, Default: \code{NULL}}
 
-\item{has_header}{If \code{TRUE}, tables are expected to have implicit headers
-even if the object Default: \code{TRUE}}
+\item{has_header}{If \code{TRUE} (default), tables are expected to have implicit
+headers even if the Word table does not have an explicit header row. If
+\code{FALSE}, only explicit header rows will be used as column names.}
 
 \item{col}{If col is supplied, \code{\link[=officer_table]{officer_table()}} passes col and the
 additional parameters in ... to \code{\link[=fill_with_pattern]{fill_with_pattern()}}. This allows the
@@ -43,7 +47,14 @@ and may be modified or removed. Defaults to \code{NULL}.}
 \item{...}{Additional parameters passed to \code{\link[=fill_with_pattern]{fill_with_pattern()}}.}
 
 \item{stack}{If \code{TRUE} and all tables share the same number of columns,
-return a combined data.frame instead of a list object.}
+return a single combined data frame instead of a list. Defaults to \code{FALSE}.}
+
+\item{type_convert}{If \code{TRUE}, convert columns for the returned data frames
+to the appropriate type using \code{\link[utils:type.convert]{utils::type.convert()}}.}
+
+\item{nm}{Names to use for returned list of tables. If \code{NULL} (default), the
+names are set to the doc_index values using the pattern
+"doc_index_<doc_index_number>".}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
@@ -51,16 +62,16 @@ mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \value{
-A data.frame or list of data.frame (or list objects).
+A list of data frames or, if stack is \code{TRUE}, a single data frame.
 }
 \description{
-Get one or more tables from a rdocx or rpptx object. Functions based on
-example code on extracting Word document and PowerPoint slides in the
-\href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
-}
-\details{
-\code{\link[=officer_table]{officer_table()}} is a lower-level helper function to extract a single table
-from a document.
+Get one or more tables from a rdocx or rpptx object. These functions are
+based on example code on extracting Word document and PowerPoint slides in
+the \href{https://ardata-fr.github.io/officeverse/extract-content.html#word-tables}{officeverse documentation}.
+#' \code{\link[=officer_table]{officer_table()}} is a lower-level helper function to extract a single
+table from a document. Some additional features including the type_convert
+parameter and the addition of doc_index values as the default names for the
+returned list of tables are based on \href{https://www.rostrum.blog/2023/06/07/rectangular-officer/}{this blog post by Matt Dray}.
 }
 \examples{
 docx <- read_docx_ext(
@@ -77,4 +88,7 @@ pptx <- read_pptx_ext(
 
 officer_tables(pptx)[[1]]
 
+}
+\seealso{
+\code{\link[docxtractr:docx_extract_all]{docxtractr::docx_extract_all()}}
 }
