@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# officerExtras
+# officerExtras <a href="https://elipousson.github.io/officerExtras/"><img src="man/figures/logo.png" align="right" height="108" alt="officerExtras website" /></a>
 
 <!-- badges: start -->
 
@@ -61,9 +61,9 @@ withr::with_tempdir({
 #> 4        keywords                                     
 #> 5     description                   these are comments
 #> 6  lastModifiedBy                        officerExtras
-#> 7        revision                                   11
+#> 7        revision                                   12
 #> 8         created                 2017-04-26T13:10:00Z
-#> 9        modified                 2023-04-03T00:29:38Z
+#> 9        modified                 2023-06-22T11:04:39Z
 #> 10       category
 ```
 

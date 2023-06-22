@@ -6,6 +6,8 @@
 \alias{officerExtras-package}
 \title{officerExtras: Extra Helpers for 'officer'}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Helper and convenience functions using the 'officer' package to modify docx files.
 }
 \seealso{
