@@ -7,7 +7,8 @@
 #' allow users to pass the value and keyword, id, or index value used to place a
 #' "cursor" within the document using a single function. If `pos = NULL`,
 #' [add_to_body()] calls [officer::body_add()] instead of
-#' [officer::body_add_par()].
+#' [officer::body_add_par()]. If value is a `gt_tbl` object, value is passed as
+#' the gt_object parameter for [add_gt_to_body()].
 #'
 #' - [add_text_to_body()] passes value to [glue::glue()]
 #' to add support for glue string interpolation.
@@ -48,8 +49,30 @@ add_to_body <- function(docx,
                         style = NULL,
                         pos = "after",
                         ...,
+                        gt_object = NULL,
                         call = caller_env()) {
   check_docx(docx, call = call)
+
+  if (!is.null(gt_object)) {
+    # FIXME: This pattern introduces recursion but allows vec_add_to_body to
+    # work with gt_object inputs
+    if (!inherits(gt_object, "gt_tbl")) {
+      gt_object <- gt_object[[1]]
+    }
+
+    return(
+      add_gt_to_body(
+        docx,
+        gt_object = gt_object,
+        keyword = keyword,
+        id = id,
+        index = index,
+        pos = pos,
+        ...,
+        call = call
+      )
+    )
+  }
 
   if ((!is_any_null(list(str, value))) || is_all_null(list(str, value))) {
     cli_abort(

@@ -16,17 +16,31 @@
 #'
 #' docx_example <- vec_add_to_body(
 #'   docx_example,
-#'   value = "Sample text",
+#'   value = c("Sample text 1", "Sample text 2", "Sample text 3"),
 #'   style = c("heading 1", "heading 2", "Normal")
 #' )
 #'
 #' officer_summary(docx_example)
+#'
+#' if (is_installed("gt")) {
+#'   gt_tbl <- gt::gt(gt::gtcars[1:2, 1:2])
+#'
+#'   # list inputs such as gt tables must be passed within a list to avoid
+#'   # issues
+#'   docx_example <- vec_add_to_body(
+#'     docx_example,
+#'     gt_object = list(gt_tbl, gt_tbl),
+#'     keyword = c("Sample text 1", "Sample text 2")
+#'   )
+#'
+#'   officer_summary(docx_example)
+#' }
 #' @export
 vec_add_to_body <- function(docx,
                             ...,
                             .size = NULL,
                             .call = caller_env()) {
-  params <- vctrs::vec_recycle_common(..., .size = .size, .call  = .call)
+  params <- vctrs::vec_recycle_common(..., .size = .size, .call = .call)
 
   for (i in seq_along(params[[1]])) {
     docx <- exec(

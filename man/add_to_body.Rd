@@ -21,6 +21,7 @@ add_to_body(
   style = NULL,
   pos = "after",
   ...,
+  gt_object = NULL,
   call = caller_env()
 )
 
@@ -95,6 +96,10 @@ one of "after", "before", "on".}
 \item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}},
 \code{\link[officer:body_add_gg]{officer::body_add_gg()}}, or \code{\link[officer:body_add]{officer::body_add()}}.}
 
+\item{gt_object}{A gt object converted to an OOXML string with
+\code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
+Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
+
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
@@ -112,10 +117,6 @@ value is replaced by the value of \code{.null}.}
 \item{.envir}{[\code{environment}: \code{parent.frame()}]\cr Environment to evaluate each expression in. Expressions are
 evaluated from left to right. If \code{.x} is an environment, the expressions are
 evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is passed, it is equivalent to \code{\link[=emptyenv]{emptyenv()}}.}
-
-\item{gt_object}{A gt object converted to an OOXML string with
-\code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
-Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
 
 \item{align}{\emph{Table alignment}
 
@@ -177,7 +178,8 @@ Wrappers for \code{\link[officer:body_add_par]{officer::body_add_par()}}, \code{
 allow users to pass the value and keyword, id, or index value used to place a
 "cursor" within the document using a single function. If \code{pos = NULL},
 \code{\link[=add_to_body]{add_to_body()}} calls \code{\link[officer:body_add]{officer::body_add()}} instead of
-\code{\link[officer:body_add_par]{officer::body_add_par()}}.
+\code{\link[officer:body_add_par]{officer::body_add_par()}}. If value is a \code{gt_tbl} object, value is passed as
+the gt_object parameter for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.
 \itemize{
 \item \code{\link[=add_text_to_body]{add_text_to_body()}} passes value to \code{\link[glue:glue]{glue::glue()}}
 to add support for glue string interpolation.

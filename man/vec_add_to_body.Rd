@@ -12,6 +12,9 @@ vec_add_to_body(docx, ..., .size = NULL, .call = caller_env())
 \item{...}{
   Arguments passed on to \code{\link[=add_to_body]{add_to_body}}
   \describe{
+    \item{\code{gt_object}}{A gt object converted to an OOXML string with
+\code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
+Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
     \item{\code{keyword,id}}{A keyword string used to place cursor with
 \code{\link[officer:cursor]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor]{officer::cursor_bookmark()}}.
 Defaults to \code{NULL}. If keyword or id are not provided, the gt object is
@@ -56,9 +59,23 @@ docx_example <- read_officer()
 
 docx_example <- vec_add_to_body(
   docx_example,
-  value = "Sample text",
+  value = c("Sample text 1", "Sample text 2", "Sample text 3"),
   style = c("heading 1", "heading 2", "Normal")
 )
 
 officer_summary(docx_example)
+
+if (is_installed("gt")) {
+  gt_tbl <- gt::gt(gt::gtcars[1:2, 1:2])
+
+  # list inputs such as gt tables must be passed within a list to avoid
+  # issues
+  docx_example <- vec_add_to_body(
+    docx_example,
+    gt_object = list(gt_tbl, gt_tbl),
+    keyword = c("Sample text 1", "Sample text 2")
+  )
+
+  officer_summary(docx_example)
+}
 }
