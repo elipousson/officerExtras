@@ -35,6 +35,7 @@ Default: c("down", "up", "downup", "updown")}
 \item{...}{
   Arguments passed on to \code{\link[=officer_summary]{officer_summary}}
   \describe{
+    \item{\code{as_tibble}}{If \code{TRUE} (default), return a tibble data frame.}
     \item{\code{summary_type}}{Summary type. Options "doc", "docx", "pptx", "slide", or
 "layout". "doc" requires the data.frame include a "content_type" column but
 allows columns for either a docx or pptx summary.}
@@ -51,9 +52,19 @@ running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
+\value{
+A summary data frame with additional columns based on the supplied
+levels.
+}
 \description{
 This function works with \code{\link[=fill_with_pattern]{fill_with_pattern()}} to help convert hierarchically
 organized text, e.g. text with leveled headings or other styles into a
 data.frame where new columns hold the value of the preceding (or succeeding)
 heading text.
 }
+\seealso{
+Other summary functions: 
+\code{\link{check_officer_summary}()},
+\code{\link{officer_summary}()}
+}
+\concept{summary functions}

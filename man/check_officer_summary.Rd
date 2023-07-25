@@ -58,3 +58,9 @@ column names to be a summary data.frame created from a rdocx or rpptx object.
 Optionally check for the number of rows, a specific content_type value, or if
 tables are included in the document the summary was created from.
 }
+\seealso{
+Other summary functions: 
+\code{\link{officer_summary_levels}()},
+\code{\link{officer_summary}()}
+}
+\concept{summary functions}

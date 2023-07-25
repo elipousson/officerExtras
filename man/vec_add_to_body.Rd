@@ -65,7 +65,7 @@ docx_example <- vec_add_to_body(
 
 officer_summary(docx_example)
 
-if (is_installed("gt")) {
+if (rlang::is_installed("gt")) {
   gt_tbl <- gt::gt(gt::gtcars[1:2, 1:2])
 
   # list inputs such as gt tables must be passed within a list to avoid

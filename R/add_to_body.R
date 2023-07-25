@@ -292,7 +292,7 @@ add_value_with_keys <- function(docx,
     "superseded",
     what = "add_value_with_keys()",
     with = "vec_add_to_body()"
-    )
+  )
 
   arg <- "keyword"
   rlang::check_required(value)

@@ -69,3 +69,8 @@ paragraph value, the text of the pargraph is used as a keyword.}
 allows users to set the cursor position before adding the block list using
 \code{\link[=cursor_docx]{cursor_docx()}}.
 }
+\seealso{
+Other block list functions: 
+\code{\link{make_block_list}()}
+}
+\concept{block list functions}

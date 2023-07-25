@@ -27,3 +27,6 @@ Uses the Google Docs, Slides, or Sheets URL to export a file locally, read to
 an officer object. If filename is \code{NULL}, exported file is removed after
 export.
 }
+\seealso{
+\code{\link[=read_officer]{read_officer()}}
+}

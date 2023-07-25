@@ -15,6 +15,7 @@
 #' @inheritParams officer::body_add_blocks
 #' @inheritParams officer::ph_with
 #' @inheritParams check_officer
+#' @family block list functions
 #' @export
 officer_add_blocks <- function(x,
                                blocks,

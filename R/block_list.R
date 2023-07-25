@@ -19,6 +19,7 @@
 #'   a `block_list`, the additional parameters are appended to the end of
 #'   blocks.
 #' @inheritParams check_block_list
+#' @family block list functions
 #' @export
 make_block_list <- function(blocks = NULL,
                             ...,

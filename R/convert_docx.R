@@ -1,8 +1,10 @@
 #' Convert an rodcx object or Word file to another format with pandoc
 #'
-#' Use [rmarkdown::pandoc_convert()] to convert a rodcx object or Word file to
-#' another format with pandoc. If the "to" parameter contains a file extension,
-#' it is assumed to be an output file name.
+#' `convert_docx()` uses [rmarkdown::pandoc_convert()] to convert a rodcx object
+#' or Word file to another format with pandoc. If the "to" parameter contains a
+#' file extension, it is assumed to be an output file name. If you want to
+#' convert a file to a Word document, use the input parameter for the path to
+#' the Markdown, HTML, or other file.
 #'
 #' @param docx A rdocx object or path to a docx file. Optional if input is
 #'   provided.
@@ -21,31 +23,27 @@
 #' @returns Executes a call to pandoc using [rmarkdown::pandoc_convert()] to
 #'   create a file from an officer object or a docx file.
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   docx_example <- read_officer(
-#'     system.file("doc_examples/example.docx", package = "officer")
-#'   )
+#' docx_example <- read_officer(
+#'   system.file("doc_examples/example.docx", package = "officer")
+#' )
 #'
+#' convert_docx(
+#'   docx_example,
+#'   to = "markdown"
+#' )
+#'
+#' withr::with_tempdir({
 #'   convert_docx(
 #'     docx_example,
-#'     to = "markdown"
+#'     output = "docx_example.html"
 #'   )
-#'
-#'   withr::with_tempdir({
-#'     convert_docx(
-#'       docx_example,
-#'       output = "docx_example.html"
-#'     )
-#'   })
-#' }
-#' }
+#' })
 #' @seealso
 #'  [rmarkdown::pandoc_convert()]
 #' @rdname convert_docx
 #' @export
 #' @importFrom rlang check_installed is_true is_false
-convert_docx <- function(docx,
+convert_docx <- function(docx = NULL,
                          to = NULL,
                          input = NULL,
                          output = NULL,

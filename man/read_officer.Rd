@@ -80,11 +80,14 @@ parameter of \code{\link[=read_officer]{read_officer()}} by the variant function
 A rdocx, rpptx, or rxlsx object.
 }
 \description{
+\code{\link[=read_officer]{read_officer()}} is a variant of \code{\link[officer:read_docx]{officer::read_docx()}},
+\code{\link[officer:read_pptx]{officer::read_pptx()}}, and \code{\link[officer:read_xlsx]{officer::read_xlsx()}} that allows users to read
+different Microsoft Office file types with a single function.
 \code{\link[=read_docx_ext]{read_docx_ext()}}, \code{\link[=read_pptx_ext]{read_pptx_ext()}}, and \code{\link[=read_xlsx_ext]{read_xlsx_ext()}} are wrappers for
-\code{\link[=read_officer]{read_officer()}} which is a wrapper for \code{\link[officer:read_docx]{officer::read_docx()}},
-\code{\link[officer:read_pptx]{officer::read_pptx()}}, and \code{\link[officer:read_xlsx]{officer::read_xlsx()}}. This function uses both a
-filename and path (the original officer functions only use a path) and
-default to use a rdocx, rpptx, or rxlsx class object if provided.
+\code{\link[=read_officer]{read_officer()}} that require the matching input file type. All versions
+allow both a filename and path (the officer functions only use a path). If a
+rdocx, rpptx, or rxlsx class object is provided to x, the object is checked
+based on the fileext parameter and then returned as is.
 }
 \seealso{
 \code{\link[officer:read_docx]{officer::read_docx()}}

@@ -1,11 +1,14 @@
 #' Read a docx, pptx, potx, or xlsx file or use an existing object from officer
 #' if provided
 #'
+#' [read_officer()] is a variant of [officer::read_docx()],
+#' [officer::read_pptx()], and [officer::read_xlsx()] that allows users to read
+#' different Microsoft Office file types with a single function.
 #' [read_docx_ext()], [read_pptx_ext()], and [read_xlsx_ext()] are wrappers for
-#' [read_officer()] which is a wrapper for [officer::read_docx()],
-#' [officer::read_pptx()], and [officer::read_xlsx()]. This function uses both a
-#' filename and path (the original officer functions only use a path) and
-#' default to use a rdocx, rpptx, or rxlsx class object if provided.
+#' [read_officer()] that require the matching input file type. All versions
+#' allow both a filename and path (the officer functions only use a path). If a
+#' rdocx, rpptx, or rxlsx class object is provided to x, the object is checked
+#' based on the fileext parameter and then returned as is.
 #'
 #' @param filename,path File name and path. Default: `NULL`. Must include a
 #'   "docx", "pptx", or "xlsx" file path. "dotx" and "potx" files are also

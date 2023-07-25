@@ -12,6 +12,9 @@
 #' @param exclude_levels Levels to exclude from process of adding new columns.
 #' @inheritParams fill_with_pattern
 #' @inheritDotParams officer_summary
+#' @returns A summary data frame with additional columns based on the supplied
+#'   levels.
+#' @family summary functions
 #' @export
 officer_summary_levels <- function(x,
                                    levels = NULL,

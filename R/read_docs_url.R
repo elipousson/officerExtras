@@ -14,6 +14,7 @@
 #'   downloaded file is removed as part of the function execution.
 #' @param path Folder path. Optional.
 #' @param quiet If `TRUE`, suppress messages when downloading file.
+#' @seealso [read_officer()]
 #' @export
 #' @importFrom glue glue
 #' @importFrom utils download.file

@@ -38,3 +38,8 @@ errors if no input parameters are provided.
 \code{combine_blocks()} takes any number of \code{block_list} objects and combined them
 into a single \code{block_list}. Both functions are not yet working as expected.
 }
+\seealso{
+Other block list functions: 
+\code{\link{officer_add_blocks}()}
+}
+\concept{block list functions}
