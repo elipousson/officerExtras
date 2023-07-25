@@ -4,6 +4,12 @@ test_that("cursor_docx works", {
     path = system.file("doc_examples", package = "officer")
   )
 
+  bmks <- officer::docx_bookmarks(docx)
+
+  expect_error(
+    cursor_docx(docx)
+  )
+
   expect_snapshot(
     cursor_docx(docx, keyword = "Title 1")[["officer_cursor"]]
   )
@@ -15,7 +21,7 @@ test_that("cursor_docx works", {
   )
 
   expect_snapshot(
-    cursor_docx(docx, id = "bmk_1")[["officer_cursor"]]
+    cursor_docx(docx, id = bmks[[1]])[["officer_cursor"]]
   )
 
   expect_snapshot(

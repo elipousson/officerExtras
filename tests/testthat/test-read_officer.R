@@ -13,6 +13,15 @@ test_that("read_officer works", {
     docx
   )
 
+  expect_identical(
+    read_docx_ext(allow_null = TRUE)[["styles"]],
+    officer::read_docx()[["styles"]]
+  )
+
+  expect_error(
+    read_docx_ext()
+  )
+
   expect_message(
     read_docx_ext(docx = docx, quiet = FALSE)
   )

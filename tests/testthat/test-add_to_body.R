@@ -36,29 +36,26 @@ test_that("add_gt_to_body works", {
     path = system.file("doc_examples", package = "officer")
   )
 
-  tab_1 <-
-    gt::gt(
-      gt::exibble,
-      rowname_col = "row",
-      groupname_col = "group"
-    )
+  tab_1 <- gt::gt(
+    gt::exibble,
+    rowname_col = "row",
+    groupname_col = "group"
+  )
 
-  docx_gt <-
-    add_gt_to_body(
-      docx,
-      tab_1,
-      keyword = "Sub title 1"
-    )
+  docx_gt <- add_gt_to_body(
+    docx,
+    tab_1,
+    keyword = "Sub title 1"
+  )
 
   expect_snapshot(docx_gt)
 
   tab_str <- gt::as_word(tab_1)
 
-  docx_str_keys <-
-    add_str_with_keys(
-      docx,
-      str = c("Title 1" = tab_str, "Title 2" = tab_str)
-    )
+  docx_str_keys <- add_str_with_keys(
+    docx,
+    str = c("Title 1" = tab_str, "Title 2" = tab_str)
+  )
 
   expect_snapshot(docx_str_keys)
 })
@@ -79,18 +76,19 @@ test_that("add_gg_to_body works", {
 
   plot1 <- ggplot2::ggplot(df, ggplot2::aes(gp, y)) +
     ggplot2::geom_point() +
-    ggplot2::geom_point(data = ds,
-                        ggplot2::aes(y = mean),
-                        colour = "red", size = 3) +
+    ggplot2::geom_point(
+      data = ds,
+      ggplot2::aes(y = mean),
+      colour = "red", size = 3
+    ) +
     ggplot2::labs(
       title = "test title"
     )
 
-  docx_gg <-
-    add_gg_to_body(
-      docx,
-      plot1
-    )
+  docx_gg <- add_gg_to_body(
+    docx,
+    plot1
+  )
 
   expect_snapshot(docx_gg)
 })

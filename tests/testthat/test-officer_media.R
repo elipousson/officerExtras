@@ -2,7 +2,7 @@ test_that("officer_media works", {
   expect_message(
     officer_media(
       system.file("doc_examples/example.docx", package = "officer")
-      ),
+    ),
     "No media files found in"
   )
 

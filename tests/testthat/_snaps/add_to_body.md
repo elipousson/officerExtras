@@ -3,18 +3,18 @@
     Code
       docx_text
     Output
-      rdocx document with 21 element(s)
+      rdocx document with 20 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
@@ -26,18 +26,18 @@
     Code
       docx_value_key
     Output
-      rdocx document with 23 element(s)
+      rdocx document with 22 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
@@ -49,18 +49,18 @@
     Code
       docx_value_named
     Output
-      rdocx document with 25 element(s)
+      rdocx document with 24 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
@@ -72,18 +72,18 @@
     Code
       docx_gt
     Output
-      rdocx document with 21 element(s)
+      rdocx document with 20 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
@@ -182,18 +182,18 @@
     Code
       docx_str_keys
     Output
-      rdocx document with 23 element(s)
+      rdocx document with 22 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
@@ -292,18 +292,18 @@
     Code
       docx_gg
     Output
-      rdocx document with 22 element(s)
+      rdocx document with 21 element(s)
       
       * styles:
                       Normal              heading 1              heading 2 
                  "paragraph"            "paragraph"            "paragraph" 
       Default Paragraph Font           Normal Table                No List 
                  "character"                "table"            "numbering" 
-                 Titre 1 Car            Titre 2 Car          Light Shading 
+              Heading 1 Char         Heading 2 Char          Light Shading 
                  "character"            "character"                "table" 
-              List Paragraph                 header            En-tête Car 
+              List Paragraph                 header            Header Char 
                  "paragraph"            "paragraph"            "character" 
-                      footer       Pied de page Car 
+                      footer            Footer Char 
                  "paragraph"            "character" 
       
       * Content at cursor location:
