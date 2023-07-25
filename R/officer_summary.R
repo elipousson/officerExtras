@@ -11,7 +11,7 @@
 #' @inheritParams check_officer_summary
 #' @inheritParams officer::slide_summary
 #' @inheritParams officer::docx_summary
-#' @returns A data.frame object.
+#' @returns A data frame object.
 #' @export
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
 officer_summary <- function(x,
@@ -39,11 +39,21 @@ officer_summary <- function(x,
 
   summary_type <- summary_type %||% class(x)
 
+  if (is_installed("officer (>= 0.6.3)")) {
+    if (summary_type %in% c("rdocx", "docx")) {
+      return(officer::docx_summary(x, preserve = preserve))
+    }
+
+    if (summary_type %in% c("rpptx", "pptx")) {
+      return(officer::pptx_summary(x, preserve = preserve))
+    }
+  }
+
   switch(summary_type,
-    "rdocx" = officer::docx_summary(x, preserve = preserve),
-    "rpptx" = officer::pptx_summary(x, preserve = preserve),
-    "docx" = officer::docx_summary(x, preserve = preserve),
-    "pptx" = officer::pptx_summary(x, preserve = preserve),
+    "rdocx" = officer::docx_summary(x),
+    "rpptx" = officer::pptx_summary(x),
+    "docx" = officer::docx_summary(x),
+    "pptx" = officer::pptx_summary(x),
     "slide" = officer::slide_summary(x, index = index),
     "layout" = officer::layout_summary(x)
   )
