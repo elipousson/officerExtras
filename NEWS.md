@@ -1,8 +1,9 @@
 # officerExtras (development version)
 
 * Add new `vec_add_to_body()` function.
-* Update `add_to_body()` to support gt table inputs. 
+* Update `add_to_body()` to support `gt_tbl` table input to the value parameter.
 * Update `read_officer()` to return empty document if `allow_null = TRUE` and filename, path, and x all remain `NULL`.
+* Update `officer_summary()` to return a tibble data frame (and add `{tibble}` to Imports).
 * Add new `make_block_list()`, `combine_blocks()`, `officer_add_blocks()`, and `add_blocks_to_body()` functions.
 * Export `is_officer()` helper function.
 
