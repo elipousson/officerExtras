@@ -6,11 +6,10 @@
 #' `make_block_list()` extends [officer::block_list()] by supporting a list of
 #' inputs and optionally combining parameters with an existing block list (using
 #' the blocks parameter). Unlike [officer::block_list()], [make_block_list()]
-#' errors if no input parameters are provided. If an rdocx or rpptx object is
-#' provided to x, the block list is passed to [officer_add_blocks()].
+#' errors if no input parameters are provided.
 #'
-#' `combine_blocks()` takes any number of `block_list` objects and combined
-#' them into a single `block_list`. Both functions are not yet working as expected.
+#' `combine_blocks()` takes any number of `block_list` objects and combined them
+#' into a single `block_list`. Both functions are not yet working as expected.
 #'
 #' @param ... For [make_block_list()], these parameters are passed to
 #'   [officer::block_list()] and must *not* include `block_list` objects. For
@@ -29,7 +28,7 @@ make_block_list <- function(blocks = NULL,
 
   if (is.null(blocks)) {
     if (!allow_empty && !has_blocks) {
-      cli::cli_abort("{.arg .l} or {.arg ...} must be supplied.")
+      cli::cli_abort("{.arg blocks} or {.arg ...} must be supplied.")
     }
     has_blocks <- FALSE
     blocks <- officer::block_list(...)

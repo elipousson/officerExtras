@@ -33,9 +33,8 @@ mentioned in error messages as the source of the error. See the
 \code{make_block_list()} extends \code{\link[officer:block_list]{officer::block_list()}} by supporting a list of
 inputs and optionally combining parameters with an existing block list (using
 the blocks parameter). Unlike \code{\link[officer:block_list]{officer::block_list()}}, \code{\link[=make_block_list]{make_block_list()}}
-errors if no input parameters are provided. If an rdocx or rpptx object is
-provided to x, the block list is passed to \code{\link[=officer_add_blocks]{officer_add_blocks()}}.
+errors if no input parameters are provided.
 
-\code{combine_blocks()} takes any number of \code{block_list} objects and combined
-them into a single \code{block_list}. Both functions are not yet working as expected.
+\code{combine_blocks()} takes any number of \code{block_list} objects and combined them
+into a single \code{block_list}. Both functions are not yet working as expected.
 }

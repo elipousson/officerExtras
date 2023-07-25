@@ -93,7 +93,8 @@ fill_with_pattern <- function(x,
   if (has_name(x, col)) {
     cli_abort(
       "{.arg col} {.field {col}} can't be used when
-      {.arg x} has a column name {.field {col}}."
+      {.arg x} has a column name {.field {col}}.",
+      call = call
     )
   }
 
@@ -103,7 +104,7 @@ fill_with_pattern <- function(x,
   if (sum(pattern, na.rm = TRUE) == 0) {
     return(x)
   }
-  check_installed("vctrs")
+  check_installed("vctrs", call = call)
   x[[col]] <- NA_character_
   x[pattern, ][[col]] <- x[pattern, ][[fill_col]]
   # x[!pattern, ][[col]] <- rep(NA_character_, nrow(x))[!pattern]

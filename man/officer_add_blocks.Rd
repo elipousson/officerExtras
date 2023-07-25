@@ -34,7 +34,7 @@ function \code{\link[officer:block_list]{block_list()}}.}
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
 
-\item{location}{If \code{NULL}, location defaults to \code{\link[officer:ph_location]{officer::ph_location()}}}
+\item{location}{If \code{NULL}, location defaults to \code{\link[officer:ph_location_type]{officer::ph_location_type()}}}
 
 \item{level_list}{The list of levels for hierarchy structure as integer values.
 If used the object is formated as an unordered list. If 1 and 2,
@@ -65,7 +65,7 @@ paragraph value, the text of the pargraph is used as a keyword.}
 
 \code{\link[=officer_add_blocks]{officer_add_blocks()}} supports adding a list of blocks to rdocx (using
 \code{\link[=add_blocks_to_body]{add_blocks_to_body()}}) or rpptx objects (using \code{\link[officer:ph_with]{officer::ph_with()}}).
-add_blocks_to_body() is a variant of \code{\link[officer:body_add_blocks]{officer::body_add_blocks()}} that allows
-users to set the cursor position before adding the block list using
+\code{add_blocks_to_body()} is a variant of \code{\link[officer:body_add_blocks]{officer::body_add_blocks()}} that
+allows users to set the cursor position before adding the block list using
 \code{\link[=cursor_docx]{cursor_docx()}}.
 }

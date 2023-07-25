@@ -1,3 +1,11 @@
+# officerExtras (development version)
+
+* Add new `vec_add_to_body()` function.
+* Update `add_to_body()` to support gt table inputs. 
+* Update `read_officer()` to return empty document if `allow_null = TRUE` and filename, path, and x all remain `NULL`.
+* Add new `make_block_list()`, `combine_blocks()`, `officer_add_blocks()`, and `add_blocks_to_body()` functions.
+* Export `is_officer()` helper function.
+
 # officerExtras 0.0.1
 
 * Add new `officer_summary_levels()` and `read_docs_url()` functions.

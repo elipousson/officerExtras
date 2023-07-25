@@ -5,13 +5,13 @@
 #'
 #' [officer_add_blocks()] supports adding a list of blocks to rdocx (using
 #' [add_blocks_to_body()]) or rpptx objects (using [officer::ph_with()]).
-#' add_blocks_to_body() is a variant of [officer::body_add_blocks()] that allows
-#' users to set the cursor position before adding the block list using
+#' `add_blocks_to_body()` is a variant of [officer::body_add_blocks()] that
+#' allows users to set the cursor position before adding the block list using
 #' [cursor_docx()].
 #'
 #' @name officer_add_blocks
 #' @param x A rdocx or rpptx object. Required.
-#' @param location If `NULL`, location defaults to [officer::ph_location()]
+#' @param location If `NULL`, location defaults to [officer::ph_location_type()]
 #' @inheritParams officer::body_add_blocks
 #' @inheritParams officer::ph_with
 #' @inheritParams check_officer

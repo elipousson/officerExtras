@@ -40,6 +40,8 @@ vec_add_to_body <- function(docx,
                             ...,
                             .size = NULL,
                             .call = caller_env()) {
+  check_installed("vctrs", call = .call)
+
   params <- vctrs::vec_recycle_common(..., .size = .size, .call = .call)
 
   for (i in seq_along(params[[1]])) {
