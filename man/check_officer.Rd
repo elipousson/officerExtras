@@ -5,6 +5,7 @@
 \alias{check_docx}
 \alias{check_pptx}
 \alias{check_xlsx}
+\alias{check_block_list}
 \title{Check if x is a rdocx, rpptx, or rxlsx object}
 \usage{
 check_officer(
@@ -20,6 +21,14 @@ check_docx(x, arg = caller_arg(x), call = caller_env(), ...)
 check_pptx(x, arg = caller_arg(x), call = caller_env(), ...)
 
 check_xlsx(x, arg = caller_arg(x), call = caller_env(), ...)
+
+check_block_list(
+  x,
+  arg = caller_arg(x),
+  allow_empty = FALSE,
+  allow_null = FALSE,
+  call = caller_env()
+)
 }
 \arguments{
 \item{x}{Object to check.}
@@ -35,6 +44,9 @@ mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
+
+\item{allow_empty}{If \code{TRUE}, \code{\link[=check_block_list]{check_block_list()}} allows an empty block
+list.}
 }
 \description{
 Check if x is a rdocx, rpptx, or rxlsx object

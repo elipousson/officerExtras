@@ -1,9 +1,3 @@
-#' @keywords internal
-#' @noRd
-is_officer <- function(x, what = c("rdocx", "rpptx", "rxlsx")) {
-  inherits(x, what)
-}
-
 #' Check if x is a rdocx, rpptx, or rxlsx object
 #'
 #' @param x Object to check.
@@ -21,10 +15,12 @@ check_officer <- function(x,
   check_required(x, arg = arg, call = call)
   check_character(what)
   what <- match.arg(what, several.ok = TRUE)
-  if (!inherits(x, what)) {
-    what <- cli_vec_cls(what)
-    cli_abort("{.arg {arg}} must be a {what} object.", call = call, ...)
+  if (inherits(x, what)) {
+    return(invisible(NULL))
   }
+
+  what <- cli_vec_cls(what)
+  cli_abort("{.arg {arg}} must be a {what} object.", call = call, ...)
 }
 
 #' @name check_docx
@@ -46,6 +42,32 @@ check_pptx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
 #' @export
 check_xlsx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
   check_officer(x, what = "rxlsx", arg = arg, call = call, ...)
+}
+
+#' @name check_block_list
+#' @rdname check_officer
+#' @param allow_empty If `TRUE`, [check_block_list()] allows an empty block
+#'   list.
+#' @export
+check_block_list <- function(x,
+                             arg = caller_arg(x),
+                             allow_empty = FALSE,
+                             allow_null = FALSE,
+                             call = caller_env()) {
+  if (is_block_list(x)) {
+    if (allow_empty || !is_empty(x)) {
+      return(invisible(NULL))
+    }
+
+    cli::cli_abort("{.arg {arg}} can't be empty.", call = call)
+  }
+
+  stop_input_type(
+    x,
+    "block list",
+    allow_null = allow_null,
+    call = call
+  )
 }
 
 #' Check file path for a docx, pptx, or xlsx file extension
