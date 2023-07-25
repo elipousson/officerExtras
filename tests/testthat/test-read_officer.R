@@ -14,6 +14,15 @@ test_that("read_officer works", {
   )
 
   expect_identical(
+    officer::docx_summary(docx),
+    officer::docx_summary(
+      officer::read_docx(
+        system.file("doc_examples", "example.docx", package = "officer")
+      )
+    )
+  )
+
+  expect_identical(
     read_docx_ext(allow_null = TRUE)[["styles"]],
     officer::read_docx()[["styles"]]
   )
