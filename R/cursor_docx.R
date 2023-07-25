@@ -13,6 +13,7 @@
 #'   the docx object created with [officer::docx_summary()]. If index is for a
 #'   paragraph value, the text of the pargraph is used as a keyword.
 #' @param quiet If `FALSE` (default) warn when keyword is not found.
+#' @inheritParams check_docx
 #' @seealso
 #'  [officer::cursor_begin()], [officer::docx_summary()]
 #' @export
@@ -24,8 +25,9 @@ cursor_docx <- function(docx,
                         keyword = NULL,
                         id = NULL,
                         index = NULL,
-                        quiet = FALSE) {
-  check_docx(docx)
+                        quiet = FALSE,
+                        call = caller_env()) {
+  check_docx(docx, call = call)
 
   if (!is.null(keyword)) {
     if (isFALSE(officer::cursor_reach_test(docx, keyword)) && isFALSE(quiet)) {
@@ -50,21 +52,24 @@ cursor_docx <- function(docx,
   }
 
   cli_abort(
-    "{.arg keyword}, {.arg id}, or {.arg index} must be supplied."
+    "{.arg keyword}, {.arg id}, or {.arg index} must be supplied.",
+    call = call
   )
 }
 
 #' @keywords internal
 #' @noRd
 #' @importFrom officer docx_summary cursor_reach
-cursor_index <- function(docx, index) {
-  docx_df <- subset_index(officer::docx_summary(docx), index)
+cursor_index <- function(docx, index, call = caller_env()) {
+  x <- officer::docx_summary(docx)
+  docx_df <- subset_index(x, index)
 
   check_officer_summary(
     docx_df,
     n = 1,
     content_type = "paragraph",
-    summary_type = "docx"
+    summary_type = "docx",
+    call = call
   )
 
   officer::cursor_reach(docx, keyword = docx_df[["text"]])

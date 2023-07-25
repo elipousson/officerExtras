@@ -48,7 +48,7 @@ add_to_body <- function(docx,
                         style = NULL,
                         pos = "after",
                         ...,
-                        call = parent.frame()) {
+                        call = caller_env()) {
   check_docx(docx, call = call)
 
   if ((!is_any_null(list(str, value))) || is_all_null(list(str, value))) {
@@ -59,11 +59,11 @@ add_to_body <- function(docx,
   }
 
   if (!is_all_null(c(keyword, id, index))) {
-    docx <- cursor_docx(docx, keyword, id, index)
+    docx <- cursor_docx(docx, keyword, id, index, call = call)
   }
 
   if (!is.null(str)) {
-    return(officer::body_add_xml(docx, str, pos))
+    return(officer::body_add_xml(x = docx, str = str, pos = pos))
   }
 
   if (!is.null(pos) && !is.null(value)) {
@@ -106,9 +106,10 @@ add_text_to_body <- function(docx,
 add_xml_to_body <- function(docx,
                             str,
                             pos = "after",
-                            ...) {
-  rlang::check_required(str)
-  add_to_body(docx, str = str, pos = pos, ...)
+                            ...,
+                            call = caller_env()) {
+  rlang::check_required(str, call = call)
+  add_to_body(docx, str = str, pos = pos, ..., call = call)
 }
 
 # The code for the add_gt_to_body function transform the gt_object to OOXML and
@@ -160,9 +161,10 @@ add_gt_to_body <- function(docx,
                            keep_with_next = TRUE,
                            pos = "after",
                            tablecontainer = TRUE,
-                           ...) {
-  rlang::check_required(gt_object)
-  rlang::check_installed("gt")
+                           ...,
+                           call = caller_env()) {
+  rlang::check_required(gt_object, call = call)
+  rlang::check_installed("gt", call = call)
 
   str <- gt::as_word(
     gt_object,
@@ -178,7 +180,8 @@ add_gt_to_body <- function(docx,
       docx,
       str = str,
       pos = pos,
-      ...
+      ...,
+      call = call
     )
 
     return(docx)
@@ -193,7 +196,13 @@ add_gt_to_body <- function(docx,
   }
 
   for (i in node_seq) {
-    docx <- add_xml_to_body(docx, str = str_nodes[[i]], pos = pos, ...)
+    docx <- add_xml_to_body(
+      docx,
+      str = str_nodes[[i]],
+      pos = pos,
+      ...,
+      call = call
+    )
   }
 
   docx

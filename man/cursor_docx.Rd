@@ -4,7 +4,14 @@
 \alias{cursor_docx}
 \title{Set cursor position in rdocx object based on keyword, id, or index}
 \usage{
-cursor_docx(docx, keyword = NULL, id = NULL, index = NULL, quiet = FALSE)
+cursor_docx(
+  docx,
+  keyword = NULL,
+  id = NULL,
+  index = NULL,
+  quiet = FALSE,
+  call = caller_env()
+)
 }
 \arguments{
 \item{docx}{A rdocx object.}
@@ -19,6 +26,11 @@ the docx object created with \code{\link[officer:docx_summary]{officer::docx_sum
 paragraph value, the text of the pargraph is used as a keyword.}
 
 \item{quiet}{If \code{FALSE} (default) warn when keyword is not found.}
+
+\item{call}{The execution environment of a currently
+running function, e.g. \code{caller_env()}. The function will be
+mentioned in error messages as the source of the error. See the
+\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
 \description{
 A combined function for setting cursor position with

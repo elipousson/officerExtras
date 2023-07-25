@@ -21,7 +21,7 @@ add_to_body(
   style = NULL,
   pos = "after",
   ...,
-  call = parent.frame()
+  call = caller_env()
 )
 
 add_text_to_body(
@@ -35,7 +35,7 @@ add_text_to_body(
   ...
 )
 
-add_xml_to_body(docx, str, pos = "after", ...)
+add_xml_to_body(docx, str, pos = "after", ..., call = caller_env())
 
 add_gt_to_body(
   docx,
@@ -47,7 +47,8 @@ add_gt_to_body(
   keep_with_next = TRUE,
   pos = "after",
   tablecontainer = TRUE,
-  ...
+  ...,
+  call = caller_env()
 )
 
 add_gg_to_body(
@@ -116,21 +117,39 @@ evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is pa
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
 Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
 
-\item{align}{An option for table alignment. Can either be \code{"center"} (the
-default), \code{"left"}, or \code{"right"}.}
+\item{align}{\emph{Table alignment}
 
-\item{caption_location}{Determines where the caption should be positioned.
-This can either be \code{"top"} (the default), \code{"bottom"}, or \code{"embed"}.}
+\verb{scalar<character>} // \emph{default:} \code{"center"}
 
-\item{caption_align}{Determines the alignment of the caption. This is
+An option for table alignment. Can either be \code{"center"}, \code{"left"}, or
+\code{"right"}.}
+
+\item{caption_location}{\emph{Caption location}
+
+\verb{singl-kw:[top|bottom|embed]} // \emph{default:} \code{"top"}
+
+Determines where the caption should be positioned. This can either be
+\code{"top"}, \code{"bottom"}, or \code{"embed"}.}
+
+\item{caption_align}{\emph{Caption alignment}
+
+Determines the alignment of the caption. This is
 either \code{"left"} (the default), \code{"center"}, or \code{"right"}. This option is
 only used when \code{caption_location} is not set as \code{"embed"}.}
 
-\item{split}{A \code{TRUE} or \code{FALSE} (the default) value that indicates whether
-to activate the Word option \verb{Allow row to break across pages}.}
+\item{split}{\emph{Allow splitting}
 
-\item{keep_with_next}{A \code{TRUE} (the default) or \code{FALSE} value that indicates
-whether a table should use Word option \verb{keep rows together}.}
+\verb{scalar<logical>} // \emph{default:} \code{FALSE}
+
+A logical value that indicates whether to activate the Word option
+\verb{Allow row to break across pages}.}
+
+\item{keep_with_next}{\emph{Keeping rows together}
+
+\verb{scalar<logical>} // \emph{default:} \code{TRUE}
+
+A logical value that indicates whether a table should use Word option
+\verb{keep rows together}.}
 
 \item{tablecontainer}{If \code{TRUE} (default), add tables inside of a
 tablecontainer tag that automatically adds a table number and converts the
