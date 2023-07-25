@@ -13,6 +13,7 @@ BugReports: https://github.com/elipousson/officerExtras/issues
 Imports: 
     cli,
     glue,
+    lifecycle,
     officer,
     rlang (>= 1.1.0),
     utils,
