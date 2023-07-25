@@ -16,6 +16,7 @@ Imports:
     lifecycle,
     officer,
     rlang (>= 1.1.0),
+    tibble,
     utils,
     xml2
 Suggests: 

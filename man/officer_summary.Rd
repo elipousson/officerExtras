@@ -9,14 +9,15 @@ officer_summary(
   summary_type = "doc",
   index = NULL,
   preserve = FALSE,
+  as_tibble = TRUE,
   call = caller_env()
 )
 }
 \arguments{
 \item{x}{A rdocx or rpptx object passed to \code{\link[officer:docx_summary]{officer::docx_summary()}},
 \code{\link[officer:pptx_summary]{officer::pptx_summary()}}, \code{\link[officer:slide_summary]{officer::slide_summary()}}, or
-\code{\link[officer:layout_summary]{officer::layout_summary()}}. If x is a data.frame created with one of those
-functions, it is returned as is.}
+\code{\link[officer:layout_summary]{officer::layout_summary()}}. If x is a data frame created with one of those
+functions, it is returned as is (this feature may be removed in the future).}
 
 \item{summary_type}{Summary type. Options "doc", "docx", "pptx", "slide", or
 "layout". "doc" requires the data.frame include a "content_type" column but
@@ -29,6 +30,8 @@ single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
 character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
 published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
 the \code{{docxtractr}} package by Bob Rudis.}
+
+\item{as_tibble}{If \code{TRUE} (default), return a tibble data frame.}
 
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function
@@ -45,10 +48,34 @@ respectively not display any call or hard-code a code to display.
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 }
 \value{
-A data frame object.
+A tibble or data frame object.
 }
 \description{
+\code{officer_summary()} extends \code{officer::docx_summary()} and other officer
+summary functions by handling multiple input types within a single function.
 The preserve parameter is supported by officer version >= 0.6.3 (currently
 the development version) and it is ignored unless a minimum supported version
 of officer is installed.
 }
+\examples{
+docx_example <- read_officer(
+  system.file("doc_examples", "example.docx", package = "officer")
+)
+
+officer_summary(docx_example)
+
+pptx_example <- read_officer(
+  "example.pptx", system.file("doc_examples", package = "officer")
+)
+
+officer_summary(pptx_example)
+
+officer_summary(pptx_example, "slide", 1)
+
+}
+\seealso{
+Other summary functions: 
+\code{\link{check_officer_summary}()},
+\code{\link{officer_summary_levels}()}
+}
+\concept{summary functions}

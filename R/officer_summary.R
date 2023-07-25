@@ -1,34 +1,59 @@
 #' Summarize a rdocx or rpptx object
 #'
+#' `officer_summary()` extends `officer::docx_summary()` and other officer
+#' summary functions by handling multiple input types within a single function.
 #' The preserve parameter is supported by officer version >= 0.6.3 (currently
 #' the development version) and it is ignored unless a minimum supported version
 #' of officer is installed.
 #'
 #' @param x A rdocx or rpptx object passed to [officer::docx_summary()],
 #'   [officer::pptx_summary()], [officer::slide_summary()], or
-#'   [officer::layout_summary()]. If x is a data.frame created with one of those
-#'   functions, it is returned as is.
+#'   [officer::layout_summary()]. If x is a data frame created with one of those
+#'   functions, it is returned as is (this feature may be removed in the future).
 #' @inheritParams check_officer_summary
 #' @inheritParams officer::slide_summary
 #' @inheritParams officer::docx_summary
-#' @returns A data frame object.
+#' @param as_tibble If `TRUE` (default), return a tibble data frame.
+#' @returns A tibble or data frame object.
+#' @family summary functions
+#' @examples
+#' docx_example <- read_officer(
+#'   system.file("doc_examples", "example.docx", package = "officer")
+#' )
+#'
+#' officer_summary(docx_example)
+#'
+#' pptx_example <- read_officer(
+#'   "example.pptx", system.file("doc_examples", package = "officer")
+#' )
+#'
+#' officer_summary(pptx_example)
+#'
+#' officer_summary(pptx_example, "slide", 1)
+#'
 #' @export
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
 officer_summary <- function(x,
                             summary_type = "doc",
                             index = NULL,
                             preserve = FALSE,
+                            as_tibble = TRUE,
                             call = caller_env()) {
+  # FIXME: This feature should likely be removed.
   if (is_officer_summary(x, summary_type, call = call)) {
+    if (as_tibble) {
+      return(tibble::as_tibble(x))
+    }
+
     return(x)
   }
 
   what <- switch(summary_type,
-                 "docx" = "rdocx",
-                 "pptx" = "rpptx",
-                 "slide" = "rpptx",
-                 "layout" = "rpptx",
-                 c("rdocx", "rpptx")
+    "docx" = "rdocx",
+    "pptx" = "rpptx",
+    "slide" = "rpptx",
+    "layout" = "rpptx",
+    c("rdocx", "rpptx")
   )
 
   check_officer(x, what = what, call = call)
@@ -39,24 +64,31 @@ officer_summary <- function(x,
 
   summary_type <- summary_type %||% class(x)
 
-  if (is_installed("officer (>= 0.6.3)")) {
+  if (is_installed("officer (>= 0.6.3)") &&
+    (summary_type %in% c("rdocx", "docx", "rpptx", "pptx"))) {
     if (summary_type %in% c("rdocx", "docx")) {
-      return(officer::docx_summary(x, preserve = preserve))
+      summary_df <- officer::docx_summary(x, preserve = preserve)
     }
 
     if (summary_type %in% c("rpptx", "pptx")) {
-      return(officer::pptx_summary(x, preserve = preserve))
+      summary_df <- officer::pptx_summary(x, preserve = preserve)
     }
+  } else {
+    summary_df <- switch(summary_type,
+      "rdocx" = officer::docx_summary(x),
+      "rpptx" = officer::pptx_summary(x),
+      "docx" = officer::docx_summary(x),
+      "pptx" = officer::pptx_summary(x),
+      "slide" = officer::slide_summary(x, index = index),
+      "layout" = officer::layout_summary(x)
+    )
   }
 
-  switch(summary_type,
-    "rdocx" = officer::docx_summary(x),
-    "rpptx" = officer::pptx_summary(x),
-    "docx" = officer::docx_summary(x),
-    "pptx" = officer::pptx_summary(x),
-    "slide" = officer::slide_summary(x, index = index),
-    "layout" = officer::layout_summary(x)
-  )
+  if (as_tibble) {
+    return(tibble::as_tibble(summary_df))
+  }
+
+  summary_df
 }
 
 
@@ -82,6 +114,7 @@ officer_summary <- function(x,
 #' @param arg Argument name to use in error messages. Defaults to
 #'   `caller_arg(x)`
 #' @param ... Additional parameters passed to [cli::cli_abort()]
+#' @family summary functions
 #' @inheritParams cli::cli_abort
 #' @export
 #' @importFrom cli cli_abort
