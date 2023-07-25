@@ -8,7 +8,7 @@
 \alias{add_gg_to_body}
 \alias{add_value_with_keys}
 \alias{add_str_with_keys}
-\title{Add an xml string, text paragraph, or gt object at a specified position in a
+\title{Add a xml string, text paragraph, or gt object at a specified position in a
 rdocx object}
 \usage{
 add_to_body(
@@ -18,9 +18,10 @@ add_to_body(
   index = NULL,
   value = NULL,
   str = NULL,
+  style = NULL,
   pos = "after",
-  call = parent.frame(),
-  ...
+  ...,
+  call = parent.frame()
 )
 
 add_text_to_body(
@@ -83,20 +84,20 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.}
 
 \item{str}{a wml string}
 
+\item{style}{paragraph style name. These names are available with function \link[officer]{styles_info}
+and are the names of the Word styles defined in the base document (see
+argument \code{path} from \link[officer]{read_docx}).}
+
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
+
+\item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}},
+\code{\link[officer:body_add_gg]{officer::body_add_gg()}}, or \code{\link[officer:body_add]{officer::body_add()}}.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
-
-\item{...}{Additional parameters passed to \code{\link[officer:body_add_par]{officer::body_add_par()}},
-\code{\link[officer:body_add_gg]{officer::body_add_gg()}}, or \code{\link[officer:body_add]{officer::body_add()}}.}
-
-\item{style}{paragraph style name. These names are available with function \link[officer]{styles_info}
-and are the names of the Word styles defined in the base document (see
-argument \code{path} from \link[officer]{read_docx}).}
 
 \item{.na}{[\code{character(1)}: \sQuote{NA}]\cr Value to replace \code{NA} values
 with. If \code{NULL} missing values are propagated, that is an \code{NA} result will
@@ -174,6 +175,9 @@ value is named, the names are assumed to be keywords indicating the cursor
 position for adding each value in the vector. If value is not named, a
 keyword parameter with the same length as value must be provided. When \code{named = FALSE}, no keyword parameter is required. Add \code{\link[=add_str_with_keys]{add_str_with_keys()}} works
 identically but uses a str parameter and .f defaults to \code{\link[=add_xml_to_body]{add_xml_to_body()}}.
+
+Note, as of July 2023, both \code{\link[=add_value_with_keys]{add_value_with_keys()}} and \code{\link[=add_str_with_keys]{add_str_with_keys()}}
+are superseded by \code{\link[=vec_add_to_body]{vec_add_to_body()}}.
 }
 \examples{
 if (rlang::is_installed("gt")) {

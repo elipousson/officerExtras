@@ -1,4 +1,4 @@
-#' Add an xml string, text paragraph, or gt object at a specified position in a
+#' Add a xml string, text paragraph, or gt object at a specified position in a
 #' rdocx object
 #'
 #' @description
@@ -24,6 +24,9 @@
 #' = FALSE`, no keyword parameter is required. Add [add_str_with_keys()] works
 #' identically but uses a str parameter and .f defaults to [add_xml_to_body()].
 #'
+#' Note, as of July 2023, both [add_value_with_keys()] and [add_str_with_keys()]
+#' are superseded by [vec_add_to_body()].
+#'
 #' @inheritParams cursor_docx
 #' @inheritParams read_docx_ext
 #' @inheritParams cursor_docx
@@ -42,9 +45,10 @@ add_to_body <- function(docx,
                         index = NULL,
                         value = NULL,
                         str = NULL,
+                        style = NULL,
                         pos = "after",
-                        call = parent.frame(),
-                        ...) {
+                        ...,
+                        call = parent.frame()) {
   check_docx(docx, call = call)
 
   if ((!is_any_null(list(str, value))) || is_all_null(list(str, value))) {
@@ -64,15 +68,16 @@ add_to_body <- function(docx,
 
   if (!is.null(pos) && !is.null(value)) {
     if (is.character(value)) {
-      return(officer::body_add_par(docx, value, pos = pos, ...))
+      return(officer::body_add_par(docx, value, style = style, pos = pos, ...))
     }
 
     if (is_ggplot(value)) {
-      return(officer::body_add_gg(docx, value, pos = pos, ...))
+      style <- style %||% "Normal"
+      return(officer::body_add_gg(docx, value, style = style, pos = pos, ...))
     }
   }
 
-  officer::body_add(docx, value, ...)
+  officer::body_add(x = docx, value = value, style = style, ...)
 }
 
 #' @inheritParams glue::glue
@@ -251,6 +256,12 @@ add_value_with_keys <- function(docx,
                                 value,
                                 ...,
                                 .f = add_text_to_body) {
+  lifecycle::signal_stage(
+    "superseded",
+    what = "add_value_with_keys()",
+    with = "vec_add_to_body()"
+    )
+
   arg <- "keyword"
   rlang::check_required(value)
   .f <- rlang::as_function(.f)
@@ -284,6 +295,12 @@ add_str_with_keys <- function(docx,
                               str,
                               ...,
                               .f = add_xml_to_body) {
+  lifecycle::signal_stage(
+    "superseded",
+    what = "add_str_with_keys()",
+    with = "vec_add_to_body()"
+  )
+
   arg <- "keyword"
   rlang::check_required(str)
   .f <- rlang::as_function(.f)
@@ -333,7 +350,6 @@ set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
     }
     nm <- params[[arg]]
   }
-
 
   rlang::set_names(value, nm)
 }
