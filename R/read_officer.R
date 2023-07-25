@@ -10,10 +10,14 @@
 #' @param filename,path File name and path. Default: `NULL`. Must include a
 #'   "docx", "pptx", or "xlsx" file path. "dotx" and "potx" files are also
 #'   supported.
-#' @param x A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
-#'   and path are ignored. Default: `NULL`
+#' @param x A rdocx, rpptx, or rxlsx class object If x is provided, filename and
+#'   path are ignored. Default: `NULL`
 #' @param docx,pptx,xlsx A rdocx, rpptx, or rxlsx class object passed to the x
-#'   parameter by the corresponding function. Defaults to `NULL`.
+#'   parameter of [read_officer()] by the variant functions. Defaults to `NULL`.
+#' @param allow_null If `TRUE`, function supports the default behavior of
+#'   [officer::read_docx()], [officer::read_pptx()], or [officer::read_xlsx()]
+#'   and returns an empty document if x, filename, and path are all `NULL`. If
+#'   `FALSE`, one of the three parameters must be supplied.
 #' @param quiet If `FALSE`, warn if docx is provided when filename and/or path
 #'   are also provided. Default: `TRUE`.
 #' @inheritParams check_office_fileext
@@ -30,34 +34,47 @@ read_officer <- function(filename = NULL,
                          fileext = c("docx", "pptx", "xlsx"),
                          x = NULL,
                          arg = caller_arg(x),
+                         allow_null = TRUE,
                          quiet = TRUE,
                          call = parent.frame(),
                          ...) {
   cli_quiet(quiet)
 
+  has_input_file <- !is_null(c(filename, path))
+
   if (is.null(x)) {
-    path <- set_office_path(filename, path, fileext = fileext, call = call)
-
-    fileext <- str_extract_fileext(path)
-
-    x <-
-      rlang::try_fetch(
-        switch(fileext,
-          "docx" = officer::read_docx(path),
-          "dotx" = officer::read_docx(path),
-          "pptx" = officer::read_pptx(path),
-          "potx" = officer::read_pptx(path),
-          "xlsx" = officer::read_xlsx(path)
-        ),
-        error = function(cnd) {
-          cli::cli_abort("{.val {fileext}} file can't be read.", parent = cnd)
-        },
-        warning = function(cnd) {
-          cli::cli_warn(message = cnd)
-        }
+    if (has_input_file || !allow_null) {
+      path <- set_office_path(filename, path, fileext = fileext, call = call)
+      filename <- basename(path)
+      fileext <- str_extract_fileext(path)
+    } else {
+      fileext <- match.arg(fileext)
+      new_obj <- switch(fileext,
+        "docx" = "empty document",
+        "pptx" = "pptx document with 0 slides",
+        "xlsx" = "xlsx document with 1 sheet"
       )
+
+      cli::cli_alert_success("Creating a new {new_obj}")
+    }
+
+    x <- rlang::try_fetch(
+      switch(fileext,
+        "docx" = officer::read_docx(path),
+        "dotx" = officer::read_docx(path),
+        "pptx" = officer::read_pptx(path),
+        "potx" = officer::read_pptx(path),
+        "xlsx" = officer::read_xlsx(path)
+      ),
+      error = function(cnd) {
+        cli::cli_abort("{.val {fileext}} file can't be read.", parent = cnd)
+      },
+      warning = function(cnd) {
+        cli::cli_warn(message = cnd)
+      }
+    )
   } else {
-    if (!is_null(c(filename, path)) && is_false(quiet)) {
+    if (has_input_file) {
       cli::cli_alert_warning(
         "{.arg filename} and {.arg path} are ignored if {.arg {arg}} is provided."
       )
@@ -84,12 +101,14 @@ read_officer <- function(filename = NULL,
 read_docx_ext <- function(filename = NULL,
                           path = NULL,
                           docx = NULL,
+                          allow_null = FALSE,
                           quiet = TRUE) {
   read_officer(
     filename = filename,
     path = path,
     fileext = "docx",
     x = docx,
+    allow_null = allow_null,
     quiet = quiet
   )
 }
@@ -100,12 +119,14 @@ read_docx_ext <- function(filename = NULL,
 read_pptx_ext <- function(filename = NULL,
                           path = NULL,
                           pptx = NULL,
+                          allow_null = FALSE,
                           quiet = TRUE) {
   read_officer(
     filename = filename,
     path = path,
     fileext = "pptx",
     x = pptx,
+    allow_null = allow_null,
     quiet = quiet
   )
 }
@@ -116,12 +137,14 @@ read_pptx_ext <- function(filename = NULL,
 read_xlsx_ext <- function(filename = NULL,
                           path = NULL,
                           xlsx = NULL,
+                          allow_null = FALSE,
                           quiet = TRUE) {
   read_officer(
     filename = filename,
     path = path,
     fileext = "xlsx",
     x = xlsx,
+    allow_null = allow_null,
     quiet = quiet
   )
 }
@@ -138,17 +161,18 @@ cli_doc_properties <- function(x, filename = NULL) {
     return(props)
   }
 
+  msg <- "{cli::symbol$info} document properties:"
+
   if (!is.null(filename)) {
-    cli::cli_rule("{cli::symbol$info} {.filename {filename}} properties:")
-  } else {
-    cli::cli_rule("{cli::symbol$info} document properties:")
+    msg <- "{cli::symbol$info} {.filename {filename}} properties:"
   }
 
+  cli::cli_rule(msg)
+
   cli::cli_dl(
-    items = discard(
-      props,
-      ~ .x == ""
-    )
+    items = discard(props, function(x) {
+      x == ""
+    })
   )
 }
 
@@ -192,17 +216,17 @@ set_office_path <- function(filename = NULL,
                             path = NULL,
                             fileext = c("docx", "pptx", "xlsx"),
                             call = parent.frame()) {
+  check_string(filename, allow_null = TRUE, call = call)
+  check_string(path, allow_null = TRUE, call = call)
+
   if (is.null(path)) {
+    if (is.null(filename)) {
+      args <- c("filename", "path")
+      cli::cli_abort("{.arg {args}} can't both be {.code NULL}")
+    }
     path <- filename
   } else if (!is.null(filename)) {
     path <- file.path(path, filename)
-  }
-
-  if (!is.character(path) && !is.null(path)) {
-    cli::cli_abort(
-      '{.arg {cli_vec_last(c("filename", "path"))}} must be `NULL` or
-      {.cls character} objects not {.obj_type_friendly {path}}.'
-    )
   }
 
   fileext <- match.arg(fileext, several.ok = TRUE)

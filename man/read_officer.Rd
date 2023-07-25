@@ -14,16 +14,35 @@ read_officer(
   fileext = c("docx", "pptx", "xlsx"),
   x = NULL,
   arg = caller_arg(x),
+  allow_null = TRUE,
   quiet = TRUE,
   call = parent.frame(),
   ...
 )
 
-read_docx_ext(filename = NULL, path = NULL, docx = NULL, quiet = TRUE)
+read_docx_ext(
+  filename = NULL,
+  path = NULL,
+  docx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+)
 
-read_pptx_ext(filename = NULL, path = NULL, pptx = NULL, quiet = TRUE)
+read_pptx_ext(
+  filename = NULL,
+  path = NULL,
+  pptx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+)
 
-read_xlsx_ext(filename = NULL, path = NULL, xlsx = NULL, quiet = TRUE)
+read_xlsx_ext(
+  filename = NULL,
+  path = NULL,
+  xlsx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+)
 }
 \arguments{
 \item{filename, path}{File name and path. Default: \code{NULL}. Must include a
@@ -33,11 +52,16 @@ supported.}
 \item{fileext}{File extensions to allow without error. Defaults to "docx",
 "pptx", "xlsx".}
 
-\item{x}{A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
-and path are ignored. Default: \code{NULL}}
+\item{x}{A rdocx, rpptx, or rxlsx class object If x is provided, filename and
+path are ignored. Default: \code{NULL}}
 
 \item{arg}{Argument name of object to check. Used to improve
 \code{\link[cli:cli_abort]{cli::cli_abort()}} messages. Defaults to \code{caller_arg(x)}.}
+
+\item{allow_null}{If \code{TRUE}, function supports the default behavior of
+\code{\link[officer:read_docx]{officer::read_docx()}}, \code{\link[officer:read_pptx]{officer::read_pptx()}}, or \code{\link[officer:read_xlsx]{officer::read_xlsx()}}
+and returns an empty document if x, filename, and path are all \code{NULL}. If
+\code{FALSE}, one of the three parameters must be supplied.}
 
 \item{quiet}{If \code{FALSE}, warn if docx is provided when filename and/or path
 are also provided. Default: \code{TRUE}.}
@@ -50,7 +74,7 @@ mentioned in error messages as the source of the error. See the
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 
 \item{docx, pptx, xlsx}{A rdocx, rpptx, or rxlsx class object passed to the x
-parameter by the corresponding function. Defaults to \code{NULL}.}
+parameter of \code{\link[=read_officer]{read_officer()}} by the variant functions. Defaults to \code{NULL}.}
 }
 \value{
 A rdocx, rpptx, or rxlsx object.
