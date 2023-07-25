@@ -89,19 +89,19 @@ addition of doc_index values as the default names for the returned list of
 tables are based on \href{https://www.rostrum.blog/2023/06/07/rectangular-officer/}{this blog post by Matt Dray}.
 }
 \examples{
-docx <- read_docx_ext(
+docx_example <- read_docx_ext(
   filename = "example.docx",
   path = system.file("doc_examples", package = "officer")
 )
 
-officer_tables(docx)
+officer_tables(docx_example)
 
-pptx <- read_pptx_ext(
+pptx_example <- read_pptx_ext(
   filename = "example.pptx",
   path = system.file("doc_examples", package = "officer")
 )
 
-officer_tables(pptx)[[1]]
+officer_tables(pptx_example)[[1]]
 
 }
 \seealso{

@@ -34,19 +34,19 @@
 #' @inheritParams rlang::args_error_context
 #' @return A list of data frames or, if stack is `TRUE`, a single data frame.
 #' @examples
-#' docx <- read_docx_ext(
+#' docx_example <- read_docx_ext(
 #'   filename = "example.docx",
 #'   path = system.file("doc_examples", package = "officer")
 #' )
 #'
-#' officer_tables(docx)
+#' officer_tables(docx_example)
 #'
-#' pptx <- read_pptx_ext(
+#' pptx_example <- read_pptx_ext(
 #'   filename = "example.pptx",
 #'   path = system.file("doc_examples", package = "officer")
 #' )
 #'
-#' officer_tables(pptx)[[1]]
+#' officer_tables(pptx_example)[[1]]
 #'
 #' @rdname officer_tables
 #' @seealso [docxtractr::docx_extract_all()]

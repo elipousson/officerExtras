@@ -12,15 +12,15 @@
 #' @inheritDotParams add_to_body
 #' @inheritParams vctrs::vec_recycle_common
 #' @examples
-#' docx <- read_officer()
+#' docx_example <- read_officer()
 #'
-#' docx <- vec_add_to_body(
-#'   docx,
+#' docx_example <- vec_add_to_body(
+#'   docx_example,
 #'   value = "Sample text",
 #'   style = c("heading 1", "heading 2", "Normal")
 #' )
 #'
-#' officer_summary(docx)
+#' officer_summary(docx_example)
 #' @export
 vec_add_to_body <- function(docx,
                             ...,

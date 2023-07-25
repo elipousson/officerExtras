@@ -52,13 +52,13 @@ different styles.  All parameters are recycled using
 of the longest input vector.
 }
 \examples{
-docx <- read_officer()
+docx_example <- read_officer()
 
-docx <- vec_add_to_body(
-  docx,
+docx_example <- vec_add_to_body(
+  docx_example,
   value = "Sample text",
   style = c("heading 1", "heading 2", "Normal")
 )
 
-officer_summary(docx)
+officer_summary(docx_example)
 }

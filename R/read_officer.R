@@ -83,7 +83,6 @@ read_officer <- function(filename = NULL,
     check_officer(x, what = paste0("r", fileext), call = call, ...)
   }
 
-
   if (!is.null(filename)) {
     cli::cli_alert_success(
       "Reading {.filename {filename}}{cli::symbol$ellipsis}"

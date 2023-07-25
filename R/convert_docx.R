@@ -23,19 +23,19 @@
 #' @examples
 #' \dontrun{
 #' if (interactive()) {
-#'   docx <- read_officer(
+#'   docx_example <- read_officer(
 #'     system.file("doc_examples/example.docx", package = "officer")
 #'   )
 #'
 #'   convert_docx(
-#'     docx,
+#'     docx_example,
 #'     to = "markdown"
 #'   )
 #'
 #'   withr::with_tempdir({
 #'     convert_docx(
-#'       docx,
-#'       output = "docx.html"
+#'       docx_example,
+#'       output = "docx_example.html"
 #'     )
 #'   })
 #' }

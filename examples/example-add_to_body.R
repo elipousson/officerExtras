@@ -1,5 +1,5 @@
 if (rlang::is_installed("gt")) {
-  docx <- read_docx_ext(
+  docx_example <- read_docx_ext(
     filename = "example.docx",
     path = system.file("doc_examples", package = "officer")
   )
@@ -12,7 +12,7 @@ if (rlang::is_installed("gt")) {
     )
 
   add_gt_to_body(
-    docx,
+    docx_example,
     tab_1,
     keyword = "Title 1"
   )
@@ -20,7 +20,7 @@ if (rlang::is_installed("gt")) {
   tab_str <- gt::as_word(tab_1)
 
   add_str_with_keys(
-    docx,
+    docx_example,
     str = c("Title 1" = tab_str, "Title 2" = tab_str)
   )
 }
