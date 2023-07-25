@@ -1,6 +1,6 @@
 # officerExtras (development version)
 
-* Add new `vec_add_to_body()` function.
+* Add new `vec_add_to_body()` function with optional `.sep` parameter.
 * Update `add_to_body()` to support `gt_tbl` table input to the value parameter.
 * Update `read_officer()` to return empty document if `allow_null = TRUE` and filename, path, and x all remain `NULL`.
 * Update `officer_summary()` to return a tibble data frame (and add `{tibble}` to Imports).
