@@ -16,40 +16,35 @@
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
 officer_summary <- function(x,
                             summary_type = "doc",
-                            preserve = FALSE,
                             index = NULL,
+                            preserve = FALSE,
                             call = caller_env()) {
   if (is_officer_summary(x, summary_type, call = call)) {
     return(x)
   }
 
   what <- switch(summary_type,
-    "docx" = "rdocx",
-    "pptx" = "rpptx",
-    "slide" = "rpptx",
-    "layout" = "rpptx",
-    c("rdocx", "rpptx")
+                 "docx" = "rdocx",
+                 "pptx" = "rpptx",
+                 "slide" = "rpptx",
+                 "layout" = "rpptx",
+                 c("rdocx", "rpptx")
   )
 
   check_officer(x, what = what, call = call)
 
-  if (summary_type == "doc") {
+  if (identical(summary_type, "doc")) {
     summary_type <- NULL
   }
 
   summary_type <- summary_type %||% class(x)
 
-  if ((summary_type %in% c("rdocx", "docx")) &&
-    is_installed("officer (>= 0.6.3)")) {
-    return(officer::docx_summary(x, preserve = preserve))
-  }
-
   switch(summary_type,
-    "rdocx" = officer::docx_summary(x),
-    "rpptx" = officer::pptx_summary(x),
-    "docx" = officer::docx_summary(x),
-    "pptx" = officer::pptx_summary(x),
-    "slide" = officer::slide_summary(x, index),
+    "rdocx" = officer::docx_summary(x, preserve = preserve),
+    "rpptx" = officer::pptx_summary(x, preserve = preserve),
+    "docx" = officer::docx_summary(x, preserve = preserve),
+    "pptx" = officer::pptx_summary(x, preserve = preserve),
+    "slide" = officer::slide_summary(x, index = index),
     "layout" = officer::layout_summary(x)
   )
 }
@@ -124,7 +119,7 @@ is_officer_summary <- function(x,
                                summary_type = "doc",
                                tables = FALSE,
                                call = caller_env()) {
-  check_required(x)
+  check_required(x, call = call)
   check_bool(tables, call = call)
   check_string(summary_type, allow_null = TRUE, call = call)
 
@@ -132,9 +127,10 @@ is_officer_summary <- function(x,
     return(FALSE)
   }
 
-  summary_type <- match.arg(
+  summary_type <- arg_match0(
     summary_type,
-    c("doc", "docx", "pptx", "slide", "layout")
+    values = c("doc", "docx", "pptx", "slide", "layout"),
+    error_call = call
   )
 
   nm <- "content_type"
@@ -154,7 +150,7 @@ is_officer_summary <- function(x,
   )
 
   nm_check <- TRUE
-  if (summary_type == "doc") {
+  if (identical(summary_type, "doc")) {
     nm_check <- any(rlang::has_name(x, c(docx_nm, pptx_nm)))
   }
 

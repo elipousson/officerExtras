@@ -7,8 +7,8 @@
 officer_summary(
   x,
   summary_type = "doc",
-  preserve = FALSE,
   index = NULL,
+  preserve = FALSE,
   call = caller_env()
 )
 }
@@ -22,13 +22,13 @@ functions, it is returned as is.}
 "layout". "doc" requires the data.frame include a "content_type" column but
 allows columns for either a docx or pptx summary.}
 
+\item{index}{slide index}
+
 \item{preserve}{If \code{FALSE} (default), text in table cells is collapsed into a
 single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
 character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
 published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
 the \code{{docxtractr}} package by Bob Rudis.}
-
-\item{index}{slide index}
 
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function
