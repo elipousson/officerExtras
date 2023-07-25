@@ -11,8 +11,8 @@ add_gt_to_body() converts gt tables to OOXML with gt::as_word().
 add_gg_to_body() adds a caption following the plots using the labels
 from the plot object.
 
-'><title>Add an xml string, text paragraph, or gt object at a specified position in a
-rdocx object — add_to_body • officerExtras</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add an xml string, text paragraph, or gt object at a specified position in a
+'><title>Add a xml string, text paragraph, or gt object at a specified position in a
+rdocx object — add_to_body • officerExtras</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Add a xml string, text paragraph, or gt object at a specified position in a
 rdocx object — add_to_body"><meta property="og:description" content='Wrappers for officer::body_add_par(), officer::body_add_gg(), and
 officer::body_add_xml() that use the cursor_docx() helper function to
 allow users to pass the value and keyword, id, or index value used to place a
@@ -66,7 +66,7 @@ from the plot object.
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Add an xml string, text paragraph, or gt object at a specified position in a
+      <img src="../logo.png" class="logo" alt=""><h1>Add a xml string, text paragraph, or gt object at a specified position in a
 rdocx object</h1>
       <small class="dont-index">Source: <a href="https://github.com/elipousson/officerExtras/blob/HEAD/R/add_to_body.R" class="external-link"><code>R/add_to_body.R</code></a></small>
       <div class="d-none name"><code>add_to_body.Rd</code></div>
@@ -94,9 +94,10 @@ from the plot object.</p></li>
 <span>  index <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  str <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  style <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="st">"after"</span>,</span>
-<span>  call <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_text_to_body</span><span class="op">(</span></span>
@@ -171,16 +172,15 @@ pretty tables with package flextable, 'Microsoft' charts with package mschart.</
 <dd><p>a wml string</p></dd>
 
 
+<dt>style</dt>
+<dd><p>paragraph style name. These names are available with function <a href="https://davidgohel.github.io/officer/reference/styles_info.html" class="external-link">styles_info</a>
+and are the names of the Word styles defined in the base document (see
+argument <code>path</code> from <a href="https://davidgohel.github.io/officer/reference/read_docx.html" class="external-link">read_docx</a>).</p></dd>
+
+
 <dt>pos</dt>
 <dd><p>where to add the new element relative to the cursor,
 one of "after", "before", "on".</p></dd>
-
-
-<dt>call</dt>
-<dd><p>The execution environment of a currently
-running function, e.g. <code>caller_env()</code>. The function will be
-mentioned in error messages as the source of the error. See the
-<code>call</code> argument of <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort()</a></code> for more information.</p></dd>
 
 
 <dt>...</dt>
@@ -188,10 +188,11 @@ mentioned in error messages as the source of the error. See the
 <code><a href="https://davidgohel.github.io/officer/reference/body_add_gg.html" class="external-link">officer::body_add_gg()</a></code>, or <code><a href="https://davidgohel.github.io/officer/reference/body_add.html" class="external-link">officer::body_add()</a></code>.</p></dd>
 
 
-<dt>style</dt>
-<dd><p>paragraph style name. These names are available with function <a href="https://davidgohel.github.io/officer/reference/styles_info.html" class="external-link">styles_info</a>
-and are the names of the Word styles defined in the base document (see
-argument <code>path</code> from <a href="https://davidgohel.github.io/officer/reference/read_docx.html" class="external-link">read_docx</a>).</p></dd>
+<dt>call</dt>
+<dd><p>The execution environment of a currently
+running function, e.g. <code>caller_env()</code>. The function will be
+mentioned in error messages as the source of the error. See the
+<code>call</code> argument of <code><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort()</a></code> for more information.</p></dd>
 
 
 <dt>.na</dt>
@@ -286,6 +287,8 @@ value is named, the names are assumed to be keywords indicating the cursor
 position for adding each value in the vector. If value is not named, a
 keyword parameter with the same length as value must be provided. When <code>named = FALSE</code>, no keyword parameter is required. Add <code>add_str_with_keys()</code> works
 identically but uses a str parameter and .f defaults to <code>add_xml_to_body()</code>.</p>
+<p>Note, as of July 2023, both <code>add_value_with_keys()</code> and <code>add_str_with_keys()</code>
+are superseded by <code><a href="vec_add_to_body.html">vec_add_to_body()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -321,18 +324,18 @@ identically but uses a str parameter and .f defaults to <code>add_xml_to_body()<
 <span class="r-in"><span>    str <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Title 1"</span> <span class="op">=</span> <span class="va">tab_str</span>, <span class="st">"Title 2"</span> <span class="op">=</span> <span class="va">tab_str</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rdocx document with 23 element(s)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rdocx document with 22 element(s)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * styles:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 Normal              heading 1              heading 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "paragraph"            "paragraph" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Default Paragraph Font           Normal Table                No List </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "character"                "table"            "numbering" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Titre 1 Car            Titre 2 Car          Light Shading </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Heading 1 Char         Heading 2 Char          Light Shading </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "character"            "character"                "table" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         List Paragraph                 header            En-tête Car </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         List Paragraph                 header            Header Char </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "paragraph"            "character" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 footer       Pied de page Car </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 footer            Footer Char </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "character" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Content at cursor location:</span>

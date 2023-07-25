@@ -63,7 +63,15 @@
 <span></span>
 <span><span class="fu">check_pptx</span><span class="op">(</span><span class="va">x</span>, arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_xlsx</span><span class="op">(</span><span class="va">x</span>, arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">check_xlsx</span><span class="op">(</span><span class="va">x</span>, arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">check_block_list</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  allow_empty <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -90,6 +98,15 @@ mentioned in error messages as the source of the error. See the
 
 <dt>...</dt>
 <dd><p>Additional parameters passed to <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code></p></dd>
+
+
+<dt>allow_empty</dt>
+<dd><p>If <code>TRUE</code>, <code>check_block_list()</code> allows an empty block
+list. Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt>allow_null</dt>
+<dd><p>If <code>FALSE</code> (default), error if x is <code>NULL</code>.</p></dd>
 
 </dl></div>
 

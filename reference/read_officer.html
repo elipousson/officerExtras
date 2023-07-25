@@ -72,16 +72,35 @@ default to use a rdocx, rpptx, or rxlsx class object if provided.</p>
 <span>  fileext <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"docx"</span>, <span class="st">"pptx"</span>, <span class="st">"xlsx"</span><span class="op">)</span>,</span>
 <span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">read_docx_ext</span><span class="op">(</span>filename <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="cn">NULL</span>, docx <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">read_docx_ext</span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  docx <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">read_pptx_ext</span><span class="op">(</span>filename <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="cn">NULL</span>, pptx <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">read_pptx_ext</span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pptx <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">read_xlsx_ext</span><span class="op">(</span>filename <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="cn">NULL</span>, xlsx <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">read_xlsx_ext</span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xlsx <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -98,13 +117,20 @@ supported.</p></dd>
 
 
 <dt>x</dt>
-<dd><p>A rdocx, rpptx, or rxlsx class object, If docx is provided, filename
-and path are ignored. Default: <code>NULL</code></p></dd>
+<dd><p>A rdocx, rpptx, or rxlsx class object If x is provided, filename and
+path are ignored. Default: <code>NULL</code></p></dd>
 
 
 <dt>arg</dt>
 <dd><p>Argument name of object to check. Used to improve
 <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code> messages. Defaults to <code>caller_arg(x)</code>.</p></dd>
+
+
+<dt>allow_null</dt>
+<dd><p>If <code>TRUE</code>, function supports the default behavior of
+<code><a href="https://davidgohel.github.io/officer/reference/read_docx.html" class="external-link">officer::read_docx()</a></code>, <code><a href="https://davidgohel.github.io/officer/reference/read_pptx.html" class="external-link">officer::read_pptx()</a></code>, or <code><a href="https://davidgohel.github.io/officer/reference/read_xlsx.html" class="external-link">officer::read_xlsx()</a></code>
+and returns an empty document if x, filename, and path are all <code>NULL</code>. If
+<code>FALSE</code>, one of the three parameters must be supplied.</p></dd>
 
 
 <dt>quiet</dt>
@@ -125,7 +151,7 @@ mentioned in error messages as the source of the error. See the
 
 <dt>docx, pptx, xlsx</dt>
 <dd><p>A rdocx, rpptx, or rxlsx class object passed to the x
-parameter by the corresponding function. Defaults to <code>NULL</code>.</p></dd>
+parameter of <code>read_officer()</code> by the variant functions. Defaults to <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
