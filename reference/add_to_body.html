@@ -97,7 +97,7 @@ from the plot object.</p></li>
 <span>  style <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="st">"after"</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  call <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_text_to_body</span><span class="op">(</span></span>
@@ -111,7 +111,7 @@ from the plot object.</p></li>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">add_xml_to_body</span><span class="op">(</span><span class="va">docx</span>, <span class="va">str</span>, pos <span class="op">=</span> <span class="st">"after"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">add_xml_to_body</span><span class="op">(</span><span class="va">docx</span>, <span class="va">str</span>, pos <span class="op">=</span> <span class="st">"after"</span>, <span class="va">...</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_gt_to_body</span><span class="op">(</span></span>
 <span>  <span class="va">docx</span>,</span>
@@ -123,7 +123,8 @@ from the plot object.</p></li>
 <span>  keep_with_next <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pos <span class="op">=</span> <span class="st">"after"</span>,</span>
 <span>  tablecontainer <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_gg_to_body</span><span class="op">(</span></span>
@@ -221,29 +222,38 @@ Required for <code>add_gt_to_body()</code>.</p></dd>
 
 
 <dt>align</dt>
-<dd><p>An option for table alignment. Can either be <code>"center"</code> (the
-default), <code>"left"</code>, or <code>"right"</code>.</p></dd>
+<dd><p><em>Table alignment</em></p>
+<p><code>scalar&lt;character&gt;</code> // <em>default:</em> <code>"center"</code></p>
+<p>An option for table alignment. Can either be <code>"center"</code>, <code>"left"</code>, or
+<code>"right"</code>.</p></dd>
 
 
 <dt>caption_location</dt>
-<dd><p>Determines where the caption should be positioned.
-This can either be <code>"top"</code> (the default), <code>"bottom"</code>, or <code>"embed"</code>.</p></dd>
+<dd><p><em>Caption location</em></p>
+<p><code>singl-kw:[top|bottom|embed]</code> // <em>default:</em> <code>"top"</code></p>
+<p>Determines where the caption should be positioned. This can either be
+<code>"top"</code>, <code>"bottom"</code>, or <code>"embed"</code>.</p></dd>
 
 
 <dt>caption_align</dt>
-<dd><p>Determines the alignment of the caption. This is
+<dd><p><em>Caption alignment</em></p>
+<p>Determines the alignment of the caption. This is
 either <code>"left"</code> (the default), <code>"center"</code>, or <code>"right"</code>. This option is
 only used when <code>caption_location</code> is not set as <code>"embed"</code>.</p></dd>
 
 
 <dt>split</dt>
-<dd><p>A <code>TRUE</code> or <code>FALSE</code> (the default) value that indicates whether
-to activate the Word option <code>Allow row to break across pages</code>.</p></dd>
+<dd><p><em>Allow splitting</em></p>
+<p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>FALSE</code></p>
+<p>A logical value that indicates whether to activate the Word option
+<code>Allow row to break across pages</code>.</p></dd>
 
 
 <dt>keep_with_next</dt>
-<dd><p>A <code>TRUE</code> (the default) or <code>FALSE</code> value that indicates
-whether a table should use Word option <code>keep rows together</code>.</p></dd>
+<dd><p><em>Keeping rows together</em></p>
+<p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>TRUE</code></p>
+<p>A logical value that indicates whether a table should use Word option
+<code>keep rows together</code>.</p></dd>
 
 
 <dt>tablecontainer</dt>
@@ -299,7 +309,7 @@ are superseded by <code><a href="vec_add_to_body.html">vec_add_to_body()</a></co
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">docx</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_docx_ext</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">docx_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_docx_ext</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    filename <span class="op">=</span> <span class="st">"example.docx"</span>,</span></span>
 <span class="r-in"><span>    path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"doc_examples"</span>, package <span class="op">=</span> <span class="st">"officer"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
@@ -312,7 +322,7 @@ are superseded by <code><a href="vec_add_to_body.html">vec_add_to_body()</a></co
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu">add_gt_to_body</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">docx</span>,</span></span>
+<span class="r-in"><span>    <span class="va">docx_example</span>,</span></span>
 <span class="r-in"><span>    <span class="va">tab_1</span>,</span></span>
 <span class="r-in"><span>    keyword <span class="op">=</span> <span class="st">"Title 1"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
@@ -320,7 +330,7 @@ are superseded by <code><a href="vec_add_to_body.html">vec_add_to_body()</a></co
 <span class="r-in"><span>  <span class="va">tab_str</span> <span class="op">&lt;-</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/as_word.html" class="external-link">as_word</a></span><span class="op">(</span><span class="va">tab_1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu">add_str_with_keys</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">docx</span>,</span></span>
+<span class="r-in"><span>    <span class="va">docx_example</span>,</span></span>
 <span class="r-in"><span>    str <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Title 1"</span> <span class="op">=</span> <span class="va">tab_str</span>, <span class="st">"Title 2"</span> <span class="op">=</span> <span class="va">tab_str</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

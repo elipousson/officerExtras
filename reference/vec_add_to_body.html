@@ -132,15 +132,15 @@ mentioned in error messages as the source of the error. See the
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">docx</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_officer</a></span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">docx_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_officer</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">docx</span> <span class="op">&lt;-</span> <span class="fu">vec_add_to_body</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">docx</span>,</span></span>
+<span class="r-in"><span><span class="va">docx_example</span> <span class="op">&lt;-</span> <span class="fu">vec_add_to_body</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">docx_example</span>,</span></span>
 <span class="r-in"><span>  value <span class="op">=</span> <span class="st">"Sample text"</span>,</span></span>
 <span class="r-in"><span>  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"heading 1"</span>, <span class="st">"heading 2"</span>, <span class="st">"Normal"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="officer_summary.html">officer_summary</a></span><span class="op">(</span><span class="va">docx</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="officer_summary.html">officer_summary</a></span><span class="op">(</span><span class="va">docx_example</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   doc_index content_type style_name        text level num_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1         1    paragraph  heading 1 Sample text    NA     NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2         2    paragraph  heading 2 Sample text    NA     NA</span>
