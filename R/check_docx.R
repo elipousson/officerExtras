@@ -47,7 +47,8 @@ check_xlsx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
 #' @name check_block_list
 #' @rdname check_officer
 #' @param allow_empty If `TRUE`, [check_block_list()] allows an empty block
-#'   list.
+#'   list. Defaults to `FALSE`.
+#' @param allow_null If `FALSE` (default), error if x is `NULL`.
 #' @export
 check_block_list <- function(x,
                              arg = caller_arg(x),

@@ -46,7 +46,9 @@ mentioned in error messages as the source of the error. See the
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 
 \item{allow_empty}{If \code{TRUE}, \code{\link[=check_block_list]{check_block_list()}} allows an empty block
-list.}
+list. Defaults to \code{FALSE}.}
+
+\item{allow_null}{If \code{FALSE} (default), error if x is \code{NULL}.}
 }
 \description{
 Check if x is a rdocx, rpptx, or rxlsx object

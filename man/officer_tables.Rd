@@ -44,6 +44,12 @@ addition of preceding headings or captions as a column within the
 data.frame returned by \code{\link[=officer_tables]{officer_tables()}}. This is an experimental feature
 and may be modified or removed. Defaults to \code{NULL}.}
 
+\item{preserve}{If \code{FALSE} (default), text in table cells is collapsed into a
+single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
+character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
+published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
+the \code{{docxtractr}} package by Bob Rudis.}
+
 \item{...}{Additional parameters passed to \code{\link[=fill_with_pattern]{fill_with_pattern()}}.}
 
 \item{stack}{If \code{TRUE} and all tables share the same number of columns,
@@ -56,10 +62,19 @@ to the appropriate type using \code{\link[utils:type.convert]{utils::type.conver
 names are set to the doc_index values using the pattern
 "doc_index_<doc_index_number>".}
 
-\item{call}{The execution environment of a currently
-running function, e.g. \code{caller_env()}. The function will be
-mentioned in error messages as the source of the error. See the
-\code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
+\item{call}{The execution environment of a currently running
+function, e.g. \code{call = caller_env()}. The corresponding function
+call is retrieved and mentioned in error messages as the source
+of the error.
+
+You only need to supply \code{call} when throwing a condition from a
+helper function which wouldn't be relevant to mention in the
+message.
+
+Can also be \code{NULL} or a \link[rlang:topic-defuse]{defused function call} to
+respectively not display any call or hard-code a code to display.
+
+For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 }
 \value{
 A list of data frames or, if stack is \code{TRUE}, a single data frame.

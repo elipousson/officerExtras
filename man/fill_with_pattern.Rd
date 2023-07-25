@@ -49,5 +49,5 @@ function that may be modified or removed. At present, it is only used by
 \code{\link[=officer_tables]{officer_tables()}}.
 }
 \seealso{
-\code{\link[vctrs]{vec_fill_missing}}
+\code{\link[vctrs:vec_fill_missing]{vctrs::vec_fill_missing()}}
 }

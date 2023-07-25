@@ -30,6 +30,7 @@
 #' @param nm Names to use for returned list of tables. If `NULL` (default), the
 #'   names are set to the doc_index values using the pattern
 #'   "doc_index_<doc_index_number>".
+#' @inheritParams officer_summary
 #' @inheritParams rlang::args_error_context
 #' @return A list of data frames or, if stack is `TRUE`, a single data frame.
 #' @examples

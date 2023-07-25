@@ -77,7 +77,7 @@ cli_vec_cls <- function(x) {
 #' @returns A data.frame with an additional column taking the name from col and
 #'   the values from the column named in fill_col.
 #' @seealso
-#'  \code{\link[vctrs]{vec_fill_missing}}
+#'  [vctrs::vec_fill_missing()]
 #' @rdname fill_with_pattern
 #' @export
 fill_with_pattern <- function(x,
