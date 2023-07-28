@@ -117,7 +117,7 @@ add_text_to_body <- function(docx,
                              .null = NULL,
                              .envir = parent.frame(),
                              ...) {
-  rlang::check_required(value)
+  check_required(value)
   value <- glue::glue(value, .na = .na, .null = .null, .envir = .envir)
   add_to_body(docx, value = value, style = style, pos = pos, ...)
 }
@@ -131,7 +131,7 @@ add_xml_to_body <- function(docx,
                             pos = "after",
                             ...,
                             call = caller_env()) {
-  rlang::check_required(str, call = call)
+  check_required(str, call = call)
   add_to_body(docx, str = str, pos = pos, ..., call = call)
 }
 
@@ -186,8 +186,8 @@ add_gt_to_body <- function(docx,
                            tablecontainer = TRUE,
                            ...,
                            call = caller_env()) {
-  rlang::check_required(gt_object, call = call)
-  rlang::check_installed("gt", call = call)
+  check_required(gt_object, call = call)
+  check_installed("gt", call = call)
 
   str <- gt::as_word(
     gt_object,
@@ -199,6 +199,9 @@ add_gt_to_body <- function(docx,
   )
 
   if (!tablecontainer) {
+    # FIXME: I thought this worked prior to incorporating the gto code but it is
+    # not working any more. Check and possibly remove the tablecontainer
+    # parameter if I can't get it working.
     docx <- add_xml_to_body(
       docx,
       str = str,
@@ -250,7 +253,7 @@ add_gg_to_body <- function(docx,
                            style = "Normal",
                            pos = "after",
                            ...) {
-  rlang::check_required(value)
+  check_required(value)
   docx <- add_to_body(docx, value = value, style = style, pos = pos, ...)
 
   if (!is.null(caption) && !is.null(value[["labels"]][[caption]])) {
@@ -295,19 +298,19 @@ add_value_with_keys <- function(docx,
   )
 
   arg <- "keyword"
-  rlang::check_required(value)
-  .f <- rlang::as_function(.f)
+  check_required(value)
+  .f <- as_function(.f)
 
   value <- set_vec_value_names(value, arg = arg, ...)
-  params <- rlang::list2(...)
+  params <- list2(...)
 
-  if (rlang::has_name(params, arg)) {
+  if (has_name(params, arg)) {
     params[[arg]] <- NULL
   }
 
   for (i in seq_along(value)) {
     docx <-
-      rlang::exec(
+      exec(
         .f,
         docx,
         value = value[[i]],
@@ -334,19 +337,19 @@ add_str_with_keys <- function(docx,
   )
 
   arg <- "keyword"
-  rlang::check_required(str)
-  .f <- rlang::as_function(.f)
+  check_required(str)
+  .f <- as_function(.f)
 
   str <- set_vec_value_names(str, arg = arg, ...)
-  params <- rlang::list2(...)
+  params <- list2(...)
 
-  if (rlang::has_name(params, arg)) {
+  if (has_name(params, arg)) {
     params[[arg]] <- NULL
   }
 
   for (i in seq_along(str)) {
     docx <-
-      rlang::exec(
+      exec(
         .f,
         docx,
         str = str[[i]],
@@ -368,12 +371,12 @@ add_str_with_keys <- function(docx,
 #' @importFrom rlang is_named list2 set_names
 #' @importFrom cli cli_abort
 set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
-  if (rlang::is_named(value)) {
+  if (is_named(value)) {
     return(value)
   }
 
   if (is.null(nm)) {
-    params <- rlang::list2(...)
+    params <- list2(...)
     if (is.null(params[[arg]]) || (length(params[[arg]]) != length(value))) {
       cli_abort(
         "{.arg value} must {.arg {arg}} must be be the same length
@@ -383,5 +386,5 @@ set_vec_value_names <- function(value, nm = NULL, arg = "keyword", ...) {
     nm <- params[[arg]]
   }
 
-  rlang::set_names(value, nm)
+  set_names(value, nm)
 }

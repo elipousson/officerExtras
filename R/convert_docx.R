@@ -53,7 +53,7 @@ convert_docx <- function(docx = NULL,
                          overwrite = TRUE,
                          quiet = TRUE,
                          ...) {
-  rlang::check_installed("rmarkdown")
+  check_installed("rmarkdown")
 
   if (is_officer(docx, "rdocx")) {
     if (!is.null(input) && is_true(quiet)) {
@@ -72,7 +72,6 @@ convert_docx <- function(docx = NULL,
 
     path <- path %||% getwd()
   } else if (is.null(input)) {
-    rlang::check_required(docx)
     check_docx_fileext(docx)
     input <- docx
   }

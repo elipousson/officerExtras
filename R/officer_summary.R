@@ -194,8 +194,8 @@ is_officer_summary <- function(x,
 
   nm_check <- TRUE
   if (identical(summary_type, "doc")) {
-    nm_check <- any(rlang::has_name(x, c(docx_nm, pptx_nm)))
+    nm_check <- any(has_name(x, c(docx_nm, pptx_nm)))
   }
 
-  all(rlang::has_name(x, nm)) && nm_check
+  all(has_name(x, nm)) && nm_check
 }

@@ -21,19 +21,17 @@ write_officer <- function(x,
                           overwrite = TRUE,
                           modified_by = Sys.getenv("USER"),
                           ...) {
-  rlang::check_required(x)
-  rlang::check_required(path)
+  check_officer(x, call = current_call())
 
-  check_officer(x, call = rlang::current_call())
   check_office_fileext(
     path,
     fileext = c("docx", "pptx", "xlsx"),
-    call = rlang::current_call()
+    call = current_call()
   )
 
   is_xlsx <- isTRUE(is_fileext_path(path, "xlsx"))
 
-  if (isFALSE(rlang::is_empty(rlang::list2(...))) && !is_xlsx) {
+  if (isFALSE(is_empty(list2(...))) && !is_xlsx) {
     x <-
       officer::set_doc_properties(
         x,
@@ -51,7 +49,7 @@ write_officer <- function(x,
     file.remove(path)
   }
 
-  if (!rlang::is_installed("withr")) {
+  if (!is_installed("withr")) {
     print(x, target = path)
   } else {
     withr::with_envvar(

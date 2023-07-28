@@ -102,7 +102,7 @@ officer_media <- function(filename = NULL,
 
   if (isTRUE(list)) {
     cli::cli_bullets(
-      rlang::set_names(
+      set_names(
         basename(media_files),
         rep("*", length(media_files))
       )

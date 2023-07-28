@@ -111,7 +111,7 @@ officer_tables <- function(x,
     return(do.call("rbind", tables))
   }
 
-  rlang::set_names(tables, nm %||% glue("doc_index_{index}"))
+  set_names(tables, nm %||% glue("doc_index_{index}"))
 }
 
 #' @rdname officer_tables
@@ -145,7 +145,7 @@ officer_table <- function(x,
   body_cells <- table_cells
   header_cells <- data.frame()
 
-  if (rlang::has_name(x, "is_header")) {
+  if (has_name(x, "is_header")) {
     header_cells <- officer_table_pivot(subset_header(table_cells, TRUE))
     body_cells <- subset_header(table_cells, FALSE)
   }
@@ -189,7 +189,7 @@ officer_table <- function(x,
     nm <- utils::head(body_cells, 1)
 
     return(
-      rlang::set_names(
+      set_names(
         utils::tail(body_cells, n_body_rows - 1),
         nm
       )
@@ -204,7 +204,7 @@ officer_table <- function(x,
       body_cells[[col]] <- rep(col_value, n_body_rows)
     }
 
-    return(rlang::set_names(body_cells, nm))
+    return(set_names(body_cells, nm))
   }
 
   list(body_cells, header_cells)
@@ -215,9 +215,9 @@ officer_table <- function(x,
 #' @importFrom rlang has_name
 officer_table_index <- function(x) {
   tables <- subset_type(x, "table cell")
-  if (rlang::has_name(x, "doc_index")) {
+  if (has_name(x, "doc_index")) {
     unique(tables[["doc_index"]])
-  } else if (rlang::has_name(x, "id")) {
+  } else if (has_name(x, "id")) {
     unique(tables[["id"]])
   }
 }
