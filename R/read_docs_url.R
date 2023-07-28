@@ -74,9 +74,14 @@ prep_docs_export <- function(url, format = NULL) {
       "xlsx" = glue("https://docs.google.com/spreadsheets/d/{id}/export?format={format}")
     )
 
+  filename <- str_remove(
+    officer_temp(fileext = fileext),
+    paste0("^", .Platform$file.sep)
+    )
+
   list(
     "url" = url,
-    "filename" = officer_temp(fileext)
+    "filename" = filename
   )
 }
 

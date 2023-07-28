@@ -16,16 +16,15 @@ wrap_tag <- function(..., tag) {
 }
 
 #' @noRd
-officer_temp <- function(fileext = c("docx", "pptx", "xslx"), path = NULL, ...) {
+officer_temp <- function(...,
+                         path = NULL,
+                         fileext = c("docx", "pptx", "xslx")) {
   fileext <- match.arg(fileext)
 
-  str_remove(
-    tempfile(
-      ...,
-      tmpdir = path %||% tempdir(), # "",
-      fileext = paste0(".", fileext)
-    ),
-    paste0("^", .Platform$file.sep)
+  tempfile(
+    ...,
+    tmpdir = path %||% tempdir(),
+    fileext = paste0(".", fileext)
   )
 }
 
