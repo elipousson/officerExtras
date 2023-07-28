@@ -1,8 +1,17 @@
 #' Combine multiple rdocx objects or docx files
 #'
+#' @description
 #' [combine_docx()] is a variant of [officer::body_add_docx()] that allows any
 #' number of input files and supports rdocx objects as well as Word file paths.
 #' Optionally use a separator between files or objects.
+#'
+#' Please note that when you create a new rdocx object with this function (or
+#' [officer::body_add_docx()]) the added content will not appear in a summary
+#' data frame created with [officer_summary()] and is not accessible to other
+#' functions until the document is *opened and edited* with Microsoft Word. This
+#' is part of how the OOXML [AltChunk
+#' Class](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.altchunk?view=openxml-2.8.1)
+#' works and can't be avoided.
 #'
 #' @param docx A rdocx object or a file path with a docx file extension.
 #' @param ... Any number of additional rdocx objects or docx file paths.
@@ -54,13 +63,13 @@ combine_docx <- function(docx,
     src <- params[[i]]
 
     if (is_rdocx(params[[i]])) {
-      src <- officer_temp("docx")
+      src <- officer_temp(fileext = "docx")
       write_officer(params[[i]], path = src)
     }
 
     if (!is_fileext_path(src, "docx") || !file.exists(src)) {
       cli_abort(
-        "Every objects in {.arg ...} must be a {.cls rdocx} object or a path to
+        "Every object in {.arg ...} must be a {.cls rdocx} object or a path to
         an existing docx file.",
         call = call
       )

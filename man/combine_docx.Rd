@@ -30,6 +30,13 @@ A rdocx object.
 \code{\link[=combine_docx]{combine_docx()}} is a variant of \code{\link[officer:body_add_docx]{officer::body_add_docx()}} that allows any
 number of input files and supports rdocx objects as well as Word file paths.
 Optionally use a separator between files or objects.
+
+Please note that when you create a new rdocx object with this function (or
+\code{\link[officer:body_add_docx]{officer::body_add_docx()}}) the added content will not appear in a summary
+data frame created with \code{\link[=officer_summary]{officer_summary()}} and is not accessible to other
+functions until the document is \emph{opened and edited} with Microsoft Word. This
+is part of how the OOXML \href{https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.altchunk?view=openxml-2.8.1}{AltChunk Class}
+works and can't be avoided.
 }
 \details{
 DETAILS
