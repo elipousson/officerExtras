@@ -18,6 +18,7 @@ Imports:
     rlang (>= 1.1.0),
     tibble,
     utils,
+    vctrs,
     xml2
 Suggests: 
     covr,
@@ -25,7 +26,6 @@ Suggests:
     gt (>= 0.7.0),
     rmarkdown,
     testthat (>= 3.0.0),
-    vctrs,
     withr
 Config/testthat/edition: 3
 Encoding: UTF-8

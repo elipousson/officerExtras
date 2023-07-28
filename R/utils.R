@@ -16,11 +16,13 @@ wrap_tag <- function(..., tag) {
 }
 
 #' @noRd
-office_temp <- function(fileext = NULL, path = NULL, ...) {
+officer_temp <- function(fileext = c("docx", "pptx", "xslx"), path = NULL, ...) {
+  fileext <- match.arg(fileext)
+
   str_remove(
     tempfile(
       ...,
-      tmpdir = path %||% "",
+      tmpdir = path %||% tempdir(), # "",
       fileext = paste0(".", fileext)
     ),
     paste0("^", .Platform$file.sep)
@@ -80,6 +82,7 @@ cli_vec_cls <- function(x) {
 #'  [vctrs::vec_fill_missing()]
 #' @rdname fill_with_pattern
 #' @export
+#' @importFrom vctrs vec_fill_missing
 fill_with_pattern <- function(x,
                               pattern = "^heading",
                               pattern_col = "style_name",
@@ -104,7 +107,7 @@ fill_with_pattern <- function(x,
   if (sum(pattern, na.rm = TRUE) == 0) {
     return(x)
   }
-  check_installed("vctrs", call = call)
+
   x[[col]] <- NA_character_
   x[pattern, ][[col]] <- x[pattern, ][[fill_col]]
   # x[!pattern, ][[col]] <- rep(NA_character_, nrow(x))[!pattern]

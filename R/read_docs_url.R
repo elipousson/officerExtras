@@ -76,7 +76,7 @@ prep_docs_export <- function(url, format = NULL) {
 
   list(
     "url" = url,
-    "filename" = office_temp(fileext)
+    "filename" = officer_temp(fileext)
   )
 }
 
