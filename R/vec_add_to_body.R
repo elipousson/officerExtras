@@ -13,8 +13,8 @@
 #' @inheritParams add_to_body
 #' @inheritDotParams add_to_body
 #' @inheritParams vctrs::vec_recycle_common
-#' @param .sep A bare function, such as [officer::body_add_break] or another object
-#'   passed to [add_to_body()] as the value parameter.
+#' @param .sep A bare function, such as [officer::body_add_break] or another
+#'   object passed to [add_to_body()] as the value parameter.
 #' @param .pos String passed to pos parameter if [add_to_body()] with .sep if
 #'   .sep is not a function. Defaults to "after".
 #' @examples
@@ -49,34 +49,37 @@
 #'   officer_summary(docx_example)
 #' }
 #' @export
+#' @importFrom vctrs vec_recycle_common vec_recycle vec_slice
 vec_add_to_body <- function(docx,
                             ...,
                             .sep = NULL,
                             .pos = "after",
                             .size = NULL,
                             .call = caller_env()) {
-  check_installed("vctrs", call = .call)
-
   params <- vctrs::vec_recycle_common(..., .size = .size, .call = .call)
 
-  param_size <- length(params[[1]])
+  .size <- .size %||% length(params[[1]])
 
   if (!is.null(.sep)) {
-    .sep <- vctrs::vec_recycle(.sep, size = param_size, call = call)
+    if (is_function(.sep)) {
+      .sep <- list(.sep)
+    }
+
+    .sep <- vctrs::vec_recycle(.sep, size = .size, x_arg = ".sep", call = call)
   }
 
-  for (i in c(1:param_size)) {
+  for (i in seq(.size)) {
     docx <- exec(
       .fn = add_to_body,
       docx = docx,
       !!!lapply(params, vctrs::vec_slice, i = i, error_call = call)
     )
 
-    if (!is.null(.sep) && (i < param_size)) {
+    if (!is.null(.sep) && (i < .size)) {
       if (is_function(.sep[[i]])) {
-        docx <- .sep(docx)
+        docx <- exec(.sep[[i]], docx)
       } else {
-        docx <- add_to_body(docx, value = .sep[[i]], pos = .pos)
+        docx <- add_to_body(docx, value = .sep[[i]], pos = .pos, call = .call)
       }
     }
   }

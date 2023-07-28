@@ -45,8 +45,8 @@ argument \code{path} from \link[officer]{read_docx}).}
 one of "after", "before", "on".}
   }}
 
-\item{.sep}{A bare function, such as \link[officer:body_add_break]{officer::body_add_break} or another object
-passed to \code{\link[=add_to_body]{add_to_body()}} as the value parameter.}
+\item{.sep}{A bare function, such as \link[officer:body_add_break]{officer::body_add_break} or another
+object passed to \code{\link[=add_to_body]{add_to_body()}} as the value parameter.}
 
 \item{.pos}{String passed to pos parameter if \code{\link[=add_to_body]{add_to_body()}} with .sep if
 .sep is not a function. Defaults to "after".}
