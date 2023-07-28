@@ -21,7 +21,6 @@
 #'   the value parameter. Optional. Defaults to `NULL`.
 #' @inheritParams check_officer
 #' @return A rdocx object.
-#' @details DETAILS
 #' @examples
 #' \dontrun{
 #' if (interactive()) {

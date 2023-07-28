@@ -38,9 +38,6 @@ functions until the document is \emph{opened and edited} with Microsoft Word. Th
 is part of how the OOXML \href{https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.altchunk?view=openxml-2.8.1}{AltChunk Class}
 works and can't be avoided.
 }
-\details{
-DETAILS
-}
 \examples{
 \dontrun{
 if (interactive()) {
