@@ -26,7 +26,7 @@ a function, such as officer::body_add_break()."><meta property="og:image" conten
     
     <a class="navbar-brand me-2" href="../index.html">officerExtras</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,8 +137,8 @@ one of "after", "before", "on".</p></dd>
 
 
 <dt>.sep</dt>
-<dd><p>A bare function, such as <a href="https://davidgohel.github.io/officer/reference/body_add_break.html" class="external-link">officer::body_add_break</a> or another object
-passed to <code><a href="add_to_body.html">add_to_body()</a></code> as the value parameter.</p></dd>
+<dd><p>A bare function, such as <a href="https://davidgohel.github.io/officer/reference/body_add_break.html" class="external-link">officer::body_add_break</a> or another
+object passed to <code><a href="add_to_body.html">add_to_body()</a></code> as the value parameter.</p></dd>
 
 
 <dt>.pos</dt>
@@ -174,15 +174,23 @@ mentioned in error messages as the source of the error. See the
 <span class="r-in"><span>  style <span class="op">=</span> <span class="st">"Normal"</span>,</span></span>
 <span class="r-in"><span>  .sep <span class="op">=</span> <span class="fu">officer</span><span class="fu">::</span><span class="va"><a href="https://davidgohel.github.io/officer/reference/body_add_break.html" class="external-link">body_add_break</a></span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vec_size():</span> `x` must be a vector, not a function.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="officer_summary.html">officer_summary</a></span><span class="op">(</span><span class="va">docx_example</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   doc_index content_type style_name text          level num_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         1 paragraph    heading 1  Sample text 1    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         2 paragraph    heading 2  Sample text 2    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         3 paragraph    Normal     Sample text 3    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    doc_index content_type style_name text            level num_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 paragraph    heading 1  <span style="color: #949494;">"</span>Sample text 1<span style="color: #949494;">"</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2 paragraph    heading 2  <span style="color: #949494;">"</span>Sample text 2<span style="color: #949494;">"</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         3 paragraph    Normal     <span style="color: #949494;">"</span>Sample text 3<span style="color: #949494;">"</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         4 paragraph    Normal     <span style="color: #949494;">"</span>Text<span style="color: #949494;">"</span>             <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         5 paragraph    <span style="color: #BB0000;">NA</span>         <span style="color: #949494;">""</span>                 <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         6 paragraph    Normal     <span style="color: #949494;">"</span>Text<span style="color: #949494;">"</span>             <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         7 paragraph    <span style="color: #BB0000;">NA</span>         <span style="color: #949494;">""</span>                 <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         8 paragraph    Normal     <span style="color: #949494;">"</span>Text<span style="color: #949494;">"</span>             <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         9 paragraph    <span style="color: #BB0000;">NA</span>         <span style="color: #949494;">""</span>                 <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        10 paragraph    Normal     <span style="color: #949494;">"</span>Text<span style="color: #949494;">"</span>             <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>        11 paragraph    <span style="color: #BB0000;">NA</span>         <span style="color: #949494;">""</span>                 <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>        12 paragraph    Normal     <span style="color: #949494;">"</span>Text<span style="color: #949494;">"</span>             <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"gt"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">gt_tbl</span> <span class="op">&lt;-</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="va"><a href="https://gt.rstudio.com/reference/gtcars.html" class="external-link">gtcars</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
@@ -197,7 +205,7 @@ mentioned in error messages as the source of the error. See the
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="officer_summary.html">officer_summary</a></span><span class="op">(</span><span class="va">docx_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 24 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    doc_index content_type style_name text  level num_id row_id is_header cell_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 paragraph    heading 1  Samp…    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span></span>
@@ -210,11 +218,7 @@ mentioned in error messages as the source of the error. See the
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         3 paragraph    heading 2  Samp…    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         4 table cell   <span style="color: #BB0000;">NA</span>         mfr      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      1 TRUE            1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         4 table cell   <span style="color: #BB0000;">NA</span>         Ford     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      2 FALSE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>         4 table cell   <span style="color: #BB0000;">NA</span>         Ferr…    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      3 FALSE           1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>         4 table cell   <span style="color: #BB0000;">NA</span>         model    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      1 TRUE            2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>         4 table cell   <span style="color: #BB0000;">NA</span>         GT       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      2 FALSE           2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>         4 table cell   <span style="color: #BB0000;">NA</span>         458 …    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      3 FALSE           2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>         5 paragraph    Normal     Samp…    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: col_span &lt;dbl&gt;, row_span &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
