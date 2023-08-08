@@ -75,17 +75,30 @@ works and can't be avoided.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">combine_docx</span><span class="op">(</span><span class="va">docx</span>, <span class="va">...</span>, pos <span class="op">=</span> <span class="st">"after"</span>, sep <span class="op">=</span> <span class="cn">NULL</span>, call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">combine_docx</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  docx <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .list <span class="op">=</span> <span class="fu">list2</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,</span>
+<span>  pos <span class="op">=</span> <span class="st">"after"</span>,</span>
+<span>  sep <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>docx</dt>
-<dd><p>A rdocx object or a file path with a docx file extension.</p></dd>
-
-
-<dt>...</dt>
+    <dl><dt>...</dt>
 <dd><p>Any number of additional rdocx objects or docx file paths.</p></dd>
+
+
+<dt>docx</dt>
+<dd><p>A rdocx object or a file path with a docx file extension.
+Defaults to <code>NULL</code>.</p></dd>
+
+
+<dt>.list</dt>
+<dd><p>Any number of additional rdocx objects or docx file paths passed
+as a list. Defaults to <code>list2()</code></p></dd>
 
 
 <dt>pos</dt>
@@ -94,9 +107,10 @@ one of "after", "before", "on".</p></dd>
 
 
 <dt>sep</dt>
-<dd><p>Separator to use docx files. A bare function, such as
-<a href="https://davidgohel.github.io/officer/reference/body_add_break.html" class="external-link">officer::body_add_break</a> or another object passed to <code><a href="add_to_body.html">add_to_body()</a></code> as
-the value parameter. Optional. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>Separator to use docx files. A bare function that takes a rdocx
+object as the only parameter, such as <a href="https://davidgohel.github.io/officer/reference/body_add_break.html" class="external-link">officer::body_add_break</a> or another
+object passed to <code><a href="add_to_body.html">add_to_body()</a></code> as the value parameter. Optional. Defaults
+to <code>NULL</code>.</p></dd>
 
 
 <dt>call</dt>

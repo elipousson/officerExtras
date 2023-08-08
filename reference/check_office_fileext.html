@@ -55,6 +55,7 @@
 <span>  <span class="va">x</span>,</span>
 <span>  arg <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  fileext <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"docx"</span>, <span class="st">"pptx"</span>, <span class="st">"xlsx"</span><span class="op">)</span>,</span>
+<span>  allow_null <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  call <span class="op">=</span> <span class="fu">caller_env</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
@@ -80,6 +81,12 @@
 <dt>fileext</dt>
 <dd><p>File extensions to allow without error. Defaults to "docx",
 "pptx", "xlsx".</p></dd>
+
+
+<dt>allow_null</dt>
+<dd><p>If <code>TRUE</code> and x is <code>NULL</code>, invisibly return <code>NULL</code>. If
+<code>FALSE</code> (default), error unless x is a character vector with file extension
+matching the supplied fileext value.</p></dd>
 
 
 <dt>call</dt>
