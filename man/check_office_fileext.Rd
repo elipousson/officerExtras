@@ -11,6 +11,7 @@ check_office_fileext(
   x,
   arg = caller_arg(x),
   fileext = c("docx", "pptx", "xlsx"),
+  allow_null = FALSE,
   call = caller_env(),
   ...
 )
@@ -29,6 +30,10 @@ check_xlsx_fileext(x, arg = caller_arg(x), call = caller_env(), ...)
 
 \item{fileext}{File extensions to allow without error. Defaults to "docx",
 "pptx", "xlsx".}
+
+\item{allow_null}{If \code{TRUE} and x is \code{NULL}, invisibly return \code{NULL}. If
+\code{FALSE} (default), error unless x is a character vector with file extension
+matching the supplied fileext value.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be

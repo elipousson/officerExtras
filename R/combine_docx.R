@@ -13,12 +13,16 @@
 #' Class](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.altchunk?view=openxml-2.8.1)
 #' works and can't be avoided.
 #'
-#' @param docx A rdocx object or a file path with a docx file extension.
 #' @param ... Any number of additional rdocx objects or docx file paths.
+#' @param .list Any number of additional rdocx objects or docx file paths passed
+#'   as a list. Defaults to [list2()]
+#' @param docx A rdocx object or a file path with a docx file extension.
+#'   Defaults to `NULL`.
 #' @inheritParams officer::body_add_docx
-#' @param sep Separator to use docx files. A bare function, such as
-#'   [officer::body_add_break] or another object passed to [add_to_body()] as
-#'   the value parameter. Optional. Defaults to `NULL`.
+#' @param sep Separator to use docx files. A bare function that takes a rdocx
+#'   object as the only parameter, such as [officer::body_add_break] or another
+#'   object passed to [add_to_body()] as the value parameter. Optional. Defaults
+#'   to `NULL`.
 #' @inheritParams check_officer
 #' @return A rdocx object.
 #' @examples
@@ -39,36 +43,39 @@
 #' @export
 #' @importFrom vctrs vec_recycle
 #' @importFrom officer body_add_docx
-combine_docx <- function(docx,
-                         ...,
+combine_docx <- function(...,
+                         docx = NULL,
+                         .list = list2(...),
                          pos = "after",
                          sep = NULL,
                          call = caller_env()) {
-  if (!is_rdocx(docx)) {
+  if (is_string(docx)) {
     check_office_fileext(docx, fileext = "docx", call = call)
     docx <- read_docx_ext(docx)
+  } else if (is.null(docx)) {
+    docx <- read_docx_ext(allow_null = TRUE)
   }
 
   check_officer(docx, what = "rdocx", call = call)
 
-  params <- list2(...)
-  size <- length(params)
+  .list <- .list %||% list2(...)
+  size <- length(.list)
 
   if (!is.null(sep)) {
     sep <- vctrs::vec_recycle(sep, size = size, x_arg = "size", call = call)
   }
 
   for (i in seq(size)) {
-    src <- params[[i]]
+    src <- .list[[i]]
 
-    if (is_rdocx(params[[i]])) {
+    if (is_rdocx(.list[[i]])) {
       src <- officer_temp(fileext = "docx")
-      write_officer(params[[i]], path = src)
+      write_officer(.list[[i]], path = src)
     }
 
     if (!is_fileext_path(src, "docx") || !file.exists(src)) {
       cli_abort(
-        "Every object in {.arg ...} must be a {.cls rdocx} object or a path to
+        "Every object in {.arg .list} must be a {.cls rdocx} object or a path to
         an existing docx file.",
         call = call
       )

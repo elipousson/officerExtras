@@ -78,6 +78,9 @@ check_block_list <- function(x,
 #'   "pptx", "xlsx".
 #' @param arg Argument name of object to check. Used to improve
 #'   [cli::cli_abort()] messages. Defaults to `caller_arg(x)`.
+#' @param allow_null If `TRUE` and x is `NULL`, invisibly return `NULL`. If
+#'   `FALSE` (default), error unless x is a character vector with file extension
+#'   matching the supplied fileext value.
 #' @inheritParams check_officer
 #' @export
 #' @importFrom rlang caller_arg current_env
@@ -85,9 +88,15 @@ check_block_list <- function(x,
 check_office_fileext <- function(x,
                                  arg = caller_arg(x),
                                  fileext = c("docx", "pptx", "xlsx"),
+                                 allow_null = FALSE,
                                  call = caller_env(),
                                  ...) {
   check_required(x, call = call)
+
+  if (allow_null && is_null(x)) {
+    return(invisible(NULL))
+  }
+
   check_character(fileext, allow_null = TRUE, call = call)
   fileext <- match.arg(fileext, several.ok = TRUE)
 

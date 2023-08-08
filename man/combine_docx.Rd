@@ -4,19 +4,31 @@
 \alias{combine_docx}
 \title{Combine multiple rdocx objects or docx files}
 \usage{
-combine_docx(docx, ..., pos = "after", sep = NULL, call = caller_env())
+combine_docx(
+  ...,
+  docx = NULL,
+  .list = list2(...),
+  pos = "after",
+  sep = NULL,
+  call = caller_env()
+)
 }
 \arguments{
-\item{docx}{A rdocx object or a file path with a docx file extension.}
-
 \item{...}{Any number of additional rdocx objects or docx file paths.}
+
+\item{docx}{A rdocx object or a file path with a docx file extension.
+Defaults to \code{NULL}.}
+
+\item{.list}{Any number of additional rdocx objects or docx file paths passed
+as a list. Defaults to \code{\link[=list2]{list2()}}}
 
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
 
-\item{sep}{Separator to use docx files. A bare function, such as
-\link[officer:body_add_break]{officer::body_add_break} or another object passed to \code{\link[=add_to_body]{add_to_body()}} as
-the value parameter. Optional. Defaults to \code{NULL}.}
+\item{sep}{Separator to use docx files. A bare function that takes a rdocx
+object as the only parameter, such as \link[officer:body_add_break]{officer::body_add_break} or another
+object passed to \code{\link[=add_to_body]{add_to_body()}} as the value parameter. Optional. Defaults
+to \code{NULL}.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
