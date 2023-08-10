@@ -52,6 +52,14 @@ read_officer <- function(filename = NULL,
       fileext <- str_extract_fileext(path)
     } else {
       fileext <- match.arg(fileext)
+
+      if ("docx" %in% fileext) {
+        path <- system.file(
+          "template", "styles_template.docx",
+          package = "officerExtras"
+        )
+      }
+
       new_obj <- switch(fileext,
         "docx" = "empty document",
         "pptx" = "pptx document with 0 slides",
