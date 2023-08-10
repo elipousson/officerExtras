@@ -2,7 +2,10 @@
 #'
 #' A combined function for setting cursor position with
 #' [officer::cursor_reach()], [officer::cursor_bookmark()], or using a doc_index
-#' value from [officer::docx_summary()].
+#' value from [officer::docx_summary()]. Defaults to using
+#' [officer::cursor_end()], [officer::cursor_begin()],
+#' [officer::cursor_backward()], or [officer::cursor_forward()] if keyword, id,
+#' and index are all `NULL`.
 #'
 #' @param docx A rdocx object.
 #' @param keyword,id A keyword string used to place cursor with
@@ -12,6 +15,9 @@
 #' @param index A integer matching a doc_index value appearing in a summary of
 #'   the docx object created with [officer::docx_summary()]. If index is for a
 #'   paragraph value, the text of the pargraph is used as a keyword.
+#' @param default Character string with one of the following options: `c("end",
+#'   "begin", "backward", "forward")` to set cursor position. Only used if
+#'   keyword, id, and index are all `NULL`.
 #' @param quiet If `FALSE` (default) warn when keyword is not found.
 #' @inheritParams check_docx
 #' @seealso
@@ -25,6 +31,7 @@ cursor_docx <- function(docx,
                         keyword = NULL,
                         id = NULL,
                         index = NULL,
+                        default = "end",
                         quiet = FALSE,
                         call = caller_env()) {
   check_docx(docx, call = call)
@@ -48,12 +55,20 @@ cursor_docx <- function(docx,
   }
 
   if (!is.null(index)) {
-    return(cursor_index(docx, index))
+    return(cursor_index(docx, index, call = call))
   }
 
-  cli_abort(
-    "{.arg keyword}, {.arg id}, or {.arg index} must be supplied.",
-    call = call
+  default <- arg_match0(
+    default,
+    c("end", "begin", "backward", "forward"),
+    error_call = call
+    )
+
+  switch (default,
+    "end" = officer::cursor_end(docx),
+    "begin" = officer::cursor_begin(docx),
+    "backward" = officer::cursor_backward(docx),
+    "forward" = officer::cursor_forward(docx)
   )
 }
 
