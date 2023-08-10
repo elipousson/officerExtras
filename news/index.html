@@ -49,13 +49,15 @@
 <div class="section level3">
 <h3 id="new-features-for-existing-functions-development-version">New features for existing functions<a class="anchor" aria-label="anchor" href="#new-features-for-existing-functions-development-version"></a></h3>
 <ul><li>Update <code><a href="../reference/add_to_body.html">add_to_body()</a></code> to support <code>gt_tbl</code> table input to the value parameter.</li>
-<li>Update <code><a href="../reference/read_officer.html">read_officer()</a></code> to return empty document if <code>allow_null = TRUE</code> and filename, path, and x all remain <code>NULL</code>.</li>
+<li>Update <code><a href="../reference/read_officer.html">read_officer()</a></code> to return empty document (based on included <code>styles_template.docx</code> file) if <code>allow_null = TRUE</code> and filename, path, and x all remain <code>NULL</code>.</li>
 <li>Update <code><a href="../reference/officer_summary.html">officer_summary()</a></code> to return a tibble data frame (and add <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a> to Imports).</li>
+<li>Update <code><a href="../reference/cursor_docx.html">cursor_docx()</a></code> to use a default cursor position function if keyword, id, and index are all <code>NULL</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h3>
 <ul><li>Add new <code><a href="../reference/vec_add_to_body.html">vec_add_to_body()</a></code> function with optional <code>.sep</code> parameter.</li>
 <li>Add new <code><a href="../reference/make_block_list.html">make_block_list()</a></code>, <code><a href="../reference/make_block_list.html">combine_blocks()</a></code>, <code><a href="../reference/officer_add_blocks.html">officer_add_blocks()</a></code>, and <code><a href="../reference/officer_add_blocks.html">add_blocks_to_body()</a></code> functions.</li>
+<li>Add new <code><a href="../reference/add_list_to_body.html">add_list_to_body()</a></code> function.</li>
 <li>Add new <code><a href="../reference/combine_docx.html">combine_docx()</a></code> function.</li>
 <li>Export <code><a href="../reference/is_officer.html">is_officer()</a></code> helper function.</li>
 </ul></div>
