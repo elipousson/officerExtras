@@ -9,6 +9,7 @@ cursor_docx(
   keyword = NULL,
   id = NULL,
   index = NULL,
+  default = "end",
   quiet = FALSE,
   call = caller_env()
 )
@@ -25,6 +26,9 @@ inserted at the front of the document.}
 the docx object created with \code{\link[officer:docx_summary]{officer::docx_summary()}}. If index is for a
 paragraph value, the text of the pargraph is used as a keyword.}
 
+\item{default}{Character string with one of the following options: \code{c("end", "begin", "backward", "forward")} to set cursor position. Only used if
+keyword, id, and index are all \code{NULL}.}
+
 \item{quiet}{If \code{FALSE} (default) warn when keyword is not found.}
 
 \item{call}{The execution environment of a currently
@@ -35,7 +39,10 @@ mentioned in error messages as the source of the error. See the
 \description{
 A combined function for setting cursor position with
 \code{\link[officer:cursor]{officer::cursor_reach()}}, \code{\link[officer:cursor]{officer::cursor_bookmark()}}, or using a doc_index
-value from \code{\link[officer:docx_summary]{officer::docx_summary()}}.
+value from \code{\link[officer:docx_summary]{officer::docx_summary()}}. Defaults to using
+\code{\link[officer:cursor]{officer::cursor_end()}}, \code{\link[officer:cursor]{officer::cursor_begin()}},
+\code{\link[officer:cursor]{officer::cursor_backward()}}, or \code{\link[officer:cursor]{officer::cursor_forward()}} if keyword, id,
+and index are all \code{NULL}.
 }
 \seealso{
 \code{\link[officer:cursor]{officer::cursor_begin()}}, \code{\link[officer:docx_summary]{officer::docx_summary()}}
