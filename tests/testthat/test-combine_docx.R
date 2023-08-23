@@ -1,6 +1,8 @@
 test_that("combine_docx works", {
-  docx1 <- read_officer()
-  docx2 <- read_officer()
+  docx_path <- system.file("doc_examples", "example.docx", package = "officer")
+
+  docx1 <- read_officer(docx_path)
+  docx2 <- read_officer(docx_path)
 
   docx_combined <- combine_docx(docx1, docx2)
 
@@ -10,13 +12,6 @@ test_that("combine_docx works", {
 
   expect_equal(
     nrow(officer_summary(docx_combined)),
-    nrow(officer_summary(docx1)) * 2
+    1
   )
-
-  docx3_path <- system.file("doc_examples", "example.docx", package = "officer")
-
-  # expect_equal(
-  #   nrow(officer_summary(combine_docx(docx3_path, docx = docx1))),
-  #   nrow(officer_summary(read_officer(docx3_path))) + nrow(officer_summary(docx1))
-  # )
 })

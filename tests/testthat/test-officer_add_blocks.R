@@ -3,7 +3,8 @@ test_that("officer_add_blocks works", {
 
   docx <- officer_add_blocks(
     docx,
-    blocks = officer::block_list("text", "text")
+    blocks = officer::block_list("text", "text"),
+    pos = "on"
   )
 
   docx_summary <- officer_summary(docx)
