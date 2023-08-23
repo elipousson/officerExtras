@@ -188,13 +188,28 @@ cli_doc_properties <- function(x, filename = NULL) {
 
 #' Get doc properties for a rdocx or rpptx object as a list
 #'
-#' @keywords internal
-#' @noRd
+#' [officer_properties()] is a variant on [officer::doc_properties()] that will
+#' warn instead of error if document properties can't be found
+#'
+#' @param x A rdocx or rpptx object.
+#' @param values A named list with new properties to replace existing document
+#'   properties before they are returned as a named list.
+#' @param keep.null Passed to [utils::modifyList()]. If `TRUE`, retain
+#'   properties in returned list even if they have `NULL` values.
+#' @returns A named list of existing document properties or (if values is
+#'   supplied) modified document properties.
+#' @inheritParams check_officer
+#' @export
 #' @importFrom officer doc_properties
 #' @importFrom rlang set_names
 #' @importFrom utils modifyList
 #' @importFrom cli cli_warn
-officer_properties <- function(x, values = list(), keep.null = FALSE) {
+officer_properties <- function(x,
+                               values = list(),
+                               keep.null = FALSE,
+                               call = caller_env()) {
+  check_officer(x, what = c("rdocx", "rpptx"), call = call)
+
   props <- rlang::try_fetch(
     officer::doc_properties(x),
     error = function(cnd) {
