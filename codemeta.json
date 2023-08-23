@@ -223,7 +223,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "274.092KB",
+  "fileSize": "318.76KB",
   "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
   "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras?branch=main",
