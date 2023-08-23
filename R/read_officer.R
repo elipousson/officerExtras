@@ -100,7 +100,9 @@ read_officer <- function(filename = NULL,
     )
   }
 
-  cli_doc_properties(x, filename)
+  if (fileext != "xlsx") {
+    cli_doc_properties(x, filename)
+  }
 
   invisible(x)
 }
