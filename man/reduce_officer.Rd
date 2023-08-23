@@ -11,7 +11,7 @@ reduce_officer(
  },
   value = NULL,
   ...,
-  .write_path = NULL
+  .path = NULL
 )
 }
 \arguments{
@@ -26,7 +26,7 @@ value as the second parameter, Defaults to anonymous function:
 
 \item{...}{Additional parameters passed to \code{\link[purrr:reduce]{purrr::reduce()}}.}
 
-\item{.write_path}{If .write_path not \code{NULL}, it should be a file path that
+\item{.path}{If .path not \code{NULL}, it should be a file path that
 is passed to \code{\link[=write_officer]{write_officer()}}, allowing you to modify a docx file and
 write it back to a file in a single function call.}
 }

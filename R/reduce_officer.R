@@ -10,7 +10,7 @@
 #' @param value A vector of values that are support by the function passed to
 #'   .f, Default: `NULL`
 #' @param ... Additional parameters passed to [purrr::reduce()].
-#' @param .write_path If .write_path not `NULL`, it should be a file path that
+#' @param .path If .path not `NULL`, it should be a file path that
 #'   is passed to [write_officer()], allowing you to modify a docx file and
 #'   write it back to a file in a single function call.
 #' @returns A rdocx, rpptx, or rxlsx object.
@@ -32,7 +32,7 @@ reduce_officer <- function(x = NULL,
                            },
                            value = NULL,
                            ...,
-                           .write_path = NULL) {
+                           .path = NULL) {
   if (!is_officer(x)) {
     x <- read_officer(x)
   }
@@ -48,5 +48,5 @@ reduce_officer <- function(x = NULL,
     return(x)
   }
 
-  write_officer(x, path = .write_path)
+  write_officer(x, path = .path)
 }
