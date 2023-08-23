@@ -13,7 +13,8 @@
 * Add new `make_block_list()`, `combine_blocks()`, `officer_add_blocks()`, and `add_blocks_to_body()` functions.
 * Add new `add_list_to_body()` function.
 * Add new `combine_docx()` function.
-* Export `is_officer()` helper function.
+* Add new `use_doc_version()` function.
+* Export `is_officer()` and `officer_properties()` helper functions.
 
 # officerExtras 0.0.1
 
