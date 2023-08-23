@@ -113,3 +113,30 @@ fill_with_pattern <- function(x,
   x[[col]] <- vctrs::vec_fill_missing(x[[col]], direction = direction)
   x
 }
+
+
+#' Extract pattern from a length 1 string
+#'
+#' @param string Passed to x parameter of [regmatches()]
+#' @inheritParams base::regexpr
+#' @noRd
+string_extract <- function(string, pattern, perl = TRUE) {
+  if (is.na(string)) {
+    return(NA_character_)
+  }
+
+  match <- regmatches(
+    x = string,
+    m = regexpr(
+      pattern = pattern,
+      text = string,
+      perl = perl
+    )
+  )
+
+  if (is_empty(match)) {
+    return(NULL)
+  }
+
+  match
+}
