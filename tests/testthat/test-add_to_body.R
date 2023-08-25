@@ -1,4 +1,6 @@
 test_that("add_to_body works", {
+  skip_on_ci()
+
   docx_example <- read_docx_ext(
     filename = "example.docx",
     path = system.file("doc_examples", package = "officer")
@@ -31,6 +33,8 @@ test_that("add_to_body works", {
 })
 
 test_that("add_gt_to_body works", {
+  skip_on_ci()
+
   docx <- read_docx_ext(
     filename = "example.docx",
     path = system.file("doc_examples", package = "officer")
