@@ -247,7 +247,7 @@ only used when <code>caption_location</code> is not set as <code>"embed"</code>.
 
 
 <dt>split</dt>
-<dd><p><em>Allow splitting</em></p>
+<dd><p><em>Allow splitting of a table row across pages</em></p>
 <p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>FALSE</code></p>
 <p>A logical value that indicates whether to activate the Word option
 <code>Allow row to break across pages</code>.</p></dd>
@@ -257,7 +257,7 @@ only used when <code>caption_location</code> is not set as <code>"embed"</code>.
 <dd><p><em>Keeping rows together</em></p>
 <p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>TRUE</code></p>
 <p>A logical value that indicates whether a table should use Word option
-<code>keep rows together</code>.</p></dd>
+<code>Keep rows together</code>.</p></dd>
 
 
 <dt>tablecontainer</dt>
@@ -338,18 +338,18 @@ are superseded by <code><a href="vec_add_to_body.html">vec_add_to_body()</a></co
 <span class="r-in"><span>    str <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Title 1"</span> <span class="op">=</span> <span class="va">tab_str</span>, <span class="st">"Title 2"</span> <span class="op">=</span> <span class="va">tab_str</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> rdocx document with 23 element(s)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rdocx document with 22 element(s)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * styles:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 Normal              heading 1              heading 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "paragraph"            "paragraph" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Default Paragraph Font           Normal Table                No List </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "character"                "table"            "numbering" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Titre 1 Car            Titre 2 Car          Light Shading </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Heading 1 Char         Heading 2 Char          Light Shading </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "character"            "character"                "table" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         List Paragraph                 header            En-tête Car </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         List Paragraph                 header            Header Char </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "paragraph"            "character" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 footer       Pied de page Car </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 footer            Footer Char </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            "paragraph"            "character" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * Content at cursor location:</span>
