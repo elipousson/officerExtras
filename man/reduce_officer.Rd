@@ -38,11 +38,11 @@ A rdocx, rpptx, or rxlsx object.
 }
 \examples{
 \dontrun{
-if(interactive()){
- x <- reduce_officer(value = LETTERS)
+if (interactive()) {
+  x <- reduce_officer(value = LETTERS)
 
- officer_summary(x)
- }
+  officer_summary(x)
+}
 }
 }
 \seealso{
