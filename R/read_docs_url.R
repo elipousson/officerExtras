@@ -77,7 +77,7 @@ prep_docs_export <- function(url, format = NULL) {
   filename <- str_remove(
     officer_temp(fileext = fileext),
     paste0("^", .Platform$file.sep)
-    )
+  )
 
   list(
     "url" = url,

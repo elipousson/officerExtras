@@ -62,9 +62,9 @@ cursor_docx <- function(docx,
     default,
     c("end", "begin", "backward", "forward"),
     error_call = call
-    )
+  )
 
-  switch (default,
+  switch(default,
     "end" = officer::cursor_end(docx),
     "begin" = officer::cursor_begin(docx),
     "backward" = officer::cursor_backward(docx),

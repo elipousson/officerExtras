@@ -235,7 +235,7 @@ doc_version <- function(filename = NULL,
     }
   }
 
- ver_num <- numeric_version(ver_str)
- cli_alert_info(msg)
- ver_str
+  ver_num <- numeric_version(ver_str)
+  cli_alert_info(msg)
+  ver_str
 }

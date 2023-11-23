@@ -25,7 +25,6 @@ add_list_to_body <- function(docx,
                              before = NULL,
                              after = "",
                              ...) {
-
   check_docx(docx)
   check_character(values)
   if (!keep_na && !all(is.na(values))) {
