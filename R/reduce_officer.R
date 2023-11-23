@@ -44,7 +44,7 @@ reduce_officer <- function(x = NULL,
     .init = x
   )
 
-  if (is.null(.write_path)) {
+  if (is.null(.path)) {
     return(x)
   }
 
