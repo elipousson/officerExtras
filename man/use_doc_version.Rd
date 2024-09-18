@@ -14,6 +14,7 @@ use_doc_version(
   sep = ".",
   property = "version",
   prefix = NULL,
+  path = NULL,
   ...,
   call = caller_env()
 )
@@ -24,6 +25,7 @@ doc_version(
   sep = ".",
   property = "version",
   allow_new = TRUE,
+  .default = c(0, 1, 0),
   call = caller_env()
 )
 }
@@ -53,6 +55,8 @@ version number, version is added to the filename as a prefix instead of a
 postfix. Defaults to \code{NULL}. Note handling of this parameter is expected to
 change in future versions of this function.}
 
+\item{path}{Passed to \code{\link[=write_officer]{write_officer()}}.}
+
 \item{...}{Additional parameters passed to \code{\link[=write_officer]{write_officer()}} if save is
 \code{TRUE}.}
 
@@ -64,6 +68,8 @@ mentioned in error messages as the source of the error. See the
 \item{allow_new}{If \code{TRUE} (default), return "0.1.0" if version can't be
 found in the filename or the properties of the input rdocx or rpptx object
 x.}
+
+\item{.default}{Specification for initial version.}
 }
 \value{
 Invisibly return a rdocx or rpptx object with an updated version

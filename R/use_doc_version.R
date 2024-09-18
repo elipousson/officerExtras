@@ -62,6 +62,7 @@
 #'   change in future versions of this function.
 #' @param ... Additional parameters passed to [write_officer()] if save is
 #'   `TRUE`.
+#' @param path Passed to [write_officer()].
 #' @returns Invisibly return a rdocx or rpptx object with an updated version
 #'   property.
 #' @export
@@ -72,6 +73,7 @@ use_doc_version <- function(filename = NULL,
                             sep = ".",
                             property = "version",
                             prefix = NULL,
+                            path = NULL,
                             ...,
                             call = caller_env()) {
   x <- x %||% read_officer(filename)
@@ -80,7 +82,7 @@ use_doc_version <- function(filename = NULL,
 
   ver <- get_version_components(ver_init)
 
-  # Adapted from desc::idesc_bump_version()
+  # Adapted from desc:::idesc_bump_version()
   # https://github.com/r-lib/desc/blob/c8463062edf4dc5501c66d4e8f6019743fae3fa3/R/version.R
   if (is.character(which)) {
     which <- match(which, c("major", "minor", "patch", "dev"))
@@ -120,6 +122,8 @@ use_doc_version <- function(filename = NULL,
     return(invisible(x))
   }
 
+  path <- path %||% dirname(filename)
+
   if (!is.null(prefix) && !identical(prefix, property)) {
     props <- officer_properties(x)
 
@@ -131,7 +135,7 @@ use_doc_version <- function(filename = NULL,
     prefix <- make.names(gsub("\\s+|[[:punct:]]", "", prefix), allow_ = TRUE)
 
     filename <- file.path(
-      dirname(filename),
+      path,
       paste0(prefix, "_", basename(filename))
     )
   }
@@ -146,8 +150,8 @@ use_doc_version <- function(filename = NULL,
       filename <- paste0(filename, "_", new_ver, ".", fileext)
     } else {
       filename <- file.path(
-        dirname(filename),
-        paste0(new_ver, "_", basename(filename), ".", fileext)
+        path,
+        paste0(basename(filename), "_", new_ver, ".", fileext)
       )
     }
   }
@@ -195,6 +199,7 @@ doc_str_ver <- function(filename, sep = ".") {
 #' @param allow_new If `TRUE` (default), return "0.1.0" if version can't be
 #'   found in the filename or the properties of the input rdocx or rpptx object
 #'   x.
+#' @param .default Specification for initial version.
 #' @inheritParams rlang::args_error_context
 #' @export
 doc_version <- function(filename = NULL,
@@ -202,6 +207,7 @@ doc_version <- function(filename = NULL,
                         sep = ".",
                         property = "version",
                         allow_new = TRUE,
+                        .default = c(0, 1, 0),
                         call = caller_env()) {
   if (!is.null(filename)) {
     ver_str <- string_extract(filename, pattern = version_sep(sep))
@@ -209,7 +215,7 @@ doc_version <- function(filename = NULL,
   }
 
   if (allow_new && is.null(ver_str) && is.null(x)) {
-    ver_str <- paste0(c(0, 1, 0), collapse = sep)
+    ver_str <- paste0(.default, collapse = sep)
     msg <- "Using initial version {.val {ver_str}}"
   }
 
@@ -230,7 +236,7 @@ doc_version <- function(filename = NULL,
       ver_str <- props[[property]]
       msg <- "Version {.val {ver_str}} found in document properties"
     } else if (allow_new) {
-      ver_str <- paste0(c(0, 1, 0), collapse = sep)
+      ver_str <- paste0(.default, collapse = sep)
       msg <- "Using initial version {.val {ver_str}}"
     }
   }
