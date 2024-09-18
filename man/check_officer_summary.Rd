@@ -60,7 +60,7 @@ tables are included in the document the summary was created from.
 }
 \seealso{
 Other summary functions: 
-\code{\link{officer_summary_levels}()},
-\code{\link{officer_summary}()}
+\code{\link{officer_summary}()},
+\code{\link{officer_summary_levels}()}
 }
 \concept{summary functions}
