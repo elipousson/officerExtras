@@ -1,0 +1,99 @@
+---
+title: "Extending the {officer} R package"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This article is a work-in-progress guide to officer and OOXML files to document my understanding of what options and approaches are available when extending the officer package.
+
+```{r setup}
+library(officer)
+library(officerExtras)
+```
+
+# Basics of working with officer objects and OOXML files
+
+First, we need to read in an example docx and pptx file to work with:
+
+```{r}
+docx <- read_officer(
+  system.file("doc_examples/example.docx", package = "officer")
+)
+
+pptx <- read_officer(
+  system.file("doc_examples/example.pptx", package = "officer")
+)
+```
+
+Both files are built using a standard format known as [Open Office XML](https://en.wikipedia.org/wiki/Office_Open_XML). An individual Word, PowerPoint or Excel document is a zipped collection of XML files (along wtih any media files embedded within the document). Functions like `officer::read_docx()` or the `read_officer()` wrapper function in this package unzip Microsoft Office files into a temporary package directory to allow convenient access to all of the component XML files.
+
+You can access this file path by selecting the named "package_dir" attribute:
+
+```{r}
+list.files(docx[["package_dir"]])
+
+list.files(pptx[["package_dir"]])
+```
+
+These read functions (along with more specialized functions such as `doc_properties()` or `slide_size()`) are accessing data from these component XML files.
+
+Some data is stored when the file is initially loaded. For example, rpptx objects have stored "core_properties" and rdocx objects have "doc_properties" that are both pulled in from the "docProps/core.xml" file.
+
+```{r}
+pptx$core_properties$data
+
+docx$doc_properties$data
+```
+
+These functions use the [{xml2} package](https://xml2.r-lib.org/) to extract data using `xml2::xml_child()`, `xml2::xml_attrs()`, and others. We can read the document xml to explore this structure in detail:
+
+```{r}
+library(xml2)
+
+path <- file.path(docx$package_dir, "word/document.xml")
+
+docx_xml <- read_xml(path)
+
+docx_xml
+```
+
+PowerPoint files have a different set of XML files:
+
+
+```{r}
+pptx_xml <- xml2::read_xml(file.path(pptx$package_dir, "ppt/presentation.xml"))
+
+pptx_xml
+```
+
+officer also has functions that can be used to **write or modify** data in these files such as `set_doc_properties()` or `set_notes()`.
+
+These functions are built around a helper
+`to_wml()` provides a set of methods to convert objects created by officer functions into strings following the WordprocessingML specifications. This is the `to_wml()` method for docx_settings (it is used internally by `set_doc_properties()`):
+
+```{r}
+to_wml.docx_settings <- function(x, add_ns = FALSE, ...) {
+  out <- paste0(
+    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n",
+    "<w:settings xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">",
+    sprintf("<w:zoom w:percent=\"%.0f\"/>", x$zoom * 100),
+    sprintf("<w:defaultTabStop w:val=\"%.0f\"/>", x$default_tab_stop * 1440),
+    sprintf("<w:hyphenationZone w:val=\"%.0f\"/>", x$hyphenation_zone * 1440),
+    sprintf("<w:compat><w:compatSetting w:name=\"compatibilityMode\" w:uri=\"http://schemas.microsoft.com/office/word\" w:val=\"%s\"/></w:compat>", x$compatibility_mode),
+    sprintf("<w:decimalSymbol w:val=\"%s\"/>", x$decimal_symbol),
+    sprintf("<w:listSeparator w:val=\"%s\"/>", x$list_separator),
+    if (x$even_and_odd_headers) "<w:evenAndOddHeaders/>",
+    "</w:settings>"
+  )
+  out
+}
+```
+
+# Working with rdocx objects
+
+TODO: Fill in this section.
