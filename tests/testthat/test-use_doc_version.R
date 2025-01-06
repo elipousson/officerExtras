@@ -1,5 +1,4 @@
 test_that("use_doc_version works", {
-
   example_path <- system.file("doc_examples/example.docx", package = "officer")
 
   withr::with_tempdir({

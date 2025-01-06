@@ -1,5 +1,4 @@
 test_that("reduce_officer works", {
-
   example_path <- system.file("doc_examples/example.docx", package = "officer")
   x <- reduce_officer(example_path, value = LETTERS)
 
