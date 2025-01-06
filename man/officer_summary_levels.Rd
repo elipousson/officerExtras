@@ -12,6 +12,7 @@ officer_summary_levels(
   fill_col = "text",
   direction = c("down", "up", "downup", "updown"),
   ...,
+  strict = FALSE,
   call = caller_env()
 )
 }
@@ -47,6 +48,10 @@ published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICEN
 the \code{{docxtractr}} package by Bob Rudis.}
   }}
 
+\item{strict}{If \code{TRUE}, error unless all values provided to \code{level} are
+present in the \code{levels_from} column. Defaults to \code{FALSE} which warns if
+invalid values are present.}
+
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
@@ -57,10 +62,10 @@ A summary data frame with additional columns based on the supplied
 levels.
 }
 \description{
-This function works with \code{\link[=fill_with_pattern]{fill_with_pattern()}} to help convert hierarchically
-organized text, e.g. text with leveled headings or other styles into a
-data.frame where new columns hold the value of the preceding (or succeeding)
-heading text.
+\code{\link[=officer_summary_levels]{officer_summary_levels()}} works with \code{\link[=fill_with_pattern]{fill_with_pattern()}} to help convert
+hierarchically organized text, e.g. text with leveled headings or other
+styles into a data.frame where new columns hold the value of the preceding
+(or succeeding) heading text.
 }
 \seealso{
 Other summary functions: 
