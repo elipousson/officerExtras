@@ -17,6 +17,10 @@
 * Add new `use_doc_version()` function.
 * Export `is_officer()` and `officer_properties()` helper functions.
 
+## Other changes
+
+* Update included `styles_template.docx` file to use Aptos as base font.
+
 # officerExtras 0.0.1
 
 * Add new `officer_summary_levels()` and `read_docs_url()` functions.
