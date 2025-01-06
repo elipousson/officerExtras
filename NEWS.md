@@ -6,6 +6,7 @@
 * Update `read_officer()` to return empty document (based on included `styles_template.docx` file) if `allow_null = TRUE` and filename, path, and x all remain `NULL`.
 * Update `officer_summary()` to return a tibble data frame (and add `{tibble}` to Imports).
 * Update `cursor_docx()` to use a default cursor position function if keyword, id, and index are all `NULL`.
+* Add `strict` argument to `officer_summary_levels()` to warn if `levels` contains invalid values.
 
 ## New functions
 
