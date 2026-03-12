@@ -25,6 +25,8 @@ officer).}
   \describe{
     \item{\code{title,subject,creator,description}}{text fields}
     \item{\code{created}}{a date object}
+    \item{\code{hyperlink_base}}{a string specifying the base URL for relative hyperlinks
+in the document (only for rdocx).}
     \item{\code{values}}{a named list (names are field names), each element is a single
 character value specifying value associated with the corresponding field name.
 If \code{values} is provided, argument \code{...} will be ignored.}

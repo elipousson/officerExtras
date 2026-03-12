@@ -42,7 +42,7 @@ item 1 level will be 1, item 2 level will be 2.}
 
 \item{...}{further arguments passed to or from other methods. When
 adding a \code{ggplot} object or \code{plot_instr}, these arguments will be used
-by png function.}
+by the png function.}
 
 \item{call}{The execution environment of a currently
 running function, e.g. \code{caller_env()}. The function will be

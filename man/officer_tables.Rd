@@ -48,7 +48,7 @@ and may be modified or removed. Defaults to \code{NULL}.}
 single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
 character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
 published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
-the \code{{docxtractr}} package by Bob Rudis.}
+the 'docxtractr' package by Bob Rudis.}
 
 \item{...}{Additional parameters passed to \code{\link[=fill_with_pattern]{fill_with_pattern()}}.}
 

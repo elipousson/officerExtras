@@ -163,7 +163,13 @@ to value has a label for this value. Defaults to "title".}
 \item{caption_style}{Passed to style for \code{\link[officer:body_add_caption]{officer::body_add_caption()}}.
 Defaults to same value as style.}
 
-\item{autonum}{an object generated with function \link[officer]{run_autonum}}
+\item{autonum}{Automatic Table Numbering
+
+\verb{scalar<logical>} // \emph{default:} \code{TRUE}
+
+A logical value that indicates whether a table should use Words built-in
+auto table numbering option in the caption.
+\verb{Automatic Table Numbering}.}
 
 \item{.f}{Any function that takes a docx and value parameter and returns a
 rdocx object. A keyword parameter must also be supported if named is TRUE.

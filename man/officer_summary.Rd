@@ -29,7 +29,7 @@ allows columns for either a docx or pptx summary.}
 single line. If \code{TRUE}, line breaks in table cells are preserved as a "\\n"
 character. This feature is adapted from \code{docxtractr::docx_extract_tbl()}
 published under a \href{https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE}{MIT licensed} in
-the \code{{docxtractr}} package by Bob Rudis.}
+the 'docxtractr' package by Bob Rudis.}
 
 \item{as_tibble}{If \code{TRUE} (default), return a tibble data frame.}
 
