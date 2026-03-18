@@ -1,0 +1,221 @@
+# officerExtras
+
+The goal of officerExtras is to provide helper and convenience functions
+for the [{officer}](https://github.com/davidgohel/officer) package.
+
+## Installation
+
+You can install the development version of officerExtras like so:
+
+``` r
+pak::pkg_install("elipousson/officerExtras")
+```
+
+## Usage
+
+The officerExtras package provides a variety of helper functions to
+simplify the process of working with officer. For example, a single
+[`read_officer()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)
+function works with docx, pptx, or xlsx files:
+
+``` r
+library(officerExtras)
+
+docx <- read_officer(filename = "example.docx", path = system.file("doc_examples", package = "officer"))
+
+pptx <- read_officer(filename = "example.pptx", path = system.file("doc_examples", package = "officer"))
+```
+
+officer uses a print method to save rdocx, rpptx, or rxlsx objects back
+to files. officerExtras provides a
+[`write_officer()`](https://elipousson.github.io/officerExtras/reference/write_officer.md)
+with that adds the option to pass a filename and path separately and
+pass document properties to
+[`officer::doc_properties()`](https://davidgohel.github.io/officer/reference/doc_properties.html).
+
+``` r
+withr::with_tempdir({
+  write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
+
+  example_docx <- read_officer("write-example.docx")
+
+  officer::doc_properties(example_docx)
+})
+#>               tag                                value
+#> 1           title Document Title set by doc_properties
+#> 2         subject                    Microsoft Word, R
+#> 3         creator                               author
+#> 4        keywords                                     
+#> 5     description                   these are comments
+#> 6  lastModifiedBy                        officerExtras
+#> 7        revision                                   12
+#> 8         created                 2017-04-26T13:10:00Z
+#> 9        modified                 2023-06-22T11:04:39Z
+#> 10       category
+```
+
+The package also wraps useful functions from a few other packages.
+[`convert_docx()`](https://elipousson.github.io/officerExtras/reference/convert_docx.md)
+uses
+[`rmarkdown::pandoc_convert()`](https://pkgs.rstudio.com/rmarkdown/reference/pandoc_convert.html)
+to convert a rdocx object or a Word document to any other pandoc
+supported output format:
+
+``` r
+convert_docx(docx, to = "markdown")
+```
+
+## Related projects
+
+There are a number of related projects for extending officer or working
+with [OOXML](https://en.wikipedia.org/wiki/Office_Open_XML) in R and
+other languages.
+
+### Extending officer
+
+- [gto](https://github.com/GSK-Biostatistics/gto): allow users to insert
+  gt tables into officeverse.
+- [onbrand](https://github.com/john-harrold/onbrand): A R package to
+  provide a systematic method to script support for different Word of
+  PowerPoint templates.
+- [officerWinTools](https://github.com/joshmire/officerWinTools): A R
+  package to complement the officer package when using Microsoft Office
+  in a Windows environment.
+
+### Working with Microsoft Office documents with R
+
+- [docxtractr](https://github.com/hrbrmstr/docxtractr): Extract Tables
+  from Microsoft Word Documents with R
+- [stylex](https://github.com/niszet/stylex): A R package to help update
+  docx style files.
+- [deef](https://github.com/prcleary/deef): Data extractor scripts for
+  electronic forms, compatible with Microsoft Word files.
+
+### Other tools for working with Microsoft Office documents
+
+- [python-docx](https://github.com/python-openxml/python-docx):Create
+  and modify Word documents with Python
+- [Docx-templates](https://github.com/guigrpa/docx-templates):
+  Template-based docx report creation for both Node and the browser
+- [docx](https://github.com/dolanmiu/docx): Easily generate and modify
+  .docx files with JS/TS. Works for Node and on the Browser.
+- [docxtemplater](https://github.com/open-xml-templating/docxtemplater):
+  Generate docx, pptx, and xlsx from templates (Word, Powerpoint and
+  Excel documents), from Node.js, the Browser and the command line
+
+# Package index
+
+## All functions
+
+- [`add_list_to_body()`](https://elipousson.github.io/officerExtras/reference/add_list_to_body.md)
+  :
+
+  Add a formatted list of items to a `rdocx` object
+
+- [`add_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_text_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_xml_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_gt_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_gg_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_value_with_keys()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  [`add_str_with_keys()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+  : Add a xml string, text paragraph, or gt object at a specified
+  position in a rdocx object
+
+- [`check_office_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
+  [`check_docx_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
+  [`check_pptx_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
+  [`check_xlsx_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
+  : Check file path for a docx, pptx, or xlsx file extension
+
+- [`check_officer()`](https://elipousson.github.io/officerExtras/reference/check_officer.md)
+  [`check_docx()`](https://elipousson.github.io/officerExtras/reference/check_officer.md)
+  [`check_pptx()`](https://elipousson.github.io/officerExtras/reference/check_officer.md)
+  [`check_xlsx()`](https://elipousson.github.io/officerExtras/reference/check_officer.md)
+  [`check_block_list()`](https://elipousson.github.io/officerExtras/reference/check_officer.md)
+  : Check if x is a rdocx, rpptx, or rxlsx object
+
+- [`check_officer_summary()`](https://elipousson.github.io/officerExtras/reference/check_officer_summary.md)
+  : Check a summary data.frame created from a rdocx or rpptx object
+
+- [`combine_docx()`](https://elipousson.github.io/officerExtras/reference/combine_docx.md)
+  : Combine multiple rdocx objects or docx files
+
+- [`convert_docx()`](https://elipousson.github.io/officerExtras/reference/convert_docx.md)
+  : Convert an rodcx object or Word file to another format with pandoc
+
+- [`cursor_docx()`](https://elipousson.github.io/officerExtras/reference/cursor_docx.md)
+  : Set cursor position in rdocx object based on keyword, id, or index
+
+- [`dims_docx_ext()`](https://elipousson.github.io/officerExtras/reference/dims_docx_ext.md)
+  : Get page and block layout dimensions from an rdocx object
+
+- [`fill_with_pattern()`](https://elipousson.github.io/officerExtras/reference/fill_with_pattern.md)
+  : Fill a new column based on an existing column depending on a pattern
+
+- [`is_officer()`](https://elipousson.github.io/officerExtras/reference/is_officer.md)
+  [`is_rdocx()`](https://elipousson.github.io/officerExtras/reference/is_officer.md)
+  [`is_rpptx()`](https://elipousson.github.io/officerExtras/reference/is_officer.md)
+  [`is_block_list()`](https://elipousson.github.io/officerExtras/reference/is_officer.md)
+  : Is this object an officer class object?
+
+- [`make_block_list()`](https://elipousson.github.io/officerExtras/reference/make_block_list.md)
+  [`combine_blocks()`](https://elipousson.github.io/officerExtras/reference/make_block_list.md)
+  **\[experimental\]** : Make a list of blocks to add to a Word document
+  or PowerPoint presentation
+
+- [`officer_add_blocks()`](https://elipousson.github.io/officerExtras/reference/officer_add_blocks.md)
+  [`add_blocks_to_body()`](https://elipousson.github.io/officerExtras/reference/officer_add_blocks.md)
+  **\[experimental\]** : Add a list of blocks into a Word document or
+  PowerPoint presentation
+
+- [`officer_media()`](https://elipousson.github.io/officerExtras/reference/officer_media.md)
+  : Copy media from a docx or pptx file or a rdocx or rpptx object to a
+  target folder
+
+- [`officer_open()`](https://elipousson.github.io/officerExtras/reference/officer_open.md)
+  : Preview a rdocx, rpptx, or rxlsx object in local default
+  applications
+
+- [`officer_properties()`](https://elipousson.github.io/officerExtras/reference/officer_properties.md)
+  : Get doc properties for a rdocx or rpptx object as a list
+
+- [`officer_summary()`](https://elipousson.github.io/officerExtras/reference/officer_summary.md)
+  : Summarize a rdocx or rpptx object
+
+- [`officer_summary_levels()`](https://elipousson.github.io/officerExtras/reference/officer_summary_levels.md)
+  : Create new columns to an officer summary data.frame based on
+  specific levels
+
+- [`officer_tables()`](https://elipousson.github.io/officerExtras/reference/officer_tables.md)
+  [`officer_table()`](https://elipousson.github.io/officerExtras/reference/officer_tables.md)
+  : Get tables from a rdocx or rpptx object
+
+- [`read_docs_url()`](https://elipousson.github.io/officerExtras/reference/read_docs_url.md)
+  : Read a Google Docs document, Slides, or Sheets URL to a rdocx,
+  rpptx, or rxlsx object
+
+- [`read_officer()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)
+  [`read_docx_ext()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)
+  [`read_pptx_ext()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)
+  [`read_xlsx_ext()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)
+  : Read a docx, pptx, potx, or xlsx file or use an existing object from
+  officer if provided
+
+- [`reduce_officer()`](https://elipousson.github.io/officerExtras/reference/reduce_officer.md)
+  : Reduce a list to a single officer object
+
+- [`use_doc_version()`](https://elipousson.github.io/officerExtras/reference/use_doc_version.md)
+  [`doc_version()`](https://elipousson.github.io/officerExtras/reference/use_doc_version.md)
+  **\[experimental\]** : Update the version of a document and optionally
+  save a new version of the input document
+
+- [`vec_add_to_body()`](https://elipousson.github.io/officerExtras/reference/vec_add_to_body.md)
+  :
+
+  Add a vector of objects to a rdocx object using
+  [`add_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md)
+
+- [`write_officer()`](https://elipousson.github.io/officerExtras/reference/write_officer.md)
+  : Write a rdocx, rpptx, or rxlsx object to a file
+

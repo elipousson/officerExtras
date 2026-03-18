@@ -112,7 +112,7 @@ and may be modified or removed. Defaults to <code>NULL</code>.</p></dd>
 single line. If <code>TRUE</code>, line breaks in table cells are preserved as a "\n"
 character. This feature is adapted from <code>docxtractr::docx_extract_tbl()</code>
 published under a <a href="https://github.com/hrbrmstr/docxtractr/blob/master/LICENSE" class="external-link">MIT licensed</a> in
-the <code>{docxtractr}</code> package by Bob Rudis.</p></dd>
+the 'docxtractr' package by Bob Rudis.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -131,8 +131,8 @@ to the appropriate type using <code><a href="https://rdrr.io/r/utils/type.conver
 
 <dt id="arg-nm">nm<a class="anchor" aria-label="anchor" href="#arg-nm"></a></dt>
 <dd><p>Names to use for returned list of tables. If <code>NULL</code> (default), the
-names are set to the doc_index values using the pattern
-"doc_index_&lt;doc_index_number&gt;".</p></dd>
+names are set to the table_index values using the pattern
+"table_index_&lt;table_index_number&gt;".</p></dd>
 
 
 <dt id="arg-call">call<a class="anchor" aria-label="anchor" href="#arg-call"></a></dt>
@@ -165,33 +165,20 @@ respectively not display any call or hard-code a code to display.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">officer_tables</span><span class="op">(</span><span class="va">docx_example</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $doc_index_16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               Petals   Internode                 Sepal</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        5,621498349        &lt;NA&gt; 2,46210657918,2034091</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        4,994616997          AA           2,429320759</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        4,767504884        &lt;NA&gt;                   AAA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4         25,9242382        &lt;NA&gt;           2,066051345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        6,489375001 25,21130805           2,901582763</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6          5,7858682 25,52433147           2,655642742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7        5,645575295 Merged cell           2,278691288</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8        4,828953215        &lt;NA&gt;           2,238467716</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9        6,783500773        &lt;NA&gt;           2,202762147</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10       5,395076839        &lt;NA&gt;           2,538375992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11       4,683617783  29,2459239           2,601945544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 NoteNew line note        &lt;NA&gt;                  &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               Bract</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                              &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                       17,65204912</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                              &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                       18,37915478</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  17,3130473717,0721572418,2902189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                              &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                              &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                       19,87376227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                       19,85326662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                      19,56545356</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                      18,95335451</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                             &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $table_index_1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Petals   Internode       Sepal                                Bract</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  5,621498349        NULL 2,462106579                           18,2034091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  4,994616997          AA 2,429320759                          17,65204912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  4,767504884        NULL         AAA                                 NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   25,9242382        NULL 2,066051345                          18,37915478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  6,489375001 25,21130805 2,901582763 17,31304737, 17,07215724, 18,2902189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    5,7858682 25,52433147 2,655642742                                 NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  5,645575295 Merged cell 2,278691288                                 NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  4,828953215        NULL 2,238467716                          19,87376227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  6,783500773        NULL 2,202762147                          19,85326662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 5,395076839        NULL 2,538375992                          19,56545356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 4,683617783  29,2459239 2,601945544                          18,95335451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12        Note        NULL        NULL                        New line note</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">pptx_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_officer.html">read_pptx_ext</a></span><span class="op">(</span></span></span>
@@ -217,7 +204,7 @@ respectively not display any call or hard-code a code to display.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
