@@ -28,8 +28,8 @@
 #' @param type_convert If `TRUE`, convert columns for the returned data frames
 #'   to the appropriate type using [utils::type.convert()].
 #' @param nm Names to use for returned list of tables. If `NULL` (default), the
-#'   names are set to the doc_index values using the pattern
-#'   "doc_index_<doc_index_number>".
+#'   names are set to the table_index values using the pattern
+#'   "table_index_<table_index_number>".
 #' @inheritParams officer_summary
 #' @inheritParams rlang::args_error_context
 #' @return A list of data frames or, if stack is `TRUE`, a single data frame.
@@ -53,16 +53,18 @@
 #' @export
 #' @importFrom utils type.convert
 #' @importFrom rlang set_names
-officer_tables <- function(x,
-                           index = NULL,
-                           has_header = TRUE,
-                           col = NULL,
-                           preserve = FALSE,
-                           ...,
-                           stack = FALSE,
-                           type_convert = FALSE,
-                           nm = NULL,
-                           call = caller_env()) {
+officer_tables <- function(
+  x,
+  index = NULL,
+  has_header = TRUE,
+  col = NULL,
+  preserve = FALSE,
+  ...,
+  stack = FALSE,
+  type_convert = FALSE,
+  nm = NULL,
+  call = caller_env()
+) {
   check_required(x)
   if (is_officer(x, c("rdocx", "rpptx"))) {
     x <- officer_summary(x, preserve = preserve, call = call)
@@ -78,21 +80,18 @@ officer_tables <- function(x,
 
   index <- index %||% officer_table_index(x)
 
-  tables <- vector("list", length(index))
-
-  tables <-
-    map(
-      index,
-      function(i) {
-        officer_table(
-          x = x,
-          index = i,
-          has_header = has_header,
-          col = col,
-          call = call
-        )
-      }
-    )
+  tables <- map(
+    index,
+    function(i) {
+      officer_table(
+        x = x,
+        index = i,
+        has_header = has_header,
+        col = col,
+        call = call
+      )
+    }
+  )
 
   if (type_convert) {
     tables <- lapply(tables, utils::type.convert, as.is = TRUE)
@@ -111,7 +110,7 @@ officer_tables <- function(x,
     return(do.call("rbind", tables))
   }
 
-  set_names(tables, nm %||% glue("doc_index_{index}"))
+  set_names(tables, nm %||% glue("table_index_{index}"))
 }
 
 #' @rdname officer_tables
@@ -119,12 +118,14 @@ officer_tables <- function(x,
 #' @export
 #' @importFrom rlang has_name set_names
 #' @importFrom utils head tail
-officer_table <- function(x,
-                          index = NULL,
-                          has_header = TRUE,
-                          col = NULL,
-                          ...,
-                          call = caller_env()) {
+officer_table <- function(
+  x,
+  index = NULL,
+  has_header = TRUE,
+  col = NULL,
+  ...,
+  call = caller_env()
+) {
   check_string(col, allow_null = TRUE, call = call)
 
   if (!is_null(col)) {
@@ -133,7 +134,7 @@ officer_table <- function(x,
 
   # Subset by doc_index or content_type
   if (!is.null(index)) {
-    table_cells <- subset_index(x, index)
+    table_cells <- subset_index(x, index, index_type = "table_index")
   } else {
     table_cells <- subset_type(x, "table cell")
   }
@@ -175,11 +176,10 @@ officer_table <- function(x,
 
       body_col <- set_names(body_col, ncol(body_cells) + 1)
 
-      body_cells <-
-        cbind(
-          body_cells,
-          body_col
-        )
+      body_cells <- cbind(
+        body_cells,
+        body_col
+      )
     }
 
     if (is_false(has_header)) {
@@ -215,7 +215,9 @@ officer_table <- function(x,
 #' @importFrom rlang has_name
 officer_table_index <- function(x) {
   tables <- subset_type(x, "table cell")
-  if (has_name(x, "doc_index")) {
+  if (has_name(x, "table_index")) {
+    unique(tables[["table_index"]])
+  } else if (has_name(x, "doc_index")) {
     unique(tables[["doc_index"]])
   } else if (has_name(x, "id")) {
     unique(tables[["id"]])
@@ -224,19 +226,17 @@ officer_table_index <- function(x) {
 
 #' @keywords internal
 #' @noRd
-officer_table_pivot <- function(x,
-                                call = caller_env()) {
-  tbl <-
-    data.frame(
-      tapply(
-        x[["text"]],
-        list(
-          row_id = x[["row_id"]],
-          cell_id = x[["cell_id"]]
-        ),
-        FUN = I
-      )
+officer_table_pivot <- function(x, call = caller_env()) {
+  tbl <- data.frame(
+    tapply(
+      x[["text"]],
+      list(
+        row_id = x[["row_id"]],
+        cell_id = x[["cell_id"]]
+      ),
+      FUN = I
     )
+  )
 
   rownames(tbl) <- NULL
 

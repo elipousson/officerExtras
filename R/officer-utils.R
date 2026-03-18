@@ -37,8 +37,11 @@ subset_style <- function(x, style) {
 #' @keywords internal
 #' @noRd
 #' @importFrom rlang has_name
-subset_index <- function(x, index) {
-  if (has_name(x, "doc_index")) {
+subset_index <- function(x, index, index_type = NULL) {
+  if (!is.null(index_type) && has_name(x, index_type)) {
+    stopifnot(is_string(index_type))
+    x[x[[index_type]] %in% index, ]
+  } else if (has_name(x, "doc_index")) {
     x[x[["doc_index"]] %in% index, ]
   } else if (has_name(x, "id")) {
     x[x[["id"]] %in% index, ]
