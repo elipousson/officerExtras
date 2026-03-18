@@ -20,7 +20,7 @@ combine_docx(
 Defaults to \code{NULL}.}
 
 \item{.list}{Any number of additional rdocx objects or docx file paths passed
-as a list. Defaults to \code{\link[=list2]{list2()}}}
+as a list. Defaults to \code{\link[rlang:list2]{rlang::list2()}}}
 
 \item{pos}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
