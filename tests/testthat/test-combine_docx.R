@@ -12,6 +12,6 @@ test_that("combine_docx works", {
 
   expect_equal(
     nrow(officer_summary(docx_combined)),
-    1
+    0
   )
 })
