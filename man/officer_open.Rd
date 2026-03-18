@@ -16,13 +16,17 @@ officer_open(
 \item{x}{A rdocx, rpptx, or rxlsx object to save. Document properties won't
 be set for rxlsx objects.}
 
-\item{path}{Optional. Set as temporary file with file extension matching type of input object x.}
+\item{path}{Optional. Set as temporary file with file extension matching type
+of input object \code{x}.}
 
 \item{overwrite}{Defaults to \code{FALSE}.}
+
+\item{interactive}{If \code{FALSE}, warn the user and return \code{x}.}
 }
 \value{
-Input object x
+Input object \code{x} without modification.
 }
 \description{
-Preview a rdocx, rpptx, or rxlsx object in local default applications
+\code{officer_open()} uses \code{officer::open_file()} to open a file ceated from a
+rdocx, rpptx, or rxlsx object.
 }
