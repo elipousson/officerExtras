@@ -84,10 +84,11 @@ read_officer <- function(
       ),
       error = function(cnd) {
         cli::cli_abort("{.val {fileext}} file can't be read.", parent = cnd)
-      },
-      warning = function(cnd) {
-        cli::cli_warn(message = cnd)
       }
+      # TODO: Return output but allow display of warning w/ cli
+      # warning = function(cnd) {
+      #   cli::cli_warn(message = cnd)
+      # }
     )
   } else {
     if (has_input_file) {
@@ -242,8 +243,8 @@ officer_properties <- function(
 
   utils::modifyList(
     rlang::set_names(as.list(props[["value"]]), props[["tag"]]),
-    values,
-    keep.null
+    val = values,
+    keep.null = keep.null
   )
 }
 
