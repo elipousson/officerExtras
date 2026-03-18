@@ -5,7 +5,14 @@
 \title{Read a Google Docs document, Slides, or Sheets URL to a rdocx, rpptx, or
 rxlsx object}
 \usage{
-read_docs_url(url, format = NULL, filename = NULL, path = NULL, quiet = TRUE)
+read_docs_url(
+  url,
+  format = NULL,
+  filename = NULL,
+  path = NULL,
+  overwrite = TRUE,
+  quiet = TRUE
+)
 }
 \arguments{
 \item{url}{A URL for a Google Doc, Google Slides presentation, or Google
@@ -19,6 +26,9 @@ automatically). Options are \code{NULL} (default), "doc", "pptx", or "xslx".
 downloaded file is removed as part of the function execution.}
 
 \item{path}{Folder path. Optional.}
+
+\item{overwrite}{If \code{TRUE} (default), overwrite any existing file at the same
+location specified by \code{filename} and \code{path}.}
 
 \item{quiet}{If \code{TRUE}, suppress messages when downloading file.}
 }

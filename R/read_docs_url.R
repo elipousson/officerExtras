@@ -13,6 +13,8 @@
 #' @param filename Destination file name. Optional. If filename is `NULL`,
 #'   downloaded file is removed as part of the function execution.
 #' @param path Folder path. Optional.
+#' @param overwrite If `TRUE` (default), overwrite any existing file at the same
+#' location specified by `filename` and `path`.
 #' @param quiet If `TRUE`, suppress messages when downloading file.
 #' @seealso [read_officer()]
 #' @export
@@ -23,6 +25,7 @@ read_docs_url <- function(
   format = NULL,
   filename = NULL,
   path = NULL,
+  overwrite = TRUE,
   quiet = TRUE
 ) {
   export <- prep_docs_export(url, format)
@@ -37,8 +40,8 @@ read_docs_url <- function(
     sep = .Platform$file.sep
   )
 
-  if (!file.exists(path)) {
-    utils::download.file(export[["url"]], path, quiet = quiet)
+  if (!file.exists(path) || overwrite) {
+    utils::download.file(export[["url"]], path, mode = "wb", quiet = quiet)
   }
 
   docx <- read_officer(path, quiet = quiet)
