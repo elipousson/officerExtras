@@ -15,7 +15,7 @@ Imports:
     glue,
     lifecycle,
     officer,
-    rlang (>= 1.1.0),
+    rlang,
     tibble,
     utils,
     vctrs,
