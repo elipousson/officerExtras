@@ -13,13 +13,8 @@ list_officer_media <- function(path, type = "docx") {
 #' @noRd
 #' @keywords internal
 #' @importFrom cli cli_alert_warning cli_alert_info
-list_media_files <- function(path = NULL,
-                             filenames = NULL,
-                             type = "docx") {
-  pattern <- switch(type,
-    "docx" = "word",
-    "pptx" = "ppt"
-  )
+list_media_files <- function(path = NULL, filenames = NULL, type = "docx") {
+  pattern <- switch(type, "docx" = "word", "pptx" = "ppt")
 
   filenames <- filenames %||% list.files(path, recursive = TRUE)
   pattern <- file.path(pattern, "media", ".+")
@@ -38,11 +33,13 @@ list_media_files <- function(path = NULL,
 #' @keywords internal
 #' @noRd
 #' @importFrom utils unzip
-unzip_officer <- function(path,
-                          exdir = ".",
-                          list = FALSE,
-                          overwrite = TRUE,
-                          setTimes = TRUE) {
+unzip_officer <- function(
+  path,
+  exdir = ".",
+  list = FALSE,
+  overwrite = TRUE,
+  setTimes = TRUE
+) {
   utils::unzip(
     zipfile = path,
     exdir = exdir,
@@ -79,12 +76,14 @@ unzip_officer <- function(path,
 #' @export
 #' @importFrom cli cli_bullets cli_alert_success
 #' @importFrom rlang set_names
-officer_media <- function(filename = NULL,
-                          path = NULL,
-                          x = NULL,
-                          target = "media",
-                          list = FALSE,
-                          overwrite = TRUE) {
+officer_media <- function(
+  filename = NULL,
+  path = NULL,
+  x = NULL,
+  target = "media",
+  list = FALSE,
+  overwrite = TRUE
+) {
   if (is.null(x)) {
     path <- set_office_path(filename, path, fileext = c("docx", "pptx"))
     type <- str_extract_fileext(path)
@@ -126,7 +125,8 @@ officer_media <- function(filename = NULL,
 
   if (any(file.exists(media_files_to)) && isFALSE(overwrite)) {
     cli::cli_abort(
-      c("One or more media files already exist at
+      c(
+        "One or more media files already exist at
         {.arg target}: {.path {target}}",
         "i" = "Set {.code overwrite = TRUE} to replace these existing files."
       )

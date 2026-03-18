@@ -1,3 +1,44 @@
+#' Preview a rdocx, rpptx, or rxlsx object in local default applications
+#'
+#' `officer_open()` uses `officer::open_file()` to open a file ceated from a
+#' rdocx, rpptx, or rxlsx object.
+#'
+#' @inheritParams write_officer
+#' @param path Optional. Set as temporary file with file extension matching type
+#' of input object `x`.
+#' @param overwrite Defaults to `FALSE`.
+#' @param interactive If `FALSE`, warn the user and return `x`.
+#' @returns Input object `x` without modification.
+#' @export
+officer_open <- function(
+  x,
+  path = NULL,
+  ...,
+  overwrite = FALSE,
+  interactive = is_interactive()
+) {
+  if (!interactive) {
+    cli::cli_warn(
+      "{.fn officer_open} can't be used in a non-interactive session."
+    )
+
+    return(x)
+  }
+
+  new_path <- path %||% tempfile(fileext = officer_fileext(x, prefix = "."))
+
+  write_officer(
+    x,
+    path = new_path,
+    ...,
+    overwrite = overwrite
+  )
+
+  officer::open_file(new_path)
+
+  x
+}
+
 #' Convert officer object class into equivalent file extension
 #'
 #' @keywords internal
@@ -37,8 +78,11 @@ subset_style <- function(x, style) {
 #' @keywords internal
 #' @noRd
 #' @importFrom rlang has_name
-subset_index <- function(x, index) {
-  if (has_name(x, "doc_index")) {
+subset_index <- function(x, index, index_type = NULL) {
+  if (!is.null(index_type) && has_name(x, index_type)) {
+    stopifnot(is_string(index_type))
+    x[x[[index_type]] %in% index, ]
+  } else if (has_name(x, "doc_index")) {
     x[x[["doc_index"]] %in% index, ]
   } else if (has_name(x, "id")) {
     x[x[["id"]] %in% index, ]

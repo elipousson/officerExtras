@@ -17,13 +17,15 @@
 #' @inheritParams check_officer
 #' @family block list functions
 #' @export
-officer_add_blocks <- function(x,
-                               blocks,
-                               pos = "after",
-                               location = NULL,
-                               level_list = integer(0),
-                               ...,
-                               call = caller_env()) {
+officer_add_blocks <- function(
+  x,
+  blocks,
+  pos = "after",
+  location = NULL,
+  level_list = integer(0),
+  ...,
+  call = caller_env()
+) {
   check_officer(x, what = c("rdocx", "rpptx"), call = call)
 
   check_block_list(blocks, call = call)
@@ -58,13 +60,15 @@ officer_add_blocks <- function(x,
 #' @param docx A rdocx object.
 #' @inheritParams cursor_docx
 #' @export
-add_blocks_to_body <- function(docx,
-                               blocks,
-                               pos = "after",
-                               keyword = NULL,
-                               id = NULL,
-                               index = NULL,
-                               ...) {
+add_blocks_to_body <- function(
+  docx,
+  blocks,
+  pos = "after",
+  keyword = NULL,
+  id = NULL,
+  index = NULL,
+  ...
+) {
   if (!is_all_null(c(keyword, id, index))) {
     docx <- cursor_docx(docx, keyword, id, index)
   }

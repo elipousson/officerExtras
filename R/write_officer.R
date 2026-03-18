@@ -16,11 +16,13 @@
 #' @importFrom rlang check_required check_installed current_call
 #' @importFrom cli cli_abort
 #' @importFrom officer set_doc_properties
-write_officer <- function(x,
-                          path,
-                          overwrite = TRUE,
-                          modified_by = Sys.getenv("USER"),
-                          ...) {
+write_officer <- function(
+  x,
+  path,
+  overwrite = TRUE,
+  modified_by = Sys.getenv("USER"),
+  ...
+) {
   check_officer(x, call = current_call())
 
   check_office_fileext(

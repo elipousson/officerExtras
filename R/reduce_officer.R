@@ -26,13 +26,15 @@
 #'  [purrr::reduce()], [vec_add_to_body()]
 #' @rdname reduce_officer
 #' @export
-reduce_officer <- function(x = NULL,
-                           .f = \(x, value, ...) {
-                             vec_add_to_body(x, value = value, ...)
-                           },
-                           value = NULL,
-                           ...,
-                           .path = NULL) {
+reduce_officer <- function(
+  x = NULL,
+  .f = \(x, value, ...) {
+    vec_add_to_body(x, value = value, ...)
+  },
+  value = NULL,
+  ...,
+  .path = NULL
+) {
   if (!is_officer(x)) {
     x <- read_officer(x)
   }

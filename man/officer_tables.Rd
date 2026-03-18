@@ -59,8 +59,8 @@ return a single combined data frame instead of a list. Defaults to \code{FALSE}.
 to the appropriate type using \code{\link[utils:type.convert]{utils::type.convert()}}.}
 
 \item{nm}{Names to use for returned list of tables. If \code{NULL} (default), the
-names are set to the doc_index values using the pattern
-"doc_index_<doc_index_number>".}
+names are set to the table_index values using the pattern
+"table_index_<table_index_number>".}
 
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function

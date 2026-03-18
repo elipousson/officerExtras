@@ -43,16 +43,18 @@
 #' @rdname convert_docx
 #' @export
 #' @importFrom rlang check_installed is_true is_false
-convert_docx <- function(docx = NULL,
-                         to = NULL,
-                         input = NULL,
-                         output = NULL,
-                         path = NULL,
-                         options = NULL,
-                         extract_media = TRUE,
-                         overwrite = TRUE,
-                         quiet = TRUE,
-                         ...) {
+convert_docx <- function(
+  docx = NULL,
+  to = NULL,
+  input = NULL,
+  output = NULL,
+  path = NULL,
+  options = NULL,
+  extract_media = TRUE,
+  overwrite = TRUE,
+  quiet = TRUE,
+  ...
+) {
   check_installed("rmarkdown")
 
   if (is_officer(docx, "rdocx")) {
@@ -97,7 +99,8 @@ convert_docx <- function(docx = NULL,
 
     if (is_true(output_exists) && is_false(overwrite)) {
       cli::cli_abort(
-        c("{.arg output} {.filename {output}} already exists.",
+        c(
+          "{.arg output} {.filename {output}} already exists.",
           "*" = "Set {.code overwrite = TRUE} to replace existing file."
         )
       )

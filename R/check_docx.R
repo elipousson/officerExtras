@@ -7,11 +7,13 @@
 #' @param ... Additional parameters passed to [cli::cli_abort()]
 #' @inheritParams rlang::args_error_context
 #' @export
-check_officer <- function(x,
-                          arg = caller_arg(x),
-                          what = c("rdocx", "rpptx", "rxlsx"),
-                          call = caller_env(),
-                          ...) {
+check_officer <- function(
+  x,
+  arg = caller_arg(x),
+  what = c("rdocx", "rpptx", "rxlsx"),
+  call = caller_env(),
+  ...
+) {
   check_required(x, arg = arg, call = call)
   check_character(what)
   what <- match.arg(what, several.ok = TRUE)
@@ -50,11 +52,13 @@ check_xlsx <- function(x, arg = caller_arg(x), call = caller_env(), ...) {
 #'   list. Defaults to `FALSE`.
 #' @param allow_null If `FALSE` (default), error if x is `NULL`.
 #' @export
-check_block_list <- function(x,
-                             arg = caller_arg(x),
-                             allow_empty = FALSE,
-                             allow_null = FALSE,
-                             call = caller_env()) {
+check_block_list <- function(
+  x,
+  arg = caller_arg(x),
+  allow_empty = FALSE,
+  allow_null = FALSE,
+  call = caller_env()
+) {
   if (is_block_list(x)) {
     if (allow_empty || !is_empty(x)) {
       return(invisible(NULL))
@@ -85,12 +89,14 @@ check_block_list <- function(x,
 #' @export
 #' @importFrom rlang caller_arg current_env
 #' @importFrom cli cli_abort
-check_office_fileext <- function(x,
-                                 arg = caller_arg(x),
-                                 fileext = c("docx", "pptx", "xlsx"),
-                                 allow_null = FALSE,
-                                 call = caller_env(),
-                                 ...) {
+check_office_fileext <- function(
+  x,
+  arg = caller_arg(x),
+  fileext = c("docx", "pptx", "xlsx"),
+  allow_null = FALSE,
+  call = caller_env(),
+  ...
+) {
   check_required(x, call = call)
 
   if (allow_null && is_null(x)) {
@@ -112,10 +118,12 @@ check_office_fileext <- function(x,
 #' @name check_docx_fileext
 #' @rdname check_office_fileext
 #' @export
-check_docx_fileext <- function(x,
-                               arg = caller_arg(x),
-                               call = caller_env(),
-                               ...) {
+check_docx_fileext <- function(
+  x,
+  arg = caller_arg(x),
+  call = caller_env(),
+  ...
+) {
   check_office_fileext(x, arg, fileext = "docx", call = call, ...)
 }
 
@@ -123,10 +131,12 @@ check_docx_fileext <- function(x,
 #' @rdname check_office_fileext
 #' @export
 #' @importFrom rlang caller_arg current_env
-check_pptx_fileext <- function(x,
-                               arg = caller_arg(x),
-                               call = caller_env(),
-                               ...) {
+check_pptx_fileext <- function(
+  x,
+  arg = caller_arg(x),
+  call = caller_env(),
+  ...
+) {
   check_office_fileext(x, arg, fileext = "pptx", call = call, ...)
 }
 
@@ -134,9 +144,11 @@ check_pptx_fileext <- function(x,
 #' @rdname check_office_fileext
 #' @export
 #' @importFrom rlang caller_arg current_env
-check_xlsx_fileext <- function(x,
-                               arg = caller_arg(x),
-                               call = caller_env(),
-                               ...) {
+check_xlsx_fileext <- function(
+  x,
+  arg = caller_arg(x),
+  call = caller_env(),
+  ...
+) {
   check_office_fileext(x, arg, fileext = "xlsx", call = call, ...)
 }

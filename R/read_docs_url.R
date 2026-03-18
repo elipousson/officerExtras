@@ -13,16 +13,21 @@
 #' @param filename Destination file name. Optional. If filename is `NULL`,
 #'   downloaded file is removed as part of the function execution.
 #' @param path Folder path. Optional.
+#' @param overwrite If `TRUE` (default), overwrite any existing file at the same
+#' location specified by `filename` and `path`.
 #' @param quiet If `TRUE`, suppress messages when downloading file.
 #' @seealso [read_officer()]
 #' @export
 #' @importFrom glue glue
 #' @importFrom utils download.file
-read_docs_url <- function(url,
-                          format = NULL,
-                          filename = NULL,
-                          path = NULL,
-                          quiet = TRUE) {
+read_docs_url <- function(
+  url,
+  format = NULL,
+  filename = NULL,
+  path = NULL,
+  overwrite = TRUE,
+  quiet = TRUE
+) {
   export <- prep_docs_export(url, format)
 
   if (!is.null(filename)) {
@@ -35,8 +40,8 @@ read_docs_url <- function(url,
     sep = .Platform$file.sep
   )
 
-  if (!file.exists(path)) {
-    utils::download.file(export[["url"]], path, quiet = quiet)
+  if (!file.exists(path) || overwrite) {
+    utils::download.file(export[["url"]], path, mode = "wb", quiet = quiet)
   }
 
   docx <- read_officer(path, quiet = quiet)
@@ -68,10 +73,17 @@ prep_docs_export <- function(url, format = NULL) {
 
   # https://www.labnol.org/internet/direct-links-for-google-drive/28356/
   url <-
-    switch(fileext,
-      "docx" = glue("https://docs.google.com/document/d/{id}/export?format={format}"),
-      "pptx" = glue("https://docs.google.com/presentation/d/{id}/export/{format}"),
-      "xlsx" = glue("https://docs.google.com/spreadsheets/d/{id}/export?format={format}")
+    switch(
+      fileext,
+      "docx" = glue(
+        "https://docs.google.com/document/d/{id}/export?format={format}"
+      ),
+      "pptx" = glue(
+        "https://docs.google.com/presentation/d/{id}/export/{format}"
+      ),
+      "xlsx" = glue(
+        "https://docs.google.com/spreadsheets/d/{id}/export?format={format}"
+      )
     )
 
   filename <- str_remove(

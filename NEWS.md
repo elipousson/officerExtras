@@ -16,6 +16,7 @@
 * Add new `combine_docx()` function.
 * Add new `use_doc_version()` function.
 * Export `is_officer()` and `officer_properties()` helper functions.
+* Add new `officer_open()` function.
 
 ## Other changes
 

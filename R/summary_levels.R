@@ -19,15 +19,17 @@
 #'   levels.
 #' @family summary functions
 #' @export
-officer_summary_levels <- function(x,
-                                   levels = NULL,
-                                   levels_from = "style_name",
-                                   exclude_levels = NULL,
-                                   fill_col = "text",
-                                   direction = c("down", "up", "downup", "updown"),
-                                   ...,
-                                   strict = FALSE,
-                                   call = caller_env()) {
+officer_summary_levels <- function(
+  x,
+  levels = NULL,
+  levels_from = "style_name",
+  exclude_levels = NULL,
+  fill_col = "text",
+  direction = c("down", "up", "downup", "updown"),
+  ...,
+  strict = FALSE,
+  call = caller_env()
+) {
   check_required(x, call = call)
   if (!is_officer_summary(x)) {
     x <- officer_summary(x, ..., call = call)
@@ -60,8 +62,10 @@ officer_summary_levels <- function(x,
       levels_invalid <- levels[!valid_levels]
 
       cli_bullets(
-        c("!" = "`levels` contains invalid values that are not
-        present in {levels_from} column: {levels_invalid}")
+        c(
+          "!" = "`levels` contains invalid values that are not
+        present in {levels_from} column: {levels_invalid}"
+        )
       )
     }
   }

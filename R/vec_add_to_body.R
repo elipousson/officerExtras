@@ -50,12 +50,14 @@
 #' }
 #' @export
 #' @importFrom vctrs vec_recycle_common vec_recycle vec_slice
-vec_add_to_body <- function(docx,
-                            ...,
-                            .sep = NULL,
-                            .pos = "after",
-                            .size = NULL,
-                            .call = caller_env()) {
+vec_add_to_body <- function(
+  docx,
+  ...,
+  .sep = NULL,
+  .pos = "after",
+  .size = NULL,
+  .call = caller_env()
+) {
   params <- vctrs::vec_recycle_common(..., .size = .size, .call = .call)
 
   .size <- .size %||% length(params[[1]])

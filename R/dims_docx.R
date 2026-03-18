@@ -26,7 +26,8 @@ dims_docx_ext <- function(docx) {
       list(
         "orientation" = ifelse(
           isTRUE(dims[["landscape"]]),
-          "landscape", "portrait"
+          "landscape",
+          "portrait"
         )
       )
     )

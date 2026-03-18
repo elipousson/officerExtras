@@ -27,13 +27,15 @@
 #' @importFrom cli cli_alert_warning cli_abort
 #' @importFrom officer cursor_reach_test cursor_reach docx_bookmarks
 #'   cursor_bookmark docx_summary
-cursor_docx <- function(docx,
-                        keyword = NULL,
-                        id = NULL,
-                        index = NULL,
-                        default = "end",
-                        quiet = FALSE,
-                        call = caller_env()) {
+cursor_docx <- function(
+  docx,
+  keyword = NULL,
+  id = NULL,
+  index = NULL,
+  default = "end",
+  quiet = FALSE,
+  call = caller_env()
+) {
   check_docx(docx, call = call)
 
   if (!is.null(keyword)) {
@@ -64,7 +66,8 @@ cursor_docx <- function(docx,
     error_call = call
   )
 
-  switch(default,
+  switch(
+    default,
     "end" = officer::cursor_end(docx),
     "begin" = officer::cursor_begin(docx),
     "backward" = officer::cursor_backward(docx),

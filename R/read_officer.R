@@ -32,15 +32,17 @@
 #' @importFrom cli cli_alert_warning cli_alert_success symbol
 #' @importFrom rlang current_call
 #' @importFrom officer read_docx
-read_officer <- function(filename = NULL,
-                         path = NULL,
-                         fileext = c("docx", "pptx", "xlsx"),
-                         x = NULL,
-                         arg = caller_arg(x),
-                         allow_null = TRUE,
-                         quiet = TRUE,
-                         call = parent.frame(),
-                         ...) {
+read_officer <- function(
+  filename = NULL,
+  path = NULL,
+  fileext = c("docx", "pptx", "xlsx"),
+  x = NULL,
+  arg = caller_arg(x),
+  allow_null = TRUE,
+  quiet = TRUE,
+  call = parent.frame(),
+  ...
+) {
   cli_quiet(quiet)
 
   has_input_file <- !is_null(c(filename, path))
@@ -55,12 +57,14 @@ read_officer <- function(filename = NULL,
 
       if ("docx" %in% fileext) {
         path <- system.file(
-          "template", "styles_template.docx",
+          "template",
+          "styles_template.docx",
           package = "officerExtras"
         )
       }
 
-      new_obj <- switch(fileext,
+      new_obj <- switch(
+        fileext,
         "docx" = "empty document",
         "pptx" = "pptx document with 0 slides",
         "xlsx" = "xlsx document with 1 sheet"
@@ -70,7 +74,8 @@ read_officer <- function(filename = NULL,
     }
 
     x <- rlang::try_fetch(
-      switch(fileext,
+      switch(
+        fileext,
         "docx" = officer::read_docx(path),
         "dotx" = officer::read_docx(path),
         "pptx" = officer::read_pptx(path),
@@ -79,10 +84,11 @@ read_officer <- function(filename = NULL,
       ),
       error = function(cnd) {
         cli::cli_abort("{.val {fileext}} file can't be read.", parent = cnd)
-      },
-      warning = function(cnd) {
-        cli::cli_warn(message = cnd)
       }
+      # TODO: Return output but allow display of warning w/ cli
+      # warning = function(cnd) {
+      #   cli::cli_warn(message = cnd)
+      # }
     )
   } else {
     if (has_input_file) {
@@ -110,11 +116,13 @@ read_officer <- function(filename = NULL,
 #' @name read_docx_ext
 #' @rdname read_officer
 #' @export
-read_docx_ext <- function(filename = NULL,
-                          path = NULL,
-                          docx = NULL,
-                          allow_null = FALSE,
-                          quiet = TRUE) {
+read_docx_ext <- function(
+  filename = NULL,
+  path = NULL,
+  docx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+) {
   read_officer(
     filename = filename,
     path = path,
@@ -128,11 +136,13 @@ read_docx_ext <- function(filename = NULL,
 #' @name read_pptx_ext
 #' @rdname read_officer
 #' @export
-read_pptx_ext <- function(filename = NULL,
-                          path = NULL,
-                          pptx = NULL,
-                          allow_null = FALSE,
-                          quiet = TRUE) {
+read_pptx_ext <- function(
+  filename = NULL,
+  path = NULL,
+  pptx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+) {
   read_officer(
     filename = filename,
     path = path,
@@ -146,11 +156,13 @@ read_pptx_ext <- function(filename = NULL,
 #' @name read_xlsx_ext
 #' @rdname read_officer
 #' @export
-read_xlsx_ext <- function(filename = NULL,
-                          path = NULL,
-                          xlsx = NULL,
-                          allow_null = FALSE,
-                          quiet = TRUE) {
+read_xlsx_ext <- function(
+  filename = NULL,
+  path = NULL,
+  xlsx = NULL,
+  allow_null = FALSE,
+  quiet = TRUE
+) {
   read_officer(
     filename = filename,
     path = path,
@@ -206,10 +218,12 @@ cli_doc_properties <- function(x, filename = NULL) {
 #' @importFrom rlang set_names
 #' @importFrom utils modifyList
 #' @importFrom cli cli_warn
-officer_properties <- function(x,
-                               values = list(),
-                               keep.null = FALSE,
-                               call = caller_env()) {
+officer_properties <- function(
+  x,
+  values = list(),
+  keep.null = FALSE,
+  call = caller_env()
+) {
   check_officer(x, what = c("rdocx", "rpptx"), call = call)
 
   props <- rlang::try_fetch(
@@ -229,8 +243,8 @@ officer_properties <- function(x,
 
   utils::modifyList(
     rlang::set_names(as.list(props[["value"]]), props[["tag"]]),
-    values,
-    keep.null
+    val = values,
+    keep.null = keep.null
   )
 }
 
@@ -239,10 +253,12 @@ officer_properties <- function(x,
 #' @keywords internal
 #' @noRd
 #' @importFrom cli cli_vec
-set_office_path <- function(filename = NULL,
-                            path = NULL,
-                            fileext = c("docx", "pptx", "xlsx"),
-                            call = parent.frame()) {
+set_office_path <- function(
+  filename = NULL,
+  path = NULL,
+  fileext = c("docx", "pptx", "xlsx"),
+  call = parent.frame()
+) {
   check_string(filename, allow_null = TRUE, call = call)
   check_string(path, allow_null = TRUE, call = call)
 
@@ -258,8 +274,10 @@ set_office_path <- function(filename = NULL,
 
   fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if ((("pptx" %in% fileext) && is_fileext_path(path, "potx")) ||
-    (("dotx" %in% fileext) && is_fileext_path(path, "dotx"))) {
+  if (
+    (("pptx" %in% fileext) && is_fileext_path(path, "potx")) ||
+      (("dotx" %in% fileext) && is_fileext_path(path, "dotx"))
+  ) {
     return(path)
   }
 
