@@ -222,7 +222,9 @@ add_gt_to_body <- function(
   }
 
   str <- wrap_tag(str, tag = "tablecontainer")
-  str_nodes <- xml2::xml_children(xml2::read_xml(str))
+  str_nodes <- suppressWarnings(
+    xml2::xml_children(xml2::read_xml(str))
+  )
   node_seq <- seq_along(str_nodes)
 
   if (pos == "before") {
