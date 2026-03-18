@@ -22,7 +22,8 @@ test_that("write_officer works", {
     expect_identical(
       docx[["doc_obj"]],
       read_docx_ext(
-        filename = "example.docx", quiet = TRUE
+        filename = "example.docx",
+        quiet = TRUE
       )[["doc_obj"]]
     )
 
@@ -32,7 +33,8 @@ test_that("write_officer works", {
       "test",
       officer_properties(
         read_docx_ext(
-          filename = "example.docx", quiet = TRUE
+          filename = "example.docx",
+          quiet = TRUE
         )
       )[["lastModifiedBy"]]
     )
@@ -42,7 +44,8 @@ test_that("write_officer works", {
     expect_identical(
       pptx[["doc_obj"]],
       read_pptx_ext(
-        filename = "example.pptx", quiet = TRUE
+        filename = "example.pptx",
+        quiet = TRUE
       )[["doc_obj"]]
     )
   })

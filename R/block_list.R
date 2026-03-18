@@ -21,10 +21,12 @@
 #' @inheritParams check_block_list
 #' @family block list functions
 #' @export
-make_block_list <- function(blocks = NULL,
-                            ...,
-                            allow_empty = FALSE,
-                            call = caller_env()) {
+make_block_list <- function(
+  blocks = NULL,
+  ...,
+  allow_empty = FALSE,
+  call = caller_env()
+) {
   has_blocks <- ...length() > 0
 
   if (is.null(blocks)) {

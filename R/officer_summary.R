@@ -33,12 +33,14 @@
 #'
 #' @export
 #' @importFrom officer docx_summary pptx_summary slide_summary layout_summary
-officer_summary <- function(x,
-                            summary_type = "doc",
-                            index = NULL,
-                            preserve = FALSE,
-                            as_tibble = TRUE,
-                            call = caller_env()) {
+officer_summary <- function(
+  x,
+  summary_type = "doc",
+  index = NULL,
+  preserve = FALSE,
+  as_tibble = TRUE,
+  call = caller_env()
+) {
   # FIXME: This feature should likely be removed.
   if (is_officer_summary(x, summary_type, call = call)) {
     if (as_tibble) {
@@ -48,7 +50,8 @@ officer_summary <- function(x,
     return(x)
   }
 
-  what <- switch(summary_type,
+  what <- switch(
+    summary_type,
     "docx" = "rdocx",
     "pptx" = "rpptx",
     "slide" = "rpptx",
@@ -64,8 +67,10 @@ officer_summary <- function(x,
 
   summary_type <- summary_type %||% class(x)
 
-  if (is_installed("officer (>= 0.6.3)") &&
-    (summary_type %in% c("rdocx", "docx", "rpptx", "pptx"))) {
+  if (
+    is_installed("officer (>= 0.6.3)") &&
+      (summary_type %in% c("rdocx", "docx", "rpptx", "pptx"))
+  ) {
     if (summary_type %in% c("rdocx", "docx")) {
       summary_df <- officer::docx_summary(x, preserve = preserve)
     }
@@ -74,7 +79,8 @@ officer_summary <- function(x,
       summary_df <- officer::pptx_summary(x, preserve = preserve)
     }
   } else {
-    summary_df <- switch(summary_type,
+    summary_df <- switch(
+      summary_type,
       "rdocx" = officer::docx_summary(x),
       "rpptx" = officer::pptx_summary(x),
       "docx" = officer::docx_summary(x),
@@ -118,14 +124,16 @@ officer_summary <- function(x,
 #' @inheritParams cli::cli_abort
 #' @export
 #' @importFrom cli cli_abort
-check_officer_summary <- function(x,
-                                  n = NULL,
-                                  content_type = NULL,
-                                  summary_type = "doc",
-                                  tables = FALSE,
-                                  ...,
-                                  arg = caller_arg(x),
-                                  call = parent.frame()) {
+check_officer_summary <- function(
+  x,
+  n = NULL,
+  content_type = NULL,
+  summary_type = "doc",
+  tables = FALSE,
+  ...,
+  arg = caller_arg(x),
+  call = parent.frame()
+) {
   if (!is_officer_summary(x, summary_type, tables)) {
     fn_nm <- c("officer_summary", "docx_summary", "pptx_summary")
     cli_abort(
@@ -158,10 +166,12 @@ check_officer_summary <- function(x,
 #' @keywords internal
 #' @noRd
 #' @importFrom rlang has_name
-is_officer_summary <- function(x,
-                               summary_type = "doc",
-                               tables = FALSE,
-                               call = caller_env()) {
+is_officer_summary <- function(
+  x,
+  summary_type = "doc",
+  tables = FALSE,
+  call = caller_env()
+) {
   check_required(x, call = call)
   check_bool(tables, call = call)
   check_string(summary_type, allow_null = TRUE, call = call)
@@ -184,7 +194,8 @@ is_officer_summary <- function(x,
     nm <- c(nm, "row_id", "cell_id")
   }
 
-  nm <- switch(summary_type,
+  nm <- switch(
+    summary_type,
     "docx" = c(nm, docx_nm),
     "pptx" = c(nm, pptx_nm),
     "slide" = c("type", "id"),

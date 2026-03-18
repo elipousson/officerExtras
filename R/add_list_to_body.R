@@ -18,13 +18,15 @@
 #' @rdname add_list_to_body
 #' @export
 #' @importFrom rlang has_length
-add_list_to_body <- function(docx,
-                             values,
-                             style = "List Bullet",
-                             keep_na = FALSE,
-                             before = NULL,
-                             after = "",
-                             ...) {
+add_list_to_body <- function(
+  docx,
+  values,
+  style = "List Bullet",
+  keep_na = FALSE,
+  before = NULL,
+  after = "",
+  ...
+) {
   check_docx(docx)
   check_character(values)
   if (!keep_na && !all(is.na(values))) {

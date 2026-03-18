@@ -66,16 +66,18 @@
 #' @returns Invisibly return a rdocx or rpptx object with an updated version
 #'   property.
 #' @export
-use_doc_version <- function(filename = NULL,
-                            x = NULL,
-                            which = NULL,
-                            save = TRUE,
-                            sep = ".",
-                            property = "version",
-                            prefix = NULL,
-                            path = NULL,
-                            ...,
-                            call = caller_env()) {
+use_doc_version <- function(
+  filename = NULL,
+  x = NULL,
+  which = NULL,
+  save = TRUE,
+  sep = ".",
+  property = "version",
+  prefix = NULL,
+  path = NULL,
+  ...,
+  call = caller_env()
+) {
   x <- x %||% read_officer(filename)
 
   ver_init <- doc_version(x, filename = filename, property = property)
@@ -96,13 +98,17 @@ use_doc_version <- function(filename = NULL,
   inc <- if (which == 4 && length(ver) < 4) 9000 else 1
 
   # Missing components are equivalent to zero
-  if (which > length(ver)) ver <- c(ver, rep(0, which - length(ver)))
+  if (which > length(ver)) {
+    ver <- c(ver, rep(0, which - length(ver)))
+  }
 
   # Bump selected component
   ver[which] <- ver[which] + inc
 
   # Zero out everything after
-  if (which < length(ver)) ver[(which + 1):length(ver)] <- 0
+  if (which < length(ver)) {
+    ver[(which + 1):length(ver)] <- 0
+  }
 
   # Keep at most three components if they are zero
   if (length(ver) > 3 && all(ver[4:length(ver)] == 0)) {
@@ -202,13 +208,15 @@ doc_str_ver <- function(filename, sep = ".") {
 #' @param .default Specification for initial version.
 #' @inheritParams rlang::args_error_context
 #' @export
-doc_version <- function(filename = NULL,
-                        x = NULL,
-                        sep = ".",
-                        property = "version",
-                        allow_new = TRUE,
-                        .default = c(0, 1, 0),
-                        call = caller_env()) {
+doc_version <- function(
+  filename = NULL,
+  x = NULL,
+  sep = ".",
+  property = "version",
+  allow_new = TRUE,
+  .default = c(0, 1, 0),
+  call = caller_env()
+) {
   if (!is.null(filename)) {
     ver_str <- string_extract(filename, pattern = version_sep(sep))
     msg <- "Version {.val {ver_str}} found in {.file {filename}}"

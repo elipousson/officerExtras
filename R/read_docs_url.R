@@ -18,11 +18,13 @@
 #' @export
 #' @importFrom glue glue
 #' @importFrom utils download.file
-read_docs_url <- function(url,
-                          format = NULL,
-                          filename = NULL,
-                          path = NULL,
-                          quiet = TRUE) {
+read_docs_url <- function(
+  url,
+  format = NULL,
+  filename = NULL,
+  path = NULL,
+  quiet = TRUE
+) {
   export <- prep_docs_export(url, format)
 
   if (!is.null(filename)) {
@@ -68,10 +70,17 @@ prep_docs_export <- function(url, format = NULL) {
 
   # https://www.labnol.org/internet/direct-links-for-google-drive/28356/
   url <-
-    switch(fileext,
-      "docx" = glue("https://docs.google.com/document/d/{id}/export?format={format}"),
-      "pptx" = glue("https://docs.google.com/presentation/d/{id}/export/{format}"),
-      "xlsx" = glue("https://docs.google.com/spreadsheets/d/{id}/export?format={format}")
+    switch(
+      fileext,
+      "docx" = glue(
+        "https://docs.google.com/document/d/{id}/export?format={format}"
+      ),
+      "pptx" = glue(
+        "https://docs.google.com/presentation/d/{id}/export/{format}"
+      ),
+      "xlsx" = glue(
+        "https://docs.google.com/spreadsheets/d/{id}/export?format={format}"
+      )
     )
 
   filename <- str_remove(

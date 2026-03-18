@@ -40,17 +40,19 @@
 #' @export
 #' @importFrom officer body_add body_add_xml
 #' @importFrom cli cli_abort cli_alert_warning
-add_to_body <- function(docx,
-                        keyword = NULL,
-                        id = NULL,
-                        index = NULL,
-                        value = NULL,
-                        str = NULL,
-                        style = NULL,
-                        pos = "after",
-                        ...,
-                        gt_object = NULL,
-                        call = caller_env()) {
+add_to_body <- function(
+  docx,
+  keyword = NULL,
+  id = NULL,
+  index = NULL,
+  value = NULL,
+  str = NULL,
+  style = NULL,
+  pos = "after",
+  ...,
+  gt_object = NULL,
+  call = caller_env()
+) {
   check_docx(docx, call = call)
 
   if (!is.null(gt_object)) {
@@ -109,14 +111,16 @@ add_to_body <- function(docx,
 #' @export
 #' @importFrom rlang check_required
 #' @importFrom glue glue
-add_text_to_body <- function(docx,
-                             value,
-                             style = NULL,
-                             pos = "after",
-                             .na = "NA",
-                             .null = NULL,
-                             .envir = parent.frame(),
-                             ...) {
+add_text_to_body <- function(
+  docx,
+  value,
+  style = NULL,
+  pos = "after",
+  .na = "NA",
+  .null = NULL,
+  .envir = parent.frame(),
+  ...
+) {
   check_required(value)
   value <- glue::glue(value, .na = .na, .null = .null, .envir = .envir)
   add_to_body(docx, value = value, style = style, pos = pos, ...)
@@ -126,11 +130,13 @@ add_text_to_body <- function(docx,
 #' @name add_xml_to_body
 #' @rdname add_to_body
 #' @export
-add_xml_to_body <- function(docx,
-                            str,
-                            pos = "after",
-                            ...,
-                            call = caller_env()) {
+add_xml_to_body <- function(
+  docx,
+  str,
+  pos = "after",
+  ...,
+  call = caller_env()
+) {
   check_required(str, call = call)
   add_to_body(docx, str = str, pos = pos, ..., call = call)
 }
@@ -175,17 +181,19 @@ add_xml_to_body <- function(docx,
 #'   ([ORCID](https://orcid.org/0000-0003-0637-4436))
 #' @export
 #' @importFrom rlang check_required check_installed
-add_gt_to_body <- function(docx,
-                           gt_object,
-                           align = "center",
-                           caption_location = c("top", "bottom", "embed"),
-                           caption_align = "left",
-                           split = FALSE,
-                           keep_with_next = TRUE,
-                           pos = "after",
-                           tablecontainer = TRUE,
-                           ...,
-                           call = caller_env()) {
+add_gt_to_body <- function(
+  docx,
+  gt_object,
+  align = "center",
+  caption_location = c("top", "bottom", "embed"),
+  caption_align = "left",
+  split = FALSE,
+  keep_with_next = TRUE,
+  pos = "after",
+  tablecontainer = TRUE,
+  ...,
+  call = caller_env()
+) {
   check_required(gt_object, call = call)
   check_installed("gt", call = call)
 
@@ -245,14 +253,16 @@ add_gt_to_body <- function(docx,
 #' @export
 #' @importFrom rlang check_required
 #' @importFrom officer body_add_caption
-add_gg_to_body <- function(docx,
-                           value,
-                           caption = "title",
-                           caption_style = style,
-                           autonum = NULL,
-                           style = "Normal",
-                           pos = "after",
-                           ...) {
+add_gg_to_body <- function(
+  docx,
+  value,
+  caption = "title",
+  caption_style = style,
+  autonum = NULL,
+  style = "Normal",
+  pos = "after",
+  ...
+) {
   check_required(value)
   docx <- add_to_body(docx, value = value, style = style, pos = pos, ...)
 
@@ -287,10 +297,7 @@ add_gg_to_body <- function(docx,
 #'   Defaults to [add_text_to_body()].
 #' @export
 #' @importFrom rlang check_required as_function is_named
-add_value_with_keys <- function(docx,
-                                value,
-                                ...,
-                                .f = add_text_to_body) {
+add_value_with_keys <- function(docx, value, ..., .f = add_text_to_body) {
   lifecycle::signal_stage(
     "superseded",
     what = "add_value_with_keys()",
@@ -326,10 +333,7 @@ add_value_with_keys <- function(docx,
 #' @rdname add_to_body
 #' @export
 #' @importFrom rlang check_required as_function is_named
-add_str_with_keys <- function(docx,
-                              str,
-                              ...,
-                              .f = add_xml_to_body) {
+add_str_with_keys <- function(docx, str, ..., .f = add_xml_to_body) {
   lifecycle::signal_stage(
     "superseded",
     what = "add_str_with_keys()",

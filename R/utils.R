@@ -16,9 +16,11 @@ wrap_tag <- function(..., tag) {
 }
 
 #' @noRd
-officer_temp <- function(...,
-                         path = NULL,
-                         fileext = c("docx", "pptx", "xslx")) {
+officer_temp <- function(
+  ...,
+  path = NULL,
+  fileext = c("docx", "pptx", "xslx")
+) {
   fileext <- match.arg(fileext)
 
   tempfile(
@@ -82,13 +84,15 @@ cli_vec_cls <- function(x) {
 #' @rdname fill_with_pattern
 #' @export
 #' @importFrom vctrs vec_fill_missing
-fill_with_pattern <- function(x,
-                              pattern = "^heading",
-                              pattern_col = "style_name",
-                              fill_col = "text",
-                              col = "heading",
-                              direction = c("down", "up", "downup", "updown"),
-                              call = caller_env()) {
+fill_with_pattern <- function(
+  x,
+  pattern = "^heading",
+  pattern_col = "style_name",
+  fill_col = "text",
+  col = "heading",
+  direction = c("down", "up", "downup", "updown"),
+  call = caller_env()
+) {
   check_name(col, call = call)
   check_name(fill_col, call = call)
 

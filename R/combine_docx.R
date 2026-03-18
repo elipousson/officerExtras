@@ -43,12 +43,14 @@
 #' @export
 #' @importFrom vctrs vec_recycle
 #' @importFrom officer body_add_docx
-combine_docx <- function(...,
-                         docx = NULL,
-                         .list = list2(...),
-                         pos = "after",
-                         sep = NULL,
-                         call = caller_env()) {
+combine_docx <- function(
+  ...,
+  docx = NULL,
+  .list = list2(...),
+  pos = "after",
+  sep = NULL,
+  call = caller_env()
+) {
   if (is_string(docx)) {
     check_office_fileext(docx, fileext = "docx", call = call)
     docx <- read_docx_ext(docx)
