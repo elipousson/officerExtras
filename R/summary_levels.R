@@ -36,7 +36,7 @@ officer_summary_levels <- function(
   }
 
   # Validate `levels_from`
-  check_name(levels_from, call = call)
+  check_string(levels_from, call = call)
   levels_from <- arg_match(levels_from, values = names(x), error_call = call)
 
   # If levels is `NULL`, set levels to match unique values in `levels_from`

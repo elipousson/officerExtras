@@ -93,8 +93,8 @@ fill_with_pattern <- function(
   direction = c("down", "up", "downup", "updown"),
   call = caller_env()
 ) {
-  check_name(col, call = call)
-  check_name(fill_col, call = call)
+  check_string(col, call = call)
+  check_string(fill_col, call = call)
 
   if (has_name(x, col)) {
     cli_abort(

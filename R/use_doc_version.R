@@ -121,7 +121,7 @@ use_doc_version <- function(
     "Incrementing document version number to {.val {new_ver}}"
   )
 
-  check_name(property, call = call)
+  check_string(property, call = call)
   x <- set_doc_properties(x, values = set_names(list(new_ver), property))
 
   if (is.null(filename) || !save) {
@@ -133,7 +133,7 @@ use_doc_version <- function(
   if (!is.null(prefix) && !identical(prefix, property)) {
     props <- officer_properties(x)
 
-    check_name(prefix, call = call)
+    check_string(prefix, call = call)
     if (has_name(props, prefix)) {
       prefix <- props[[prefix]]
     }
@@ -230,7 +230,7 @@ doc_version <- function(
   if (is.null(ver_str)) {
     x <- x %||% read_officer(filename)
     props <- officer_properties(x, call = call)
-    check_name(property, call = call)
+    check_string(property, call = call)
     if (!allow_new && !has_name(props, property)) {
       cli_abort(
         c(
