@@ -28,6 +28,18 @@ officer_open(
   Optional. Set as temporary file with file extension matching type of
   input object `x`.
 
+- ...:
+
+  Arguments passed on to
+  [`write_officer`](https://elipousson.github.io/officerExtras/reference/write_officer.md)
+
+  `modified_by`
+
+  :   If the withr package is installed, modified_by overrides the
+      default value for the lastModifiedBy property assigned to the
+      output file by officer. Defaults to `Sys.getenv("USER")` (the same
+      value used by officer).
+
 - overwrite:
 
   Defaults to `FALSE`.

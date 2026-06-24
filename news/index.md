@@ -57,6 +57,8 @@
 ### Other changes
 
 - Update included `styles_template.docx` file to use Aptos as base font.
+- Update standalone type check functions from
+  [rlang](https://rlang.r-lib.org). (2026-06-24)
 
 ## officerExtras 0.0.1
 

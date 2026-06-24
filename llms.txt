@@ -8,6 +8,7 @@ for the [{officer}](https://github.com/davidgohel/officer) package.
 You can install the development version of officerExtras like so:
 
 ``` r
+
 pak::pkg_install("elipousson/officerExtras")
 ```
 
@@ -19,6 +20,7 @@ simplify the process of working with officer. For example, a single
 function works with docx, pptx, or xlsx files:
 
 ``` r
+
 library(officerExtras)
 
 docx <- read_officer(filename = "example.docx", path = system.file("doc_examples", package = "officer"))
@@ -34,6 +36,7 @@ pass document properties to
 [`officer::doc_properties()`](https://davidgohel.github.io/officer/reference/doc_properties.html).
 
 ``` r
+
 withr::with_tempdir({
   write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
 
@@ -62,6 +65,7 @@ to convert a rdocx object or a Word document to any other pandoc
 supported output format:
 
 ``` r
+
 convert_docx(docx, to = "markdown")
 ```
 
