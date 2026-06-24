@@ -19,6 +19,15 @@ be set for rxlsx objects.}
 \item{path}{Optional. Set as temporary file with file extension matching type
 of input object \code{x}.}
 
+\item{...}{
+  Arguments passed on to \code{\link[=write_officer]{write_officer}}
+  \describe{
+    \item{\code{modified_by}}{If the withr package is installed, modified_by overrides
+the default value for the lastModifiedBy property assigned to the output
+file by officer. Defaults to \code{Sys.getenv("USER")} (the same value used by
+officer).}
+  }}
+
 \item{overwrite}{Defaults to \code{FALSE}.}
 
 \item{interactive}{If \code{FALSE}, warn the user and return \code{x}.}

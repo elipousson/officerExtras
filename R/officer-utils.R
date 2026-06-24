@@ -8,6 +8,7 @@
 #' of input object `x`.
 #' @param overwrite Defaults to `FALSE`.
 #' @param interactive If `FALSE`, warn the user and return `x`.
+#' @inheritDotParams write_officer
 #' @returns Input object `x` without modification.
 #' @export
 officer_open <- function(
