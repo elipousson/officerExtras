@@ -40,7 +40,7 @@ is_all <- function(x, FUN, ...) {
   all(vapply(x, FUN, FUN.VALUE = TRUE, ...))
 }
 
-#' - [is_all_null()]: Are all items in a list or vector `NULL` values?
+#' - `is_all_null()`: Are all items in a list or vector `NULL` values?
 #'
 #' @name is_all_null
 #' @rdname is_all
@@ -62,7 +62,7 @@ is_any <- function(x, FUN, ...) {
   any(vapply(x, FUN, FUN.VALUE = TRUE, ...))
 }
 
-#' - [is_any_null()]: Is any item in a list or vector a `NULL` value?
+#' - `is_any_null()`: Is any item in a list or vector a `NULL` value?
 #'
 #' @name is_any_null
 #' @rdname is_any
@@ -84,7 +84,8 @@ is_fileext_path <- function(x, fileext, ignore.case = TRUE) {
   grepl(
     paste0("\\.", paste0(fileext, collapse = "|"), "$(?!\\.)"),
     x,
-    ignore.case = ignore.case, perl = TRUE
+    ignore.case = ignore.case,
+    perl = TRUE
   )
 }
 
@@ -112,7 +113,7 @@ is_ggplot <- function(x) {
 #'   as described in [base::regex].
 #'   Control options with [regex()].
 #'
-#'   Match a fixed string (i.e. by comparing only bytes), using [fixed()].
+#'   Match a fixed string (i.e. by comparing only bytes), using `fixed()`.
 #'   This is fast, but approximate.
 #'
 #' @return A character matrix.
@@ -120,22 +121,31 @@ is_ggplot <- function(x) {
 #'   followed by one column for each capture group.
 #' @noRd
 str_extract <- function(string, pattern) {
-  if (length(string) == 0 || length(pattern) == 0) return(character(0))
+  if (length(string) == 0 || length(pattern) == 0) {
+    return(character(0))
+  }
 
   is_fixed <- inherits(pattern, "stringr_fixed")
 
   result <- Map(
     function(string, pattern) {
-      if (is.na(string) || is.na(pattern)) return(NA_character_)
+      if (is.na(string) || is.na(pattern)) {
+        return(NA_character_)
+      }
 
       regmatches(
         x = string,
         m = regexpr(
-          pattern = pattern, text = string, perl = !is_fixed, fixed = is_fixed
+          pattern = pattern,
+          text = string,
+          perl = !is_fixed,
+          fixed = is_fixed
         )
       )
     },
-    string, pattern, USE.NAMES = FALSE
+    string,
+    pattern,
+    USE.NAMES = FALSE
   )
 
   result[lengths(result) == 0] <- NA_character_
@@ -220,7 +230,7 @@ str_c <- function(..., sep = "", collapse = NULL) {
 #'   as described in [base::regex].
 #'   Control options with [regex()].
 #'
-#'   Match a fixed string (i.e. by comparing only bytes), using [fixed()].
+#'   Match a fixed string (i.e. by comparing only bytes), using `fixed()`.
 #'   This is fast, but approximate.
 #'
 #' @param negate If `TRUE`, return non-matching elements.
@@ -260,7 +270,7 @@ str_detect <- function(string, pattern, negate = FALSE) {
 #'   as described in [base::regex].
 #'   Control options with [regex()].
 #'
-#'   Match a fixed string (i.e. by comparing only bytes), using [fixed()].
+#'   Match a fixed string (i.e. by comparing only bytes), using `fixed()`.
 #'   This is fast, but approximate.
 #'
 #' @return A character vector.
