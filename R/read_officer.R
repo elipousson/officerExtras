@@ -98,6 +98,7 @@ read_officer <- function(
     }
 
     check_officer(x, what = paste0("r", fileext), call = call, ...)
+    fileext <- officer_fileext(x)
   }
 
   if (!is.null(filename)) {
