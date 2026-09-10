@@ -52,4 +52,6 @@ add_list_to_body <- function(
   if (!is.null(after)) {
     docx <- add_to_body(docx = docx, value = after)
   }
+
+  docx
 }
