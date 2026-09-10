@@ -18,7 +18,7 @@ cursor_docx(
 \item{docx}{A rdocx object.}
 
 \item{keyword, id}{A keyword string used to place cursor with
-\code{\link[officer:cursor]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor]{officer::cursor_bookmark()}}.
+\code{\link[officer:cursor_reach]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor_bookmark]{officer::cursor_bookmark()}}.
 Defaults to \code{NULL}. If keyword or id are not provided, the gt object is
 inserted at the front of the document.}
 
@@ -38,12 +38,12 @@ mentioned in error messages as the source of the error. See the
 }
 \description{
 A combined function for setting cursor position with
-\code{\link[officer:cursor]{officer::cursor_reach()}}, \code{\link[officer:cursor]{officer::cursor_bookmark()}}, or using a doc_index
+\code{\link[officer:cursor_reach]{officer::cursor_reach()}}, \code{\link[officer:cursor_bookmark]{officer::cursor_bookmark()}}, or using a doc_index
 value from \code{\link[officer:docx_summary]{officer::docx_summary()}}. Defaults to using
-\code{\link[officer:cursor]{officer::cursor_end()}}, \code{\link[officer:cursor]{officer::cursor_begin()}},
-\code{\link[officer:cursor]{officer::cursor_backward()}}, or \code{\link[officer:cursor]{officer::cursor_forward()}} if keyword, id,
+\code{\link[officer:cursor_end]{officer::cursor_end()}}, \code{\link[officer:cursor_begin]{officer::cursor_begin()}},
+\code{\link[officer:cursor_backward]{officer::cursor_backward()}}, or \code{\link[officer:cursor_forward]{officer::cursor_forward()}} if keyword, id,
 and index are all \code{NULL}.
 }
 \seealso{
-\code{\link[officer:cursor]{officer::cursor_begin()}}, \code{\link[officer:docx_summary]{officer::docx_summary()}}
+\code{\link[officer:cursor_begin]{officer::cursor_begin()}}, \code{\link[officer:docx_summary]{officer::docx_summary()}}
 }

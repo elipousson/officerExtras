@@ -74,8 +74,8 @@ officer_summary(pptx_example, "slide", 1)
 
 }
 \seealso{
-Other summary functions: 
-\code{\link{check_officer_summary}()},
-\code{\link{officer_summary_levels}()}
+Other summary functions:
+\code{\link[=check_officer_summary]{check_officer_summary()}},
+\code{\link[=officer_summary_levels]{officer_summary_levels()}}
 }
 \concept{summary functions}

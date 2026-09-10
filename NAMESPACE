@@ -49,55 +49,67 @@ export(use_doc_version)
 export(vec_add_to_body)
 export(write_officer)
 import(rlang)
-importFrom(cli,cli_abort)
-importFrom(cli,cli_alert_info)
-importFrom(cli,cli_alert_success)
-importFrom(cli,cli_alert_warning)
-importFrom(cli,cli_bullets)
-importFrom(cli,cli_dl)
-importFrom(cli,cli_rule)
-importFrom(cli,cli_vec)
-importFrom(cli,cli_warn)
-importFrom(cli,symbol)
+importFrom(cli,
+  cli_abort,
+  cli_alert_info,
+  cli_alert_success,
+  cli_alert_warning,
+  cli_bullets,
+  cli_dl,
+  cli_rule,
+  cli_vec,
+  cli_warn,
+  symbol
+)
 importFrom(glue,glue)
-importFrom(lifecycle,deprecated)
-importFrom(lifecycle,signal_stage)
-importFrom(officer,body_add)
-importFrom(officer,body_add_caption)
-importFrom(officer,body_add_docx)
-importFrom(officer,body_add_xml)
-importFrom(officer,cursor_bookmark)
-importFrom(officer,cursor_reach)
-importFrom(officer,cursor_reach_test)
-importFrom(officer,doc_properties)
-importFrom(officer,docx_bookmarks)
-importFrom(officer,docx_dim)
-importFrom(officer,docx_summary)
-importFrom(officer,layout_summary)
-importFrom(officer,pptx_summary)
-importFrom(officer,read_docx)
-importFrom(officer,set_doc_properties)
-importFrom(officer,slide_summary)
-importFrom(rlang,as_function)
-importFrom(rlang,caller_arg)
-importFrom(rlang,check_installed)
-importFrom(rlang,check_required)
-importFrom(rlang,current_call)
-importFrom(rlang,current_env)
-importFrom(rlang,has_length)
-importFrom(rlang,has_name)
-importFrom(rlang,is_false)
-importFrom(rlang,is_named)
-importFrom(rlang,is_true)
-importFrom(rlang,list2)
-importFrom(rlang,set_names)
-importFrom(utils,download.file)
-importFrom(utils,head)
-importFrom(utils,modifyList)
-importFrom(utils,tail)
-importFrom(utils,type.convert)
-importFrom(utils,unzip)
-importFrom(vctrs,vec_fill_missing)
-importFrom(vctrs,vec_recycle)
-importFrom(vctrs,vec_recycle_common)
-importFrom(vctrs,vec_slice)
+importFrom(lifecycle,
+  deprecated,
+  signal_stage
+)
+importFrom(officer,
+  body_add,
+  body_add_caption,
+  body_add_docx,
+  body_add_xml,
+  cursor_bookmark,
+  cursor_reach,
+  cursor_reach_test,
+  doc_properties,
+  docx_bookmarks,
+  docx_dim,
+  docx_summary,
+  layout_summary,
+  pptx_summary,
+  read_docx,
+  set_doc_properties,
+  slide_summary
+)
+importFrom(rlang,
+  as_function,
+  caller_arg,
+  check_installed,
+  check_required,
+  current_call,
+  current_env,
+  has_length,
+  has_name,
+  is_false,
+  is_named,
+  is_true,
+  list2,
+  set_names
+)
+importFrom(utils,
+  download.file,
+  head,
+  modifyList,
+  tail,
+  type.convert,
+  unzip
+)
+importFrom(vctrs,
+  vec_fill_missing,
+  vec_recycle,
+  vec_recycle_common,
+  vec_slice
+)

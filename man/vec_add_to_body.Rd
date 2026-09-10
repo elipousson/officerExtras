@@ -17,13 +17,24 @@ vec_add_to_body(
 \item{docx}{A rdocx object.}
 
 \item{...}{
-  Arguments passed on to \code{\link[=add_to_body]{add_to_body}}
+  Arguments passed on to \code{\link{add_to_body}}
   \describe{
     \item{\code{gt_object}}{A gt object converted to an OOXML string with
 \code{\link[gt:as_word]{gt::as_word()}} then passed to \code{\link[=add_xml_to_body]{add_xml_to_body()}} as str parameter.
 Required for \code{\link[=add_gt_to_body]{add_gt_to_body()}}.}
+    \item{\code{tablecontainer}}{If \code{TRUE} (default), add tables inside of a
+tablecontainer tag that automatically adds a table number and converts the
+gt title into a table caption. This feature is based on code from the \href{https://github.com/GSK-Biostatistics/gto/}{gto package} by Ellis Hughes to
+transform the gt_object to OOXML and insert the XML into the docx object.}
+    \item{\code{caption}}{Name of the ggplot2 label to use as a caption if plot passed
+to value has a label for this value. Defaults to "title".}
+    \item{\code{caption_style}}{Passed to style for \code{\link[officer:body_add_caption]{officer::body_add_caption()}}.
+Defaults to same value as style.}
+    \item{\code{.f}}{Any function that takes a docx and value parameter and returns a
+rdocx object. A keyword parameter must also be supported if named is TRUE.
+Defaults to \code{\link[=add_text_to_body]{add_text_to_body()}}.}
     \item{\code{keyword,id}}{A keyword string used to place cursor with
-\code{\link[officer:cursor]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor]{officer::cursor_bookmark()}}.
+\code{\link[officer:cursor_reach]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor_bookmark]{officer::cursor_bookmark()}}.
 Defaults to \code{NULL}. If keyword or id are not provided, the gt object is
 inserted at the front of the document.}
     \item{\code{index}}{A integer matching a doc_index value appearing in a summary of
@@ -43,6 +54,52 @@ argument \code{path} from \link[officer]{read_docx}).}
     \item{\code{str}}{a wml string}
     \item{\code{pos}}{where to add the new element relative to the cursor,
 one of "after", "before", "on".}
+    \item{\code{.envir}}{[\code{environment}: \code{parent.frame()}]\cr Environment to evaluate each expression in. Expressions are
+evaluated from left to right. If \code{.x} is an environment, the expressions are
+evaluated in that environment and \code{.envir} is ignored. If \code{NULL} is passed, it is equivalent to \code{\link[=emptyenv]{emptyenv()}}.}
+    \item{\code{.na}}{[\code{character(1)}: \sQuote{NA}]\cr Value to replace \code{NA} values
+with. If \code{NULL} missing values are propagated, that is an \code{NA} result will
+cause \code{NA} output. Otherwise the value is replaced by the value of \code{.na}.}
+    \item{\code{.null}}{[\code{character(1)}: \sQuote{character()}]\cr Value to replace
+NULL values with. If \code{character()} whole output is \code{character()}. If
+\code{NULL} all NULL values are dropped (as in \code{paste0()}). Otherwise the
+value is replaced by the value of \code{.null}.}
+    \item{\code{align}}{\emph{Table alignment}
+
+\verb{scalar<character>} // \emph{default:} \code{"center"}
+
+An option for table alignment. Can either be \code{"center"}, \code{"left"}, or
+\code{"right"}.}
+    \item{\code{caption_location}}{\emph{Caption location}
+
+\verb{singl-kw:[top|bottom|embed]} // \emph{default:} \code{"top"}
+
+Determines where the caption should be positioned. This can either be
+\code{"top"}, \code{"bottom"}, or \code{"embed"}.}
+    \item{\code{caption_align}}{\emph{Caption alignment}
+
+Determines the alignment of the caption. This is
+either \code{"left"} (the default), \code{"center"}, or \code{"right"}. This option is
+only used when \code{caption_location} is not set as \code{"embed"}.}
+    \item{\code{split}}{\emph{Allow splitting of a table row across pages}
+
+\verb{scalar<logical>} // \emph{default:} \code{FALSE}
+
+A logical value that indicates whether to activate the Word option
+\verb{Allow row to break across pages}.}
+    \item{\code{keep_with_next}}{\emph{Keeping rows together}
+
+\verb{scalar<logical>} // \emph{default:} \code{TRUE}
+
+A logical value that indicates whether a table should use Word option
+\verb{Keep rows together}.}
+    \item{\code{autonum}}{Automatic Table Numbering
+
+\verb{scalar<logical>} // \emph{default:} \code{TRUE}
+
+A logical value that indicates whether a table should use Words built-in
+auto table numbering option in the caption.
+\verb{Automatic Table Numbering}.}
   }}
 
 \item{.sep}{A bare function, such as \link[officer:body_add_break]{officer::body_add_break} or another
@@ -64,7 +121,7 @@ to supply a vector of values or str inputs to add multiple blocks of text,
 images, plots, or tables to a document. Alternatively, the function also
 supports adding a single object at multiple locations or using multiple
 different styles.  All parameters are recycled using
-\code{\link[vctrs:vec_recycle]{vctrs::vec_recycle_common()}} so inputs must be length 1 or match the length
+\code{\link[vctrs:vec_recycle_common]{vctrs::vec_recycle_common()}} so inputs must be length 1 or match the length
 of the longest input vector. Optionally, the function can apply a separator
 between each element by passing a value to \code{\link[=add_to_body]{add_to_body()}} or passing docx to
 a function, such as \code{\link[officer:body_add_break]{officer::body_add_break()}}.

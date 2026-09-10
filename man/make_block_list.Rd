@@ -39,7 +39,7 @@ errors if no input parameters are provided.
 into a single \code{block_list}. Both functions are not yet working as expected.
 }
 \seealso{
-Other block list functions: 
-\code{\link{officer_add_blocks}()}
+Other block list functions:
+\code{\link[=officer_add_blocks]{officer_add_blocks()}}
 }
 \concept{block list functions}

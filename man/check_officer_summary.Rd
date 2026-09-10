@@ -59,8 +59,8 @@ Optionally check for the number of rows, a specific content_type value, or if
 tables are included in the document the summary was created from.
 }
 \seealso{
-Other summary functions: 
-\code{\link{officer_summary}()},
-\code{\link{officer_summary_levels}()}
+Other summary functions:
+\code{\link[=officer_summary]{officer_summary()}},
+\code{\link[=officer_summary_levels]{officer_summary_levels()}}
 }
 \concept{summary functions}

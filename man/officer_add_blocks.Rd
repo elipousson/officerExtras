@@ -52,7 +52,7 @@ mentioned in error messages as the source of the error. See the
 \item{docx}{A rdocx object.}
 
 \item{keyword, id}{A keyword string used to place cursor with
-\code{\link[officer:cursor]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor]{officer::cursor_bookmark()}}.
+\code{\link[officer:cursor_reach]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor_bookmark]{officer::cursor_bookmark()}}.
 Defaults to \code{NULL}. If keyword or id are not provided, the gt object is
 inserted at the front of the document.}
 
@@ -70,7 +70,7 @@ allows users to set the cursor position before adding the block list using
 \code{\link[=cursor_docx]{cursor_docx()}}.
 }
 \seealso{
-Other block list functions: 
-\code{\link{make_block_list}()}
+Other block list functions:
+\code{\link[=make_block_list]{make_block_list()}}
 }
 \concept{block list functions}

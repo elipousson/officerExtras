@@ -71,7 +71,7 @@ add_str_with_keys(docx, str, ..., .f = add_xml_to_body)
 \item{docx}{A rdocx object.}
 
 \item{keyword, id}{A keyword string used to place cursor with
-\code{\link[officer:cursor]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor]{officer::cursor_bookmark()}}.
+\code{\link[officer:cursor_reach]{officer::cursor_reach()}} or bookmark id with \code{\link[officer:cursor_bookmark]{officer::cursor_bookmark()}}.
 Defaults to \code{NULL}. If keyword or id are not provided, the gt object is
 inserted at the front of the document.}
 

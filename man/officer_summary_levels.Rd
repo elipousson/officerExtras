@@ -34,7 +34,7 @@ non-NA values from the levels_from column.}
 Default: c("down", "up", "downup", "updown")}
 
 \item{...}{
-  Arguments passed on to \code{\link[=officer_summary]{officer_summary}}
+  Arguments passed on to \code{\link{officer_summary}}
   \describe{
     \item{\code{as_tibble}}{If \code{TRUE} (default), return a tibble data frame.}
     \item{\code{summary_type}}{Summary type. Options "doc", "docx", "pptx", "slide", or
@@ -68,8 +68,8 @@ styles into a data.frame where new columns hold the value of the preceding
 (or succeeding) heading text.
 }
 \seealso{
-Other summary functions: 
-\code{\link{check_officer_summary}()},
-\code{\link{officer_summary}()}
+Other summary functions:
+\code{\link[=check_officer_summary]{check_officer_summary()}},
+\code{\link[=officer_summary]{officer_summary()}}
 }
 \concept{summary functions}

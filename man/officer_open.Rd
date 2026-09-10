@@ -20,7 +20,7 @@ be set for rxlsx objects.}
 of input object \code{x}.}
 
 \item{...}{
-  Arguments passed on to \code{\link[=write_officer]{write_officer}}
+  Arguments passed on to \code{\link{write_officer}}
   \describe{
     \item{\code{modified_by}}{If the withr package is installed, modified_by overrides
 the default value for the lastModifiedBy property assigned to the output
