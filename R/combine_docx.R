@@ -64,6 +64,9 @@ combine_docx <- function(
   size <- length(.list)
 
   if (!is.null(sep)) {
+    if (is_function(sep)) {
+      sep <- list(sep)
+    }
     sep <- vctrs::vec_recycle(sep, size = size, x_arg = "size", call = call)
   }
 
@@ -90,7 +93,7 @@ combine_docx <- function(
 
     if (!is.null(sep) && (i < size)) {
       if (is_function(sep[[i]])) {
-        docx <- eval(sep, docx)
+        docx <- exec(sep[[i]], docx)
       } else {
         docx <- add_to_body(docx, value = sep[[i]], pos = pos, call = call)
       }
