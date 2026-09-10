@@ -34,11 +34,15 @@ read_docs_url <- function(
     check_office_fileext(filename)
   }
 
-  path <- str_c(
-    path,
-    filename %||% export[["filename"]],
-    sep = .Platform$file.sep
-  )
+  if (is.null(filename) && is.null(path)) {
+    path <- export[["filename"]]
+  } else {
+    path <- str_c(
+      path,
+      filename %||% basename(export[["filename"]]),
+      sep = .Platform$file.sep
+    )
+  }
 
   if (!file.exists(path) || overwrite) {
     utils::download.file(export[["url"]], path, mode = "wb", quiet = quiet)
@@ -63,7 +67,7 @@ prep_docs_export <- function(url, format = NULL) {
     suffix <- "export"
     format <- match.arg(format, c("pptx", "pdf"))
     fileext <- "pptx"
-  } else if (is_slides_url(url)) {
+  } else if (is_sheets_url(url)) {
     suffix <- "edit"
     format <- match.arg(format, c("xlsx", "csv", "pdf"))
     fileext <- "xlsx"
@@ -86,10 +90,7 @@ prep_docs_export <- function(url, format = NULL) {
       )
     )
 
-  filename <- str_remove(
-    officer_temp(fileext = fileext),
-    paste0("^", .Platform$file.sep)
-  )
+  filename <- officer_temp(fileext = fileext)
 
   list(
     "url" = url,
