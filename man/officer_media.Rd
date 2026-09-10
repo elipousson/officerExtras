@@ -30,6 +30,10 @@ or pptx file but do not copy the files to dir. Defaults to \code{FALSE}.}
 at target path. If \code{FALSE}, abort if files with the same names already
 exist.}
 }
+\value{
+Invisibly returns the paths of the copied (or, if \code{list} is
+\code{TRUE}, listed) media files, or \code{NULL} if no media files are found.
+}
 \description{
 Unzip a docx or pptx file to a temporary directory, check if the directory
 contains a media folder, and copy media files to the directory set by dir. If

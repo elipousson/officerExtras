@@ -22,6 +22,8 @@
 #' @inheritParams check_docx
 #' @seealso
 #'  [officer::cursor_begin()], [officer::docx_summary()]
+#' @returns A `rdocx` object with the cursor repositioned. If `keyword` can't
+#'   be found, `docx` is returned unmodified.
 #' @export
 #' @importFrom rlang check_required
 #' @importFrom cli cli_alert_warning cli_abort

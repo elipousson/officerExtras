@@ -17,6 +17,7 @@
 #' location specified by `filename` and `path`.
 #' @param quiet If `TRUE`, suppress messages when downloading file.
 #' @seealso [read_officer()]
+#' @returns A `rdocx`, `rpptx`, or `rxlsx` object.
 #' @export
 #' @importFrom glue glue
 #' @importFrom utils download.file

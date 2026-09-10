@@ -20,6 +20,9 @@ is_block_list(x)
 
 \item{what}{Class or classes passed to \code{\link[=inherits]{inherits()}}}
 }
+\value{
+\code{TRUE} or \code{FALSE}.
+}
 \description{
 \code{\link[=is_officer]{is_officer()}} and variants are basic wrappers for \code{\link[=inherits]{inherits()}} to check for
 object classes created by functions from the officer package. These functions

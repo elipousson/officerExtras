@@ -6,6 +6,8 @@
 #'
 #' @param docx A rdocx object to get dimensions for.
 #' @seealso [officer::docx_dim()]
+#' @returns A list with `page`, `landscape`, `margins`, `orientation`, and
+#'   `body` elements describing the page and body text dimensions.
 #' @export
 #' @importFrom officer docx_dim
 dims_docx_ext <- function(docx) {

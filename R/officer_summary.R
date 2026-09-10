@@ -106,6 +106,8 @@ officer_summary <- function(
 #' @param ... Additional parameters passed to [cli::cli_abort()]
 #' @family summary functions
 #' @inheritParams cli::cli_abort
+#' @returns Invisibly returns `NULL` if `x` passes the checks. Otherwise,
+#'   errors.
 #' @export
 #' @importFrom cli cli_abort
 check_officer_summary <- function(

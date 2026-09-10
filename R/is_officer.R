@@ -8,6 +8,7 @@
 #' @rdname is_officer
 #' @param x A object to test
 #' @param what Class or classes passed to [inherits()]
+#' @returns `TRUE` or `FALSE`.
 #' @export
 is_officer <- function(x, what = c("rdocx", "rpptx", "rxlsx")) {
   inherits(x, what)

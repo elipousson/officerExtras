@@ -60,6 +60,9 @@ inserted at the front of the document.}
 the docx object created with \code{\link[officer:docx_summary]{officer::docx_summary()}}. If index is for a
 paragraph value, the text of the pargraph is used as a keyword.}
 }
+\value{
+A \code{rdocx} or \code{rpptx} object with the block list added.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 

@@ -115,6 +115,9 @@ running function, e.g. \code{caller_env()}. The function will be
 mentioned in error messages as the source of the error. See the
 \code{call} argument of \code{\link[rlang:abort]{abort()}} for more information.}
 }
+\value{
+A \code{rdocx} object with each recycled element added in sequence.
+}
 \description{
 \code{\link[=vec_add_to_body]{vec_add_to_body()}} is a vectorized variant \code{\link[=add_to_body]{add_to_body()}} that allows users
 to supply a vector of values or str inputs to add multiple blocks of text,

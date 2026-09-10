@@ -50,6 +50,10 @@ list. Defaults to \code{FALSE}.}
 
 \item{allow_null}{If \code{FALSE} (default), error if x is \code{NULL}.}
 }
+\value{
+Invisibly returns \code{NULL} if \code{x} passes the check. Otherwise,
+errors.
+}
 \description{
 Check if x is a rdocx, rpptx, or rxlsx object
 }

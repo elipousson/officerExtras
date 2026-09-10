@@ -52,6 +52,10 @@ respectively not display any call or hard-code a code to display.
 
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 }
+\value{
+Invisibly returns \code{NULL} if \code{x} passes the checks. Otherwise,
+errors.
+}
 \description{
 Check an object and error if an object is not a data.frame with the required
 column names to be a summary data.frame created from a rdocx or rpptx object.

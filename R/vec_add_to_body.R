@@ -48,6 +48,7 @@
 #'
 #'   officer_summary(docx_example)
 #' }
+#' @returns A `rdocx` object with each recycled element added in sequence.
 #' @export
 #' @importFrom vctrs vec_recycle_common vec_recycle vec_slice
 vec_add_to_body <- function(

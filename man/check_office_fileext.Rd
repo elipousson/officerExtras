@@ -42,6 +42,10 @@ mentioned in error messages as the source of the error. See the
 
 \item{...}{Additional parameters passed to \code{\link[cli:cli_abort]{cli::cli_abort()}}}
 }
+\value{
+Invisibly returns \code{NULL} if \code{x} passes the check (or is \code{NULL}
+and \code{allow_null} is \code{TRUE}). Otherwise, errors.
+}
 \description{
 Check file path for a docx, pptx, or xlsx file extension
 }

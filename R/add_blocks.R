@@ -16,6 +16,7 @@
 #' @inheritParams officer::ph_with
 #' @inheritParams check_officer
 #' @family block list functions
+#' @returns A `rdocx` or `rpptx` object with the block list added.
 #' @export
 officer_add_blocks <- function(
   x,

@@ -6,6 +6,8 @@
 #' @param what Class names to check
 #' @param ... Additional parameters passed to [cli::cli_abort()]
 #' @inheritParams rlang::args_error_context
+#' @returns Invisibly returns `NULL` if `x` passes the check. Otherwise,
+#'   errors.
 #' @export
 check_officer <- function(
   x,
@@ -90,6 +92,8 @@ check_block_list <- function(
 #'   `FALSE` (default), error unless x is a character vector with file extension
 #'   matching the supplied fileext value.
 #' @inheritParams check_officer
+#' @returns Invisibly returns `NULL` if `x` passes the check (or is `NULL`
+#'   and `allow_null` is `TRUE`). Otherwise, errors.
 #' @export
 #' @importFrom rlang caller_arg current_env
 #' @importFrom cli cli_abort

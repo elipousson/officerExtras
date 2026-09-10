@@ -78,6 +78,9 @@ For more information about error calls, see \ifelse{html}{\link[rlang:topic-erro
 }
 \value{
 A list of data frames or, if stack is \code{TRUE}, a single data frame.
+
+A single data.frame, or (if the table has more than one header
+row) a list of two data.frames: the table body and the table header.
 }
 \description{
 Get one or more tables from a rdocx or rpptx object. \code{\link[=officer_tables]{officer_tables()}}

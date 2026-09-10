@@ -20,6 +20,7 @@
 #'   blocks.
 #' @inheritParams check_block_list
 #' @family block list functions
+#' @returns A `block_list` object.
 #' @export
 make_block_list <- function(
   blocks = NULL,

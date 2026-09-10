@@ -32,6 +32,9 @@ location specified by \code{filename} and \code{path}.}
 
 \item{quiet}{If \code{TRUE}, suppress messages when downloading file.}
 }
+\value{
+A \code{rdocx}, \code{rpptx}, or \code{rxlsx} object.
+}
 \description{
 Uses the Google Docs, Slides, or Sheets URL to export a file locally, read to
 an officer object. If filename is \code{NULL}, exported file is removed after

@@ -73,6 +73,8 @@ unzip_officer <- function(
 #'   list = TRUE
 #' )
 #' @seealso [officer::media_extract()]
+#' @returns Invisibly returns the paths of the copied (or, if `list` is
+#'   `TRUE`, listed) media files, or `NULL` if no media files are found.
 #' @export
 #' @importFrom cli cli_bullets cli_alert_success
 #' @importFrom rlang set_names

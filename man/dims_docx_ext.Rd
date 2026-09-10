@@ -9,6 +9,10 @@ dims_docx_ext(docx)
 \arguments{
 \item{docx}{A rdocx object to get dimensions for.}
 }
+\value{
+A list with \code{page}, \code{landscape}, \code{margins}, \code{orientation}, and
+\code{body} elements describing the page and body text dimensions.
+}
 \description{
 This function extends \code{\link[officer:docx_dim]{officer::docx_dim()}} by also returning the body text
 dimensions within the margins, the aspect ratio of the page and body, and the

@@ -207,6 +207,7 @@ doc_str_ver <- function(filename, sep = ".") {
 #'   x.
 #' @param .default Specification for initial version.
 #' @inheritParams rlang::args_error_context
+#' @returns A string with the document version.
 #' @export
 doc_version <- function(
   filename = NULL,

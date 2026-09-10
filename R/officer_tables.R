@@ -115,6 +115,8 @@ officer_tables <- function(
 
 #' @rdname officer_tables
 #' @name officer_table
+#' @returns A single data.frame, or (if the table has more than one header
+#'   row) a list of two data.frames: the table body and the table header.
 #' @export
 #' @importFrom rlang has_name set_names
 #' @importFrom utils head tail
