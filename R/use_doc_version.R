@@ -217,6 +217,9 @@ doc_version <- function(
   .default = c(0, 1, 0),
   call = caller_env()
 ) {
+  ver_str <- NULL
+  msg <- NULL
+
   if (!is.null(filename)) {
     ver_str <- string_extract(filename, pattern = version_sep(sep))
     msg <- "Version {.val {ver_str}} found in {.file {filename}}"
