@@ -33,3 +33,29 @@ test_that("officer_media works", {
     )
   })
 })
+
+test_that("officer_media supports list = TRUE", {
+  expect_message(
+    media_files <- officer_media(
+      system.file("doc_examples/example.pptx", package = "officer"),
+      list = TRUE
+    ),
+    "1 media file found"
+  )
+
+  expect_true(any(grepl("image1.png", media_files)))
+})
+
+test_that("officer_media works with a rpptx object as x", {
+  pptx <- read_officer(
+    system.file("doc_examples/example.pptx", package = "officer")
+  )
+
+  withr::with_tempdir({
+    officer_media(x = pptx, target = "media_from_object")
+
+    expect_true(
+      file.exists(file.path("media_from_object", "image1.png"))
+    )
+  })
+})

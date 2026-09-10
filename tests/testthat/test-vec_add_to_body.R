@@ -20,10 +20,66 @@ test_that("vec_add_to_body works", {
     docx_rows + new_rows
   )
 
-  skip("vec_add_to_body test is not working")
+  new_idx <- which(docx_update_summary[["text"]] == "new text")
+
+  # New rows must all be present and inserted as a contiguous block
+  expect_length(new_idx, new_rows)
+  expect_true(all(diff(new_idx) == 1))
+})
+
+test_that("vec_add_to_body recycles style and value parameters", {
+  docx_example <- read_officer()
+
+  docx_update <- vec_add_to_body(
+    docx_example,
+    value = c("Sample text 1", "Sample text 2", "Sample text 3"),
+    style = c("heading 1", "heading 2", "Normal")
+  )
+
+  summary_df <- officer_summary(docx_update)
 
   expect_identical(
-    docx_update_summary[c((docx_rows + 1):(docx_rows + new_rows)), ][["text"]],
-    values
+    summary_df[["text"]],
+    c("Sample text 1", "Sample text 2", "Sample text 3")
+  )
+
+  expect_identical(
+    summary_df[["style_name"]],
+    c("heading 1", "heading 2", "Normal")
+  )
+})
+
+test_that("vec_add_to_body supports .sep as a function", {
+  docx_example <- read_officer()
+
+  docx_update <- vec_add_to_body(
+    docx_example,
+    value = rep("Text", 3),
+    style = "Normal",
+    .sep = officer::body_add_break
+  )
+
+  summary_df <- officer_summary(docx_update)
+
+  expect_equal(
+    sum(summary_df[["text"]] == "Text"),
+    3
+  )
+})
+
+test_that("vec_add_to_body supports .sep as a value passed to add_to_body", {
+  docx_example <- read_officer()
+
+  docx_update <- vec_add_to_body(
+    docx_example,
+    value = c("A", "B"),
+    .sep = "separator"
+  )
+
+  summary_df <- officer_summary(docx_update)
+
+  expect_identical(
+    summary_df[["text"]],
+    c("A", "separator", "B")
   )
 })
