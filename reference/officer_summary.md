@@ -3,9 +3,7 @@
 `officer_summary()` extends
 [`officer::docx_summary()`](https://davidgohel.github.io/officer/reference/docx_summary.html)
 and other officer summary functions by handling multiple input types
-within a single function. The preserve parameter is supported by officer
-version \>= 0.6.3 (currently the development version) and it is ignored
-unless a minimum supported version of officer is installed.
+within a single function.
 
 ## Usage
 
