@@ -53,9 +53,6 @@ A tibble or data frame object.
 \description{
 \code{officer_summary()} extends \code{officer::docx_summary()} and other officer
 summary functions by handling multiple input types within a single function.
-The preserve parameter is supported by officer version >= 0.6.3 (currently
-the development version) and it is ignored unless a minimum supported version
-of officer is installed.
 }
 \examples{
 docx_example <- read_officer(

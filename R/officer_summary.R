@@ -2,9 +2,6 @@
 #'
 #' `officer_summary()` extends `officer::docx_summary()` and other officer
 #' summary functions by handling multiple input types within a single function.
-#' The preserve parameter is supported by officer version >= 0.6.3 (currently
-#' the development version) and it is ignored unless a minimum supported version
-#' of officer is installed.
 #'
 #' @param x A rdocx or rpptx object passed to [officer::docx_summary()],
 #'   [officer::pptx_summary()], [officer::slide_summary()], or
@@ -67,28 +64,15 @@ officer_summary <- function(
 
   summary_type <- summary_type %||% class(x)
 
-  if (
-    is_installed("officer (>= 0.6.3)") &&
-      (summary_type %in% c("rdocx", "docx", "rpptx", "pptx"))
-  ) {
-    if (summary_type %in% c("rdocx", "docx")) {
-      summary_df <- officer::docx_summary(x, preserve = preserve)
-    }
-
-    if (summary_type %in% c("rpptx", "pptx")) {
-      summary_df <- officer::pptx_summary(x, preserve = preserve)
-    }
-  } else {
-    summary_df <- switch(
-      summary_type,
-      "rdocx" = officer::docx_summary(x),
-      "rpptx" = officer::pptx_summary(x),
-      "docx" = officer::docx_summary(x),
-      "pptx" = officer::pptx_summary(x),
-      "slide" = officer::slide_summary(x, index = index),
-      "layout" = officer::layout_summary(x)
-    )
-  }
+  summary_df <- switch(
+    summary_type,
+    "rdocx" = officer::docx_summary(x, preserve = preserve),
+    "docx" = officer::docx_summary(x, preserve = preserve),
+    "rpptx" = officer::pptx_summary(x, preserve = preserve),
+    "pptx" = officer::pptx_summary(x, preserve = preserve),
+    "slide" = officer::slide_summary(x, index = index),
+    "layout" = officer::layout_summary(x)
+  )
 
   if (as_tibble) {
     return(tibble::as_tibble(summary_df))
