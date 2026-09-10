@@ -39,10 +39,12 @@ cursor_docx <- function(
   check_docx(docx, call = call)
 
   if (!is.null(keyword)) {
-    if (isFALSE(officer::cursor_reach_test(docx, keyword)) && isFALSE(quiet)) {
-      cli::cli_alert_warning(
-        "{.arg keyword} {.val {keyword}} can't be found in {.arg docx}."
-      )
+    if (isFALSE(officer::cursor_reach_test(docx, keyword))) {
+      if (isFALSE(quiet)) {
+        cli::cli_alert_warning(
+          "{.arg keyword} {.val {keyword}} can't be found in {.arg docx}."
+        )
+      }
 
       return(docx)
     }
