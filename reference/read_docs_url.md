@@ -47,6 +47,10 @@ read_docs_url(
 
   If `TRUE`, suppress messages when downloading file.
 
+## Value
+
+A `rdocx`, `rpptx`, or `rxlsx` object.
+
 ## See also
 
 [`read_officer()`](https://elipousson.github.io/officerExtras/reference/read_officer.md)

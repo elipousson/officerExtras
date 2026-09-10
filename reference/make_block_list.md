@@ -52,6 +52,10 @@ combine_blocks(...)
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A `block_list` object.
+
 ## See also
 
 Other block list functions:

@@ -116,6 +116,9 @@ officer_table(
 
 A list of data frames or, if stack is `TRUE`, a single data frame.
 
+A single data.frame, or (if the table has more than one header row) a
+list of two data.frames: the table body and the table header.
+
 ## See also
 
 `docxtractr::docx_extract_all()`

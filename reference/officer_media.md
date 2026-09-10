@@ -45,6 +45,11 @@ officer_media(
   If `TRUE` (default), overwrite any files with the same names at target
   path. If `FALSE`, abort if files with the same names already exist.
 
+## Value
+
+Invisibly returns the paths of the copied (or, if `list` is `TRUE`,
+listed) media files, or `NULL` if no media files are found.
+
 ## See also
 
 [`officer::media_extract()`](https://davidgohel.github.io/officer/reference/media_extract.html)

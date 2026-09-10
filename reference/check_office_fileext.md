@@ -56,3 +56,8 @@ check_xlsx_fileext(x, arg = caller_arg(x), call = caller_env(), ...)
 
   Additional parameters passed to
   [`cli::cli_abort()`](https://cli.r-lib.org/reference/cli_abort.html)
+
+## Value
+
+Invisibly returns `NULL` if `x` passes the check (or is `NULL` and
+`allow_null` is `TRUE`). Otherwise, errors.

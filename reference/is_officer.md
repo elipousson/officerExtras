@@ -28,3 +28,7 @@ is_block_list(x)
 
   Class or classes passed to
   [`inherits()`](https://rdrr.io/r/base/class.html)
+
+## Value
+
+`TRUE` or `FALSE`.

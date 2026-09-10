@@ -68,6 +68,11 @@ cursor_docx(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A `rdocx` object with the cursor repositioned. If `keyword` can't be
+found, `docx` is returned unmodified.
+
 ## See also
 
 [`officer::cursor_begin()`](https://davidgohel.github.io/officer/reference/cursor.html),

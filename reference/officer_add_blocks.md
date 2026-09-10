@@ -97,6 +97,10 @@ add_blocks_to_body(
   If index is for a paragraph value, the text of the pargraph is used as
   a keyword.
 
+## Value
+
+A `rdocx` or `rpptx` object with the block list added.
+
 ## See also
 
 Other block list functions:

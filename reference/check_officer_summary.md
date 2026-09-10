@@ -77,6 +77,10 @@ check_officer_summary(
   in error
   messages](https://rlang.r-lib.org/reference/topic-error-call.html).
 
+## Value
+
+Invisibly returns `NULL` if `x` passes the checks. Otherwise, errors.
+
 ## See also
 
 Other summary functions:

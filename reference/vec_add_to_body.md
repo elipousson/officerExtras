@@ -231,6 +231,10 @@ vec_add_to_body(
   [`abort()`](https://rlang.r-lib.org/reference/abort.html) for more
   information.
 
+## Value
+
+A `rdocx` object with each recycled element added in sequence.
+
 ## Examples
 
 ``` r

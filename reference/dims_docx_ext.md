@@ -18,6 +18,11 @@ dims_docx_ext(docx)
 
   A rdocx object to get dimensions for.
 
+## Value
+
+A list with `page`, `landscape`, `margins`, `orientation`, and `body`
+elements describing the page and body text dimensions.
+
 ## See also
 
 [`officer::docx_dim()`](https://davidgohel.github.io/officer/reference/docx_dim.html)

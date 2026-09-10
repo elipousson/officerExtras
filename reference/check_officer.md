@@ -65,3 +65,7 @@ check_block_list(
 - allow_null:
 
   If `FALSE` (default), error if x is `NULL`.
+
+## Value
+
+Invisibly returns `NULL` if `x` passes the check. Otherwise, errors.

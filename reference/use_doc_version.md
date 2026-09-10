@@ -117,3 +117,5 @@ doc_version(
 
 Invisibly return a rdocx or rpptx object with an updated version
 property.
+
+A string with the document version.
