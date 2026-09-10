@@ -67,6 +67,10 @@ check_block_list <- function(
     cli::cli_abort("{.arg {arg}} can't be empty.", call = call)
   }
 
+  if (allow_null && is.null(x)) {
+    return(invisible(NULL))
+  }
+
   stop_input_type(
     x,
     "block list",
@@ -106,7 +110,7 @@ check_office_fileext <- function(
   check_character(fileext, allow_null = TRUE, call = call)
   fileext <- match.arg(fileext, several.ok = TRUE)
 
-  if (!is_null(x) && !any(is_fileext_path(x, fileext))) {
+  if (is_null(x) || !any(is_fileext_path(x, fileext))) {
     cli_abort(
       "{.arg {arg}} must use a {.val {cli_vec_last(fileext)}} file extension.",
       ...,
