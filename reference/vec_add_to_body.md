@@ -48,6 +48,33 @@ vec_add_to_body(
       as str parameter. Required for
       [`add_gt_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md).
 
+  `tablecontainer`
+
+  :   If `TRUE` (default), add tables inside of a tablecontainer tag
+      that automatically adds a table number and converts the gt title
+      into a table caption. This feature is based on code from the [gto
+      package](https://github.com/GSK-Biostatistics/gto/) by Ellis
+      Hughes to transform the gt_object to OOXML and insert the XML into
+      the docx object.
+
+  `caption`
+
+  :   Name of the ggplot2 label to use as a caption if plot passed to
+      value has a label for this value. Defaults to "title".
+
+  `caption_style`
+
+  :   Passed to style for
+      [`officer::body_add_caption()`](https://davidgohel.github.io/officer/reference/body_add_caption.html).
+      Defaults to same value as style.
+
+  `.f`
+
+  :   Any function that takes a docx and value parameter and returns a
+      rdocx object. A keyword parameter must also be supported if named
+      is TRUE. Defaults to
+      [`add_text_to_body()`](https://elipousson.github.io/officerExtras/reference/add_to_body.md).
+
   `keyword,id`
 
   :   A keyword string used to place cursor with
@@ -96,6 +123,87 @@ vec_add_to_body(
 
   :   where to add the new element relative to the cursor, one of
       "after", "before", "on".
+
+  `.envir`
+
+  :   \[`environment`:
+      [`parent.frame()`](https://rdrr.io/r/base/sys.parent.html)\]  
+      Environment to evaluate each expression in. Expressions are
+      evaluated from left to right. If `.x` is an environment, the
+      expressions are evaluated in that environment and `.envir` is
+      ignored. If `NULL` is passed, it is equivalent to
+      [`emptyenv()`](https://rdrr.io/r/base/environment.html).
+
+  `.na`
+
+  :   \[`character(1)`: ‘NA’\]  
+      Value to replace `NA` values with. If `NULL` missing values are
+      propagated, that is an `NA` result will cause `NA` output.
+      Otherwise the value is replaced by the value of `.na`.
+
+  `.null`
+
+  :   \[`character(1)`: ‘character()’\]  
+      Value to replace NULL values with. If
+      [`character()`](https://rdrr.io/r/base/character.html) whole
+      output is [`character()`](https://rdrr.io/r/base/character.html).
+      If `NULL` all NULL values are dropped (as in
+      [`paste0()`](https://rdrr.io/r/base/paste.html)). Otherwise the
+      value is replaced by the value of `.null`.
+
+  `align`
+
+  :   *Table alignment*
+
+      `scalar<character>` // *default:* `"center"`
+
+      An option for table alignment. Can either be `"center"`, `"left"`,
+      or `"right"`.
+
+  `caption_location`
+
+  :   *Caption location*
+
+      `singl-kw:[top|bottom|embed]` // *default:* `"top"`
+
+      Determines where the caption should be positioned. This can either
+      be `"top"`, `"bottom"`, or `"embed"`.
+
+  `caption_align`
+
+  :   *Caption alignment*
+
+      Determines the alignment of the caption. This is either `"left"`
+      (the default), `"center"`, or `"right"`. This option is only used
+      when `caption_location` is not set as `"embed"`.
+
+  `split`
+
+  :   *Allow splitting of a table row across pages*
+
+      `scalar<logical>` // *default:* `FALSE`
+
+      A logical value that indicates whether to activate the Word option
+      `Allow row to break across pages`.
+
+  `keep_with_next`
+
+  :   *Keeping rows together*
+
+      `scalar<logical>` // *default:* `TRUE`
+
+      A logical value that indicates whether a table should use Word
+      option `Keep rows together`.
+
+  `autonum`
+
+  :   Automatic Table Numbering
+
+      `scalar<logical>` // *default:* `TRUE`
+
+      A logical value that indicates whether a table should use Words
+      built-in auto table numbering option in the caption.
+      `Automatic Table Numbering`.
 
 - .sep:
 

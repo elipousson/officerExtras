@@ -86,6 +86,25 @@ a function, such as <code><a href="https://davidgohel.github.io/officer/referenc
 <code><a href="https://gt.rstudio.com/reference/as_word.html" class="external-link">gt::as_word()</a></code> then passed to <code><a href="add_to_body.html">add_xml_to_body()</a></code> as str parameter.
 Required for <code><a href="add_to_body.html">add_gt_to_body()</a></code>.</p></dd>
 
+    <dt><code>tablecontainer</code></dt>
+<dd><p>If <code>TRUE</code> (default), add tables inside of a
+tablecontainer tag that automatically adds a table number and converts the
+gt title into a table caption. This feature is based on code from the <a href="https://github.com/GSK-Biostatistics/gto/" class="external-link">gto package</a> by Ellis Hughes to
+transform the gt_object to OOXML and insert the XML into the docx object.</p></dd>
+
+    <dt><code>caption</code></dt>
+<dd><p>Name of the ggplot2 label to use as a caption if plot passed
+to value has a label for this value. Defaults to "title".</p></dd>
+
+    <dt><code>caption_style</code></dt>
+<dd><p>Passed to style for <code><a href="https://davidgohel.github.io/officer/reference/body_add_caption.html" class="external-link">officer::body_add_caption()</a></code>.
+Defaults to same value as style.</p></dd>
+
+    <dt><code>.f</code></dt>
+<dd><p>Any function that takes a docx and value parameter and returns a
+rdocx object. A keyword parameter must also be supported if named is TRUE.
+Defaults to <code><a href="add_to_body.html">add_text_to_body()</a></code>.</p></dd>
+
     <dt><code>keyword,id</code></dt>
 <dd><p>A keyword string used to place cursor with
 <code><a href="https://davidgohel.github.io/officer/reference/cursor.html" class="external-link">officer::cursor_reach()</a></code> or bookmark id with <code><a href="https://davidgohel.github.io/officer/reference/cursor.html" class="external-link">officer::cursor_bookmark()</a></code>.
@@ -120,6 +139,59 @@ argument <code>path</code> from <a href="https://davidgohel.github.io/officer/re
     <dt><code>pos</code></dt>
 <dd><p>where to add the new element relative to the cursor,
 one of "after", "before", "on".</p></dd>
+
+    <dt><code>.envir</code></dt>
+<dd><p>[<code>environment</code>: <code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame()</a></code>]<br> Environment to evaluate each expression in. Expressions are
+evaluated from left to right. If <code>.x</code> is an environment, the expressions are
+evaluated in that environment and <code>.envir</code> is ignored. If <code>NULL</code> is passed, it is equivalent to <code><a href="https://rdrr.io/r/base/environment.html" class="external-link">emptyenv()</a></code>.</p></dd>
+
+    <dt><code>.na</code></dt>
+<dd><p>[<code>character(1)</code>: ‘NA’]<br> Value to replace <code>NA</code> values
+with. If <code>NULL</code> missing values are propagated, that is an <code>NA</code> result will
+cause <code>NA</code> output. Otherwise the value is replaced by the value of <code>.na</code>.</p></dd>
+
+    <dt><code>.null</code></dt>
+<dd><p>[<code>character(1)</code>: ‘character()’]<br> Value to replace
+NULL values with. If <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> whole output is <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code>. If
+<code>NULL</code> all NULL values are dropped (as in <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>). Otherwise the
+value is replaced by the value of <code>.null</code>.</p></dd>
+
+    <dt><code>align</code></dt>
+<dd><p><em>Table alignment</em></p>
+<p><code>scalar&lt;character&gt;</code> // <em>default:</em> <code>"center"</code></p>
+<p>An option for table alignment. Can either be <code>"center"</code>, <code>"left"</code>, or
+<code>"right"</code>.</p></dd>
+
+    <dt><code>caption_location</code></dt>
+<dd><p><em>Caption location</em></p>
+<p><code>singl-kw:[top|bottom|embed]</code> // <em>default:</em> <code>"top"</code></p>
+<p>Determines where the caption should be positioned. This can either be
+<code>"top"</code>, <code>"bottom"</code>, or <code>"embed"</code>.</p></dd>
+
+    <dt><code>caption_align</code></dt>
+<dd><p><em>Caption alignment</em></p>
+<p>Determines the alignment of the caption. This is
+either <code>"left"</code> (the default), <code>"center"</code>, or <code>"right"</code>. This option is
+only used when <code>caption_location</code> is not set as <code>"embed"</code>.</p></dd>
+
+    <dt><code>split</code></dt>
+<dd><p><em>Allow splitting of a table row across pages</em></p>
+<p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>FALSE</code></p>
+<p>A logical value that indicates whether to activate the Word option
+<code>Allow row to break across pages</code>.</p></dd>
+
+    <dt><code>keep_with_next</code></dt>
+<dd><p><em>Keeping rows together</em></p>
+<p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>TRUE</code></p>
+<p>A logical value that indicates whether a table should use Word option
+<code>Keep rows together</code>.</p></dd>
+
+    <dt><code>autonum</code></dt>
+<dd><p>Automatic Table Numbering</p>
+<p><code>scalar&lt;logical&gt;</code> // <em>default:</em> <code>TRUE</code></p>
+<p>A logical value that indicates whether a table should use Words built-in
+auto table numbering option in the caption.
+<code>Automatic Table Numbering</code>.</p></dd>
 
 
 </dl></dd>

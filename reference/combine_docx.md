@@ -43,7 +43,7 @@ combine_docx(
 
   Any number of additional rdocx objects or docx file paths passed as a
   list. Defaults to
-  [`rlang::list2()`](https://rlang.r-lib.org/reference/list2.html)
+  [`list2()`](https://rlang.r-lib.org/reference/list2.html)
 
 - pos:
 
