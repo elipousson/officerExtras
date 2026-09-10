@@ -19,7 +19,7 @@ wrap_tag <- function(..., tag) {
 officer_temp <- function(
   ...,
   path = NULL,
-  fileext = c("docx", "pptx", "xslx")
+  fileext = c("docx", "pptx", "xlsx")
 ) {
   fileext <- match.arg(fileext)
 
