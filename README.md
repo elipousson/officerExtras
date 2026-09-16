@@ -13,7 +13,7 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Codecov test
-coverage](https://codecov.io/gh/elipousson/officerExtras/branch/main/graph/badge.svg)](https://app.codecov.io/gh/elipousson/officerExtras?branch=main)
+coverage](https://codecov.io/gh/elipousson/officerExtras/graph/badge.svg)](https://app.codecov.io/gh/elipousson/officerExtras)
 <!-- badges: end -->
 
 The goal of officerExtras is to provide helper and convenience functions
@@ -36,9 +36,15 @@ simplify the process of working with officer. For example, a single
 ``` r
 library(officerExtras)
 
-docx <- read_officer(filename = "example.docx", path = system.file("doc_examples", package = "officer"))
+docx <- read_officer(
+  filename = "example.docx",
+  path = system.file("doc_examples", package = "officer")
+)
 
-pptx <- read_officer(filename = "example.pptx", path = system.file("doc_examples", package = "officer"))
+pptx <- read_officer(
+  filename = "example.pptx",
+  path = system.file("doc_examples", package = "officer")
+)
 ```
 
 officer uses a print method to save rdocx, rpptx, or rxlsx objects back
@@ -48,7 +54,13 @@ properties to `officer::doc_properties()`.
 
 ``` r
 withr::with_tempdir({
-  write_officer(docx, "write-example.docx", modified_by = "officerExtras", title = "Document Title set by doc_properties", subject = "Microsoft Word, R")
+  write_officer(
+    docx,
+    "write-example.docx",
+    modified_by = "officerExtras",
+    title = "Document Title set by doc_properties",
+    subject = "Microsoft Word, R"
+  )
 
   example_docx <- read_officer("write-example.docx")
 
@@ -63,8 +75,10 @@ withr::with_tempdir({
 #> 6  lastModifiedBy                        officerExtras
 #> 7        revision                                   12
 #> 8         created                 2017-04-26T13:10:00Z
-#> 9        modified                 2023-06-22T11:04:39Z
-#> 10       category
+#> 9        modified                 2026-09-16T14:15:03Z
+#> 10       category                                     
+#> 11  HyperlinkBase                                     
+#> 12        Company                               ArData
 ```
 
 The package also wraps useful functions from a few other packages.
