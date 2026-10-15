@@ -88,6 +88,26 @@
 #' by hand in Word afterwards (but re-creating the reference document
 #' overwrites those edits).
 #'
+#' @section Page settings and sections:
+#'
+#' The `defaults.docx.page` settings (page size, margins, and footer) are
+#' stored in the reference document's section properties. Pandoc copies them
+#' to the last section of the rendered document, so they don't always apply to
+#' every page:
+#'
+#' - Quarto's `.landscape` divs add section breaks with no footer, no margins,
+#'   and an A4 landscape page size, so the pages before and in a landscape
+#'   section lose the footer and page settings.
+#' - A custom Pandoc OpenXML template (the `template` option for docx output,
+#'   e.g. as used by the better-word Quarto extension) replaces the section
+#'   properties if it doesn't use the `$sectpr$` variable.
+#'
+#' Use [docx_sync_sections()] on the rendered document (e.g. in a Quarto
+#' `post-render` script) to copy the footer and page settings from the last
+#' section to every other section. The reference document only controls styles
+#' and these defaults, not the document structure (e.g. the title block or
+#' table of contents), which a custom template controls.
+#'
 #' @param brand Path to a brand.yml file or a directory containing one, a
 #'   `brand_yml` object from [brand.yml::read_brand_yml()], or a list with the
 #'   brand settings (e.g. from [yaml12::read_yaml()]). If `NULL` (default), the
@@ -136,6 +156,10 @@ brand_reference_docx <- function(
     check_docx_fileext(reference)
     doc <- officer::read_docx(reference)
   }
+
+  # Allow a reference document previously written by officer (e.g. by
+  # brand_reference_docx()) to be printed again
+  remove_officer_ref_marks(officer::docx_body_xml(doc))
 
   doc <- set_brand_styles(doc, brand)
   doc <- set_brand_page(doc, brand)
@@ -1073,13 +1097,21 @@ set_brand_page <- function(doc, brand, call = caller_env()) {
     set_page_margins(sect_pr, page[["margins"]], call = call)
   }
 
-  # officer writes pgMar before pgSz, so put the section properties in schema
-  # order. Header and footer references stay in place: officer fills in their
-  # content when the document is written.
+  # officer writes pgMar before pgSz
+  sort_sect_pr(sect_pr)
+
+  doc
+}
+
+#' Put section properties in schema order. Header and footer references
+#' (which come first) stay in place: officer fills in their content when the
+#' document is written.
+#' @noRd
+sort_sect_pr <- function(sect_pr) {
   children <- xml2::xml_find_all(
     sect_pr,
     "*[not(self::w:headerReference or self::w:footerReference)]",
-    ns
+    w_ns(sect_pr)
   )
   sorted <- children[
     order(match(xml2::xml_name(children), ooxml_child_order[["sectPr"]]))
@@ -1093,7 +1125,7 @@ set_brand_page <- function(doc, brand, call = caller_env()) {
 
   xml2::xml_remove(children)
 
-  doc
+  invisible(sect_pr)
 }
 
 #' Set w:pgMar, filling margins the brand doesn't set from the existing

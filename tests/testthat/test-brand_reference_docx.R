@@ -409,3 +409,19 @@ test_that("brand_reference_docx warns when monospace-block differs from inline",
     "monospace-inline"
   )
 })
+
+test_that("brand_reference_docx can update a reference it created", {
+  skip_if_no_pandoc()
+
+  brand <- list(defaults = list(docx = list(page = list(
+    footer = list(text = "Page {page}")
+  ))))
+  path <- withr::local_tempfile(fileext = ".docx")
+  brand_reference_docx(brand, path = path, quiet = TRUE)
+
+  brand$defaults$docx$page$footer$text <- "Page {page} of {pages}"
+  expect_no_error(
+    brand_reference_docx(brand, reference = path, path = path, quiet = TRUE)
+  )
+  expect_true(file.exists(path))
+})

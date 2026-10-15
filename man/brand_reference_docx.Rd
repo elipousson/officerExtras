@@ -135,6 +135,29 @@ by hand in Word afterwards (but re-creating the reference document
 overwrites those edits).
 }
 
+\section{Page settings and sections}{
+
+
+The \code{defaults.docx.page} settings (page size, margins, and footer) are
+stored in the reference document's section properties. Pandoc copies them
+to the last section of the rendered document, so they don't always apply to
+every page:
+\itemize{
+\item Quarto's \code{.landscape} divs add section breaks with no footer, no margins,
+and an A4 landscape page size, so the pages before and in a landscape
+section lose the footer and page settings.
+\item A custom Pandoc OpenXML template (the \code{template} option for docx output,
+e.g. as used by the better-word Quarto extension) replaces the section
+properties if it doesn't use the \verb{$sectpr$} variable.
+}
+
+Use \code{\link[=docx_sync_sections]{docx_sync_sections()}} on the rendered document (e.g. in a Quarto
+\code{post-render} script) to copy the footer and page settings from the last
+section to every other section. The reference document only controls styles
+and these defaults, not the document structure (e.g. the title block or
+table of contents), which a custom template controls.
+}
+
 \examples{
 if (nzchar(Sys.which("quarto")) || nzchar(Sys.which("pandoc"))) {
   brand_path <- system.file("extdata", "_brand.yml", package = "officerExtras")
