@@ -11,6 +11,7 @@
 ## New functions
 
 * Add new `brand_reference_docx()` function to create a Word reference document for Quarto or Pandoc from a brand.yml file (and `pandoc_reference_docx()` helper to write Pandoc's default reference document).
+* Add new `set_flextable_brand_defaults()` function to set flextable defaults from a brand.yml file so flextable tables match the reference document created with `brand_reference_docx()`.
 * Add new `vec_add_to_body()` function with optional `.sep` parameter.
 * Add new `make_block_list()`, `combine_blocks()`, `officer_add_blocks()`, and `add_blocks_to_body()` functions.
 * Add new `add_list_to_body()` function.
