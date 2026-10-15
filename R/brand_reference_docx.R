@@ -32,6 +32,20 @@
 #' - `typography.monospace-inline` (inheriting from `typography.monospace`):
 #'   `family`, `size`, `weight`, `color`, and `background-color` for the
 #'   Verbatim Char style.
+#' - `typography.monospace-block` (inheriting from `typography.monospace`):
+#'   `background-color` (as paragraph shading), `line-height`, `color`,
+#'   `family`, `size`, and `weight` for the Source Code style used for code
+#'   blocks. Pandoc's default reference document has no Source Code style, so
+#'   it is created if `monospace-block` sets `background-color`,
+#'   `line-height`, or `color`; otherwise, Pandoc creates the style when
+#'   rendering (with shading from the highlight style).
+#'
+#' Pandoc formats the text in code blocks with the Verbatim Char style (or
+#' syntax highlighting styles based on it), which takes precedence over the
+#' Source Code style. As a result, `monospace-block` values for `family`,
+#' `size`, `weight`, and `color` only apply if `monospace-inline` doesn't set
+#' a different value, and highlighted code keeps the token colors and shading
+#' from the highlight style (set with the Quarto `highlight-style` option).
 #'
 #' brand.yml has no Word-specific options, so additional settings are read
 #' from `defaults.docx` (the brand.yml section for format-specific options):
@@ -62,9 +76,8 @@
 #' names (e.g. "semi-bold"); a weight of 600 or more is bold.
 #'
 #' These brand.yml settings are not used: `color.background` (Word documents
-#' don't have a page color by default), `typography.monospace-block` (Pandoc's
-#' reference document has no code block style; Pandoc creates one when
-#' rendering), `typography.fonts` (fonts are not embedded, so the font families
+#' don't have a page color by default), `typography.fonts` (fonts are not
+#' embedded, so the font families
 #' must be installed wherever the document is opened), and `decoration:
 #' overline` (Word has no overline).
 #'
@@ -845,6 +858,14 @@ set_brand_styles <- function(doc, brand, call = caller_env()) {
     ]
   )
 
+  set_source_code_style(
+    styles,
+    typography[["monospace_block"]],
+    typography[["monospace_inline"]],
+    colors,
+    call = call
+  )
+
   # Per-style settings (defaults.docx.styles)
   for (style in setdiff(names(docx_styles), "Table")) {
     set_style_props(find_style(styles, style, call = call), docx_styles[[style]])
@@ -862,6 +883,80 @@ set_brand_styles <- function(doc, brand, call = caller_env()) {
   xml2::write_xml(styles, styles_path)
 
   doc
+}
+
+#' Apply typography.monospace_block to the Source Code paragraph style used
+#' for code blocks, creating the style if needed
+#' @noRd
+set_source_code_style <- function(
+  styles,
+  block,
+  inline,
+  colors,
+  call = caller_env()
+) {
+  block <- compact(block[c("family", "size", "weight", "color", "background_color", "line_height")])
+  style <- find_style(styles, "SourceCode", required = FALSE)
+
+  if (is.null(style)) {
+    # Without these settings, the style Pandoc creates when rendering is a
+    # better match (it has shading from the highlight style)
+    if (!any(c("background_color", "line_height", "color") %in% names(block))) {
+      return(invisible(NULL))
+    }
+
+    style <- add_source_code_style(styles)
+  }
+
+  run_fields <- c("family", "size", "weight", "color")
+  overridden <- run_fields[vapply(
+    run_fields,
+    function(field) {
+      !is.null(block[[field]]) && !is.null(inline[[field]]) &&
+        !identical(block[[field]], inline[[field]])
+    },
+    logical(1)
+  )]
+
+  if (length(overridden) > 0) {
+    cli::cli_warn(c(
+      "{.field typography.monospace-block} {.field {overridden}} differ{?s/} from
+      {.field typography.monospace-inline}.",
+      "i" = "Pandoc formats code block text with the Verbatim Char style, so the
+      {.field monospace-inline} {cli::qty(overridden)}value{?s} {?is/are} used."
+    ))
+  }
+
+  ppr <- set_ooxml_child(style, "pPr")
+
+  if (!is.null(block[["background_color"]])) {
+    fill <- resolve_color(block[["background_color"]], colors, call = call)
+    set_ooxml_child(ppr, "shd", c(val = "clear", color = "auto", fill = fill))
+  }
+
+  set_par_props(ppr, block["line_height"], call = call)
+
+  run_props <- block[intersect(run_fields, names(block))]
+
+  if (length(run_props) > 0) {
+    set_run_props(set_ooxml_child(style, "rPr"), run_props, colors, call = call)
+  }
+
+  invisible(style)
+}
+
+#' Add a Source Code paragraph style matching the one Pandoc creates
+#' @noRd
+add_source_code_style <- function(styles) {
+  ns <- w_ns(styles)
+  style <- xml2::xml_add_child(xml2::xml_root(styles), "w:style")
+  set_ooxml_attrs(style, c(type = "paragraph", customStyle = "1", styleId = "SourceCode"))
+  set_ooxml_child(style, "name", c(val = "Source Code"))
+  set_ooxml_child(style, "basedOn", c(val = "Normal"))
+  set_ooxml_child(style, "link", c(val = "VerbatimChar"))
+  set_ooxml_child(set_ooxml_child(style, "pPr"), "wordWrap", c(val = "off"))
+
+  xml2::xml_find_first(styles, "//w:style[@w:styleId='SourceCode']", ns)
 }
 
 #' Apply table settings to a table style node

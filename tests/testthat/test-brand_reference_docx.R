@@ -354,3 +354,58 @@ test_that("brand_reference_docx handles table border width and header", {
     c("name", "tblPr", "tblStylePr")
   )
 })
+
+test_that("brand_reference_docx applies monospace-block to Source Code", {
+  skip_if_no_pandoc()
+  reference <- pandoc_reference_docx()
+  source_code <- "//w:style[@w:styleId='SourceCode']"
+
+  # Without paragraph-level settings, Pandoc creates the style when rendering
+  doc <- brand_reference_docx(
+    list(typography = list(monospace = list(family = "Consolas"))),
+    reference = reference
+  )
+  expect_s3_class(style_xml(doc, source_code), "xml_missing")
+
+  doc <- brand_reference_docx(
+    list(
+      color = list(palette = list(`gray-lighter` = "#F5F5F5")),
+      typography = list(
+        monospace = list(family = "Consolas"),
+        `monospace-block` = list(`background-color` = "gray-lighter", `line-height` = 1)
+      )
+    ),
+    reference = reference
+  )
+
+  expect_identical(style_attr(doc, paste0(source_code, "/w:name")), "Source Code")
+  expect_identical(style_attr(doc, paste0(source_code, "/w:basedOn")), "Normal")
+  expect_identical(style_attr(doc, paste0(source_code, "/w:pPr/w:wordWrap")), "off")
+  expect_identical(style_attr(doc, paste0(source_code, "/w:pPr/w:shd"), "fill"), "F5F5F5")
+  expect_identical(style_attr(doc, paste0(source_code, "/w:pPr/w:spacing"), "line"), "240")
+  # Inherited from monospace
+  expect_identical(
+    style_attr(doc, paste0(source_code, "/w:rPr/w:rFonts"), "ascii"),
+    "Consolas"
+  )
+  # pPr children are in schema order
+  expect_identical(
+    xml2::xml_name(xml2::xml_children(style_xml(doc, paste0(source_code, "/w:pPr")))),
+    c("shd", "wordWrap", "spacing")
+  )
+})
+
+test_that("brand_reference_docx warns when monospace-block differs from inline", {
+  skip_if_no_pandoc()
+
+  expect_warning(
+    brand_reference_docx(
+      list(typography = list(
+        `monospace-inline` = list(size = "10pt"),
+        `monospace-block` = list(size = "9pt", `background-color` = "#F5F5F5")
+      )),
+      reference = pandoc_reference_docx()
+    ),
+    "monospace-inline"
+  )
+})

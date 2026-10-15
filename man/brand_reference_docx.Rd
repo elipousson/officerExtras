@@ -77,7 +77,21 @@ document defaults and the Normal style.
 \item \code{typography.monospace-inline} (inheriting from \code{typography.monospace}):
 \code{family}, \code{size}, \code{weight}, \code{color}, and \code{background-color} for the
 Verbatim Char style.
+\item \code{typography.monospace-block} (inheriting from \code{typography.monospace}):
+\code{background-color} (as paragraph shading), \code{line-height}, \code{color},
+\code{family}, \code{size}, and \code{weight} for the Source Code style used for code
+blocks. Pandoc's default reference document has no Source Code style, so
+it is created if \code{monospace-block} sets \code{background-color},
+\code{line-height}, or \code{color}; otherwise, Pandoc creates the style when
+rendering (with shading from the highlight style).
 }
+
+Pandoc formats the text in code blocks with the Verbatim Char style (or
+syntax highlighting styles based on it), which takes precedence over the
+Source Code style. As a result, \code{monospace-block} values for \code{family},
+\code{size}, \code{weight}, and \code{color} only apply if \code{monospace-inline} doesn't set
+a different value, and highlighted code keeps the token colors and shading
+from the highlight style (set with the Quarto \code{highlight-style} option).
 
 brand.yml has no Word-specific options, so additional settings are read
 from \code{defaults.docx} (the brand.yml section for format-specific options):
@@ -109,9 +123,8 @@ an exact line height. Font weights can be numbers (100-900) or CSS weight
 names (e.g. "semi-bold"); a weight of 600 or more is bold.
 
 These brand.yml settings are not used: \code{color.background} (Word documents
-don't have a page color by default), \code{typography.monospace-block} (Pandoc's
-reference document has no code block style; Pandoc creates one when
-rendering), \code{typography.fonts} (fonts are not embedded, so the font families
+don't have a page color by default), \code{typography.fonts} (fonts are not
+embedded, so the font families
 must be installed wherever the document is opened), and \code{decoration: overline} (Word has no overline).
 
 See \code{system.file("extdata", "_brand.yml", package = "officerExtras")} for an
