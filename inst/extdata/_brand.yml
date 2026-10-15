@@ -12,10 +12,6 @@
 # Sizes are in pt, in, cm, mm, or px. Colors are hex values, color.palette
 # names, or color roles (e.g. primary).
 
-meta:
-  name: Baltimore City Department of Planning
-  link: https://www.baltimorecity.gov/planning
-
 color:
   palette:
     blue-dark: "#00415F"
