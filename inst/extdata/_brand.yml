@@ -1,0 +1,138 @@
+# Example brand.yml file for officerExtras::brand_reference_docx().
+#
+# Follows the brand.yml structure (https://posit-dev.github.io/brand-yml/).
+# brand.yml has no Word-specific options, so per-style settings are under
+# `defaults.docx` (the brand.yml section for format-specific options). They
+# use the same field names as brand.yml typography elements (family, size,
+# weight, style, color, line-height), plus paragraph spacing fields.
+#
+# Create the reference document with:
+#   officerExtras::brand_reference_docx("_brand.yml", path = "reference.docx")
+#
+# Sizes are in pt, in, cm, mm, or px. Colors are hex values, color.palette
+# names, or color roles (e.g. primary).
+
+meta:
+  name: Baltimore City Department of Planning
+  link: https://www.baltimorecity.gov/planning
+
+color:
+  palette:
+    blue-dark: "#00415F"
+    gray-dark: "#1F1F1F"
+    gray: "#595959"
+    gray-light: "#BFBFBF"
+  foreground: gray-dark
+  background: "#FFFFFF"
+  primary: blue-dark
+  secondary: gray
+  light: gray-light
+
+typography:
+  # Aptos is the Microsoft 365 default font, so no font files are needed
+  # (brand.yml `fonts` only describes google, bunny, or file sources)
+  base:
+    family: Aptos
+    size: 11pt
+    line-height: 1.15
+  headings:
+    family: Aptos Display
+    # weight: bold
+    color: primary
+  monospace:
+    family: Consolas
+    size: 10pt
+  link:
+    color: primary
+    decoration: underline
+
+defaults:
+  docx:
+    page:
+      size: letter
+      margins:
+        top: 1in
+        bottom: 1in
+        left: 1in
+        right: 1in
+        header: 0.5in
+        footer: 0.5in
+      # {page} and {pages} are replaced with the page number and page count
+      footer:
+        text: "Page {page} of {pages}"
+        align: center
+        size: 9pt
+        color: secondary
+    # Keys are style IDs in Pandoc's default reference.docx. Fields not set
+    # here keep the Pandoc default (or inherit from typography above).
+    styles:
+      Title:
+        size: 24pt
+        weight: bold
+        color: primary
+        space-after: 6pt
+      Subtitle:
+        size: 15pt
+        weight: normal
+        color: secondary
+        space-after: 12pt
+      Author:
+        size: 11pt
+        weight: normal
+        color: secondary
+        space-after: 0pt
+      Date:
+        size: 11pt
+        weight: normal
+        color: secondary
+        space-after: 12pt
+      Heading1:
+        size: 18pt
+        space-before: 18pt
+        space-after: 6pt
+      Heading2:
+        size: 15pt
+        space-before: 18pt
+        space-after: 6pt
+      Heading3:
+        size: 13pt
+        space-before: 14pt
+        space-after: 4pt
+      Heading4:
+        size: 11pt
+        space-before: 10pt
+        space-after: 4pt
+      BodyText:
+        space-before: 0pt
+        space-after: 6pt
+      Compact:
+        space-before: 2pt
+        space-after: 2pt
+      # Field labels (Pandoc definition lists)
+      DefinitionTerm:
+        weight: bold
+        space-before: 6pt
+        space-after: 0pt
+        keep-with-next: true
+      # Field values
+      Definition:
+        indent-left: 0.25in
+        space-before: 0pt
+        space-after: 4pt
+      TableCaption:
+        size: 9pt
+        style: italic
+        color: secondary
+        space-before: 6pt
+        space-after: 2pt
+      # Applied by Pandoc to every table
+      Table:
+        border-color: light
+        border-width: 0.5pt
+        cell-padding:
+          top: 2pt
+          bottom: 2pt
+          left: 5pt
+          right: 5pt
+        header:
+          weight: bold
