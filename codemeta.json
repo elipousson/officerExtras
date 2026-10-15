@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/elipousson/officerExtras",
   "issueTracker": "https://github.com/elipousson/officerExtras/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.1.9002",
+  "version": "0.0.1.9003",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.0 (2023-04-21)",
+  "runtimePlatform": "R version 4.6.1 (2026-06-24)",
   "author": [
     {
       "@type": "Person",
@@ -45,6 +45,18 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "brand.yml",
+      "name": "brand.yml",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=brand.yml"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "covr",
       "name": "covr",
       "provider": {
@@ -54,6 +66,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "flextable",
+      "name": "flextable",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=flextable"
     },
     {
       "@type": "SoftwareApplication",
@@ -116,13 +140,32 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "yaml12",
+      "name": "yaml12",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=yaml12"
     }
   ],
   "softwareRequirements": {
     "1": {
       "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 4.1.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
+      "version": ">= 3.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -131,7 +174,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=cli"
     },
-    "2": {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "glue",
       "name": "glue",
@@ -143,7 +186,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=glue"
     },
-    "3": {
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "grDevices",
+      "name": "grDevices"
+    },
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
@@ -155,10 +203,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
-    "4": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "officer",
       "name": "officer",
+      "version": ">= 0.6.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -167,11 +216,10 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=officer"
     },
-    "5": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
-      "version": ">= 1.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -180,7 +228,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "6": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -192,12 +240,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "7": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "8": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "vctrs",
       "name": "vctrs",
@@ -209,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=vctrs"
     },
-    "9": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
@@ -223,10 +271,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "318.76KB",
-  "releaseNotes": "https://github.com/elipousson/officerExtras/blob/master/NEWS.md",
+  "fileSize": "444.745KB",
+  "releaseNotes": "https://github.com/elipousson/officerExtras/blob/main/NEWS.md",
   "readme": "https://github.com/elipousson/officerExtras/blob/main/README.md",
-  "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras?branch=main",
+  "contIntegration": "https://app.codecov.io/gh/elipousson/officerExtras",
   "developmentStatus": ["https://lifecycle.r-lib.org/articles/stages.html#experimental", "https://www.repostatus.org/#wip"],
   "keywords": ["microsoft-word", "officer", "r-package", "rstats"]
 }
