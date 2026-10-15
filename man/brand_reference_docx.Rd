@@ -6,19 +6,24 @@
 \title{Create a Word reference document from a brand.yml file}
 \usage{
 brand_reference_docx(
-  brand = "_brand.yml",
+  brand = NULL,
   path = NULL,
   reference = NULL,
-  overwrite = TRUE
+  overwrite = TRUE,
+  quiet = FALSE
 )
 
 pandoc_reference_docx(path = tempfile(fileext = ".docx"))
 }
 \arguments{
-\item{brand}{Path to a brand.yml file, a \code{brand_yml} object from
-\code{\link[brand.yml:read_brand_yml]{brand.yml::read_brand_yml()}}, or a list with the brand settings (e.g.
-from \code{\link[yaml12:read_yaml]{yaml12::read_yaml()}}). Defaults to \code{"_brand.yml"} (the file name
-Quarto uses).}
+\item{brand}{Path to a brand.yml file or a directory containing one, a
+\code{brand_yml} object from \code{\link[brand.yml:read_brand_yml]{brand.yml::read_brand_yml()}}, or a list with the
+brand settings (e.g. from \code{\link[yaml12:read_yaml]{yaml12::read_yaml()}}). If \code{NULL} (default), the
+path is taken from the \code{BRAND_YML_PATH} environment variable or, if that
+is not set, found by searching the working directory and its parent
+directories for \verb{_brand.yml} or \verb{_brand.yaml}, either directly or in a
+\code{brand} or \verb{_brand} subdirectory (the same search used by Quarto and
+\code{\link[brand.yml:read_brand_yml]{brand.yml::read_brand_yml()}}).}
 
 \item{path}{Optional file path for the output docx file. If \code{NULL}
 (default), the document is not written to a file.}
@@ -31,6 +36,9 @@ a rdocx object is modified in place (as with other officer functions).}
 
 \item{overwrite}{If \code{TRUE} (default), remove file at path if it already
 exists. If \code{FALSE} and file exists, this function aborts.}
+
+\item{quiet}{If \code{TRUE}, suppress the message reporting the path of the
+written file. Defaults to \code{FALSE}.}
 }
 \value{
 \code{brand_reference_docx()} returns a rdocx object (invisibly if

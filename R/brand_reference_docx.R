@@ -75,10 +75,14 @@
 #' by hand in Word afterwards (but re-creating the reference document
 #' overwrites those edits).
 #'
-#' @param brand Path to a brand.yml file, a `brand_yml` object from
-#'   [brand.yml::read_brand_yml()], or a list with the brand settings (e.g.
-#'   from [yaml12::read_yaml()]). Defaults to `"_brand.yml"` (the file name
-#'   Quarto uses).
+#' @param brand Path to a brand.yml file or a directory containing one, a
+#'   `brand_yml` object from [brand.yml::read_brand_yml()], or a list with the
+#'   brand settings (e.g. from [yaml12::read_yaml()]). If `NULL` (default), the
+#'   path is taken from the `BRAND_YML_PATH` environment variable or, if that
+#'   is not set, found by searching the working directory and its parent
+#'   directories for `_brand.yml` or `_brand.yaml`, either directly or in a
+#'   `brand` or `_brand` subdirectory (the same search used by Quarto and
+#'   [brand.yml::read_brand_yml()]).
 #' @param path Optional file path for the output docx file. If `NULL`
 #'   (default), the document is not written to a file.
 #' @param reference Optional path to a docx file or a rdocx object to use as the
@@ -87,6 +91,8 @@
 #'   in `defaults.docx.styles` must exist in the reference document. Note that
 #'   a rdocx object is modified in place (as with other officer functions).
 #' @inheritParams write_officer
+#' @param quiet If `TRUE`, suppress the message reporting the path of the
+#'   written file. Defaults to `FALSE`.
 #' @returns `brand_reference_docx()` returns a rdocx object (invisibly if
 #'   `path` is supplied). `pandoc_reference_docx()` returns `path`.
 #' @examples
@@ -99,10 +105,11 @@
 #' }
 #' @export
 brand_reference_docx <- function(
-  brand = "_brand.yml",
+  brand = NULL,
   path = NULL,
   reference = NULL,
-  overwrite = TRUE
+  overwrite = TRUE,
+  quiet = FALSE
 ) {
   brand <- read_brand(brand)
 
@@ -125,7 +132,11 @@ brand_reference_docx <- function(
   }
 
   write_officer(doc, path = path, overwrite = overwrite)
-  cli::cli_alert_success("Wrote {.file {path}}")
+
+  if (!isTRUE(quiet)) {
+    cli::cli_alert_success("Wrote {.file {path}}")
+  }
+
   invisible(doc)
 }
 
@@ -179,12 +190,9 @@ pandoc_reference_docx <- function(path = tempfile(fileext = ".docx")) {
 #' brand lists and `brand_yml` objects can be handled the same way. Palette
 #' names and style keys are left as is.
 #' @noRd
-read_brand <- function(brand, call = caller_env()) {
-  if (is_string(brand)) {
-    if (!file.exists(brand)) {
-      cli_abort("{.arg brand} file {.file {brand}} does not exist.", call = call)
-    }
-
+read_brand <- function(brand = NULL, call = caller_env()) {
+  if (is.null(brand) || is_string(brand)) {
+    brand <- find_brand_yml(brand, call = call)
     check_installed("yaml12", call = call)
     brand <- yaml12::read_yaml(brand)
   }
@@ -222,6 +230,62 @@ read_brand <- function(brand, call = caller_env()) {
   }
 
   brand
+}
+
+#' Find a brand.yml file
+#'
+#' Follows the search used by Quarto and `brand.yml::read_brand_yml()`: use
+#' `path` (or the `BRAND_YML_PATH` environment variable) if it is a file;
+#' otherwise search the directory (default: working directory) and up to 20
+#' parent directories for `_brand.yml` or `_brand.yaml`, directly or in a
+#' `brand` or `_brand` subdirectory. A `path` to a directory is only searched
+#' (not its parents).
+#' @noRd
+find_brand_yml <- function(path = NULL, call = caller_env()) {
+  if (is.null(path)) {
+    env_path <- Sys.getenv("BRAND_YML_PATH")
+    path <- if (nzchar(env_path)) env_path
+  }
+
+  max_parents <- if (is.null(path)) 20 else 1
+  dir <- path %||% getwd()
+
+  if (!dir.exists(dir)) {
+    if (file.exists(dir)) {
+      return(dir)
+    }
+
+    cli_abort("{.arg brand} file {.file {dir}} does not exist.", call = call)
+  }
+
+  dir <- normalizePath(dir, mustWork = TRUE)
+  filenames <- c("_brand.yml", "_brand.yaml")
+  candidates <- c(
+    filenames,
+    file.path("brand", filenames),
+    file.path("_brand", filenames)
+  )
+
+  for (i in seq_len(max_parents)) {
+    found <- file.path(dir, candidates)
+    found <- found[file.exists(found) & !dir.exists(found)]
+
+    if (length(found) > 0) {
+      return(found[[1]])
+    }
+
+    if (dirname(dir) == dir) {
+      break
+    }
+
+    dir <- dirname(dir)
+  }
+
+  cli_abort(
+    "Can't find {.file _brand.yml} or {.file _brand.yaml} in
+    {.path {path %||% getwd()}}{if (max_parents > 1) ' or its parent directories'}.",
+    call = call
+  )
 }
 
 #' Convert list names to snake case at every level
@@ -805,6 +869,13 @@ set_brand_styles <- function(doc, brand, call = caller_env()) {
 set_table_style <- function(table_style, props, colors, call = caller_env()) {
   tbl_pr <- set_ooxml_child(table_style, "tblPr")
 
+  if (!is.null(props[["border_width"]]) && is.null(props[["border_color"]])) {
+    cli::cli_warn(
+      "{.field border-width} is ignored without {.field border-color} in
+      {.field defaults.docx.styles.Table}."
+    )
+  }
+
   if (!is.null(props[["border_color"]])) {
     borders <- set_ooxml_child(tbl_pr, "tblBorders")
     # Border widths are in eighths of a point
@@ -843,15 +914,27 @@ set_table_style <- function(table_style, props, colors, call = caller_env()) {
   }
 
   if (!is.null(props[["header"]])) {
+    ns <- w_ns(table_style)
     first_row <- xml2::xml_find_first(
       table_style,
       "w:tblStylePr[@w:type='firstRow']",
-      w_ns(table_style)
+      ns
     )
 
-    if (!inherits(first_row, "xml_missing")) {
-      set_run_props(set_ooxml_child(first_row, "rPr"), props[["header"]], colors, call = call)
+    # Pandoc marks header rows with w:tblLook w:firstRow="1", so the first row
+    # formatting applies once the table style has it. tblStylePr is the last
+    # element in a style, so it can be appended.
+    if (inherits(first_row, "xml_missing")) {
+      xml2::xml_add_child(table_style, "w:tblStylePr")
+      first_row <- xml2::xml_find_first(
+        table_style,
+        "w:tblStylePr[not(@w:type)]",
+        ns
+      )
+      set_ooxml_attrs(first_row, c(type = "firstRow"))
     }
+
+    set_run_props(set_ooxml_child(first_row, "rPr"), props[["header"]], colors, call = call)
   }
 
   invisible(table_style)

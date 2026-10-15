@@ -274,3 +274,83 @@ test_that("brand_reference_docx works with the example brand file", {
     "00415F"
   )
 })
+
+test_that("find_brand_yml searches directories, subdirectories, and parents", {
+  dir <- withr::local_tempdir()
+  nested <- file.path(dir, "reports", "draft")
+  dir.create(nested, recursive = TRUE)
+  dir.create(file.path(dir, "brand"))
+  brand_file <- file.path(dir, "brand", "_brand.yml")
+  writeLines("color:\n  primary: '#00415F'", brand_file)
+  brand_file <- normalizePath(brand_file)
+
+  withr::local_envvar(BRAND_YML_PATH = NA)
+
+  withr::with_dir(nested, {
+    expect_identical(find_brand_yml(), brand_file)
+  })
+
+  # A directory path is searched without its parents
+  expect_identical(find_brand_yml(dir), brand_file)
+  expect_error(find_brand_yml(nested), "Can't find")
+
+  # A file path is used as is
+  expect_identical(find_brand_yml(brand_file), brand_file)
+  expect_error(find_brand_yml(file.path(dir, "missing.yml")), "does not exist")
+
+  withr::with_envvar(c(BRAND_YML_PATH = brand_file), {
+    expect_identical(find_brand_yml(), brand_file)
+  })
+
+  skip_if_not_installed("yaml12")
+  withr::with_dir(nested, {
+    expect_identical(read_brand(NULL)$color$primary, "#00415F")
+  })
+})
+
+test_that("brand_reference_docx respects quiet", {
+  skip_if_no_pandoc()
+
+  path <- withr::local_tempfile(fileext = ".docx")
+
+  expect_no_message(
+    brand_reference_docx(
+      list(color = list(primary = "#00415F")),
+      path = path,
+      quiet = TRUE
+    )
+  )
+  expect_true(file.exists(path))
+})
+
+test_that("brand_reference_docx handles table border width and header", {
+  expect_warning(
+    set_table_style(
+      xml2::read_xml(
+        '<w:style xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" w:type="table" w:styleId="Table"/>'
+      ),
+      list(border_width = "1pt"),
+      colors = list()
+    ),
+    "border-width"
+  )
+
+  # The first row style is created if the reference document lacks one
+  table_style <- xml2::read_xml(
+    '<w:style xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" w:type="table" w:styleId="Table"><w:name w:val="Table"/></w:style>'
+  )
+  set_table_style(table_style, list(header = list(weight = "bold")), colors = list())
+
+  ns <- xml2::xml_ns(table_style)
+  expect_identical(
+    xml2::xml_attr(
+      xml2::xml_find_first(table_style, "w:tblStylePr[@w:type='firstRow']/w:rPr/w:b", ns),
+      "val"
+    ),
+    "1"
+  )
+  expect_identical(
+    xml2::xml_name(xml2::xml_children(table_style)),
+    c("name", "tblPr", "tblStylePr")
+  )
+})
