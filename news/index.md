@@ -27,6 +27,22 @@
 ### New functions
 
 - Add new
+  [`brand_reference_docx()`](https://elipousson.github.io/officerExtras/reference/brand_reference_docx.md)
+  function to create a Word reference document for Quarto or Pandoc from
+  a brand.yml file (and
+  [`pandoc_reference_docx()`](https://elipousson.github.io/officerExtras/reference/brand_reference_docx.md)
+  helper to write Pandoc’s default reference document).
+- Add new
+  [`docx_sync_sections()`](https://elipousson.github.io/officerExtras/reference/docx_sync_sections.md)
+  function to copy the footer and page settings from the last section of
+  a Word document to every other section (e.g. to fix Quarto output with
+  `.landscape` divs).
+- Add new
+  [`set_flextable_brand_defaults()`](https://elipousson.github.io/officerExtras/reference/set_flextable_brand_defaults.md)
+  function to set flextable defaults from a brand.yml file so flextable
+  tables match the reference document created with
+  [`brand_reference_docx()`](https://elipousson.github.io/officerExtras/reference/brand_reference_docx.md).
+- Add new
   [`vec_add_to_body()`](https://elipousson.github.io/officerExtras/reference/vec_add_to_body.md)
   function with optional `.sep` parameter.
 - Add new

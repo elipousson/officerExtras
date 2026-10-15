@@ -17,6 +17,10 @@
   : Add a xml string, text paragraph, or gt object at a specified
   position in a rdocx object
 
+- [`brand_reference_docx()`](https://elipousson.github.io/officerExtras/reference/brand_reference_docx.md)
+  [`pandoc_reference_docx()`](https://elipousson.github.io/officerExtras/reference/brand_reference_docx.md)
+  : Create a Word reference document from a brand.yml file
+
 - [`check_office_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
   [`check_docx_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
   [`check_pptx_fileext()`](https://elipousson.github.io/officerExtras/reference/check_office_fileext.md)
@@ -44,6 +48,9 @@
 
 - [`dims_docx_ext()`](https://elipousson.github.io/officerExtras/reference/dims_docx_ext.md)
   : Get page and block layout dimensions from an rdocx object
+
+- [`docx_sync_sections()`](https://elipousson.github.io/officerExtras/reference/docx_sync_sections.md)
+  : Copy footer and page settings from the last section to every section
 
 - [`fill_with_pattern()`](https://elipousson.github.io/officerExtras/reference/fill_with_pattern.md)
   : Fill a new column based on an existing column depending on a pattern
@@ -99,6 +106,9 @@
 
 - [`reduce_officer()`](https://elipousson.github.io/officerExtras/reference/reduce_officer.md)
   : Reduce a list to a single officer object
+
+- [`set_flextable_brand_defaults()`](https://elipousson.github.io/officerExtras/reference/set_flextable_brand_defaults.md)
+  : Set flextable defaults from a brand.yml file
 
 - [`use_doc_version()`](https://elipousson.github.io/officerExtras/reference/use_doc_version.md)
   [`doc_version()`](https://elipousson.github.io/officerExtras/reference/use_doc_version.md)
